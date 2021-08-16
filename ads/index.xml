@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ads on SAMLSecurity</title>
+    <link>https://rasmusson.github.io/ads/</link>
+    <description>Recent content in Ads on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Mon, 26 Jul 2021 09:17:27 -0700</lastBuildDate><atom:link href="https://rasmusson.github.io/ads/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

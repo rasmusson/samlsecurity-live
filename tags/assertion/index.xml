@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Assertion on SAMLSecurity</title>
+    <link>https://rasmusson.github.io/tags/assertion/</link>
+    <description>Recent content in Assertion on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://rasmusson.github.io/tags/assertion/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decrypting a SAML Assertion in OpenSAML v3</title>
+      <link>https://rasmusson.github.io/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
+      <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://rasmusson.github.io/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
+      <description>
+        
+          &lt;p&gt;As you probably should know at this point, the SAML Assertion contains the description of a authenticated user and how it was authenticated. The assertion is generally signed to prevent manipulation but there are also cases where you would want to encrypt the assertion to prevent someone to see the information within. For example the assertion can be used to communicate personal information about the user such as social security number and address.&lt;/p&gt;
+&lt;p&gt;As most people reading my blog seem to be on the SP side of SAML I will explain how to decrypt an assertion.&lt;/p&gt;
+&lt;p&gt;The general method of encryption and subsequent decryption of a assertion uses two keys, one symmetric and on asymmetric.
+The symmetric key is generated during encryption and used to encrypt the actual assertion data. An asymmetric key, generally a SP key contained in the metadata, is then used to encrypt the symmetric key which is then stored in the XML together with the encrypted assertion.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:response&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;destination=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:8080/webprofile-ref-project/sp/consumer&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_bd4528ed60f7b8142c39ee800625972f&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;issueinstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.955Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;version=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:issuer&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;TestIDP&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:issuer&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:status&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:statuscode&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:status:Success&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:status&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:encryptedassertion&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encrypteddata&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xenc=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_2b077c659cdb0187fb617362135c3d63&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#Element&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptionmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#aes128-cbc&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:keyinfo&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ds=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptedkey&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_24266af2ae292a886ee40085790ec5c4&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptionmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#sha1&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptionmethod&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:cipherdata&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:ciphervalue&amp;gt;&lt;/span&gt;THE ENCRYPTED SYMMETRIC KEY&lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:ciphervalue&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:cipherdata&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptedkey&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:keyinfo&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:cipherdata&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:ciphervalue&amp;gt;&lt;/span&gt;THE ASSERTION ENCRYPTED USING THE SYMMETRIC KEY&lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:ciphervalue&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:cipherdata&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptionmethod&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encrypteddata&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:encryptedassertion&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:response&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To decrypt the reverse of this is done. The asymmetric is used to decrypt the symmetric key, which is then used to decrypt the assertion.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://rasmusson.github.io/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;Now for the OpenSAML part.&lt;/p&gt;
+&lt;p&gt;First we get the assertion from the XML. The assertion is stored in a EncryptedAssertion object and is retrieved with the method &lt;code&gt;getEncryptedAssertions()&lt;/code&gt; on the response instead of &lt;code&gt;getAssertions()&lt;/code&gt; which is used otherwise.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;StaticKeyInfoCredentialResolver&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoCredentialResolver&lt;/span&gt; 
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;StaticKeyInfoCredentialResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPCredentials&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Decrypter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt; 
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoCredentialResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;InlineEncryptedKeyResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setRootInNewDocument&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encryptedAssertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this example a &lt;code&gt;StaticKeyInfoCredentialResolver&lt;/code&gt; is used to point out the key that is used for decryption, in this case I have stored it in the static class &lt;code&gt;SPCredentials&lt;/code&gt;. The &lt;code&gt;InlineEncryptedKeyResolver&lt;/code&gt; is used to tell the decryptor that the symmetric encryption key can be found in the XML next to the encrypted assertion.&lt;/p&gt;
+&lt;p&gt;The decryptor returns a decrypted Assertion object.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:assertion&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsd=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_96a918c84ff41a98781133414a7c930e&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;issueinstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.956Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;version=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:issuer&amp;gt;&lt;/span&gt;TestIDP&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:issuer&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signature&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ds=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signedinfo&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:canonicalizationmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signaturemethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#rsa-sha1&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:reference&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;uri=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;#_96a918c84ff41a98781133414a7c930e&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transforms&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transform&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#enveloped-signature&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;                &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transform&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;                  &lt;span class=&#34;nt&#34;&gt;&amp;lt;ec:inclusivenamespaces&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ec=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;prefixlist=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&amp;lt;/ec:inclusivenamespaces&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;                &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transform&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transform&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transforms&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#sha256&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestvalue&amp;gt;&lt;/span&gt;UDJ762cOSK14nBjbFCq9a47x3WgSCJ1qZpeBYKdy5s0=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:digestvalue&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:digestmethod&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:reference&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signaturemethod&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:canonicalizationmethod&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signedinfo&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signaturevalue&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;syb20Rjh1pDJTc6CY1nN3x1v8WNlG9lRf71A5ik3i97/A+q0NZCvoJLEBVM73K/U8hxo/hbHOmBs
+&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;7KkF4g3yYLVunRlm/tapnTESKqZ8v8SJZQcbY4xMzi0PUxiUJKBugiho114ijDPAYs+U1UZhXGHL
+&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;zyHVd7XJYoOATKVdh3U=
+&lt;span class=&#34;ln&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signaturevalue&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signature&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;29&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subject&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:nameid&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;format=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;namequalifier=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Name qualifier&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;spnamequalifier=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;SP name qualifier&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;Some NameID value&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:nameid&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;31&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subjectconfirmation&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;method=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:cm:bearer&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;32&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subjectconfirmationdata&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;inresponseto=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Made up ID&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notbefore=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-18T21:26:14.957Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notonorafter=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-22T21:26:14.957Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;recipient=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:8080/webprofile-ref-project/sp/consumer&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&amp;lt;/saml2:subjectconfirmationdata&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;33&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:subjectconfirmation&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;34&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:subject&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;35&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:conditions&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notbefore=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-18T21:26:14.958Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notonorafter=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-22T21:26:14.958Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;36&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:audiencerestriction&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;37&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:audience&amp;gt;&lt;/span&gt;http://localhost:8080/webprofile-ref-project/sp/consumer&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:audience&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;38&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:audiencerestriction&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;39&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:conditions&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;40&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributestatement&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;41&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attribute&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;42&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributevalue&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xsi:type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd:string&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;bob&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributevalue&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;43&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attribute&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;44&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attribute&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;telephone&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;45&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributevalue&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xsi:type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd:string&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;999999999&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributevalue&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;46&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attribute&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;47&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributestatement&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;48&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authnstatement&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;authninstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.962Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;49&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authncontext&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;50&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authncontextclassref&amp;gt;&lt;/span&gt;urn:oasis:names:tc:SAML:2.0:ac:classes:Smartcard&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authncontextclassref&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;51&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authncontext&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;52&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authnstatement&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;53&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:assertion&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Digital signature on SAMLSecurity</title>
+    <link>https://rasmusson.github.io/tags/digital-signature/</link>
+    <description>Recent content in Digital signature on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Wed, 10 Aug 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://rasmusson.github.io/tags/digital-signature/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Signing and Sending AuthnRequests in OpenSAML V3</title>
+      <link>https://rasmusson.github.io/2016/08/signing-and-sending-authnrequests-in.html</link>
+      <pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://rasmusson.github.io/2016/08/signing-and-sending-authnrequests-in.html</guid>
+      <description>
+        
+          &lt;p&gt;Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.&lt;/p&gt;
+&lt;p&gt;As described in &lt;a href=&#34;https://rasmusson.github.io/2011/01/redirect-with-authnrequest.html&#34;&gt;this post on AuthnRequests OpenSAML V2&lt;/a&gt;, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.&lt;/p&gt;
+&lt;p&gt;As in V2 the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is used, the main difference lays in the message context.&lt;/p&gt;
+&lt;p&gt;One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.&lt;/p&gt;
+&lt;p&gt;In &lt;a href=&#34;https://rasmusson.github.io/book&#34;&gt;my book A Guide to OpenSAML V3&lt;/a&gt; I cover the use of the new message contexts in detail.&lt;/p&gt;
+&lt;p&gt;To sign and send a AuthnRequest, three contexts are needed.&lt;/p&gt;
+&lt;p&gt;The main context is created and the AuthnRequest is set.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;SAMLPeerEntityContext&lt;/code&gt; and &lt;code&gt;SAMLEndpointContext&lt;/code&gt; are created and configured to point to the endpoint of the message.&lt;/p&gt;
+&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idpEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;book-ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://rasmusson.github.io/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+Next, the security parameters context is created and populated with signing information&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureSigningParameters&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SignatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSigningCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPCredentials&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSignatureAlgorithm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureConstants&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ALGO_ID_SIGNATURE_RSA_SHA256&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityParametersContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSignatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next, the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is created and populated with context and the http request object.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setHttpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;httpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly the encoder is initialized and the message is encoded&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
