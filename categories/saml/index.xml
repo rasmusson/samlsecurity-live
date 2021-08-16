@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SAML on SAMLSecurity</title>
-    <link>https://www.samlsecurity.com/categories/saml/</link>
+    <link>https://blog.samlsecurity.com/categories/saml/</link>
     <description>Recent content in SAML on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Wed, 28 Oct 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://www.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Oct 2015 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SAML Chrome Extension Published!</title>
-      <link>https://www.samlsecurity.com/2015/10/saml-chrome-extension-published.html</link>
+      <link>https://blog.samlsecurity.com/2015/10/saml-chrome-extension-published.html</link>
       <pubDate>Wed, 28 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2015/10/saml-chrome-extension-published.html</guid>
+      <guid>https://blog.samlsecurity.com/2015/10/saml-chrome-extension-published.html</guid>
       <description>
         
           &lt;p&gt;I have been working with SAML for a while now and I have always used Firefox for debugging instead of my favorite browser, Chrome. Why? you ask. Because there is a plugin called SAML tracer on firefox that is excellent for viewing the SAML messages going across the browser. There have been no such plugin for Chrome.&lt;/p&gt;
@@ -38,13 +38,13 @@
     
     <item>
       <title>What is a SAML Assertion?</title>
-      <link>https://www.samlsecurity.com/2015/07/what-is-saml-assertion.html</link>
+      <link>https://blog.samlsecurity.com/2015/07/what-is-saml-assertion.html</link>
       <pubDate>Thu, 02 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2015/07/what-is-saml-assertion.html</guid>
+      <guid>https://blog.samlsecurity.com/2015/07/what-is-saml-assertion.html</guid>
       <description>
         
-          &lt;p&gt;If you are just starting out trying to understand SAML you will come across the term SAML Assertion quite quickly. In this post or tutorial, I will try to explain to you what a SAML Assertion is and give you some examples on how they could look. This post mainly looks at the SAML Assertion in the perspective of the SAML Web Browser Profile. If you don&#39;t know what that is, have a look on &lt;a href=&#34;https://www.samlsecurity.com/2012/05/saml-web-profile.html&#34;&gt;my post about exactly that&lt;/a&gt;&lt;/p&gt;
+          &lt;p&gt;If you are just starting out trying to understand SAML you will come across the term SAML Assertion quite quickly. In this post or tutorial, I will try to explain to you what a SAML Assertion is and give you some examples on how they could look. This post mainly looks at the SAML Assertion in the perspective of the SAML Web Browser Profile. If you don&#39;t know what that is, have a look on &lt;a href=&#34;https://blog.samlsecurity.com/2012/05/saml-web-profile.html&#34;&gt;my post about exactly that&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;what-is-a-saml-assertion&#34;&gt;What is a SAML Assertion?&lt;/h2&gt;
 &lt;p&gt;The SAML Assertion is the main piece in the SAML puzzle. This is the object that the rest of SAML is build to safely build, transport and use.&lt;/p&gt;
 &lt;p&gt;A SAML Assertion is basically a package with security information about a entity.(e.g. A user) issued from the Identity Provider(IdP) to the Service Provider(SP). When the user has authenticated with the IdP a SAML Assertion is sent to the SP with the IdPs information about that user.&lt;/p&gt;
@@ -167,14 +167,14 @@
     
     <item>
       <title>SAML Web Browser Profile</title>
-      <link>https://www.samlsecurity.com/2012/05/saml-web-profile.html</link>
+      <link>https://blog.samlsecurity.com/2012/05/saml-web-profile.html</link>
       <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2012/05/saml-web-profile.html</guid>
+      <guid>https://blog.samlsecurity.com/2012/05/saml-web-profile.html</guid>
       <description>
         
           &lt;h2 id=&#34;what-is-it&#34;&gt;What is it?&lt;/h2&gt;
-&lt;p&gt;The SAML Web Browser SSO Profile is one of the profiles defined in the SAML specification. As described in &lt;a href=&#34;https://www.samlsecurity.com/2010/11/short-introduction-to-saml.html&#34;&gt;my introductory post on SAML&lt;/a&gt;, profiles describes how to fulfill a specific use-case using SAML.&lt;/p&gt;
+&lt;p&gt;The SAML Web Browser SSO Profile is one of the profiles defined in the SAML specification. As described in &lt;a href=&#34;https://blog.samlsecurity.com/2010/11/short-introduction-to-saml.html&#34;&gt;my introductory post on SAML&lt;/a&gt;, profiles describes how to fulfill a specific use-case using SAML.&lt;/p&gt;
 &lt;p&gt;In the realm of user authentication using SAML, the Web Browser Profile is very frequently used.&lt;/p&gt;
 &lt;p&gt;The use-case being described in the Web Browser Profile is how to authenticate a user that is using a web browser.&lt;/p&gt;
 &lt;h2 id=&#34;how-does-it-work&#34;&gt;How does it work?&lt;/h2&gt;
@@ -197,10 +197,10 @@
     
     <item>
       <title>SAML metadata</title>
-      <link>https://www.samlsecurity.com/2012/02/saml-metadata.html</link>
+      <link>https://blog.samlsecurity.com/2012/02/saml-metadata.html</link>
       <pubDate>Wed, 22 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2012/02/saml-metadata.html</guid>
+      <guid>https://blog.samlsecurity.com/2012/02/saml-metadata.html</guid>
       <description>
         
           &lt;p&gt;Metadata is information used in the SAML protocol to expose the configuration of a SAML entity, like a SP or IdP. Metadata define things like what service is available, addresses and certificates. Metadata is defined in XML. A SP uses the Metadata to know how to communicate with the IdP and vise versa.&lt;/p&gt;
@@ -352,10 +352,10 @@ The integrity of the Metadata could be protected using for example digital signa
     
     <item>
       <title>A short introduction to SAML</title>
-      <link>https://www.samlsecurity.com/2010/11/short-introduction-to-saml.html</link>
+      <link>https://blog.samlsecurity.com/2010/11/short-introduction-to-saml.html</link>
       <pubDate>Mon, 22 Nov 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2010/11/short-introduction-to-saml.html</guid>
+      <guid>https://blog.samlsecurity.com/2010/11/short-introduction-to-saml.html</guid>
       <description>
         
           &lt;p&gt;The past few weeks I’ve been trying to understand how the SAML protocol works. I’m planing to write a couple of posts about SAML in the future so first, here is a short introduction in SAML.&lt;/p&gt;

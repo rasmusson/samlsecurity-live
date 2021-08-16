@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenSAMLV3 on SAMLSecurity</title>
-    <link>https://www.samlsecurity.com/tags/opensamlv3/</link>
+    <link>https://blog.samlsecurity.com/tags/opensamlv3/</link>
     <description>Recent content in OpenSAMLV3 on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://www.samlsecurity.com/tags/opensamlv3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/opensamlv3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decrypting a SAML Assertion in OpenSAML v3</title>
-      <link>https://www.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
+      <link>https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
+      <guid>https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
       <description>
         
           &lt;p&gt;As you probably should know at this point, the SAML Assertion contains the description of a authenticated user and how it was authenticated. The assertion is generally signed to prevent manipulation but there are also cases where you would want to encrypt the assertion to prevent someone to see the information within. For example the assertion can be used to communicate personal information about the user such as social security number and address.&lt;/p&gt;
@@ -59,7 +59,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -137,17 +137,17 @@ The symmetric key is generated during encryption and used to encrypt the actual 
     
     <item>
       <title>Signing and Sending AuthnRequests in OpenSAML V3</title>
-      <link>https://www.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</link>
+      <link>https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</link>
       <pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</guid>
+      <guid>https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</guid>
       <description>
         
           &lt;p&gt;Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.&lt;/p&gt;
-&lt;p&gt;As described in &lt;a href=&#34;https://www.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;this post on AuthnRequests OpenSAML V2&lt;/a&gt;, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.&lt;/p&gt;
+&lt;p&gt;As described in &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;this post on AuthnRequests OpenSAML V2&lt;/a&gt;, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.&lt;/p&gt;
 &lt;p&gt;As in V2 the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is used, the main difference lays in the message context.&lt;/p&gt;
 &lt;p&gt;One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.&lt;/p&gt;
-&lt;p&gt;In &lt;a href=&#34;https://www.samlsecurity.com/book&#34;&gt;my book A Guide to OpenSAML V3&lt;/a&gt; I cover the use of the new message contexts in detail.&lt;/p&gt;
+&lt;p&gt;In &lt;a href=&#34;https://blog.samlsecurity.com/book&#34;&gt;my book A Guide to OpenSAML V3&lt;/a&gt; I cover the use of the new message contexts in detail.&lt;/p&gt;
 &lt;p&gt;To sign and send a AuthnRequest, three contexts are needed.&lt;/p&gt;
 &lt;p&gt;The main context is created and the AuthnRequest is set.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
@@ -168,7 +168,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -193,13 +193,13 @@ Next, the security parameters context is created and populated with signing info
     
     <item>
       <title>Verifying signatures with OpenSAML V3</title>
-      <link>https://www.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</link>
+      <link>https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</link>
       <pubDate>Wed, 10 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</guid>
+      <guid>https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</guid>
       <description>
         
-          &lt;p&gt;Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, so &lt;a href=&#34;https://www.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html&#34;&gt;the blog post on the process from OpenSAML V2&lt;/a&gt; is still very much relevant and worth checking out.&lt;/p&gt;
+          &lt;p&gt;Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, so &lt;a href=&#34;https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html&#34;&gt;the blog post on the process from OpenSAML V2&lt;/a&gt; is still very much relevant and worth checking out.&lt;/p&gt;
 &lt;p&gt;The only difference between the two version is that the &lt;code&gt;SignatureValidator&lt;/code&gt; is no longer instantiated. Instead the validate method of &lt;code&gt;SignatureValidator&lt;/code&gt; is now static and takes both the credentials and the signature object.&lt;/p&gt;
 &lt;p&gt;Below is the code for verifying signatures in OpenSAML V3&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
@@ -217,7 +217,7 @@ Next, the security parameters context is created and populated with signing info
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -230,10 +230,10 @@ Next, the security parameters context is created and populated with signing info
     
     <item>
       <title>New book release: OpenSAML version 3</title>
-      <link>https://www.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</link>
+      <link>https://blog.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</link>
       <pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</guid>
+      <guid>https://blog.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</guid>
       <description>
         
           &lt;p&gt;As many of you know, version 2 of OpenSAML will officially reach its end of life at July 31 of 2016. This means that the library will not be receiving any new updates, not even critical security updates.&lt;/p&gt;
@@ -255,10 +255,10 @@ Next, the security parameters context is created and populated with signing info
     
     <item>
       <title>OpenSAML V3 Javadocs</title>
-      <link>https://www.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</link>
+      <link>https://blog.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</link>
       <pubDate>Mon, 25 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</guid>
+      <guid>https://blog.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</guid>
       <description>
         
           &lt;p&gt;So, as those of you working with OpenSAML probably have noticed, the version 2 of the OpenSAML library is closing in on its end of life. After July 31st no more security maintenance will be done at this version. Those using is asked to move to version 3 of the library.&lt;/p&gt;
@@ -276,7 +276,7 @@ Next, the security parameters context is created and populated with signing info
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -311,10 +311,10 @@ I hope this is of help.&lt;/p&gt;
     
     <item>
       <title>Generating metadata with OpenSAML</title>
-      <link>https://www.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</link>
+      <link>https://blog.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</link>
       <pubDate>Wed, 22 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://www.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</guid>
+      <guid>https://blog.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</guid>
       <description>
         
           &lt;p&gt;OpenSAML can be used to generate metadata. As with reading metadata, the library is pretty straight forward in relation to the metadata XML.&lt;/p&gt;
@@ -369,7 +369,7 @@ I hope this is of help.&lt;/p&gt;
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
