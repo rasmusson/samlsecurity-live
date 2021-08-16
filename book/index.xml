@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SAMLSecurity</title>
-    <link>https://rasmusson.github.io/book/</link>
+    <link>https://www.samlsecurity.com/book/</link>
     <description>Recent content on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Stefan Rasmusson</copyright><atom:link href="https://rasmusson.github.io/book/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Stefan Rasmusson</copyright><atom:link href="https://www.samlsecurity.com/book/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

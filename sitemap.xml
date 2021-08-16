@@ -2,145 +2,145 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rasmusson.github.io/privacy/</loc>
+    <loc>https://www.samlsecurity.com/privacy/</loc>
     <lastmod>2021-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/</loc>
+    <loc>https://www.samlsecurity.com/</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2015/07/a-guide-to-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2015/07/a-guide-to-opensaml.html</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/a-guide-to-opensamlv2.html</loc>
+    <loc>https://www.samlsecurity.com/a-guide-to-opensamlv2.html</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/a-guide-to-opensamlv3.html</loc>
+    <loc>https://www.samlsecurity.com/a-guide-to-opensamlv3.html</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/redirect/</loc>
+    <loc>https://www.samlsecurity.com/redirect/</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/ads/</loc>
+    <loc>https://www.samlsecurity.com/ads/</loc>
     <lastmod>2021-07-26T09:17:27-07:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/archives/</loc>
+    <loc>https://www.samlsecurity.com/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/assertion/</loc>
+    <loc>https://www.samlsecurity.com/tags/assertion/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/categories/</loc>
+    <loc>https://www.samlsecurity.com/categories/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</loc>
+    <loc>https://www.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/encryption/</loc>
+    <loc>https://www.samlsecurity.com/tags/encryption/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/categories/opensaml/</loc>
+    <loc>https://www.samlsecurity.com/categories/opensaml/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/opensamlv3/</loc>
+    <loc>https://www.samlsecurity.com/tags/opensamlv3/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/post/</loc>
+    <loc>https://www.samlsecurity.com/post/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/saml/</loc>
+    <loc>https://www.samlsecurity.com/tags/saml/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/</loc>
+    <loc>https://www.samlsecurity.com/tags/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/digital-signature/</loc>
+    <loc>https://www.samlsecurity.com/tags/digital-signature/</loc>
     <lastmod>2016-08-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2016/08/signing-and-sending-authnrequests-in.html</loc>
+    <loc>https://www.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</loc>
     <lastmod>2016-08-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2016/08/verifying-signatures-with-opensaml-v3.html</loc>
+    <loc>https://www.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</loc>
     <lastmod>2016-08-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2016/06/new-book-release-opensaml-version-3.html</loc>
+    <loc>https://www.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</loc>
     <lastmod>2016-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2016/04/opensaml-v3-javadocs.html</loc>
+    <loc>https://www.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</loc>
     <lastmod>2016-04-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/categories/saml/</loc>
+    <loc>https://www.samlsecurity.com/categories/saml/</loc>
     <lastmod>2015-10-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2015/10/saml-chrome-extension-published.html</loc>
+    <loc>https://www.samlsecurity.com/2015/10/saml-chrome-extension-published.html</loc>
     <lastmod>2015-10-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2015/07/adding-keyinfo-to-saml-message.html</loc>
+    <loc>https://www.samlsecurity.com/2015/07/adding-keyinfo-to-saml-message.html</loc>
     <lastmod>2015-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/opensamlv2/</loc>
+    <loc>https://www.samlsecurity.com/tags/opensamlv2/</loc>
     <lastmod>2015-07-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2015/07/what-is-saml-assertion.html</loc>
+    <loc>https://www.samlsecurity.com/2015/07/what-is-saml-assertion.html</loc>
     <lastmod>2015-07-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2014/09/opensaml-book-release.html</loc>
+    <loc>https://www.samlsecurity.com/2014/09/opensaml-book-release.html</loc>
     <lastmod>2014-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2014/05/exception-apache-xmlsec-idresolver.html</loc>
+    <loc>https://www.samlsecurity.com/2014/05/exception-apache-xmlsec-idresolver.html</loc>
     <lastmod>2014-05-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2014/05/nullpointer-exception-in-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html</loc>
     <lastmod>2014-05-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/11/signing-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2012/11/signing-with-opensaml.html</loc>
     <lastmod>2012-11-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/11/verifying-signatures-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</loc>
     <lastmod>2012-11-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/11/opensaml-sample-code.html</loc>
+    <loc>https://www.samlsecurity.com/2012/11/opensaml-sample-code.html</loc>
     <lastmod>2012-11-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/05/saml-web-profile.html</loc>
+    <loc>https://www.samlsecurity.com/2012/05/saml-web-profile.html</loc>
     <lastmod>2012-05-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/02/generating-metadata-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</loc>
     <lastmod>2012-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/02/reading-metadata-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2012/02/reading-metadata-with-opensaml.html</loc>
     <lastmod>2012-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2012/02/saml-metadata.html</loc>
+    <loc>https://www.samlsecurity.com/2012/02/saml-metadata.html</loc>
     <lastmod>2012-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2011/04/convenience-methods-for-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2011/04/convenience-methods-for-opensaml.html</loc>
     <lastmod>2011-04-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2011/03/getting-credentials-in-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2011/03/getting-credentials-in-opensaml.html</loc>
     <lastmod>2011-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2011/02/resolve-artifact-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2011/02/resolve-artifact-with-opensaml.html</loc>
     <lastmod>2011-02-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2011/02/single-log-out-with-opensaml.html</loc>
+    <loc>https://www.samlsecurity.com/2011/02/single-log-out-with-opensaml.html</loc>
     <lastmod>2011-02-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2011/01/redirect-with-authnrequest.html</loc>
+    <loc>https://www.samlsecurity.com/2011/01/redirect-with-authnrequest.html</loc>
     <lastmod>2011-01-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/2010/11/short-introduction-to-saml.html</loc>
+    <loc>https://www.samlsecurity.com/2010/11/short-introduction-to-saml.html</loc>
     <lastmod>2010-11-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rasmusson.github.io/book/</loc>
+    <loc>https://www.samlsecurity.com/book/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>https://rasmusson.github.io/tags/index/</loc>
+    <loc>https://www.samlsecurity.com/tags/index/</loc>
   </url><url>
-    <loc>https://rasmusson.github.io/search/search/</loc>
+    <loc>https://www.samlsecurity.com/search/search/</loc>
     <priority>0.1</priority>
   </url><url>
-    <loc>https://rasmusson.github.io/search/</loc>
+    <loc>https://www.samlsecurity.com/search/</loc>
   </url><url>
-    <loc>https://rasmusson.github.io/series/</loc>
+    <loc>https://www.samlsecurity.com/series/</loc>
   </url>
 </urlset>

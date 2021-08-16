@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>index on SAMLSecurity</title>
-    <link>https://rasmusson.github.io/tags/index/</link>
+    <link>https://www.samlsecurity.com/tags/index/</link>
     <description>Recent content in index on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Stefan Rasmusson</copyright><atom:link href="https://rasmusson.github.io/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Stefan Rasmusson</copyright><atom:link href="https://www.samlsecurity.com/tags/index/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Posts</title>
-      <link>https://rasmusson.github.io/post/</link>
+      <link>https://www.samlsecurity.com/post/</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://rasmusson.github.io/post/</guid>
+      <guid>https://www.samlsecurity.com/post/</guid>
       <description>
         
           

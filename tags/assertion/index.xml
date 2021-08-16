@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Assertion on SAMLSecurity</title>
-    <link>https://rasmusson.github.io/tags/assertion/</link>
+    <link>https://www.samlsecurity.com/tags/assertion/</link>
     <description>Recent content in Assertion on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://rasmusson.github.io/tags/assertion/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://www.samlsecurity.com/tags/assertion/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decrypting a SAML Assertion in OpenSAML v3</title>
-      <link>https://rasmusson.github.io/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
+      <link>https://www.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
       <pubDate>Sat, 20 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://rasmusson.github.io/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
+      <guid>https://www.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
       <description>
         
           &lt;p&gt;As you probably should know at this point, the SAML Assertion contains the description of a authenticated user and how it was authenticated. The assertion is generally signed to prevent manipulation but there are also cases where you would want to encrypt the assertion to prevent someone to see the information within. For example the assertion can be used to communicate personal information about the user such as social security number and address.&lt;/p&gt;
@@ -59,7 +59,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://rasmusson.github.io/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://www.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
