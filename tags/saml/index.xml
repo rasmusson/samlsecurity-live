@@ -7,7 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenSAML book release!</title>
+      <link>https://blog.samlsecurity.com/p/opensaml-book-release.html</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/p/opensaml-book-release.html</guid>
+      <description>
+        
+          &lt;p&gt;After many late nights and tedious editing, I have finished my book on OpenSAML,  based on my experiences working with the OpenSAML library. A Guide to OpenSAML is a short book that introduces SAML, the SAML Web Browser Profile and the use of OpenSAML.&lt;/p&gt;
+&lt;h4 id=&#34;buy-the-book-on-payhiphttpspayhipcombodey&#34;&gt;&lt;a href=&#34;https://payhip.com/b/odEY&#34;&gt;Buy the book on Payhip!&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;The book has three parts, the first of which introduces SAML, SAML Web Browser Profile and OpenSAML. The next part goes deeper into explaining the Web Browser Profile more in detail and shows an example on how to implement it using OpenSAML. The last part explains and shows examples on how to use some of the security functions in OpenSAML, like signatures and encryption.&lt;/p&gt;
+&lt;p&gt;The SAML Web Browser Profile is flexible and can be used in many different ways. The book shows the SAML Web Browser Profile with the following configurations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SP initiated Single Sign-On&lt;/li&gt;
+&lt;li&gt;Authentication request using HTTP Redirect Binding&lt;/li&gt;
+&lt;li&gt;Assertion transported using HTTP Artifact Binding&lt;/li&gt;
+&lt;li&gt;SAML Artifact transported using HTTP Redirect Binding&lt;/li&gt;
+&lt;li&gt;Artifact resolution using SOAP Binding&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The book explains the interaction from the Service Provider’s point of view. The implementation of the Identity Provider is not covered in this book.&lt;/p&gt;
+&lt;p&gt;The package contains the book in PDF format, three different e-reader formats(EPUB, MOBI, AZW3) and a sample project showing OpenSAML in action.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>Decrypting a SAML Assertion in OpenSAML v3</title>
       <link>https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
