@@ -31,16 +31,20 @@
 &lt;h2 id=&#34;helpful-resources&#34;&gt;Helpful resources&lt;/h2&gt;
 &lt;h3 id=&#34;my-blog-posts&#34;&gt;My blog posts&lt;/h3&gt;
 &lt;p&gt;When I work with OpenSAML I try to spend some time to blog about different situation and problems I encounter. Here are some of the more popular.&lt;/p&gt;
-&lt;p&gt;Some on using OpenSAML for the SAML flow
-&lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;Redirect with AuthnRequest&lt;/a&gt;
-&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/resolve-artifact-with-opensaml.html&#34;&gt;Resolve an artifact with OpenSAML&lt;/a&gt;
-&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/single-log-out-with-opensaml.html&#34;&gt;Single Log Out with OpenSAML&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Some more general
-&lt;a href=&#34;https://blog.samlsecurity.com/2011/04/convenience-methods-for-opensaml.html&#34;&gt;Convenience methods for OpenSAML&lt;/a&gt;
-&lt;a href=&#34;https://blog.samlsecurity.com/2011/03/getting-credentials-in-opensaml.html&#34;&gt;Getting credentials in OpenSAML&lt;/a&gt;
-&lt;a href=&#34;https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html&#34;&gt;Verifying signatures with OpenSAML&lt;/a&gt;
-&lt;a href=&#34;https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html&#34;&gt;Signing with OpenSAML&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;[Read all my posts on OpenSAML]({{ref &amp;quot;/categories/opensaml/&amp;quot;}})&lt;/p&gt;
+&lt;p&gt;Some on using OpenSAML for the SAML flow&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;Redirect with AuthnRequest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/resolve-artifact-with-opensaml.html&#34;&gt;Resolve an artifact with OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/single-log-out-with-opensaml.html&#34;&gt;Single Log Out with OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some more general&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/04/convenience-methods-for-opensaml.html&#34;&gt;Convenience methods for OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/03/getting-credentials-in-opensaml.html&#34;&gt;Getting credentials in OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html&#34;&gt;Verifying signatures with OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html&#34;&gt;Signing with OpenSAML&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.samlsecurity.com/categories/opensaml/&#34;&gt;Read all my posts on OpenSAML&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;my-book-a-guide-to-opensaml&#34;&gt;My book, A Guide to OpenSAML&lt;/h3&gt;
 &lt;p&gt;A Guide to OpenSAML is a short book that introduces SAML, the SAML Web Browser Profile and the use of OpenSAML.&lt;/p&gt;
 &lt;h4 id=&#34;buy-the-book-on-payhiphttpspayhipcombodey&#34;&gt;&lt;a href=&#34;https://payhip.com/b/odEY&#34;&gt;Buy the book on Payhip!&lt;/a&gt;&lt;/h4&gt;
@@ -57,10 +61,12 @@ The last part explains how to use some of the security functions in OpenSAML, li
 &lt;/ul&gt;
 &lt;h3 id=&#34;the-saml-specs&#34;&gt;The SAML specs&lt;/h3&gt;
 &lt;p&gt;As always, when working with SAML it pays of having the official SAML specs close at hand&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Core Specs&lt;/a&gt; - The main spec for the SAML messages
-&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35387/sstc-saml-bindings-errata-2.0-wd-05-diff.pdf&#34;&gt;SAML Binding Spec&lt;/a&gt; - Specs for bindings used to transport the messages
-&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35389/sstc-saml-profiles-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Profiles Spec&lt;/a&gt; - The profiles showing how to use the SAML messages together for a use-case
-&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf&#34;&gt;SAML Metadata Spec&lt;/a&gt; - Specification for SAML configuration data&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Core Specs&lt;/a&gt; - The main spec for the SAML messages&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35387/sstc-saml-bindings-errata-2.0-wd-05-diff.pdf&#34;&gt;SAML Binding Spec&lt;/a&gt; - Specs for bindings used to transport the messages&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35389/sstc-saml-profiles-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Profiles Spec&lt;/a&gt; - The profiles showing how to use the SAML messages together for a use-case&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf&#34;&gt;SAML Metadata Spec&lt;/a&gt; - 	Specification for SAML configuration data&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;other-resource&#34;&gt;Other resource&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://wiki.shibboleth.net/confluence/display/OpenSAML/Home&#34;&gt;The official OpenSAML homepage&lt;/a&gt; - The official page from Internet2. Has good documentation&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml/2.5.3/opensaml-2.5.3-javadoc.jar/!/index.html&#34;&gt;Javadoc for OpenSAML&lt;/a&gt; - Very useful&lt;/p&gt;
