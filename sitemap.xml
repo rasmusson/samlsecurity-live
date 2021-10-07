@@ -2,12 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.samlsecurity.com/</loc>
+    <lastmod>2021-10-06T09:17:27-07:00</lastmod>
+    <priority>0</priority>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/ads/</loc>
+    <lastmod>2021-10-06T09:17:27-07:00</lastmod>
+  </url><url>
     <loc>https://blog.samlsecurity.com/privacy/</loc>
     <lastmod>2021-08-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/</loc>
-    <lastmod>2021-08-11T20:19:39+02:00</lastmod>
-    <priority>0</priority>
   </url><url>
     <loc>https://blog.samlsecurity.com/2015/07/a-guide-to-opensaml.html</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
@@ -21,40 +24,25 @@
     <loc>https://blog.samlsecurity.com/redirect/</loc>
     <lastmod>2021-08-11T20:19:39+02:00</lastmod>
   </url><url>
-    <loc>https://blog.samlsecurity.com/ads/</loc>
-    <lastmod>2021-07-26T09:17:27-07:00</lastmod>
-  </url><url>
     <loc>https://blog.samlsecurity.com/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/categories/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/p/gumroad.html</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/p/opensaml-book-release.html</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/opensamlv3/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/post/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/</loc>
-    <lastmod>2018-06-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/tags/opensaml/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://blog.samlsecurity.com/p/opensaml.html</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/post/</loc>
+    <lastmod>2018-04-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/tags/assertion/</loc>
@@ -64,6 +52,12 @@
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/tags/encryption/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/opensamlv3/</loc>
+    <lastmod>2017-05-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
     <lastmod>2017-05-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/tags/digital-signature/</loc>

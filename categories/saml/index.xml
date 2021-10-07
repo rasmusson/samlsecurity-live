@@ -19,8 +19,9 @@
           &lt;p&gt;I have been working with SAML for a while now and I have always used Firefox for debugging instead of my favorite browser, Chrome. Why? you ask. Because there is a plugin called SAML tracer on firefox that is excellent for viewing the SAML messages going across the browser. There have been no such plugin for Chrome.&lt;/p&gt;
 &lt;p&gt;Finally I have decided to take things into my own hands and build one.&lt;/p&gt;
 &lt;p&gt;And now it&#39;s done and here it is!
-&lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
+&lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;
+ss
+&lt;img src=&#34;devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;feature-summary&#34;&gt;Feature summary&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The extension adds a panel to the Developer Tools&lt;/li&gt;

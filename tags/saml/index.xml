@@ -7,59 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>OpenSAML book release!</title>
-      <link>https://blog.samlsecurity.com/p/gumroad.html</link>
-      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.samlsecurity.com/p/gumroad.html</guid>
-      <description>
-        
-          &lt;p&gt;After many late nights and tedious editing, I have finished my book on OpenSAML,  based on my experiences working with the OpenSAML library. A Guide to OpenSAML is a short book that introduces SAML, the SAML Web Browser Profile and the use of OpenSAML.&lt;/p&gt;
-&lt;h4 id=&#34;buy-the-book-on-payhiphttpspayhipcombodey&#34;&gt;&lt;a href=&#34;https://payhip.com/b/odEY&#34;&gt;Buy the book on Payhip!&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;The book has three parts, the first of which introduces SAML, SAML Web Browser Profile and OpenSAML. The next part goes deeper into explaining the Web Browser Profile more in detail and shows an example on how to implement it using OpenSAML. The last part explains and shows examples on how to use some of the security functions in OpenSAML, like signatures and encryption.&lt;/p&gt;
-&lt;p&gt;The SAML Web Browser Profile is flexible and can be used in many different ways. The book shows the SAML Web Browser Profile with the following configurations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SP initiated Single Sign-On&lt;/li&gt;
-&lt;li&gt;Authentication request using HTTP Redirect Binding&lt;/li&gt;
-&lt;li&gt;Assertion transported using HTTP Artifact Binding&lt;/li&gt;
-&lt;li&gt;SAML Artifact transported using HTTP Redirect Binding&lt;/li&gt;
-&lt;li&gt;Artifact resolution using SOAP Binding&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The book explains the interaction from the Service Provider’s point of view. The implementation of the Identity Provider is not covered in this book.&lt;/p&gt;
-&lt;p&gt;The package contains the book in PDF format, three different e-reader formats(EPUB, MOBI, AZW3) and a sample project showing OpenSAML in action.&lt;/p&gt;
-
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>OpenSAML book release!</title>
-      <link>https://blog.samlsecurity.com/p/opensaml-book-release.html</link>
-      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.samlsecurity.com/p/opensaml-book-release.html</guid>
-      <description>
-        
-          &lt;p&gt;After many late nights and tedious editing, I have finished my book on OpenSAML,  based on my experiences working with the OpenSAML library. A Guide to OpenSAML is a short book that introduces SAML, the SAML Web Browser Profile and the use of OpenSAML.&lt;/p&gt;
-&lt;h4 id=&#34;buy-the-book-on-payhiphttpspayhipcombodey&#34;&gt;&lt;a href=&#34;https://payhip.com/b/odEY&#34;&gt;Buy the book on Payhip!&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;The book has three parts, the first of which introduces SAML, SAML Web Browser Profile and OpenSAML. The next part goes deeper into explaining the Web Browser Profile more in detail and shows an example on how to implement it using OpenSAML. The last part explains and shows examples on how to use some of the security functions in OpenSAML, like signatures and encryption.&lt;/p&gt;
-&lt;p&gt;The SAML Web Browser Profile is flexible and can be used in many different ways. The book shows the SAML Web Browser Profile with the following configurations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;SP initiated Single Sign-On&lt;/li&gt;
-&lt;li&gt;Authentication request using HTTP Redirect Binding&lt;/li&gt;
-&lt;li&gt;Assertion transported using HTTP Artifact Binding&lt;/li&gt;
-&lt;li&gt;SAML Artifact transported using HTTP Redirect Binding&lt;/li&gt;
-&lt;li&gt;Artifact resolution using SOAP Binding&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The book explains the interaction from the Service Provider’s point of view. The implementation of the Identity Provider is not covered in this book.&lt;/p&gt;
-&lt;p&gt;The package contains the book in PDF format, three different e-reader formats(EPUB, MOBI, AZW3) and a sample project showing OpenSAML in action.&lt;/p&gt;
-
-        
-      </description>
-    </item>
-    
+    <lastBuildDate>Sat, 20 May 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decrypting a SAML Assertion in OpenSAML v3</title>
       <link>https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</link>
@@ -111,7 +59,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -220,7 +168,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -269,7 +217,7 @@ Next, the security parameters context is created and populated with signing info
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -328,7 +276,7 @@ Next, the security parameters context is created and populated with signing info
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -372,8 +320,9 @@ I hope this is of help.&lt;/p&gt;
           &lt;p&gt;I have been working with SAML for a while now and I have always used Firefox for debugging instead of my favorite browser, Chrome. Why? you ask. Because there is a plugin called SAML tracer on firefox that is excellent for viewing the SAML messages going across the browser. There have been no such plugin for Chrome.&lt;/p&gt;
 &lt;p&gt;Finally I have decided to take things into my own hands and build one.&lt;/p&gt;
 &lt;p&gt;And now it&#39;s done and here it is!
-&lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
+&lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;
+ss
+&lt;img src=&#34;devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;feature-summary&#34;&gt;Feature summary&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The extension adds a panel to the Developer Tools&lt;/li&gt;
@@ -432,7 +381,7 @@ I hope this is of help.&lt;/p&gt;
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -643,7 +592,7 @@ I hope this is of help.&lt;/p&gt;
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -682,7 +631,7 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -733,7 +682,7 @@ entityDescriptor.setSignature(signature); The second step is to marchal the obje
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -793,7 +742,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -837,7 +786,7 @@ If the public key was sent in the message, it is very important to validate that
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -938,7 +887,7 @@ If the public key was sent in the message, it is very important to validate that
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1013,7 +962,7 @@ Setting what type of pseudonym federation we want with the IDP.&lt;/p&gt;
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1235,7 +1184,7 @@ With generics in JavaSE6 we can make this a lot easier.&lt;/p&gt;
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1284,7 +1233,7 @@ I will now show some examples of how creating credentials using the basic classe
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1377,7 +1326,7 @@ The credential resolvers can do things easier for you by helping to extract the 
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1589,7 +1538,7 @@ This is the resulting ArtifactResponse in my case:
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
@@ -1767,7 +1716,7 @@ The example uses the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; to enco
 &lt;/div&gt;
   
   
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hud5decf94ea6314a3162dd894095dd037_1066649_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
 	
 &lt;/div&gt;
 &lt;/a&gt;
