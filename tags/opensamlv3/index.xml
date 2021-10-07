@@ -100,11 +100,11 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:response&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To decrypt the reverse of this is done. The asymmetric is used to decrypt the symmetric key, which is then used to decrypt the assertion.&lt;/p&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -209,11 +209,11 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idpEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -258,11 +258,11 @@ Next, the security parameters context is created and populated with signing info
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cred&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -317,11 +317,11 @@ Next, the security parameters context is created and populated with signing info
 &lt;p&gt;I have had many questions on how to use the new version and unfortunately the documentation is not yet produced. I have started to dig into it and will post what I find out.&lt;/p&gt;
 &lt;p&gt;The first thing I noticed was a structure change in the maven setup. The library have been divided into many submodules as listed below. This makes the Javadoc a bit more hard to find but below are links the the javadoc for each module.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -410,11 +410,11 @@ I hope this is of help.&lt;/p&gt;
 &lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getKeyDescriptors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The keyInfoGenerator uses a &lt;code&gt;X509Credential&lt;/code&gt; to generate the key info object with the public key.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;

@@ -100,11 +100,11 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:response&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To decrypt the reverse of this is done. The asymmetric is used to decrypt the symmetric key, which is then used to decrypt the assertion.&lt;/p&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -209,11 +209,11 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idpEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -258,11 +258,11 @@ Next, the security parameters context is created and populated with signing info
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cred&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -317,11 +317,11 @@ Next, the security parameters context is created and populated with signing info
 &lt;p&gt;I have had many questions on how to use the new version and unfortunately the documentation is not yet produced. I have started to dig into it and will post what I find out.&lt;/p&gt;
 &lt;p&gt;The first thing I noticed was a structure change in the maven setup. The library have been divided into many submodules as listed below. This makes the Javadoc a bit more hard to find but below are links the the javadoc for each module.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -421,11 +421,11 @@ I hope this is of help.&lt;/p&gt;
 &lt;p&gt;There are many ways to give the receiving end the certificate. Two common methods is metadata and in the message.&lt;/p&gt;
 &lt;p&gt;When using the metadata method the KeyInfo object is embedded in the metadata inside the KeyDescriptor element. When attaching KeyInfo to the SAML message the element is embedded in the Signature object.&lt;/p&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -632,11 +632,11 @@ I hope this is of help.&lt;/p&gt;
 &lt;p&gt;To avoid this, it is often enough to configure your Decryptor using the following setting before decrypting.&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setRootInNewDocument&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -671,11 +671,11 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
 &lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;     &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If you do not do this before you start using the library, you might run into exceptions like.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -722,11 +722,11 @@ entityDescriptor.setSignature(signature); The second step is to marchal the obje
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMarshaller&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;marshall&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -782,11 +782,11 @@ The third step is to perform the actual signing to produce a cryptographic signa
 &lt;p&gt;PS. This validation only performs a cryptographic validation of the signature. This means that it validates that the message has not been changed since it was signed. It does however not check that the certificate used for signing is trusted. To confirm the trust of the certificate in OpenSAML, a trust engine must be used in the validation.&lt;/p&gt;
 &lt;p&gt;The most common method to confirm the trust of a key is to compare it to the key received in SAML Metadata. This is generally done as a configuration step when setting up a SAML federation. &lt;a href=&#34;&#34;&gt;This post gives more information on SAML Metadata&lt;/a&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -826,11 +826,11 @@ If the public key was sent in the message, it is very important to validate that
 &lt;p&gt;There is also the Norwegian electronic voting system. This also implements a service provider.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://source.evalg.stat.no/svn/eVote-ergo/admin-frontend/src/main/java/no/evote/service/security/saml/&#34;&gt;Evalg&lt;/a&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -927,11 +927,11 @@ If the public key was sent in the message, it is very important to validate that
 &lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getKeyDescriptors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The keyInfoGenerator uses a &lt;code&gt;X509Credential&lt;/code&gt; to generate the key info object with the public key.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1002,11 +1002,11 @@ Setting what type of pseudonym federation we want with the IDP.&lt;/p&gt;
 &lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EntityDescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idpEntityDescriptor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idpMetaDataProvider&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getEntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Some entity id&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The EntityDescriptor can then be used to extract data from the metadata. Here are some examples on how to use it.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1224,11 +1224,11 @@ With generics in JavaSE6 we can make this a lot easier.&lt;/p&gt;
 &lt;p&gt;By putting something like this in a utility class we can now create our SAML objects like this&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assertion&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;UtilityClass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;createSAMLObject&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1273,11 +1273,11 @@ I will now show some examples of how creating credentials using the basic classe
 &lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;credential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setUsageType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UsageType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SIGNING&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;And now you have a credential to use with signing.
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1366,11 +1366,11 @@ The credential resolvers can do things easier for you by helping to extract the 
 &lt;span class=&#34;ln&#34;&gt;44&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;artifactResolve&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;45&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1578,11 +1578,11 @@ This is the resulting ArtifactResponse in my case:
 &lt;span class=&#34;ln&#34;&gt;67&lt;/span&gt;   &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;logoutRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;68&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
@@ -1756,11 +1756,11 @@ The example uses the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; to enco
 &lt;span class=&#34;ln&#34;&gt;69&lt;/span&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;70&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&#34;book-ad&#34;&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
 
 
-&lt;a href=&#34;https://payhip.com/b/41Tw&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
 
   &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
 &lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
