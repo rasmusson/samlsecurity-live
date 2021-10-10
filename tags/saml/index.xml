@@ -29,9 +29,27 @@
 &lt;p&gt;As you are surely staring to understand, OpenSAML is a very powerful and flexible library. This does however dome with some important caveats.&lt;/p&gt;
 &lt;p&gt;The OpenSAML library works on a very low level. Meaning you have to do a lot of stuff yourself. When you use OpenSAML for SAML communication you will more or less be creating all parts of your messages by hand, choosing what should be included. This also means that if you forget something, or implement something incorrectly, like verifying digital signatures, it will not be done and you risk opening up security holes in your code.&lt;/p&gt;
 &lt;p&gt;To be able to create a working and secure SSO service using OpenSAML you should be very familiar with the SAML specification. The specification does not only specify how SAML messages should look but also have thorough rules describing how messages must be validated and processed. In this post I explain the SAML specifications further&lt;/p&gt;
-&lt;h1 id=&#34;starting-out-with-the-code&#34;&gt;Starting out with the code&lt;/h1&gt;
+&lt;h2 id=&#34;starting-out-with-the-code&#34;&gt;Starting out with the code&lt;/h2&gt;
 &lt;p&gt;This is just a small example on how to get started and do something with OpenSAML. I have loads more on the blog.&lt;/p&gt;
-&lt;h2 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h2&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;dependencies&#34;&gt;Dependencies&lt;/h3&gt;
 &lt;p&gt;To begin with, lets add OpenSAML to your project. OpenSAML has several diffferent libraries and the others might be needed depending on how you use the library. But for this tutorial the below dependencies in Maven is enough.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;	&lt;span class=&#34;nt&#34;&gt;&amp;lt;opensaml.version&amp;gt;&lt;/span&gt;4.1.1&lt;span class=&#34;nt&#34;&gt;&amp;lt;/opensaml.version&amp;gt;&lt;/span&gt;
@@ -130,7 +148,7 @@
 &lt;span class=&#34;ln&#34;&gt;95&lt;/span&gt;		&lt;span class=&#34;nt&#34;&gt;&amp;lt;url&amp;gt;&lt;/span&gt;https://build.shibboleth.net/nexus/content/repositories/releases&lt;span class=&#34;nt&#34;&gt;&amp;lt;/url&amp;gt;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;96&lt;/span&gt;	&lt;span class=&#34;nt&#34;&gt;&amp;lt;/repository&amp;gt;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;97&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/repositories&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;bootstrapping&#34;&gt;Bootstrapping&lt;/h2&gt;
+&lt;h3 id=&#34;bootstrapping&#34;&gt;Bootstrapping&lt;/h3&gt;
 &lt;p&gt;To start using OpenSAML, you first always need to initiate the library. If you do not do this you will get the ffollowing error when trying to use it.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;Exception in thread &amp;#34;main&amp;#34; java.lang.NullPointerException: Cannot invoke &amp;#34;org.opensaml.core.xml.XMLObjectBuilder.buildObject(javax.xml.namespace.QName)&amp;#34; because the return value of &amp;#34;org.opensaml.core.xml.XMLObjectBuilderFactory.getBuilder(javax.xml.namespace.QName)&amp;#34; is null
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;	at com.samlsecurity.opensamlSamples.gettingStartedAuthnrequest.OpenSAMLUtils.buildSAMLObject(OpenSAMLUtils.java:42)
@@ -165,7 +183,7 @@
 &lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ComponentInitializationException&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;	&lt;span class=&#34;n&#34;&gt;logger&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;first-shot---creating-a-authentication-request&#34;&gt;First shot - Creating a authentication request&lt;/h2&gt;
+&lt;h3 id=&#34;first-shot---creating-a-authentication-request&#34;&gt;First shot - Creating a authentication request&lt;/h3&gt;
 &lt;p&gt;This is just a small example on how to use OpenSAML. I have loads of posts and guides on how to do more.&lt;br&gt;
 The following creates a SAML authentication request&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;private&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AuthnRequest&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;buildAuthnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
@@ -210,13 +228,13 @@ The following creates a SAML authentication request&lt;/p&gt;
 &lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;    		&lt;span class=&#34;na&#34;&gt;AllowCreate=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;    		&lt;span class=&#34;na&#34;&gt;Format=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:AuthnRequest&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&#34;get-it-on-github&#34;&gt;Get it on Github!&lt;/h1&gt;
+&lt;h2 id=&#34;get-it-on-github&#34;&gt;Get it on Github!&lt;/h2&gt;
 &lt;p&gt;The full running sample is availible on Github at &lt;a href=&#34;https://github.com/rasmusson/OpenSAML-sample-code&#34;&gt;https://github.com/rasmusson/OpenSAML-sample-code&lt;/a&gt; under getting-started-authnrequest&lt;/p&gt;
 &lt;p&gt;Just check out, run and go nuts&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;git clone https://github.com/rasmusson/OpenSAML-sample-code/
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;cd OpenSAML-sample-code/getting-started-authnrequest
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;mvn compile exec:java -Dexec.mainClass=&amp;#34;com.samlsecurity.opensamlSamples.gettingStartedAuthnrequest.GenAuthnRequest&amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In this post we have looked on the very basics.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Adding OpenSAML to you project&lt;/li&gt;
@@ -224,6 +242,8 @@ The following creates a SAML authentication request&lt;/p&gt;
 &lt;li&gt;Producing your first SAML message&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This was a very simple, minimal first example on how to use OpenSAML. On this blog you will find lots of more examples and explanations on beginner level as well as more advanced fringe cases.&lt;/p&gt;
+&lt;h2 id=&#34;next-step&#34;&gt;Next step&lt;/h2&gt;
+&lt;p&gt;Check out &lt;a href=&#34;https://blog.samlsecurity.com/p/opensaml.html&#34;&gt;The Big OpenSAML Guide&lt;/a&gt; with links pointing to all relevant article and resources you need to continue building the OpenSAML.&lt;/p&gt;
 
         
       </description>
