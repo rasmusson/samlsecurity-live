@@ -196,8 +196,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     
     <p>Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.</p>
-<p>As described in <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html">this post on AuthnRequests OpenSAML V2</a>, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.</p>
-<p>As in V2 the <code>HTTPRedirectDeflateEncoder</code> is used, the main difference lays in the message context.</p>
+<p>As described in <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/">this post on AuthnRequests OpenSAML V2</a>, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.</p>
+<p>As in V2 the <code>HTTPRedirectDeflateEncoder</code> is used to send messages using HTTP redirect, the main difference lays in the message context.</p>
 <p>One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.</p>
 <p>In <a href="/book">my book A Guide to OpenSAML V3</a> I cover the use of the new message contexts in detail.</p>
 <p>To sign and send a AuthnRequest, three contexts are needed.</p>
@@ -246,6 +246,9 @@ Next, the security parameters context is created and populated with signing info
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/" class="nav-link" title="Getting started with OpenSAML 4">Getting started with OpenSAML 4</a>
       </li>
       <li>
@@ -265,9 +268,6 @@ Next, the security parameters context is created and populated with signing info
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2015/10/saml-chrome-extension-published.html" class="nav-link" title="SAML Chrome Extension Published!">SAML Chrome Extension Published!</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2015/07/adding-keyinfo-to-saml-message.html" class="nav-link" title="Adding KeyInfo to a message in OpenSAML">Adding KeyInfo to a message in OpenSAML</a>
       </li>
     </ul>
     <div>
@@ -296,12 +296,17 @@ Next, the security parameters context is created and populated with signing info
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
           OPENSAMLV2
-          <span class="button_tally">13</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv3/' class="post_tag button button_translucent" title="opensamlv3">
           OPENSAMLV3
           <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensamlv4/' class="post_tag button button_translucent" title="opensamlv4">
+          OPENSAMLV4
+          <span class="button_tally">2</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/assertion/' class="post_tag button button_translucent" title="assertion">
@@ -326,11 +331,6 @@ Next, the security parameters context is created and populated with signing info
         
         <a href='https://blog.samlsecurity.com/tags/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
-          <span class="button_tally">1</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/tags/opensamlv4/' class="post_tag button button_translucent" title="opensamlv4">
-          OPENSAMLV4
           <span class="button_tally">1</span>
         </a>
         

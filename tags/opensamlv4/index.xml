@@ -7,7 +7,101 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 09 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/opensamlv4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/opensamlv4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using HTTP Redirect binding in OpenSAML 4</title>
+      <link>https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html</link>
+      <pubDate>Sat, 16 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html</guid>
+      <description>
+        
+          &lt;p&gt;SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.&lt;/p&gt;
+&lt;p&gt;This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP Redirect in OpenSAML.&lt;/p&gt;
+&lt;h2 id=&#34;the-http-redirect-binding&#34;&gt;The HTTP Redirect binding&lt;/h2&gt;
+&lt;p&gt;The Redirect binding uses the function of HTTP Redirects the transport messages between SP and IdP with the use of the user browser.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;redirect-binding.png&#34; alt=&#34;Diagram of redirect binding&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTTP Redirect to the receiver, with the encoded message in an URL parameter.&lt;/li&gt;
+&lt;li&gt;When the browser receives the redirect, it redirects the user to the receiver.&lt;/li&gt;
+&lt;li&gt;When the user arrives at the receiver of the message, the receiver will pick the message from the URL parameter and parses the message.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;url-parameters-explained&#34;&gt;URL parameters explained&lt;/h3&gt;
+&lt;p&gt;There are four URL parameters used in the binding&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SAMLRequest/SAMResponse - The encoded, unsigned message&lt;/li&gt;
+&lt;li&gt;RelayState - The relaystate, sent in the original request and send back in the response&lt;/li&gt;
+&lt;li&gt;SigAlg - The algorithm used for signing&lt;/li&gt;
+&lt;li&gt;Signature - Calculated signature&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A typical redirect URL can look like this.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;http://localhost:8080/opensaml-http-redirect/receiverPage?SAMLRequest=fZJNb9swDIb%2FiqC744%2FagSvEKbwGxQJ0Q9C6PewyqDJdC5AlT6TT9t9PzsfQ9ZCLAIqv%2BFIPubp5Hwzbg0ftbMXTRcIZWOVabV8r%2FtTcRSW%2FWa9QDiYbRT1Rbx%2FgzwRILDy0KI6Zik%2FeCidRo7ByABSkxGP9415ki0SM3pFTznBWI4KnYHXrLE4D%2BEfwe63g6eG%2B4k0PDHs3mZa9AKMQgW1Hpy2FQNI550Fp2B8FHnAyxFx3iGRoDyxpJWcLzjahTW0PQcV7olHEsXFKmt4hiTIpk9iNYOcvRHM68tDqUJ7icIAOVHbyFTjbbir%2BW0nVdUVbpGVxnVxflV3X5UVxVaqlass0nWWIE2wtkrRU8SzJ0ihNonTZpLnIl6LIFlme%2F%2BJsd8LxTdsj5kvsXo4iFN%2BbZhfVAV4nFXH2fB5ZEPHTgMShA%2F95MpeLy%2FM4%2BLrpNX6hjwF%2FqDYTpY9tu4o%2Fm%2FzbiZ%2Bh6nazc0arD1Yb495uPUiCipOfApU75wdJl%2FuYb3QbdQepIC8t6mDL4%2FXJ9P%2FVW%2F8F&amp;amp;RelayState=teststate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The authentication request is often the first message send when authenticating a user user SAML. This is true when the recommended approach of SP initiated SSO is used and the SP is the one that requests a user to be authenticated by the IdP.&lt;/p&gt;
+&lt;h2 id=&#34;sending-a-message-using-opensaml-4&#34;&gt;Sending a message using OpenSAML 4&lt;/h2&gt;
+&lt;p&gt;
+&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://payhip.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+Creating message contexts to set the message, relaystate and receiving endpoint.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLBindingContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bindingContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLBindingContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bindingContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setRelayState&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;teststate&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;URLToEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MESSAGE_RECEIVER_ENDPOINT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setHttpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;httpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h2 id=&#34;receiving-a-message-using-opensaml-4&#34;&gt;Receiving a message using OpenSAML 4&lt;/h2&gt;
+&lt;p&gt;Using HTTPRedirectDeflateDecoder to decode the received message from the HTTPServletRequest&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateDecoder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateDecoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setHttpServletRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;req&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;messageContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AuthnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;messageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;get-it-on-github&#34;&gt;Get it on Github!&lt;/h2&gt;
+&lt;p&gt;The full running sample is availible on Github at &lt;a href=&#34;https://github.com/rasmusson/OpenSAML-sample-code&#34;&gt;https://github.com/rasmusson/OpenSAML-sample-code&lt;/a&gt; under opensaml-http-redirect&lt;/p&gt;
+&lt;p&gt;Just clone it, run it, go nuts!&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;git clone https://github.com/rasmusson/OpenSAML-sample-code/
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;cd opensaml-http-redirect
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;mvn tomcat:run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;All messages are printed in the console&lt;/p&gt;
+&lt;p&gt;Browse to [http://localhost:8080/opensaml-http-redirect/redirectPage]&lt;/p&gt;
+&lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
+&lt;p&gt;In this post we have looked on.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The basics of the HTTP redirect binding&lt;/li&gt;
+&lt;li&gt;Sending a message using OpenSAML 4,&lt;/li&gt;
+&lt;li&gt;Receiving a message using OpenSAML 4&lt;/li&gt;
+&lt;/ul&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>Getting started with OpenSAML 4</title>
       <link>https://blog.samlsecurity.com/post/getting-started-opensaml-v4/</link>
