@@ -129,7 +129,7 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;cd opensaml-http-post
 &lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;mvn tomcat:run&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;All messages are printed in the console&lt;/p&gt;
-&lt;p&gt;Browse to &lt;a href=&#34;http://localhost:8080/opensaml-http-redirect/postPage&#34;&gt;http://localhost:8080/opensaml-http-redirect/postPage&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Browse to &lt;a href=&#34;http://localhost:8080/opensaml-http-post/postPage&#34;&gt;http://localhost:8080/opensaml-http-post/postPage&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;summary&#34;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;In this post we have looked at.&lt;/p&gt;
 &lt;ul&gt;
