@@ -32,7 +32,8 @@
 &lt;p&gt;&lt;a href=&#34;https://blog.samlsecurity.com/post/getting-started-opensaml-v4/&#34;&gt;Getting started with OpenSAML 4&lt;/a&gt; - This is a tutorial for getting started with OpenSAML 4, the most current version of the library. In this tutorial I will walk you through, the basics of OpenSAML, adding it to your project and building your first SAML message. It is a good starting point for anyone new to SAML.&lt;/p&gt;
 &lt;h2 id=&#34;the-saml-web-browser-sso-flow&#34;&gt;The SAML Web browser SSO flow&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;Redirect with AuthnRequest&lt;/a&gt; - This article gives a simple example on how to send a authentication request message (AuthnRequest) using the HTTP Redirect binding.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;Using HTTP Redirect to send and receive messages&lt;/a&gt; - This tutorial gives a simple example on how to send a authentication request message (AuthnRequest) using the HTTP Redirect binding.
+&lt;a href=&#34;https://blog.samlsecurity.com/post/post-binding-opensaml-4/&#34;&gt;Using HTTP POST to send and receive messages&lt;/a&gt; - This tutorial gives a simple example on how to send a message using HTTP POST binding. A popular binding for sending SAML Responses, because of their large size .&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/resolve-artifact-with-opensaml.html&#34;&gt;Resolve an artifact with OpenSAML&lt;/a&gt; - Here we look on the second step of the HTTP Artifact binding. When a HTTP Artifact is receved, it is exchanged over SOAP to the real message. Often a SAML Response message.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;single-logout&#34;&gt;Single LogOut&lt;/h2&gt;

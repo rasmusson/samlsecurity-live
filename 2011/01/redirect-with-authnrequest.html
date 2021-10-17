@@ -205,6 +205,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>When the user arrives at the receiver of the message, the receiver will pick the message from the URL parameter and parses the message.</li>
 </ol>
 <h3 id="url-parameters-explained">URL parameters explained</h3>
+<p>A typical redirect URL can look like this.
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>http://localhost:8080/opensaml-http-redirect/receiverPage?SAMLRequest=fZJNb9swDIb%2FiqC744%2FagSvEKbwGxQJ0Q9C6PewyqDJdC5AlT6TT9t9PzsfQ9ZCLAIqv%2BFIPubp5Hwzbg0ftbMXTRcIZWOVabV8r%2FtTcRSW%2FWa9QDiYbRT1Rbx%2FgzwRILDy0KI6Zik%2FeCidRo7ByABSkxGP9415ki0SM3pFTznBWI4KnYHXrLE4D%2BEfwe63g6eG%2B4k0PDHs3mZa9AKMQgW1Hpy2FQNI550Fp2B8FHnAyxFx3iGRoDyxpJWcLzjahTW0PQcV7olHEsXFKmt4hiTIpk9iNYOcvRHM68tDqUJ7icIAOVHbyFTjbbir%2BW0nVdUVbpGVxnVxflV3X5UVxVaqlass0nWWIE2wtkrRU8SzJ0ihNonTZpLnIl6LIFlme%2F%2BJsd8LxTdsj5kvsXo4iFN%2BbZhfVAV4nFXH2fB5ZEPHTgMShA%2F95MpeLy%2FM4%2BLrpNX6hjwF%2FqDYTpY9tu4o%2Fm%2FzbiZ%2Bh6nazc0arD1Yb495uPUiCipOfApU75wdJl%2FuYb3QbdQepIC8t6mDL4%2FXJ9P%2FVW%2F8F&amp;RelayState=teststate</code></pre></div></p>
 <p>There are four URL parameters used in the binding</p>
 <ul>
 <li>SAMLRequest/SAMResponse - The encoded, unsigned message</li>
@@ -212,8 +214,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>SigAlg - The algorithm used for signing</li>
 <li>Signature - Calculated signature</li>
 </ul>
-<p>A typical redirect URL can look like this.</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>http://localhost:8080/opensaml-http-redirect/receiverPage?SAMLRequest=fZJNb9swDIb%2FiqC744%2FagSvEKbwGxQJ0Q9C6PewyqDJdC5AlT6TT9t9PzsfQ9ZCLAIqv%2BFIPubp5Hwzbg0ftbMXTRcIZWOVabV8r%2FtTcRSW%2FWa9QDiYbRT1Rbx%2FgzwRILDy0KI6Zik%2FeCidRo7ByABSkxGP9415ki0SM3pFTznBWI4KnYHXrLE4D%2BEfwe63g6eG%2B4k0PDHs3mZa9AKMQgW1Hpy2FQNI550Fp2B8FHnAyxFx3iGRoDyxpJWcLzjahTW0PQcV7olHEsXFKmt4hiTIpk9iNYOcvRHM68tDqUJ7icIAOVHbyFTjbbir%2BW0nVdUVbpGVxnVxflV3X5UVxVaqlass0nWWIE2wtkrRU8SzJ0ihNonTZpLnIl6LIFlme%2F%2BJsd8LxTdsj5kvsXo4iFN%2BbZhfVAV4nFXH2fB5ZEPHTgMShA%2F95MpeLy%2FM4%2BLrpNX6hjwF%2FqDYTpY9tu4o%2Fm%2FzbiZ%2Bh6nazc0arD1Yb495uPUiCipOfApU75wdJl%2FuYb3QbdQepIC8t6mDL4%2FXJ9P%2FVW%2F8F&amp;RelayState=teststate</code></pre></div>
 <p>The authentication request is often the first message send when authenticating a user user SAML. This is true when the recommended approach of SP initiated SSO is used and the SP is the one that requests a user to be authenticated by the IdP.</p>
 <h2 id="sending-a-message-using-opensaml-4">Sending a message using OpenSAML 4</h2>
 <p>
@@ -243,8 +243,8 @@ Creating message contexts to set the message, relaystate and receiving endpoint.
 <span class="ln">6</span>
 <span class="ln">7</span><span class="n">SAMLPeerEntityContext</span> <span class="n">peerEntityContext</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLPeerEntityContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
 <span class="ln">8</span><span class="n">SAMLEndpointContext</span> <span class="n">endpointContext</span> <span class="o">=</span> <span class="n">peerEntityContext</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLEndpointContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-<span class="ln">9</span><span class="n">endpointContext</span><span class="o">.</span><span class="na">setEndpoint</span><span class="o">(</span><span class="n">URLToEndpoint</span><span class="o">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="o">));</span></code></pre></div>
-Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
+<span class="ln">9</span><span class="n">endpointContext</span><span class="o">.</span><span class="na">setEndpoint</span><span class="o">(</span><span class="n">URLToEndpoint</span><span class="o">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="o">));</span></code></pre></div></p>
+<p>Creating, initializing and sending the message using HTTPRedirectDeflateEncoder.
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">HTTPRedirectDeflateEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HTTPRedirectDeflateEncoder</span><span class="o">();</span>
 <span class="ln">2</span><span class="n">encoder</span><span class="o">.</span><span class="na">setMessageContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
 <span class="ln">3</span><span class="n">encoder</span><span class="o">.</span><span class="na">setHttpServletResponse</span><span class="o">(</span><span class="n">httpServletResponse</span><span class="o">);</span>
@@ -267,7 +267,7 @@ Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
 <span class="ln">2</span>cd opensaml-http-redirect
 <span class="ln">3</span>mvn tomcat:run</code></pre></div>
 <p>All messages are printed in the console</p>
-<p>Browse to [http://localhost:8080/opensaml-http-redirect/redirectPage]</p>
+<p>Browse to <a href="http://localhost:8080/opensaml-http-redirect/redirectPage">http://localhost:8080/opensaml-http-redirect/redirectPage</a></p>
 <h2 id="summary">Summary</h2>
 <p>In this post we have looked on.</p>
 <ul>
@@ -282,6 +282,9 @@ Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
   <section class="sidebar_inner">
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
+      <li>
+        <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
+      </li>
       <li>
         <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/" class="nav-link" title="Getting started with OpenSAML 4">Getting started with OpenSAML 4</a>
       </li>
@@ -303,16 +306,13 @@ Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
       <li>
         <a href="https://blog.samlsecurity.com/2016/04/opensaml-v3-javadocs.html" class="nav-link" title="OpenSAML V3 Javadocs">OpenSAML V3 Javadocs</a>
       </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2015/10/saml-chrome-extension-published.html" class="nav-link" title="SAML Chrome Extension Published!">SAML Chrome Extension Published!</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/categories/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
-          <span class="button_tally">21</span>
+          <span class="button_tally">22</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
@@ -328,7 +328,7 @@ Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">25</span>
+          <span class="button_tally">26</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -343,7 +343,7 @@ Creating initializing and sending the message using HTTPRedirectDeflateEncoder.
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv4/' class="post_tag button button_translucent" title="opensamlv4">
           OPENSAMLV4
-          <span class="button_tally">2</span>
+          <span class="button_tally">3</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/assertion/' class="post_tag button button_translucent" title="assertion">

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-figures="" class="page">
   <head>
-<title>Decrypting a SAML Assertion in OpenSAML v3 | SAMLSecurity</title>
+<title>Using HTTP POST binding in OpenSAML 4 | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,20 +11,20 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Explanation and examples of how to decrypt an encrypted SAML assertion with OpenSAML V3">
+<meta name="description" content="In this tutorial I wii show you hhow the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Decrypting a SAML Assertion in OpenSAML v3" />
-<meta property="og:url" content="https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html" />
-<meta property="og:title" content="Decrypting a SAML Assertion in OpenSAML v3" />
-<meta property="og:description" content="Explanation and examples of how to decrypt an encrypted SAML assertion with OpenSAML V3" />
+<meta name="twitter:title" content="Using HTTP POST binding in OpenSAML 4" />
+<meta property="og:url" content="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" />
+<meta property="og:title" content="Using HTTP POST binding in OpenSAML 4" />
+<meta property="og:description" content="In this tutorial I wii show you hhow the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML" />
 <meta property="og:image" content="https://blog.samlsecurity.com/images/thumbnail.png" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.samlsecurity.com/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html">
+<link rel="canonical" href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/">
 
     
 
@@ -84,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <body data-code="50" data-lines="false" id="documentTop">
 
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=Page%28%2fpost%2fDecrypting-a-SAML-Assertion-in-OpenSAML-v3.md%29"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=Page%28%2fpost%2fpost-binding-opensaml-4%2findex.md%29"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
@@ -155,28 +155,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Decrypting a SAML Assertion in OpenSAML v3</h1>
+    <h1 class="post_title">Using HTTP POST binding in OpenSAML 4</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      May 20, 2017</span>
+      Oct 17, 2021</span>
     <span class="post_time"> · 3 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml' title="SAML" class="post_tag button button_translucent">SAML
-        </a><a href='https://blog.samlsecurity.com/tags/opensamlv3' title="OpenSAMLV3" class="post_tag button button_translucent">OpenSAMLV3
-        </a><a href='https://blog.samlsecurity.com/tags/encryption' title="Encryption" class="post_tag button button_translucent">Encryption
-        </a><a href='https://blog.samlsecurity.com/tags/assertion' title="Assertion" class="post_tag button button_translucent">Assertion
+        </a><a href='https://blog.samlsecurity.com/tags/opensamlv4' title="OpenSAMLV4" class="post_tag button button_translucent">OpenSAMLV4
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Decrypting%20a%20SAML%20Assertion%20in%20OpenSAML%20v3&url=https%3a%2f%2fblog.samlsecurity.com%2f2017%2f05%2fdecrypting-saml-assertion-in-opensaml-v3.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Using%20HTTP%20POST%20binding%20in%20OpenSAML%204&url=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpost-binding-opensaml-4%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2017%2f05%2fdecrypting-saml-assertion-in-opensaml-v3.html&t=Decrypting%20a%20SAML%20Assertion%20in%20OpenSAML%20v3" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpost-binding-opensaml-4%2f&t=Using%20HTTP%20POST%20binding%20in%20OpenSAML%204" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -186,7 +184,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <use xlink:href="#linkedin"></use>
 </svg>
     </a>
-    <a href="https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html" title="Copy Link" class="link link_yank">
+    <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -196,37 +194,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     
-    <p>As you probably should know at this point, the SAML Assertion contains the description of a authenticated user and how it was authenticated. The assertion is generally signed to prevent manipulation but there are also cases where you would want to encrypt the assertion to prevent someone to see the information within. For example the assertion can be used to communicate personal information about the user such as social security number and address.</p>
-<p>As most people reading my blog seem to be on the SP side of SAML I will explain how to decrypt an assertion.</p>
-<p>The general method of encryption and subsequent decryption of a assertion uses two keys, one symmetric and on asymmetric.
-The symmetric key is generated during encryption and used to encrypt the actual assertion data. An asymmetric key, generally a SP key contained in the metadata, is then used to encrypt the symmetric key which is then stored in the XML together with the encrypted assertion.</p>
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="ln"> 1</span><span class="cp">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
-<span class="ln"> 2</span><span class="nt">&lt;saml2p:response</span> <span class="na">destination=</span><span class="s">&#34;http://localhost:8080/webprofile-ref-project/sp/consumer&#34;</span> <span class="na">id=</span><span class="s">&#34;_bd4528ed60f7b8142c39ee800625972f&#34;</span> <span class="na">issueinstant=</span><span class="s">&#34;2017-05-20T21:26:14.955Z&#34;</span> <span class="na">version=</span><span class="s">&#34;2.0&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 3</span>  <span class="nt">&lt;saml2:issuer</span> <span class="na">xmlns:saml2=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:assertion&#34;</span><span class="nt">&gt;</span>TestIDP<span class="nt">&lt;/saml2:issuer&gt;</span>
-<span class="ln"> 4</span>  <span class="nt">&lt;saml2p:status&gt;</span>
-<span class="ln"> 5</span>    <span class="nt">&lt;saml2p:statuscode</span> <span class="na">value=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:status:Success&#34;</span><span class="nt">/&gt;</span>
-<span class="ln"> 6</span>  <span class="nt">&lt;/saml2p:status&gt;</span>
-<span class="ln"> 7</span>  <span class="nt">&lt;saml2:encryptedassertion</span> <span class="na">xmlns:saml2=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:assertion&#34;</span><span class="nt">&gt;</span>
-<span class="hl"><span class="ln"> 8</span>    <span class="nt">&lt;xenc:encrypteddata</span> <span class="na">xmlns:xenc=</span><span class="s">&#34;http://www.w3.org/2001/04/xmlenc#&#34;</span> <span class="na">id=</span><span class="s">&#34;_2b077c659cdb0187fb617362135c3d63&#34;</span> <span class="na">type=</span><span class="s">&#34;http://www.w3.org/2001/04/xmlenc#Element&#34;</span><span class="nt">&gt;</span>
-</span><span class="hl"><span class="ln"> 9</span>      <span class="nt">&lt;xenc:encryptionmethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2001/04/xmlenc#aes128-cbc&#34;</span><span class="nt">&gt;</span>
-</span><span class="hl"><span class="ln">10</span>        <span class="nt">&lt;ds:keyinfo</span> <span class="na">xmlns:ds=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#&#34;</span><span class="nt">&gt;</span>
-</span><span class="hl"><span class="ln">11</span>          <span class="nt">&lt;xenc:encryptedkey</span> <span class="na">id=</span><span class="s">&#34;_24266af2ae292a886ee40085790ec5c4&#34;</span><span class="nt">&gt;</span>
-</span><span class="hl"><span class="ln">12</span>            <span class="nt">&lt;xenc:encryptionmethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p&#34;</span><span class="nt">&gt;</span>
-</span><span class="hl"><span class="ln">13</span>              <span class="nt">&lt;ds:digestmethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#sha1&#34;</span><span class="nt">/&gt;</span>
-</span><span class="hl"><span class="ln">14</span>            <span class="nt">&lt;/xenc:encryptionmethod&gt;</span>
-</span><span class="hl"><span class="ln">15</span>            <span class="nt">&lt;xenc:cipherdata&gt;</span>
-</span><span class="hl"><span class="ln">16</span>              <span class="nt">&lt;xenc:ciphervalue&gt;</span>THE ENCRYPTED SYMMETRIC KEY<span class="nt">&lt;/xenc:ciphervalue&gt;</span>
-</span><span class="hl"><span class="ln">17</span>            <span class="nt">&lt;/xenc:cipherdata&gt;</span>
-</span><span class="hl"><span class="ln">18</span>          <span class="nt">&lt;/xenc:encryptedkey&gt;</span>
-</span><span class="hl"><span class="ln">19</span>        <span class="nt">&lt;/ds:keyinfo&gt;</span>
-</span><span class="hl"><span class="ln">20</span>        <span class="nt">&lt;xenc:cipherdata&gt;</span>
-</span><span class="hl"><span class="ln">21</span>          <span class="nt">&lt;xenc:ciphervalue&gt;</span>THE ASSERTION ENCRYPTED USING THE SYMMETRIC KEY<span class="nt">&lt;/xenc:ciphervalue&gt;</span>
-</span><span class="hl"><span class="ln">22</span>        <span class="nt">&lt;/xenc:cipherdata&gt;</span>
-</span><span class="hl"><span class="ln">23</span>      <span class="nt">&lt;/xenc:encryptionmethod&gt;</span>
-</span><span class="hl"><span class="ln">24</span>    <span class="nt">&lt;/xenc:encrypteddata&gt;</span>
-</span><span class="hl"><span class="ln">25</span>  <span class="nt">&lt;/saml2:encryptedassertion&gt;</span>
-</span><span class="ln">26</span><span class="nt">&lt;/saml2p:response&gt;</span></code></pre></div>
-<p>To decrypt the reverse of this is done. The asymmetric is used to decrypt the symmetric key, which is then used to decrypt the assertion.</p>
+    <p>SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.</p>
+<p>This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP POST in OpenSAML.</p>
+<h2 id="the-http-post-binding">The HTTP POST binding</h2>
+<p><a href="">The Redirect binding explained here</a> is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL paramaters kan not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.</p>
+<p>The HTTP POST binding uses input fields in a HTML form to send SAML messages.</p>
+<p><img src="post-binding.png" alt="Diagram of POST binding"></p>
+<ol>
+<li>When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.</li>
+<li>When the browser receives the HTML page a javascript or meta tag makes the browser automatically submit the form to the recipient of the message .</li>
+<li>When the user arrives with its submitted form at the receiver of the message, the receiver will pick the message from the request parameters and parse the message.</li>
+</ol>
+<h3 id="the-html-form-explained">The HTML form explained</h3>
+<p>A typical POST binding HTML page look like this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-html" data-lang="html"><span class="ln"> 1</span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="ln"> 2</span>    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="ln"> 3</span>        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&#34;utf-8&#34;</span> <span class="p">/&gt;</span>
+<span class="ln"> 4</span>    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="ln"> 5</span>    <span class="p">&lt;</span><span class="nt">body</span> <span class="na">onload</span><span class="o">=</span><span class="s">&#34;document.forms[0].submit()&#34;</span><span class="p">&gt;</span>
+<span class="ln"> 6</span>        <span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span>
+<span class="ln"> 7</span>            <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="ln"> 8</span>                <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>Note:<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> Since your browser does not support JavaScript,
+<span class="ln"> 9</span>                you must press the Continue button once to proceed.
+<span class="ln">10</span>            <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="ln">11</span>        <span class="p">&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span>
+<span class="ln">12</span>        <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;http://localhost:8080/opensaml-http-post/receiverPage&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;post&#34;</span><span class="p">&gt;</span>
+<span class="ln">13</span>            <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="ln">14</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;hidden&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;RelayState&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;teststate&#34;</span><span class="p">/&gt;</span>                
+<span class="ln">15</span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;hidden&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;SAMLRequest&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOkF1dGhuUmVxdWVzdCB4bWxuczpzYW1sMnA9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpwcm90b2NvbCIgQXNzZXJ0aW9uQ29uc3VtZXJTZXJ2aWNlVVJMPSJUaGUgc2hvdWxkIGJlIHRoZSBlbmRwb2ludCB0aGF0IHNob3VsZCByZWNpZXZlIHRoZSByZXN1bHQgb2YgdGhlIGF1dGhlbnRpY2F0aW9uIiBEZXN0aW5hdGlvbj0iaHR0cDovL2xvY2FsaG9zdDo4MDgwL29wZW5zYW1sLWh0dHAtcG9zdC9yZWNlaXZlclBhZ2UiIElEPSJfODczNjcwZDBlNmZiYTI0MDkzOWIwYjQ5OTJiOGRlMzEiIElzc3VlSW5zdGFudD0iMjAyMS0xMC0xNlQxODo0OTowOC4wODBaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLUFydGlmYWN0IiBWZXJzaW9uPSIyLjAiPjxzYW1sMjpJc3N1ZXIgeG1sbnM6c2FtbDI9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iPlRoaXMgc2hvdWxkIGJlIHRoZSBzZW5kZXIgZW50aXR5SWQ8L3NhbWwyOklzc3Vlcj48c2FtbDJwOk5hbWVJRFBvbGljeSBBbGxvd0NyZWF0ZT0idHJ1ZSIgRm9ybWF0PSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6bmFtZWlkLWZvcm1hdDp0cmFuc2llbnQiLz48L3NhbWwycDpBdXRoblJlcXVlc3Q+&#34;</span><span class="p">/&gt;</span>                    
+<span class="ln">16</span>            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="ln">17</span>            <span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span>
+<span class="ln">18</span>                <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="ln">19</span>                    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Continue&#34;</span><span class="p">/&gt;</span>
+<span class="ln">20</span>                <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="ln">21</span>            <span class="p">&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span>
+<span class="ln">22</span>        <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="ln">23</span>    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="ln">24</span><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span></code></pre></div>
+<p>There are two fields used in this binding</p>
+<ul>
+<li>SAMLRequest/SAMResponse - The encoded, unsigned message</li>
+<li>RelayState - The relaystate, sent in the original request and send back in the response</li>
+</ul>
+<h2 id="sending-a-message-using-opensaml-4">Sending a message using OpenSAML 4</h2>
+<p>Because this binding is creating a webpage, OpenSAML uses Apache Velocity. The velocity library must be included in the Maven Pom. If not you will get the following errror</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>java.lang.RuntimeException: net.shibboleth.utilities.java.support.component.ComponentInitializationException: VelocityEngine must be supplied</code></pre></div>
+<p>Add this to pom.xml
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="ln">1</span><span class="nt">&lt;dependency&gt;</span>
+<span class="ln">2</span>    <span class="nt">&lt;groupId&gt;</span>org.apache.velocity<span class="nt">&lt;/groupId&gt;</span>
+<span class="ln">3</span>    <span class="nt">&lt;artifactId&gt;</span>velocity-engine-core<span class="nt">&lt;/artifactId&gt;</span>
+<span class="ln">4</span>    <span class="nt">&lt;version&gt;</span>${velocity.version}<span class="nt">&lt;/version&gt;</span>
+<span class="ln">5</span><span class="nt">&lt;/dependency&gt;</span></code></pre></div></p>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -245,71 +263,58 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 </a>
 <span class="lower_ad_line"></span>
 </div>
-<p>Now for the OpenSAML part.</p>
-<p>First we get the assertion from the XML. The assertion is stored in a EncryptedAssertion object and is retrieved with the method <code>getEncryptedAssertions()</code> on the response instead of <code>getAssertions()</code> which is used otherwise.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">StaticKeyInfoCredentialResolver</span> <span class="n">keyInfoCredentialResolver</span> 
-<span class="ln">2</span>    <span class="o">=</span> <span class="k">new</span> <span class="n">StaticKeyInfoCredentialResolver</span><span class="o">(</span><span class="n">SPCredentials</span><span class="o">.</span><span class="na">getCredential</span><span class="o">());</span>
+<p>Creating message contexts to set the message, relaystate and receiving endpoint. Creating Velocity engine to handle website creation.
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">MessageContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageContext</span><span class="o">();</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span><span class="n">context</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+<span class="ln"> 4</span>
+<span class="ln"> 5</span><span class="n">SAMLBindingContext</span> <span class="n">bindingContext</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLBindingContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="ln"> 6</span><span class="n">bindingContext</span><span class="o">.</span><span class="na">setRelayState</span><span class="o">(</span><span class="s">&#34;teststate&#34;</span><span class="o">);</span>
+<span class="ln"> 7</span>
+<span class="ln"> 8</span><span class="n">SAMLPeerEntityContext</span> <span class="n">peerEntityContext</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLPeerEntityContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="ln"> 9</span>
+<span class="ln">10</span><span class="n">SAMLEndpointContext</span> <span class="n">endpointContext</span> <span class="o">=</span> <span class="n">peerEntityContext</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLEndpointContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="ln">11</span><span class="n">endpointContext</span><span class="o">.</span><span class="na">setEndpoint</span><span class="o">(</span><span class="n">URLToEndpoint</span><span class="o">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="o">));</span>
+<span class="ln">12</span>
+<span class="ln">13</span><span class="n">VelocityEngine</span> <span class="n">velocityEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VelocityEngine</span><span class="o">();</span>
+<span class="ln">14</span><span class="n">velocityEngine</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="n">RuntimeConstants</span><span class="o">.</span><span class="na">RESOURCE_LOADERS</span><span class="o">,</span> <span class="s">&#34;classpath&#34;</span><span class="o">);</span>
+<span class="ln">15</span><span class="n">velocityEngine</span><span class="o">.</span><span class="na">setProperty</span><span class="o">(</span><span class="s">&#34;classpath.resource.loader.class&#34;</span><span class="o">,</span>
+<span class="ln">16</span>		<span class="s">&#34;org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader&#34;</span><span class="o">);</span>
+<span class="ln">17</span><span class="n">velocityEngine</span><span class="o">.</span><span class="na">init</span><span class="o">();</span></code></pre></div>
+Initializing HTTPPostEncoder, setting context and Velocity engine and sending the message.
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">HTTPPostEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HTTPPostEncoder</span><span class="o">();</span>
+<span class="ln">2</span>
+<span class="ln">3</span><span class="n">encoder</span><span class="o">.</span><span class="na">setMessageContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="ln">4</span><span class="n">encoder</span><span class="o">.</span><span class="na">setHttpServletResponse</span><span class="o">(</span><span class="n">httpServletResponse</span><span class="o">);</span>
+<span class="ln">5</span><span class="n">encoder</span><span class="o">.</span><span class="na">setVelocityEngine</span><span class="o">(</span><span class="n">velocityEngine</span><span class="o">);</span>
+<span class="ln">6</span>
+<span class="ln">7</span><span class="n">encoder</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
+<span class="ln">8</span><span class="n">encoder</span><span class="o">.</span><span class="na">encode</span><span class="o">();</span></code></pre></div></p>
+<h2 id="receiving-a-message-using-opensaml-4">Receiving a message using OpenSAML 4</h2>
+<p>Using HTTPPostDecoder to decode the received message from the HTTPServletRequest</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">HTTPPostDecoder</span> <span class="n">decoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HTTPPostDecoder</span><span class="o">();</span>
+<span class="ln">2</span><span class="n">decoder</span><span class="o">.</span><span class="na">setHttpServletRequest</span><span class="o">(</span><span class="n">req</span><span class="o">);</span>
 <span class="ln">3</span>
-<span class="ln">4</span><span class="n">Decrypter</span> <span class="n">decrypter</span> 
-<span class="ln">5</span>    <span class="o">=</span> <span class="k">new</span> <span class="n">Decrypter</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">keyInfoCredentialResolver</span><span class="o">,</span> <span class="k">new</span> <span class="n">InlineEncryptedKeyResolver</span><span class="o">());</span>
-<span class="ln">6</span><span class="n">decrypter</span><span class="o">.</span><span class="na">setRootInNewDocument</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-<span class="ln">7</span>
-<span class="ln">8</span><span class="n">decrypter</span><span class="o">.</span><span class="na">decrypt</span><span class="o">(</span><span class="n">encryptedAssertion</span><span class="o">);</span></code></pre></div>
-<p>In this example a <code>StaticKeyInfoCredentialResolver</code> is used to point out the key that is used for decryption, in this case I have stored it in the static class <code>SPCredentials</code>. The <code>InlineEncryptedKeyResolver</code> is used to tell the decryptor that the symmetric encryption key can be found in the XML next to the encrypted assertion.</p>
-<p>The decryptor returns a decrypted Assertion object.
-<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="ln"> 1</span><span class="cp">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
-<span class="ln"> 2</span><span class="nt">&lt;saml2:assertion</span> <span class="na">xmlns:saml2=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:assertion&#34;</span> <span class="na">xmlns:xsd=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema&#34;</span> <span class="na">id=</span><span class="s">&#34;_96a918c84ff41a98781133414a7c930e&#34;</span> <span class="na">issueinstant=</span><span class="s">&#34;2017-05-20T21:26:14.956Z&#34;</span> <span class="na">version=</span><span class="s">&#34;2.0&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 3</span>  <span class="nt">&lt;saml2:issuer&gt;</span>TestIDP<span class="nt">&lt;/saml2:issuer&gt;</span>
-<span class="ln"> 4</span>  <span class="nt">&lt;ds:signature</span> <span class="na">xmlns:ds=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 5</span>    <span class="nt">&lt;ds:signedinfo&gt;</span>
-<span class="ln"> 6</span>      <span class="nt">&lt;ds:canonicalizationmethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2001/10/xml-exc-c14n#&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 7</span>        <span class="nt">&lt;ds:signaturemethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#rsa-sha1&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 8</span>          <span class="nt">&lt;ds:reference</span> <span class="na">uri=</span><span class="s">&#34;#_96a918c84ff41a98781133414a7c930e&#34;</span><span class="nt">&gt;</span>
-<span class="ln"> 9</span>            <span class="nt">&lt;ds:transforms&gt;</span>
-<span class="ln">10</span>              <span class="nt">&lt;ds:transform</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#enveloped-signature&#34;</span><span class="nt">&gt;</span>
-<span class="ln">11</span>                <span class="nt">&lt;ds:transform</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2001/10/xml-exc-c14n#&#34;</span><span class="nt">&gt;</span>
-<span class="ln">12</span>                  <span class="nt">&lt;ec:inclusivenamespaces</span> <span class="na">xmlns:ec=</span><span class="s">&#34;http://www.w3.org/2001/10/xml-exc-c14n#&#34;</span> <span class="na">prefixlist=</span><span class="s">&#34;xsd&#34;</span><span class="nt">&gt;&lt;/ec:inclusivenamespaces&gt;</span>
-<span class="ln">13</span>                <span class="nt">&lt;/ds:transform&gt;</span>
-<span class="ln">14</span>              <span class="nt">&lt;/ds:transform&gt;</span>
-<span class="ln">15</span>            <span class="nt">&lt;/ds:transforms&gt;</span>
-<span class="ln">16</span>            <span class="nt">&lt;ds:digestmethod</span> <span class="na">algorithm=</span><span class="s">&#34;http://www.w3.org/2001/04/xmlenc#sha256&#34;</span><span class="nt">&gt;</span>
-<span class="ln">17</span>              <span class="nt">&lt;ds:digestvalue&gt;</span>UDJ762cOSK14nBjbFCq9a47x3WgSCJ1qZpeBYKdy5s0=<span class="nt">&lt;/ds:digestvalue&gt;</span>
-<span class="ln">18</span>            <span class="nt">&lt;/ds:digestmethod&gt;</span>
-<span class="ln">19</span>          <span class="nt">&lt;/ds:reference&gt;</span>
-<span class="ln">20</span>        <span class="nt">&lt;/ds:signaturemethod&gt;</span>
-<span class="ln">21</span>      <span class="nt">&lt;/ds:canonicalizationmethod&gt;</span>
-<span class="ln">22</span>    <span class="nt">&lt;/ds:signedinfo&gt;</span>
-<span class="ln">23</span>    <span class="nt">&lt;ds:signaturevalue&gt;</span>
-<span class="ln">24</span>syb20Rjh1pDJTc6CY1nN3x1v8WNlG9lRf71A5ik3i97/A+q0NZCvoJLEBVM73K/U8hxo/hbHOmBs
-<span class="ln">25</span>7KkF4g3yYLVunRlm/tapnTESKqZ8v8SJZQcbY4xMzi0PUxiUJKBugiho114ijDPAYs+U1UZhXGHL
-<span class="ln">26</span>zyHVd7XJYoOATKVdh3U=
-<span class="ln">27</span><span class="nt">&lt;/ds:signaturevalue&gt;</span>
-<span class="ln">28</span>  <span class="nt">&lt;/ds:signature&gt;</span>
-<span class="ln">29</span>  <span class="nt">&lt;saml2:subject&gt;</span>
-<span class="ln">30</span>    <span class="nt">&lt;saml2:nameid</span> <span class="na">format=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;</span> <span class="na">namequalifier=</span><span class="s">&#34;Name qualifier&#34;</span> <span class="na">spnamequalifier=</span><span class="s">&#34;SP name qualifier&#34;</span><span class="nt">&gt;</span>Some NameID value<span class="nt">&lt;/saml2:nameid&gt;</span>
-<span class="ln">31</span>    <span class="nt">&lt;saml2:subjectconfirmation</span> <span class="na">method=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:cm:bearer&#34;</span><span class="nt">&gt;</span>
-<span class="ln">32</span>      <span class="nt">&lt;saml2:subjectconfirmationdata</span> <span class="na">inresponseto=</span><span class="s">&#34;Made up ID&#34;</span> <span class="na">notbefore=</span><span class="s">&#34;2017-05-18T21:26:14.957Z&#34;</span> <span class="na">notonorafter=</span><span class="s">&#34;2017-05-22T21:26:14.957Z&#34;</span> <span class="na">recipient=</span><span class="s">&#34;http://localhost:8080/webprofile-ref-project/sp/consumer&#34;</span><span class="nt">&gt;&lt;/saml2:subjectconfirmationdata&gt;</span>
-<span class="ln">33</span>    <span class="nt">&lt;/saml2:subjectconfirmation&gt;</span>
-<span class="ln">34</span>  <span class="nt">&lt;/saml2:subject&gt;</span>
-<span class="ln">35</span>  <span class="nt">&lt;saml2:conditions</span> <span class="na">notbefore=</span><span class="s">&#34;2017-05-18T21:26:14.958Z&#34;</span> <span class="na">notonorafter=</span><span class="s">&#34;2017-05-22T21:26:14.958Z&#34;</span><span class="nt">&gt;</span>
-<span class="ln">36</span>    <span class="nt">&lt;saml2:audiencerestriction&gt;</span>
-<span class="ln">37</span>      <span class="nt">&lt;saml2:audience&gt;</span>http://localhost:8080/webprofile-ref-project/sp/consumer<span class="nt">&lt;/saml2:audience&gt;</span>
-<span class="ln">38</span>    <span class="nt">&lt;/saml2:audiencerestriction&gt;</span>
-<span class="ln">39</span>  <span class="nt">&lt;/saml2:conditions&gt;</span>
-<span class="ln">40</span>  <span class="nt">&lt;saml2:attributestatement&gt;</span>
-<span class="ln">41</span>    <span class="nt">&lt;saml2:attribute</span> <span class="na">name=</span><span class="s">&#34;username&#34;</span><span class="nt">&gt;</span>
-<span class="ln">42</span>      <span class="nt">&lt;saml2:attributevalue</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span class="na">xsi:type=</span><span class="s">&#34;xsd:string&#34;</span><span class="nt">&gt;</span>bob<span class="nt">&lt;/saml2:attributevalue&gt;</span>
-<span class="ln">43</span>    <span class="nt">&lt;/saml2:attribute&gt;</span>
-<span class="ln">44</span>    <span class="nt">&lt;saml2:attribute</span> <span class="na">name=</span><span class="s">&#34;telephone&#34;</span><span class="nt">&gt;</span>
-<span class="ln">45</span>      <span class="nt">&lt;saml2:attributevalue</span> <span class="na">xmlns:xsi=</span><span class="s">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span class="na">xsi:type=</span><span class="s">&#34;xsd:string&#34;</span><span class="nt">&gt;</span>999999999<span class="nt">&lt;/saml2:attributevalue&gt;</span>
-<span class="ln">46</span>    <span class="nt">&lt;/saml2:attribute&gt;</span>
-<span class="ln">47</span>  <span class="nt">&lt;/saml2:attributestatement&gt;</span>
-<span class="ln">48</span>  <span class="nt">&lt;saml2:authnstatement</span> <span class="na">authninstant=</span><span class="s">&#34;2017-05-20T21:26:14.962Z&#34;</span><span class="nt">&gt;</span>
-<span class="ln">49</span>    <span class="nt">&lt;saml2:authncontext&gt;</span>
-<span class="ln">50</span>      <span class="nt">&lt;saml2:authncontextclassref&gt;</span>urn:oasis:names:tc:SAML:2.0:ac:classes:Smartcard<span class="nt">&lt;/saml2:authncontextclassref&gt;</span>
-<span class="ln">51</span>    <span class="nt">&lt;/saml2:authncontext&gt;</span>
-<span class="ln">52</span>  <span class="nt">&lt;/saml2:authnstatement&gt;</span>
-<span class="ln">53</span><span class="nt">&lt;/saml2:assertion&gt;</span></code></pre></div></p>
+<span class="ln">4</span><span class="n">decoder</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
+<span class="ln">5</span><span class="n">decoder</span><span class="o">.</span><span class="na">decode</span><span class="o">();</span>
+<span class="ln">6</span>
+<span class="ln">7</span><span class="n">MessageContext</span> <span class="n">messageContext</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="na">getMessageContext</span><span class="o">();</span>
+<span class="ln">8</span><span class="n">authnRequest</span> <span class="o">=</span> <span class="o">(</span><span class="n">AuthnRequest</span><span class="o">)</span> <span class="n">messageContext</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span></code></pre></div>
+<h2 id="get-it-on-github">Get it on Github!</h2>
+<p>The full running sample is availible on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-http-post</p>
+<p>Just clone it, run it, go nuts!</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>git clone https://github.com/rasmusson/OpenSAML-sample-code/
+<span class="ln">2</span>cd opensaml-http-post
+<span class="ln">3</span>mvn tomcat:run</code></pre></div>
+<p>All messages are printed in the console</p>
+<p>Browse to <a href="http://localhost:8080/opensaml-http-redirect/postPage">http://localhost:8080/opensaml-http-redirect/postPage</a></p>
+<h2 id="summary">Summary</h2>
+<p>In this post we have looked at.</p>
+<ul>
+<li>The basics of the HTTP Post binding</li>
+<li>Sending a message using OpenSAML 4,</li>
+<li>Receiving a message using OpenSAML 4</li>
+</ul>
 
 
   </article>
@@ -318,9 +323,6 @@ The symmetric key is generated during encryption and used to encrypt the actual 
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
       </li>
       <li>
@@ -328,6 +330,9 @@ The symmetric key is generated during encryption and used to encrypt the actual 
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/p/opensaml.html" class="nav-link" title="The Big OpenSAML Guide">The Big OpenSAML Guide</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html" class="nav-link" title="Decrypting a SAML Assertion in OpenSAML v3">Decrypting a SAML Assertion in OpenSAML v3</a>
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html" class="nav-link" title="Signing and Sending AuthnRequests in OpenSAML V3">Signing and Sending AuthnRequests in OpenSAML V3</a>
