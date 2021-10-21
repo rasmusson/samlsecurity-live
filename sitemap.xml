@@ -12,7 +12,7 @@
     <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
     <lastmod>2021-10-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.samlsecurity.com/tags/opensamlv4/</loc>
+    <loc>https://blog.samlsecurity.com/tags/opensaml4/</loc>
     <lastmod>2021-10-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/</loc>
@@ -31,6 +31,9 @@
     <lastmod>2021-10-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/getting-started-opensaml-v4/</loc>
+    <lastmod>2021-10-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/opensamlv4/</loc>
     <lastmod>2021-10-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/ads/</loc>
