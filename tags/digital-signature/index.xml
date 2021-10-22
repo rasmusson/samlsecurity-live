@@ -16,7 +16,8 @@
       <guid>https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</guid>
       <description>
         
-          &lt;p&gt;Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;This article discusses singing and sending in OpenSAML 3. If you&#39;re looking for an article on OpenSAML 4, &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;you will find it here&lt;/a&gt; and if you&#39;re looking for an article on OpenSAML 2, &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html&#34;&gt;you will find it here&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.&lt;/p&gt;
 &lt;p&gt;As described in &lt;a href=&#34;https://blog.samlsecurity.com/post/getting-started-opensaml-v4/&#34;&gt;this post on AuthnRequests OpenSAML V2&lt;/a&gt;, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.&lt;/p&gt;
 &lt;p&gt;As in V2 the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is used to send messages using HTTP redirect, the main difference lays in the message context.&lt;/p&gt;
 &lt;p&gt;One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.&lt;/p&gt;

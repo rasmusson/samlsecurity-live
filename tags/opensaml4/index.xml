@@ -150,7 +150,8 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
       <guid>https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html</guid>
       <description>
         
-          &lt;p&gt;SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.&lt;/p&gt;
+          &lt;p&gt;&lt;strong&gt;This article discusses singing and sending in OpenSAML 4. If you&#39;re looking for an article on OpenSAML 3, &lt;a href=&#34;https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html&#34;&gt;you will find it here&lt;/a&gt; and if you&#39;re looking for an article on OpenSAML 2, &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html&#34;&gt;you will find it here&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.&lt;/p&gt;
 &lt;p&gt;This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP Redirect in OpenSAML.&lt;/p&gt;
 &lt;h2 id=&#34;the-http-redirect-binding&#34;&gt;The HTTP Redirect binding&lt;/h2&gt;
 &lt;p&gt;The Redirect binding uses the function of HTTP Redirects the transport messages between SP and IdP with the use of the user browser.&lt;/p&gt;

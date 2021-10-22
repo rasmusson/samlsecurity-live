@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html" />
 <meta property="og:title" content="Signing and Sending AuthnRequests in OpenSAML V3" />
 <meta property="og:description" content="Information and example on how to sign and send authnrequests in OpenSAML" />
-<meta property="og:image" content="https://blog.samlsecurity.com/images/thumbnail.png" />
+<meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
@@ -200,7 +200,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     
-    <p>Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.</p>
+    <p><strong>This article discusses singing and sending in OpenSAML 3. If you're looking for an article on OpenSAML 4, <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html">you will find it here</a> and if you're looking for an article on OpenSAML 2, <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html">you will find it here</a></strong></p>
+<p>Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.</p>
 <p>As described in <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/">this post on AuthnRequests OpenSAML V2</a>, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.</p>
 <p>As in V2 the <code>HTTPRedirectDeflateEncoder</code> is used to send messages using HTTP redirect, the main difference lays in the message context.</p>
 <p>One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.</p>
@@ -254,6 +255,9 @@ Next, the security parameters context is created and populated with signing info
         <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
       </li>
       <li>
+        <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" class="nav-link" title="Redirect with AuthnRequest">Redirect with AuthnRequest</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
       </li>
       <li>
@@ -271,16 +275,13 @@ Next, the security parameters context is created and populated with signing info
       <li>
         <a href="https://blog.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html" class="nav-link" title="New book release: OpenSAML version 3">New book release: OpenSAML version 3</a>
       </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2016/04/opensaml-v3-javadocs.html" class="nav-link" title="OpenSAML V3 Javadocs">OpenSAML V3 Javadocs</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/categories/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
-          <span class="button_tally">22</span>
+          <span class="button_tally">23</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
@@ -296,12 +297,12 @@ Next, the security parameters context is created and populated with signing info
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">26</span>
+          <span class="button_tally">27</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
           OPENSAMLV2
-          <span class="button_tally">12</span>
+          <span class="button_tally">13</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv3/' class="post_tag button button_translucent" title="opensamlv3">

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-figures="" class="page">
   <head>
-<title>Verifying signatures with OpenSAML | SAMLSecurity</title>
+<title>Redirect with AuthnRequest | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,22 +11,20 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="As the post about signing SAML messages discussed, it is very important to properly sign and verify messages in a SAML federation.
-When verifying a signature of …">
+<meta name="description" content="This article discusses singing and sending in OpenSAML 2. If you&#39;re looking for an article on OpenSAML 4, you will find it here and if you&#39;re looking for an …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Verifying signatures with OpenSAML" />
-<meta property="og:url" content="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" />
-<meta property="og:title" content="Verifying signatures with OpenSAML" />
-<meta property="og:description" content="As the post about signing SAML messages discussed, it is very important to properly sign and verify messages in a SAML federation.
-When verifying a signature of …" />
+<meta name="twitter:title" content="Redirect with AuthnRequest" />
+<meta property="og:url" content="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" />
+<meta property="og:title" content="Redirect with AuthnRequest" />
+<meta property="og:description" content="This article discusses singing and sending in OpenSAML 2. If you&#39;re looking for an article on OpenSAML 4, you will find it here and if you&#39;re looking for an …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.samlsecurity.com/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html">
+<link rel="canonical" href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html">
 
     
 
@@ -86,7 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <body data-code="50" data-lines="false" id="documentTop">
 
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=Page%28%2fpost%2fverifying-signatures-with-opensaml.md%29"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=Page%28%2fpost%2fredirect-with-authnrequest.md%29"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
@@ -162,26 +160,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Verifying signatures with OpenSAML</h1>
+    <h1 class="post_title">Redirect with AuthnRequest</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
 </svg></span>
     <span class="post_date">
-      Nov 12, 2012</span>
-    <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml' title="SAML" class="post_tag button button_translucent">SAML
+      Oct 16, 2021</span>
+    <span class="post_time"> · 3 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml' title="SAML" class="post_tag button button_translucent">SAML
         </a><a href='https://blog.samlsecurity.com/tags/opensamlv2' title="OpenSAMLV2" class="post_tag button button_translucent">OpenSAMLV2
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Verifying%20signatures%20with%20OpenSAML&url=https%3a%2f%2fblog.samlsecurity.com%2f2012%2f11%2fverifying-signatures-with-opensaml.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Redirect%20with%20AuthnRequest&url=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f01%2fredirect-with-authnrequest-opensaml2.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2012%2f11%2fverifying-signatures-with-opensaml.html&t=Verifying%20signatures%20with%20OpenSAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f01%2fredirect-with-authnrequest-opensaml2.html&t=Redirect%20with%20AuthnRequest" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -191,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <use xlink:href="#linkedin"></use>
 </svg>
     </a>
-    <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" title="Copy Link" class="link link_yank">
+    <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <use xlink:href="#copy"></use>
 </svg>
@@ -201,10 +199,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     
-    <p>As the <a href="https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html">post about signing SAML messages</a> discussed, it is very important to properly sign and verify messages in a SAML federation.</p>
-<p>When verifying a signature of a message it is recommended to first validate the message with a SAML profile validator. This to ensure that the signature follows the standard for XML signatures. Afterwords the cryptography validation of the signature is done by a <code>SignatureValidator</code>.</p>
-<p>PS. This validation only performs a cryptographic validation of the signature. This means that it validates that the message has not been changed since it was signed. It does however not check that the certificate used for signing is trusted. To confirm the trust of the certificate in OpenSAML, a trust engine must be used in the validation.</p>
-<p>The most common method to confirm the trust of a key is to compare it to the key received in SAML Metadata. This is generally done as a configuration step when setting up a SAML federation. <a href="">This post gives more information on SAML Metadata</a>
+    <p><strong>This article discusses singing and sending in OpenSAML 2. If you're looking for an article on OpenSAML 4, <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html">you will find it here</a> and if you're looking for an article on OpenSAML 3, <a href="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html">you will find it here</a></strong></p>
+<p>In this post I will show you how to start the SAML Single sign-on process by sending a authentication request using OpenSAML.
+The process starts with a redirect from the SP(The one wanting to authenticate someone) to the IdP(The one authenticating).
+To start the authentication the SP sends a SAML AuthnRequest as parameter in the redirect.
+The AuthnRequest message identifies the SP and can contain information about how the SP wants the user to be authenticated.
+Here is an example how to send the AuthnRequest using OpenSAML.
+The example uses the <code>HTTPRedirectDeflateEncoder</code> to encode, sign and redirect which makes everything way easier, especially considering encoding and signing.
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="c1">//IPR Ergogroup AS
+</span><span class="ln"> 2</span><span class="c1"></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">doAuthenticationRedirect</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="kd">final</span> <span class="n">HttpSession</span> <span class="n">currentSession</span><span class="o">,</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">gotoURL</span><span class="o">,</span> <span class="kd">final</span> <span class="n">SAMLMetaData</span> <span class="n">metaData</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span><span class="o">,</span> <span class="n">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+<span class="ln"> 3</span>  <span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">generateAuthnRequest</span><span class="o">(</span><span class="n">metaData</span><span class="o">);</span>
+<span class="ln"> 4</span> 
+<span class="ln"> 5</span>  <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">logSAMLObject</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+<span class="ln"> 6</span> 
+<span class="ln"> 7</span>  <span class="c1">// Save the request ID to session for future validation
+</span><span class="ln"> 8</span><span class="c1"></span>  <span class="n">currentSession</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&#34;AuthnRequestID&#34;</span><span class="o">,</span> <span class="n">authnRequest</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
+<span class="ln"> 9</span>  <span class="n">currentSession</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">&#34;goto&#34;</span><span class="o">,</span> <span class="n">gotoURL</span><span class="o">);</span>
+<span class="ln">10</span> 
+<span class="ln">11</span>  <span class="n">HttpServletResponseAdapter</span> <span class="n">responseAdapter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServletResponseAdapter</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+<span class="ln">12</span>  <span class="n">BasicSAMLMessageContext</span><span class="o">&lt;</span><span class="n">SAMLObject</span><span class="o">,</span> <span class="n">AuthnRequest</span><span class="o">,</span> <span class="n">SAMLObject</span><span class="o">&gt;</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicSAMLMessageContext</span><span class="o">&lt;</span><span class="n">SAMLObject</span><span class="o">,</span> <span class="n">AuthnRequest</span><span class="o">,</span> <span class="n">SAMLObject</span><span class="o">&gt;();</span>  
+<span class="ln">13</span>  <span class="n">context</span><span class="o">.</span><span class="na">setPeerEntityEndpoint</span><span class="o">(</span><span class="n">getEndpointFromMetaData</span><span class="o">());</span>
+<span class="ln">14</span>  <span class="n">context</span><span class="o">.</span><span class="na">setOutboundSAMLMessage</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+<span class="ln">15</span>  <span class="n">context</span><span class="o">.</span><span class="na">setOutboundSAMLMessageSigningCredential</span><span class="o">(</span><span class="n">getSigningCredential</span><span class="o">());</span>
+<span class="ln">16</span>  <span class="n">context</span><span class="o">.</span><span class="na">setOutboundMessageTransport</span><span class="o">(</span><span class="n">responseAdapter</span><span class="o">);</span>
+<span class="ln">17</span> 
+<span class="ln">18</span>  <span class="n">HTTPRedirectDeflateEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HTTPRedirectDeflateEncoder</span><span class="o">();</span>
+<span class="ln">19</span> 
+<span class="ln">20</span>  <span class="k">try</span> <span class="o">{</span>
+<span class="ln">21</span>   <span class="n">encoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="ln">22</span>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MessageEncodingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">23</span>   <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+<span class="ln">24</span>  <span class="o">}</span>
+<span class="ln">25</span> <span class="o">}</span>
+<span class="ln">26</span> 
+<span class="ln">27</span> <span class="kd">private</span> <span class="n">AuthnRequest</span> <span class="nf">generateAuthnRequest</span><span class="o">(</span><span class="kd">final</span> <span class="n">SAMLMetaData</span> <span class="n">metaData</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span><span class="o">,</span> <span class="n">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
+<span class="ln">28</span> 
+<span class="ln">29</span>  <span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">AuthnRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="ln">30</span> 
+<span class="ln">31</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setForceAuthn</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="ln">32</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setIsPassive</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+<span class="ln">33</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="k">new</span> <span class="n">DateTime</span><span class="o">());</span>
+<span class="ln">34</span>  <span class="k">for</span> <span class="o">(</span><span class="n">SingleSignOnService</span> <span class="n">sss</span> <span class="o">:</span> <span class="n">metaData</span><span class="o">.</span><span class="na">getIdpEntityDescriptor</span><span class="o">().</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">).</span><span class="na">getSingleSignOnServices</span><span class="o">())</span> <span class="o">{</span>
+<span class="ln">35</span>   <span class="k">if</span> <span class="o">(</span><span class="n">sss</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_REDIRECT_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
+<span class="ln">36</span>    <span class="n">authnRequest</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">sss</span><span class="o">.</span><span class="na">getLocation</span><span class="o">());</span>
+<span class="ln">37</span>   <span class="o">}</span>
+<span class="ln">38</span>  <span class="o">}</span>
+<span class="ln">39</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setProtocolBinding</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="o">);</span>
+<span class="ln">40</span> 
+<span class="ln">41</span>  <span class="n">String</span> <span class="n">deployURL</span> <span class="o">=</span> <span class="n">getDeployURL</span><span class="o">();</span>
+<span class="ln">42</span>  <span class="k">if</span> <span class="o">(</span><span class="n">deployURL</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">deployURL</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">==</span> <span class="sc">&#39;/&#39;</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">43</span>   <span class="n">deployURL</span> <span class="o">=</span> <span class="n">deployURL</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">deployURL</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">1</span><span class="o">);</span>
+<span class="ln">44</span>  <span class="o">}</span>
+<span class="ln">45</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="o">(</span><span class="n">deployURL</span> <span class="o">+</span> <span class="n">SAMLMetaData</span><span class="o">.</span><span class="na">CONSUMER_PATH</span><span class="o">);</span>
+<span class="ln">46</span> 
+<span class="ln">47</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">SAMLUtil</span><span class="o">.</span><span class="na">getSecureRandomIdentifier</span><span class="o">());</span>
+<span class="ln">48</span> 
+<span class="ln">49</span>  <span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Issuer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="ln">50</span>  <span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">getSPEntityId</span><span class="o">());</span>
+<span class="ln">51</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">issuer</span><span class="o">);</span>
+<span class="ln">52</span> 
+<span class="ln">53</span>  <span class="n">NameIDPolicy</span> <span class="n">nameIDPolicy</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">NameIDPolicy</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="ln">54</span>  <span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setSPNameQualifier</span><span class="o">(</span><span class="n">getSPEntityId</span><span class="o">());</span>
+<span class="ln">55</span>  <span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setAllowCreate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="ln">56</span>  <span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;</span><span class="o">);</span>
+<span class="ln">57</span> 
+<span class="ln">58</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setNameIDPolicy</span><span class="o">(</span><span class="n">nameIDPolicy</span><span class="o">);</span>
+<span class="ln">59</span> 
+<span class="ln">60</span>  <span class="n">RequestedAuthnContext</span> <span class="n">requestedAuthnContext</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">RequestedAuthnContext</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="ln">61</span>  <span class="n">requestedAuthnContext</span><span class="o">.</span><span class="na">setComparison</span><span class="o">(</span><span class="n">AuthnContextComparisonTypeEnumeration</span><span class="o">.</span><span class="na">MINIMUM</span><span class="o">);</span>
+<span class="ln">62</span> 
+<span class="ln">63</span>  <span class="n">AuthnContextClassRef</span> <span class="n">authnContextClassRef</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">AuthnContextClassRef</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<span class="ln">64</span>  <span class="n">authnContextClassRef</span><span class="o">.</span><span class="na">setAuthnContextClassRef</span><span class="o">(</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport&#34;</span><span class="o">);</span>
+<span class="ln">65</span> 
+<span class="ln">66</span>  <span class="n">requestedAuthnContext</span><span class="o">.</span><span class="na">getAuthnContextClassRefs</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">authnContextClassRef</span><span class="o">);</span>
+<span class="ln">67</span>  <span class="n">authnRequest</span><span class="o">.</span><span class="na">setRequestedAuthnContext</span><span class="o">(</span><span class="n">requestedAuthnContext</span><span class="o">);</span>
+<span class="ln">68</span> 
+<span class="ln">69</span>  <span class="k">return</span> <span class="n">authnRequest</span><span class="o">;</span>
+<span class="ln">70</span> <span class="o">}</span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -223,14 +294,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </a>
 <span class="lower_ad_line"></span>
 </div>
-Here is a full example of the cryptographic validation.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">SAMLSignatureProfileValidator</span> <span class="n">profileValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SAMLSignatureProfileValidator</span><span class="o">();</span>
-<span class="ln">2</span><span class="n">profileValidator</span><span class="o">.</span><span class="na">validate</span><span class="o">(</span><span class="n">entityDescriptor</span><span class="o">.</span><span class="na">getSignature</span><span class="o">());</span>
-<span class="ln">3</span><span class="n">SignatureValidator</span> <span class="n">sigValidator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SignatureValidator</span><span class="o">(</span><span class="n">cred</span><span class="o">);</span>
-<span class="ln">4</span><span class="n">sigValidator</span><span class="o">.</span><span class="na">validate</span><span class="o">(</span><span class="n">entityDescriptor</span><span class="o">.</span><span class="na">getSignature</span><span class="o">());</span></code></pre></div>
-<p><code>SignatureValidator</code> is instantiated with a credential. in this case the credential basically contains the public key for the private key that was used to sign the message.
-The credential object can be obtained in a number of different ways. <a href="">This post shows some methods in OpenSAML</a>.
-If the public key was sent in the message, it is very important to validate that you trust the key.</p>
+Resulting AuthnRequest</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="ln"> 1</span><span class="nt">&lt;saml2p:authnrequest</span> 
+<span class="ln"> 2</span>        <span class="na">assertionconsumerserviceurl=</span><span class="s">&#34;https://mySP.test.com/saml/consumer&#34;</span> 
+<span class="ln"> 3</span>        <span class="na">destination=</span><span class="s">&#34;http://myIDP.test.com:80/opensso/SSORedirect/metaAlias/idp&#34;</span> 
+<span class="ln"> 4</span>        <span class="na">forceauthn=</span><span class="s">&#34;true&#34;</span> 
+<span class="ln"> 5</span>        <span class="na">id=</span><span class="s">&#34;_07dfa23f929c647c0b4503e8c13a04f7&#34;</span> 
+<span class="ln"> 6</span>        <span class="na">ispassive=</span><span class="s">&#34;false&#34;</span> 
+<span class="ln"> 7</span>        <span class="na">issueinstant=</span><span class="s">&#34;2011-01-20T12:43:52.208Z&#34;</span> 
+<span class="ln"> 8</span>        <span class="na">protocolbinding=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact&#34;</span> 
+<span class="ln"> 9</span>        <span class="na">version=</span><span class="s">&#34;2.0&#34;</span> 
+<span class="ln">10</span>        <span class="na">xmlns:saml2p=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:protocol&#34;</span><span class="nt">&gt;</span>
+<span class="ln">11</span>    <span class="nt">&lt;saml2:issuer</span> <span class="na">xmlns:saml2=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:assertion&#34;</span><span class="nt">&gt;</span>
+<span class="ln">12</span>        my-alias
+<span class="ln">13</span>    <span class="nt">&lt;/saml2:issuer&gt;</span>
+<span class="ln">14</span>    <span class="nt">&lt;saml2p:nameidpolicy</span>
+<span class="ln">15</span>            <span class="na">allowcreate=</span><span class="s">&#34;true&#34;</span> 
+<span class="ln">16</span>            <span class="na">format=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;</span> 
+<span class="ln">17</span>            <span class="na">spnamequalifier=</span><span class="s">&#34;my-alias&#34;</span><span class="nt">&gt;</span>
+<span class="ln">18</span>        <span class="nt">&lt;saml2p:requestedauthncontext</span> <span class="na">comparison=</span><span class="s">&#34;minimum&#34;</span><span class="nt">&gt;</span>
+<span class="ln">19</span>            <span class="nt">&lt;saml2:authncontextclassref</span> <span class="na">xmlns:saml2=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:assertion&#34;</span><span class="nt">&gt;</span>
+<span class="ln">20</span>                urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+<span class="ln">21</span>            <span class="nt">&lt;/saml2:authncontextclassref&gt;</span>
+<span class="ln">22</span>        <span class="nt">&lt;/saml2p:requestedauthncontext&gt;</span>
+<span class="ln">23</span>    <span class="nt">&lt;/saml2p:nameidpolicy&gt;</span>
+<span class="ln">24</span><span class="nt">&lt;/saml2p:authnrequest&gt;</span></code></pre></div>
 
 
   </article>
@@ -240,9 +328,6 @@ If the public key was sent in the message, it is very important to validate that
     <ul class="flex-column">
       <li>
         <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" class="nav-link" title="Redirect with AuthnRequest">Redirect with AuthnRequest</a>
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
@@ -261,6 +346,9 @@ If the public key was sent in the message, it is very important to validate that
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html" class="nav-link" title="Verifying signatures with OpenSAML V3">Verifying signatures with OpenSAML V3</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html" class="nav-link" title="New book release: OpenSAML version 3">New book release: OpenSAML version 3</a>
       </li>
     </ul>
     <div>

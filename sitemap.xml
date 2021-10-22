@@ -27,6 +27,12 @@
     <loc>https://blog.samlsecurity.com/post/post-binding-opensaml-4/</loc>
     <lastmod>2021-10-17T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://blog.samlsecurity.com/tags/opensamlv2/</loc>
+    <lastmod>2021-10-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html</loc>
+    <lastmod>2021-10-16T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html</loc>
     <lastmod>2021-10-16T00:00:00+00:00</lastmod>
   </url><url>
@@ -91,9 +97,6 @@
     <lastmod>2015-10-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/2015/07/adding-keyinfo-to-saml-message.html</loc>
-    <lastmod>2015-07-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/opensamlv2/</loc>
     <lastmod>2015-07-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/2015/07/what-is-saml-assertion.html</loc>
