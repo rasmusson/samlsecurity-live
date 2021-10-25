@@ -49,6 +49,24 @@ ss
 &lt;h2 id=&#34;what-is-a-saml-assertion&#34;&gt;What is a SAML Assertion?&lt;/h2&gt;
 &lt;p&gt;The SAML Assertion is the main piece in the SAML puzzle. This is the object that the rest of SAML is build to safely build, transport and use.&lt;/p&gt;
 &lt;p&gt;A SAML Assertion is basically a package with security information about a entity.(e.g. A user) issued from the Identity Provider(IdP) to the Service Provider(SP). When the user has authenticated with the IdP a SAML Assertion is sent to the SP with the IdPs information about that user.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;what-does-a-saml-assertion-contain&#34;&gt;What does a SAML Assertion contain?&lt;/h2&gt;
 &lt;p&gt;The SAML Assertion contains some general information like, who sent it, what time it was sent and validity period of the assertion. The assertion also contains statements about a user. These come in three different types.&lt;/p&gt;
 &lt;h3 id=&#34;authentication&#34;&gt;Authentication&lt;/h3&gt;
@@ -382,6 +400,24 @@ Assertions, protocols, bindings and profiles.&lt;/p&gt;
 &lt;code&gt;&amp;lt;saml:Subject&amp;gt;&lt;/code&gt; The identity the assertion is about
 &lt;code&gt;&amp;lt;saml:NameID&amp;gt;&lt;/code&gt; The identities unique identifier
 &lt;code&gt;&amp;lt;saml:AuthnStatement&amp;gt;&lt;/code&gt; Authentication information, here only authentication method, PasswordProtectedTransport. Aka login was don with username and password.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;protocol-processing&#34;&gt;Protocol, processing&lt;/h2&gt;
 &lt;p&gt;Is a packaging of the assertions that defines how the assertion should be creates and processed&lt;/p&gt;
 &lt;h2 id=&#34;binding-the-transport&#34;&gt;Binding, the transport&lt;/h2&gt;

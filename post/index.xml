@@ -7,7 +7,57 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sun, 17 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Metadata exchange and trust</title>
+      <link>https://blog.samlsecurity.com/post/matadata-exchange-trust/</link>
+      <pubDate>Mon, 18 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/matadata-exchange-trust/</guid>
+      <description>
+        
+          &lt;p&gt;Metadata can be said to be where SAML starts. Exchanging metadata between IdP and SP sets up the initial configuration and trust between the two that is later used to authenticate users.
+For a beginner this can be a quite abstract step, but in this article I will make everything clear.&lt;/p&gt;
+&lt;p&gt;The Metadata is a XML document contain many things. For example end points to be used to authenticate users, bindings(transportation methods) supported, requirements on signing. Also and very important, public keys and certificates that is used to establish trust. More on trust further down. Full specification of &lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf&#34;&gt;SAML metadata is located here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When a SP decides to start using a IdP for authenticating users, the first thing that is done is to exchange metadata. The SP sends it metadata to the IdP and the IdP send its metadata to the SP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;metadata-exchange.png&#34; alt=&#34;Metadata exchange&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The exchange can be done in different ways, but two popular is to either send it using email or to expose it on a web page on the SP or IdP service.&lt;/p&gt;
+&lt;p&gt;Ones exchanged, the SP and IdP both use this metadata in their systems for further communication.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;When the SP wants to authenticate a users, it send the user to the end point specified in the IdP metadata, using a binding also specified in the IdP metadata. Ones the IdP has finished authenticating the user it send the user back to the SP, to the end point specified in the SP metadata, using a binding specified in the SP metadata.&lt;/p&gt;
+&lt;p&gt;How signing of messages is done is also specified in the metadata.&lt;/p&gt;
+&lt;p&gt;So as you see the metadata is the specification of how the two parties can integrate with another and should contain the data needed to that start working together.&lt;/p&gt;
+&lt;h2 id=&#34;trust&#34;&gt;Trust&lt;/h2&gt;
+&lt;p&gt;Trust between the SP and IdP is vitally important for many reasons in SAML. First, the more implicit trust is important to understand.&lt;/p&gt;
+&lt;p&gt;Ones a SP sets up a integration to a IdP, it leaves all responsibility for authenticating a user to the IdP. The SP just sends a redirect to the user browser and then it goes to the IdP. How authentication then is done is up to the IdP (with some influence from the SP in the authentication request). The next thing that SP sees is the user coming back with a response from the IdP saying who the user is. Because of this it is important for the SP the trust the IdP to correctly authenticate users.&lt;/p&gt;
+&lt;p&gt;The other trust is the cryptographic trust between SP and IdP. In the exchanged metadata, there is also contained certificated and public keys for each party. Some for singing and some for encryptions. Theses are then used to secure all message transport between SP and IdP.&lt;/p&gt;
+&lt;p&gt;When the SP send the authentication request to the IdP together with the users. It usually signs it. It does so with its private key for the corresponding key in the metadata.
+When the IdP received the used and authentication request, it verifies the signature with the public key in the metadata previously sent from the SP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;key-usage.png&#34; alt=&#34;Usage of private and exchanged keys&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Same thing, when the IdP responds. IdP signs response with its private key. SP verified with IdP public key in metadata.&lt;/p&gt;
+&lt;p&gt;This way both parties can cryptographically trust that the message received was from the expected sender.&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>Using HTTP POST binding in OpenSAML 4</title>
       <link>https://blog.samlsecurity.com/post/post-binding-opensaml-4/</link>
@@ -1104,6 +1154,24 @@ ss
 &lt;h2 id=&#34;what-is-a-saml-assertion&#34;&gt;What is a SAML Assertion?&lt;/h2&gt;
 &lt;p&gt;The SAML Assertion is the main piece in the SAML puzzle. This is the object that the rest of SAML is build to safely build, transport and use.&lt;/p&gt;
 &lt;p&gt;A SAML Assertion is basically a package with security information about a entity.(e.g. A user) issued from the Identity Provider(IdP) to the Service Provider(SP). When the user has authenticated with the IdP a SAML Assertion is sent to the SP with the IdPs information about that user.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;what-does-a-saml-assertion-contain&#34;&gt;What does a SAML Assertion contain?&lt;/h2&gt;
 &lt;p&gt;The SAML Assertion contains some general information like, who sent it, what time it was sent and validity period of the assertion. The assertion also contains statements about a user. These come in three different types.&lt;/p&gt;
 &lt;h3 id=&#34;authentication&#34;&gt;Authentication&lt;/h3&gt;
@@ -2330,6 +2398,24 @@ Assertions, protocols, bindings and profiles.&lt;/p&gt;
 &lt;code&gt;&amp;lt;saml:Subject&amp;gt;&lt;/code&gt; The identity the assertion is about
 &lt;code&gt;&amp;lt;saml:NameID&amp;gt;&lt;/code&gt; The identities unique identifier
 &lt;code&gt;&amp;lt;saml:AuthnStatement&amp;gt;&lt;/code&gt; Authentication information, here only authentication method, PasswordProtectedTransport. Aka login was don with username and password.&lt;/p&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;protocol-processing&#34;&gt;Protocol, processing&lt;/h2&gt;
 &lt;p&gt;Is a packaging of the assertions that defines how the assertion should be creates and processed&lt;/p&gt;
 &lt;h2 id=&#34;binding-the-transport&#34;&gt;Binding, the transport&lt;/h2&gt;
