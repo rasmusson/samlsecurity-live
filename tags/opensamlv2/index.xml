@@ -393,49 +393,6 @@ The third step is to perform the actual signing to produce a cryptographic signa
     </item>
     
     <item>
-      <title>Verifying signatures with OpenSAML</title>
-      <link>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</link>
-      <pubDate>Mon, 12 Nov 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</guid>
-      <description>
-        
-          &lt;p&gt;As the &lt;a href=&#34;https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html&#34;&gt;post about signing SAML messages&lt;/a&gt; discussed, it is very important to properly sign and verify messages in a SAML federation.&lt;/p&gt;
-&lt;p&gt;When verifying a signature of a message it is recommended to first validate the message with a SAML profile validator. This to ensure that the signature follows the standard for XML signatures. Afterwords the cryptography validation of the signature is done by a &lt;code&gt;SignatureValidator&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;PS. This validation only performs a cryptographic validation of the signature. This means that it validates that the message has not been changed since it was signed. It does however not check that the certificate used for signing is trusted. To confirm the trust of the certificate in OpenSAML, a trust engine must be used in the validation.&lt;/p&gt;
-&lt;p&gt;The most common method to confirm the trust of a key is to compare it to the key received in SAML Metadata. This is generally done as a configuration step when setting up a SAML federation. &lt;a href=&#34;&#34;&gt;This post gives more information on SAML Metadata&lt;/a&gt;
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;
-Here is a full example of the cryptographic validation.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureValidator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sigValidator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SignatureValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cred&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sigValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;SignatureValidator&lt;/code&gt; is instantiated with a credential. in this case the credential basically contains the public key for the private key that was used to sign the message.
-The credential object can be obtained in a number of different ways. &lt;a href=&#34;&#34;&gt;This post shows some methods in OpenSAML&lt;/a&gt;.
-If the public key was sent in the message, it is very important to validate that you trust the key.&lt;/p&gt;
-
-        
-      </description>
-    </item>
-    
-    <item>
       <title>OpenSAML sample code</title>
       <link>https://blog.samlsecurity.com/2012/11/opensaml-sample-code.html</link>
       <pubDate>Wed, 07 Nov 2012 00:00:00 +0000</pubDate>
@@ -593,7 +550,7 @@ You also get other useful information, so log4j is definitely the way to go.&lt;
       <description>
         
           &lt;p&gt;For all cryptographic functions OpenSAML requires a &lt;code&gt;Credential&lt;/code&gt; which is a basically a cryptographic key wrapped in an object. The &lt;code&gt;Credential&lt;/code&gt; can contain either an symmetric key or an asymmetric key not both. The &lt;code&gt;Credential&lt;/code&gt; can be created manually with
-&lt;code&gt;BasicX509Credential&lt;/code&gt; and &lt;code&gt;BasicCredential&lt;/code&gt; classes and then populated with the setters. But the preferred way is to use on of the many &lt;code&gt;CredentialResolvers&lt;/code&gt; to create the credential for you.
+&lt;code&gt;BasicX509Credential&lt;/code&gt; and &lt;code&gt;BasicCredential&lt;/code&gt; classes and then populated with the setters. But the preferred way is to use one of the many &lt;code&gt;CredentialResolvers&lt;/code&gt; to create the credential for you.
 I will now show some examples of how creating credentials using the basic classes and two different resolvers.&lt;/p&gt;
 &lt;p&gt;The Basic classes has methods like
 &lt;code&gt;SetPublicKey&lt;/code&gt;

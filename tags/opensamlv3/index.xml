@@ -200,7 +200,7 @@ Next, the security parameters context is created and populated with signing info
       <guid>https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</guid>
       <description>
         
-          &lt;p&gt;Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, so &lt;a href=&#34;https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html&#34;&gt;the blog post on the process from OpenSAML V2&lt;/a&gt; is still very much relevant and worth checking out.&lt;/p&gt;
+          &lt;p&gt;Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, is still very much relevant and worth checking out.&lt;/p&gt;
 &lt;p&gt;The only difference between the two version is that the &lt;code&gt;SignatureValidator&lt;/code&gt; is no longer instantiated. Instead the validate method of &lt;code&gt;SignatureValidator&lt;/code&gt; is now static and takes both the credentials and the signature object.&lt;/p&gt;
 &lt;p&gt;Below is the code for verifying signatures in OpenSAML V3&lt;/p&gt;
 &lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;

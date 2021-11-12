@@ -225,7 +225,25 @@ ss
           &lt;p&gt;Metadata is information used in the SAML protocol to expose the configuration of a SAML entity, like a SP or IdP. Metadata define things like what service is available, addresses and certificates. Metadata is defined in XML. A SP uses the Metadata to know how to communicate with the IdP and vise versa.&lt;/p&gt;
 &lt;p&gt;Metadata is exchanged beetween the SP and the IDP. There is no protocol how the exchange is done, but there are no secret information in the metadata so the XML can be freely distributed by mail or published in clear text on the Internet.
 It is however highly recommended that the metadata is protected from unauthorized modification, this could be a good start on a Man-In-The-Middle attack.
-The integrity of the Metadata could be protected using for example digital signatures or by transporting the metadata using some secure channel(USB, VPN etc)&lt;/p&gt;
+The integrity of the Metadata could be protected using for example digital signatures or by transporting the metadata using some secure channel(USB, VPN etc)
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/p&gt;
 &lt;p&gt;A metadata file for a SAML Web Browser SSO Profile IdP could for example contain the following.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Location of its Single Sing On service, Artifact Resolution Service and Single Logout Service.&lt;/li&gt;
@@ -370,7 +388,7 @@ The integrity of the Metadata could be protected using for example digital signa
     </item>
     
     <item>
-      <title>A short introduction to SAML</title>
+      <title>SAML explained</title>
       <link>https://blog.samlsecurity.com/2010/11/short-introduction-to-saml.html</link>
       <pubDate>Mon, 22 Nov 2010 00:00:00 +0000</pubDate>
       

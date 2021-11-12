@@ -3,29 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.samlsecurity.com/</loc>
-    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/categories/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/opensaml4/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/post/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/</loc>
+    <lastmod>2021-11-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/matadata-exchange-trust/</loc>
     <lastmod>2021-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/post/</loc>
-    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
-    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/</loc>
-    <lastmod>2021-10-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/categories/</loc>
-    <lastmod>2021-10-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
-    <lastmod>2021-10-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/opensaml4/</loc>
-    <lastmod>2021-10-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/post-binding-opensaml-4/</loc>
     <lastmod>2021-10-17T00:00:00+00:00</lastmod>
@@ -115,9 +118,6 @@
     <lastmod>2014-05-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html</loc>
-    <lastmod>2012-11-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</loc>
     <lastmod>2012-11-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/2012/11/opensaml-sample-code.html</loc>

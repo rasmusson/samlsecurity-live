@@ -11,13 +11,13 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Information and example on how to sign and send authnrequests in OpenSAML">
+<meta name="description" content="Meta data is essential to set up a integration between two parties in SAML. But what is it? How does it work? How do you exchange it and where does this create …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="SAML metadata" />
 <meta property="og:url" content="https://blog.samlsecurity.com/2012/02/saml-metadata.html" />
 <meta property="og:title" content="SAML metadata" />
-<meta property="og:description" content="Information and example on how to sign and send authnrequests in OpenSAML" />
+<meta property="og:description" content="Meta data is essential to set up a integration between two parties in SAML. But what is it? How does it work? How do you exchange it and where does this create …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -201,7 +201,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Metadata is information used in the SAML protocol to expose the configuration of a SAML entity, like a SP or IdP. Metadata define things like what service is available, addresses and certificates. Metadata is defined in XML. A SP uses the Metadata to know how to communicate with the IdP and vise versa.</p>
 <p>Metadata is exchanged beetween the SP and the IDP. There is no protocol how the exchange is done, but there are no secret information in the metadata so the XML can be freely distributed by mail or published in clear text on the Internet.
 It is however highly recommended that the metadata is protected from unauthorized modification, this could be a good start on a Man-In-The-Middle attack.
-The integrity of the Metadata could be protected using for example digital signatures or by transporting the metadata using some secure channel(USB, VPN etc)</p>
+The integrity of the Metadata could be protected using for example digital signatures or by transporting the metadata using some secure channel(USB, VPN etc)
+
+<div class="book-ad" id="SAML20Ad">
+<h2 class="upper_ad_line"><span>Ad</span></h2>
+
+
+<a href="https://shop.samlsecurity.com/b/fGWSH" id="SAML20Ad-link"><div class="book-ad-grid">
+
+  <div class="text"> <p>Need a complete understanding of SAML 2.0?</p>
+<p>Have a look on the book <em>SAML 2.0: Designing secure identity federation</em>!</p>
+</div>
+  
+  
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png" ></div>
+	
+</div>
+</a>
+<span class="lower_ad_line"></span>
+</div></p>
 <p>A metadata file for a SAML Web Browser SSO Profile IdP could for example contain the following.</p>
 <ul>
 <li>Location of its Single Sing On service, Artifact Resolution Service and Single Logout Service.</li>
@@ -348,6 +366,9 @@ The integrity of the Metadata could be protected using for example digital signa
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML">Signing and verifying signatures with OpenSAML</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
       </li>
       <li>
@@ -367,9 +388,6 @@ The integrity of the Metadata could be protected using for example digital signa
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html" class="nav-link" title="Decrypting a SAML Assertion in OpenSAML v3">Decrypting a SAML Assertion in OpenSAML v3</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html" class="nav-link" title="Signing and Sending AuthnRequests in OpenSAML V3">Signing and Sending AuthnRequests in OpenSAML V3</a>
       </li>
     </ul>
     <div>
@@ -398,7 +416,7 @@ The integrity of the Metadata could be protected using for example digital signa
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
           OPENSAMLV2
-          <span class="button_tally">13</span>
+          <span class="button_tally">12</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv3/' class="post_tag button button_translucent" title="opensamlv3">
@@ -408,7 +426,7 @@ The integrity of the Metadata could be protected using for example digital signa
         
         <a href='https://blog.samlsecurity.com/tags/opensaml4/' class="post_tag button button_translucent" title="opensaml4">
           OPENSAML4
-          <span class="button_tally">3</span>
+          <span class="button_tally">4</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/assertion/' class="post_tag button button_translucent" title="assertion">
