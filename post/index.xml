@@ -7,7 +7,278 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Wed, 10 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Authenticating a React SPA towards a SAML IdP</title>
+      <link>https://blog.samlsecurity.com/post/saml-for-react-spa/</link>
+      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/saml-for-react-spa/</guid>
+      <description>
+        
+          &lt;p&gt;In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server to act as a broker and translate between OIDC and SAML. I will show the necessary configuration needed and as a cherry on top show you how to automate the whole setup.&lt;/p&gt;
+&lt;h2 id=&#34;the-problem-with-saml-in-spa-in-browser-application&#34;&gt;The problem with SAML in SPA in browser application&lt;/h2&gt;
+&lt;p&gt;“No, you can’t use SAML in a Single Page Application.”&lt;/p&gt;
+&lt;p&gt;“SAML is old. Why don’t you just change to OIDC.”&lt;/p&gt;
+&lt;p&gt;I have seen many questions on the subject and this is most often the kind of answers you find if you start looking around on how to let you users login to SAML IdP from SPAs like React or Angular.&lt;/p&gt;
+&lt;p&gt;It is true that you can&#39;t use SAML directly from the SPA running in the browser. This is because SAML relies heavily on public/private key pairs of the parties involved to do message signing and encryption and a SPA in the browser can not give the protection needed for these.&lt;/p&gt;
+&lt;p&gt;SAML also involves other mechanisms like automatically posting forms that does not translate well to a in browser application.&lt;/p&gt;
+&lt;p&gt;In conclusion, SAML was not designed to be used for things like SPAs. It was designed for a classic, old school, thick backend server - client setup.
+OIDC on the other hand is a more modern protocol that fit this use case perfectly.&lt;/p&gt;
+&lt;p&gt;However, the reality is that many organizations have relied on SAML for along time and it is not unusual to see this being the only supported protocol for the existing identity provider.&lt;/p&gt;
+&lt;h2 id=&#34;brokered-authentication-using-keycloak&#34;&gt;Brokered authentication using Keycloak&lt;/h2&gt;
+&lt;p&gt;One way to solve this dilemma is to use a broker authentication pattern.&lt;/p&gt;
+&lt;p&gt;Instead of just using OIDC or just using SAML, the SPA uses OIDC, the IdP uses SAML and we place Keycloak as a broker between to translate.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;brokered-auth.png&#34; alt=&#34;Brokered authentication pattern&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The SPA in the browser redirects the user with an OIDC request to Keycloak&lt;/li&gt;
+&lt;li&gt;Keycloak receives the user and request, crafts a SAML request and send it and the user to ADFS IdP for authentication&lt;/li&gt;
+&lt;li&gt;Ones the user is authenticated ADFS send a SAML response and user back to Keycloak.&lt;/li&gt;
+&lt;li&gt;Keycloak receives the SAML response, interprets it and uses it to craft a OIDC response and respond to the original OIDC request from the React SPA.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;setting-it-up&#34;&gt;Setting it up&lt;/h2&gt;
+&lt;p&gt;When I prepared this, I created configuration and scripts in Vagrant to set up the a demo environment automatically. The automated setup is available &lt;a href=&#34;https://github.com/rasmusson/SPA-saml-poc/&#34;&gt;here on Github&lt;/a&gt;. At the end of the article I have some more information on how to use it.&lt;/p&gt;
+&lt;p&gt;While walking through the configuration I will show how to configure everything in the UI interfaces as well as using the command line.&lt;/p&gt;
+&lt;p&gt;Below we will look on the four steps needed&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Setting up Keycloak to use OIDC towards React SPA&lt;/li&gt;
+&lt;li&gt;Setting up the React demo application&lt;/li&gt;
+&lt;li&gt;SAML integration between ADFS and Keycloak&lt;/li&gt;
+&lt;li&gt;Configure brokering between OIDC and SAML&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;setting-up-keycloak-to-use-oidc-towards-react-spa&#34;&gt;Setting up Keycloak to use OIDC towards React SPA&lt;/h3&gt;
+&lt;p&gt;Provided you have set up your Keycloak, lets dive in and configure OIDC!&lt;/p&gt;
+&lt;p&gt;Browse to &lt;a href=&#34;https://keycloak:8443/auth/admin/&#34;&gt;https://keycloak:8443/auth/admin/&lt;/a&gt; and login as admin.&lt;/p&gt;
+&lt;p&gt;Create a realm for the OIDC integration&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-realm.png&#34; alt=&#34;Create OIDC realm&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Create a client for the React SPA. On the first screen, just input a name for the client and click create.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-oidc-client.png&#34; alt=&#34;Create OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;On this next screen add a redirect URL for your SPA. In my case Im setting up a demo React app below with redirect URL &amp;quot;http://react:3000&amp;quot;&lt;/p&gt;
+&lt;p&gt;Under Web Origins, type a plus sign. &lt;strong&gt;Do not click the plus sign, but type a plus sign in the field&lt;/strong&gt;. This will add all your redirect URLs in allowed origins and avoid CORS problems.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;config-oidc-client-1.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Now lets configure the client to use PKCE. This is best practice when working with SPAs and other applications that can not protect a secret key.&lt;/p&gt;
+&lt;p&gt;Make sure &amp;quot;Access Type&amp;quot; is set to public and that &amp;quot;Standard Flow Enabled&amp;quot; is set to On.&lt;/p&gt;
+&lt;p&gt;Next expand the Advanced settings and set &amp;quot;Proof Key for Code Exchange Code Challenge Method&amp;quot; to S256&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;config-oidc-client-2.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To do this using the Keycloak CLI
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;kcadm.sh create realms -s &lt;span class=&#34;nv&#34;&gt;realm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;oidcrealm -s &lt;span class=&#34;nv&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;kcadm.sh create clients -r oidcrealm -f - &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;{&amp;#34;clientId&amp;#34; : &amp;#34;oidc-client&amp;#34;, &amp;#34;redirectUris&amp;#34;: [&amp;#34;http://react:3000&amp;#34;], &amp;#34;webOrigins&amp;#34;: [&amp;#34;+&amp;#34;], &amp;#34;standardFlowEnabled&amp;#34;: true, &amp;#34;publicClient&amp;#34;: true, &amp;#34;attributes&amp;#34;: {&amp;#34;pkce.code.challenge.method&amp;#34;:&amp;#34;S256&amp;#34;}}
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;setting-up-the-react-demo-application&#34;&gt;Setting up the React demo application&lt;/h3&gt;
+&lt;p&gt;Now its time to configure the React application to authenticate users using OIDC. In this tutorial I&#39;m using my own OIDC demo app.
+The application is available &lt;a href=&#34;https://github.com/rasmusson/react-oidc-pkce-demo&#34;&gt;here on Github&lt;/a&gt;
+How to set up another app will vary depending on what framework you are using, but you will need to get and configure the OIDC endpoint for Keycloak. For our current setup the endpoint will be these&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;authorizeEndpoint: https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/auth&lt;/li&gt;
+&lt;li&gt;tokenEndpoint: https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/token&lt;/li&gt;
+&lt;li&gt;logoutEndpoint: https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/logout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To configure the React demo app, clone the repo and run npm install.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;git clone https://github.com/rasmusson/react-oidc-pkce-demo
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; react-oidc-pkce-demo
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;npm install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now open src/SecuredApp.js and edit the configuration in AuthService to match your endpoints, client name and redirect URI. In our case it will look like this.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;authService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;AuthService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;clientId&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;oidc-client&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;authorizeEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/auth&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;tokenEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/token&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;logoutEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/logout&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;redirectUri&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;http://react:3000&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;scopes&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;openid&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Next start the React app&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;npm start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To test that the OIDC integration works fine, lets create a test user in Keycloak and authenticate.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;add-user.png&#34; alt=&#34;Add test user&#34;&gt;
+Save and then, set a password for the user as below&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;change-password.png&#34; alt=&#34;Changing password of the test user&#34;&gt;
+I disable temporary password as this is for demo purposes.&lt;/p&gt;
+&lt;p&gt;To create the test user using Keycloak CLI
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;kcadm.sh create users -r oidcrealm -s &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -s &lt;span class=&#34;nv&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; -o --fields id,username
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;kcadm.sh set-password -r oidcrealm --username &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; --new-password test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Browse to where your React app is running, in my case &lt;a href=&#34;http://react:3000/&#34;&gt;http://react:3000/&lt;/a&gt; and click the Login button&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;react-login.png&#34; alt=&#34;React app&#34;&gt;
+Login using the new test user&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;login-test-user.png&#34; alt=&#34;Login as test user&#34;&gt;
+You should get a JWT token with user information as a result.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jwt-token1.png&#34; alt=&#34;JWT token&#34;&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;saml-integration-between-adfs-and-keycloak&#34;&gt;SAML integration between ADFS and Keycloak&lt;/h3&gt;
+&lt;p&gt;Next step is to set up a authentication provider in Keycloak to authenticate users against the ADFS IdP.&lt;/p&gt;
+&lt;p&gt;In Keycloak, create a new SAML authentication provider&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-saml-provider.png&#34; alt=&#34;Create SAML authentication provider&#34;&gt;
+&lt;img src=&#34;configure-saml-provider.png&#34; alt=&#34;Configure SAML authentication provider&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Configuration may differ in different environments. In this demo we will set the following&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Sync Mode: Import - Meaning we import the user data comming from the IdP ones, when the user is first authenticated.&lt;/li&gt;
+&lt;li&gt;Single Sign-On Service URL: &lt;a href=&#34;https://adfs.devel/adfs/ls/&#34;&gt;https://adfs.devel/adfs/ls/&lt;/a&gt; - Where our ADFS endpoint for SSO is.&lt;/li&gt;
+&lt;li&gt;Single Logout Service URL: &lt;a href=&#34;https://adfs.devel/adfs/ls/&#34;&gt;https://adfs.devel/adfs/ls/&lt;/a&gt; - Where our ADFS endpoint for SLO is.&lt;/li&gt;
+&lt;li&gt;Want AuthnRequests Signed: On - To sign authentication request and especially singing single logout requests which is mandatory by default in ADFS.&lt;/li&gt;
+&lt;li&gt;NameID Policy Format: Email - This is how we will identify users&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To configure the SAML IdP using Keycloak CLI
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;kcadm.sh create identity-provider/instances -r oidcrealm -s &lt;span class=&#34;nv&#34;&gt;alias&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;saml -s &lt;span class=&#34;nv&#34;&gt;providerId&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;saml -s &lt;span class=&#34;nv&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; -s config.wantAuthnRequestsSigned&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; -s config.allowedClockSkew&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; -s &lt;span class=&#34;s1&#34;&gt;&amp;#39;config.useJwksUrl=&amp;#34;true&amp;#34;&amp;#39;&lt;/span&gt; -s config.singleSignOnServiceUrl&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;https://adfs.devel/adfs/ls/ -s config.singleLogoutServiceUrl&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;https://adfs.devel/adfs/ls/ -s config.nameIDPolicyFormat&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress -s config.signatureAlgorithm&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;RSA_SHA256&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h4 id=&#34;configure-keycloak-as-relaying-party-in-adfs&#34;&gt;Configure Keycloak as relaying party in ADFS&lt;/h4&gt;
+&lt;p&gt;When setting up Keycloak as a SP in ADFS, we need to import Metadata. The metadata contains connection and communication information that ADFS needs.&lt;/p&gt;
+&lt;p&gt;First lets download the metadata from Keycloak. At the ADFS server, browse to https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor. Click through the HTTPS warnings and download the file.&lt;/p&gt;
+&lt;p&gt;Open up ADFS administration, and add a relying party.
+Choose Claims aware.
+Use the option &amp;quot;Import data about the relying party from a file&amp;quot; and browse to you file.&lt;/p&gt;
+&lt;p&gt;Normally the metadata is simplest imported by using the option &amp;quot;Import data about the relying party published online or on a local network&amp;quot; to let ADFS fetch the metadata directly from Keycloak. This requires the TLS trust is setup correctly. I have not bothered to do that for this demo so I use this method instead.&lt;/p&gt;
+&lt;p&gt;Set a name, for example Keycloak&lt;/p&gt;
+&lt;p&gt;Next we set which users are allowed to authenticate thought the integration. As this is a demo, we make it simple and set it to everyone. Select &amp;quot;Permit everyone&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;select-ACP.png&#34; alt=&#34;Select users to permit&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Then click next, next and finish&lt;/p&gt;
+&lt;p&gt;After you finish, the dialog &amp;quot;Edit Claims Issuance Policy for Keycloak&amp;quot; should open. Here we configure what information will be sent to Keycloak together with the user when it has been authenticated. In Keycloak we configured the user to be identified by email, so now we must configure ADFS to send the email address of the authenticated user.&lt;/p&gt;
+&lt;p&gt;First we create a rule to get a the email as a claim.&lt;/p&gt;
+&lt;p&gt;Select &amp;quot;Send LDAP Attributes as Claims&amp;quot;. Set a name for the issuance rule, select Active Directory as store. Under LDAP attribute choose &amp;quot;Email addresses&amp;quot; and set &amp;quot;Email address&amp;quot; as Outgoing claim type&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;adfs-email-attribute.png&#34; alt=&#34;Add LDAP attribute as claim&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, we create a rule to transform and set the email claim as NameID in the SAML response.
+Select &amp;quot;Transform an incoming claim&amp;quot;&lt;/p&gt;
+&lt;p&gt;As &amp;quot;Incoming Claim type&amp;quot; set email address and as &amp;quot;Outgoing Claim type&amp;quot; set Name ID and Email as &amp;quot;Outgoing name ID format&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;adfs-claim-as-nameid.png&#34; alt=&#34;Transform claim to Name ID&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To configure the Keycloak relying party on ADFS using PowerShell, first disable HTTPS verification if you have not yet set up TLS trust between Keycloak and ADFS
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[System.Net.ServicePointManager]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ServerCertificateValidationCallback&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Create and configure relying party
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Add-ADFSRelyingPartyTrust&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;keycloak&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-MetadataURL&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-IssuanceAuthorizationRules&lt;/span&gt; &lt;span class=&#34;sh&#34;&gt;@&amp;#39;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;@RuleTemplate = &amp;#34;AllowAllAuthzRule&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt; =&amp;gt; issue(Type = &amp;#34;http://schemas.microsoft.com/authorization/claims/permit&amp;#34;, Value = &amp;#34;true&amp;#34;);
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;&amp;#39;@&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-IssuanceTransformRules&lt;/span&gt; &lt;span class=&#34;sh&#34;&gt;@&amp;#39;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;@RuleTemplate = &amp;#34;LdapClaims&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;@RuleName = &amp;#34;Email Attribute&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;c:[Type == &amp;#34;http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname&amp;#34;, Issuer == &amp;#34;AD AUTHORITY&amp;#34;] =&amp;gt; issue(store = &amp;#34;Active Directory&amp;#34;, types = (&amp;#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&amp;#34;), query = &amp;#34;;mail;{0}&amp;#34;, param = c.Value);
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;@RuleTemplate = &amp;#34;MapClaims&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;@RuleName = &amp;#34;Email ad nameid&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;c:[Type == &amp;#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&amp;#34;] =&amp;gt; issue(Type =&amp;#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier&amp;#34;, Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType, Properties[&amp;#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claimproperties/format&amp;#34;] = &amp;#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&amp;#34;);
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;sh&#34;&gt;&amp;#39;@&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;And while we are in the Windows server, lets create a test user in AD to test the final setup when we are done.&lt;/p&gt;
+&lt;p&gt;Open the Active Directory Users and Computers tool and create a new user.
+&lt;em&gt;After creating the user, make sure to open the user properties and add an email address.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;ad-create-user.png&#34; alt=&#34;Add user in AD&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To add the user using PowerShell, first disable complex passwords to let use a simple password for testing
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secedit&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;gc &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;PasswordComplexity = 1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PasswordComplexity = 0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;MinimumPasswordLength = 7&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;MinimumPasswordLength = 0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Out-File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;secedit&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;configure&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;db&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Windows&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;security&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sdb&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;areas&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SECURITYPOLICY&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;  &lt;span class=&#34;nb&#34;&gt;rm &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-force&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-confirm&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Now lets create the user
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;Import-Module&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ActiveDirectory&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;New-ADUser&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-SamAccountName&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;test2&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-GivenName&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Test&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Surname&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;User&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Name&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Test User&amp;#34;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Email&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;test@test.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;`&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;           &lt;span class=&#34;n&#34;&gt;-Path&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;CN=Users,DC=windomain,DC=local&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;`&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;           &lt;span class=&#34;n&#34;&gt;-AccountPassword&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;ConvertTo-SecureString&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-AsPlainText&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Force&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-Enabled&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;configure-brokering-between-oidc-and-saml&#34;&gt;Configure brokering between OIDC and SAML&lt;/h3&gt;
+&lt;p&gt;To make use of the configured SAML IdP to authenticate the user from the React SPA, we need to configure two things in Keycloak.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identity Provider Redirector - To direct the user to ADFS IdP&lt;/li&gt;
+&lt;li&gt;Authentication flow - To handle the SAML result from ADFS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;configure-the-redirector&#34;&gt;Configure the redirector&lt;/h4&gt;
+&lt;p&gt;Configure the redirector under Authentication in the menu in the Keycloak web ui. Set an alias and under Default Identity Provider, set the name chosen when creating the SAML authentication provider in earlier steps.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-redirector-config.png&#34; alt=&#34;Create redirector config&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;set-default-auth-provider.png&#34; alt=&#34;Set default authentication provider&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;transparent-brokering&#34;&gt;Transparent brokering&lt;/h4&gt;
+&lt;p&gt;The default behavior of Keycloak in brokering mode is that the a new user is asked to update their user profile in Keycloak a first authentication. If you want to have the brokering in Keycloak to be totally transparent, this can be disabled in the &amp;quot;First broker login&amp;quot; authentication flow.&lt;/p&gt;
+&lt;p&gt;Under Authentication, select &amp;quot;First broker login&amp;quot; flow and click disable for the first step named &amp;quot;Review Profile&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;disable-profile-review.png&#34; alt=&#34;Disable profile review&#34;&gt;&lt;/p&gt;
+&lt;p&gt;To configure the IdP redirection and disabling of the profile review in Keycloak CLI
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;idpRedirector&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;kcadm.sh get /authentication/flows/browser/executions -r oidcrealm &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;.[] | select(.providerId == &amp;#34;identity-provider-redirector&amp;#34;).id&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;kcadm.sh create /authentication/executions/&lt;span class=&#34;nv&#34;&gt;$idpRedirector&lt;/span&gt;/config -r oidcrealm -s config.defaultProvider&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;saml -s &lt;span class=&#34;nv&#34;&gt;alias&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;straight_to_saml
+&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;reviewProfileExecution&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;kcadm.sh get /authentication/flows/first%20broker%20login/executions -r oidcrealm &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;.[] | (select(.alias == &amp;#34;review profile config&amp;#34;) | .requirement) |= &amp;#34;DISABLED&amp;#34; | select(.alias == &amp;#34;review profile config&amp;#34;)&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;kcadm.sh update authentication/flows/first%20broker%20login/executions -r oidcrealm -f - &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$reviewProfileExecution
+&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;h2 id=&#34;lets-test-it&#34;&gt;Lets test it&lt;/h2&gt;
+&lt;p&gt;Browse to the React test applications and click Login&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;react-login.png&#34; alt=&#34;React app&#34;&gt;
+Login in ADFS as the test user created earlier&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;adfs-login.png&#34; alt=&#34;React app&#34;&gt;
+You now get authenticated to the application and the React test application shows the content of the JWT token in the OIDC authentication response&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jwt-token2.png&#34; alt=&#34;JWT token&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;fully-automated-demo&#34;&gt;Fully automated demo&lt;/h2&gt;
+&lt;p&gt;To make it easy to try this out and play around, I have published my fully &lt;a href=&#34;https://github.com/rasmusson/SPA-saml-poc/&#34;&gt;Automated demo of this here Github&lt;/a&gt;. The demo is based on vagrant, spinning up different virtual machines in virtual box for ADFS, Keycloak and the React app.&lt;/p&gt;
+&lt;p&gt;To start the demo first install the prerequisites listed in the GitHub page. Then spin everything up
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;vagrant up adfs keycloak react&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Go grab lunch. It takes some time =)
+
+&lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
+&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
+
+
+&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34; id=&#34;SAML20Ad-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
+
+  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Need a complete understanding of SAML 2.0?&lt;/p&gt;
+&lt;p&gt;Have a look on the book &lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;
+  
+  
+  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for SAML 2.0: Designing secure identity federation&#34; src=&#34;https://blog.samlsecurity.com/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
+	
+&lt;/div&gt;
+&lt;/a&gt;
+&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+        
+      </description>
+    </item>
+    
     <item>
       <title>Signing and verifying signatures with OpenSAML 4</title>
       <link>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</link>
