@@ -229,7 +229,7 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 <h2 id="brokered-authentication-using-keycloak">Brokered authentication using Keycloak</h2>
 <p>One way to solve this dilemma is to use a broker authentication pattern.</p>
 <p>Instead of just using OIDC or just using SAML, the SPA uses OIDC, the IdP uses SAML and we place Keycloak as a broker between to translate.</p>
-<p><img src="brokered-auth.png" alt="Brokered authentication pattern"></p>
+<p><img src="oidc-SAML-translation-for-SPA.png" alt="Brokered authentication pattern"></p>
 <ol>
 <li>The SPA in the browser redirects the user with an OIDC request to Keycloak</li>
 <li>Keycloak receives the user and request, crafts a SAML request and send it and the user to ADFS IdP for authentication</li>
@@ -268,16 +268,16 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 <p>Provided you have set up your Keycloak, lets dive in and configure OIDC!</p>
 <p>Browse to <a href="https://keycloak:8443/auth/admin/">https://keycloak:8443/auth/admin/</a> and login as admin.</p>
 <p>Create a realm for the OIDC integration</p>
-<p><img src="create-realm.png" alt="Create OIDC realm"></p>
+<p><img src="create-OIDC-realm-in-keycloak.png" alt="Create OIDC realm"></p>
 <p>Create a client for the React SPA. On the first screen, just input a name for the client and click create.</p>
-<p><img src="create-oidc-client.png" alt="Create OIDC client"></p>
+<p><img src="create-OIDC-client-in-keycloak.png" alt="Create OIDC client"></p>
 <p>On this next screen add a redirect URL for your SPA. In my case Im setting up a demo React app below with redirect URL &quot;http://react:3000&quot;</p>
 <p>Under Web Origins, type a plus sign. <strong>Do not click the plus sign, but type a plus sign in the field</strong>. This will add all your redirect URLs in allowed origins and avoid CORS problems.</p>
-<p><img src="config-oidc-client-1.png" alt="Configure OIDC client"></p>
+<p><img src="config-oidc-client-in-keycloak-1.png" alt="Configure OIDC client"></p>
 <p>Now lets configure the client to use PKCE. This is best practice when working with SPAs and other applications that can not protect a secret key.</p>
 <p>Make sure &quot;Access Type&quot; is set to public and that &quot;Standard Flow Enabled&quot; is set to On.</p>
 <p>Next expand the Advanced settings and set &quot;Proof Key for Code Exchange Code Challenge Method&quot; to S256</p>
-<p><img src="config-oidc-client-2.png" alt="Configure OIDC client"></p>
+<p><img src="config-oidc-client-in-keycloak-2.png" alt="Configure OIDC client"></p>
 <p>To do this using the Keycloak CLI
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kcadm.sh create realms -s <span class="nv">realm</span><span class="o">=</span>oidcrealm -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span>
 <span class="ln">2</span>
@@ -310,19 +310,19 @@ How to set up another app will vary depending on what framework you are using, b
 <p>Next start the React app</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>npm start</code></pre></div>
 <p>To test that the OIDC integration works fine, lets create a test user in Keycloak and authenticate.</p>
-<p><img src="add-user.png" alt="Add test user">
+<p>![Add test user](add-user-to test-OIDC-authentication.png)
 Save and then, set a password for the user as below</p>
-<p><img src="change-password.png" alt="Changing password of the test user">
+<p>![Changing password of the test user](change-password-of-user-to test-OIDC-authentication.png)
 I disable temporary password as this is for demo purposes.</p>
 <p>To create the test user using Keycloak CLI
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kcadm.sh create users -r oidcrealm -s <span class="nv">username</span><span class="o">=</span><span class="nb">test</span> -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -o --fields id,username
 <span class="ln">2</span>kcadm.sh set-password -r oidcrealm --username <span class="nb">test</span> --new-password test</code></pre></div></p>
 <p>Browse to where your React app is running, in my case <a href="http://react:3000/">http://react:3000/</a> and click the Login button</p>
-<p><img src="react-login.png" alt="React app">
+<p><img src="react-oidc-sample-app-login-form.png" alt="React app">
 Login using the new test user</p>
-<p><img src="login-test-user.png" alt="Login as test user">
+<p><img src="login-test-user-in-react-oidc-sample-app.png" alt="Login as test user">
 You should get a JWT token with user information as a result.</p>
-<p><img src="jwt-token1.png" alt="JWT token">
+<p><img src="react-oidc-sample-app-jwt-token.png" alt="JWT token">
 
 <div class="book-ad" id="SAML20Ad">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -344,8 +344,8 @@ You should get a JWT token with user information as a result.</p>
 <h3 id="saml-integration-between-adfs-and-keycloak">SAML integration between ADFS and Keycloak</h3>
 <p>Next step is to set up a authentication provider in Keycloak to authenticate users against the ADFS IdP.</p>
 <p>In Keycloak, create a new SAML authentication provider</p>
-<p><img src="create-saml-provider.png" alt="Create SAML authentication provider">
-<img src="configure-saml-provider.png" alt="Configure SAML authentication provider"></p>
+<p><img src="create-saml-authentication-provider-in-keycloak.png" alt="Create SAML authentication provider">
+<img src="configure-saml-authentication-provider-in-keycloak.png" alt="Configure SAML authentication provider"></p>
 <p>Configuration may differ in different environments. In this demo we will set the following</p>
 <ul>
 <li>Sync Mode: Import - Meaning we import the user data comming from the IdP ones, when the user is first authenticated.</li>
@@ -365,16 +365,16 @@ Use the option &quot;Import data about the relying party from a file&quot; and b
 <p>Normally the metadata is simplest imported by using the option &quot;Import data about the relying party published online or on a local network&quot; to let ADFS fetch the metadata directly from Keycloak. This requires the TLS trust is setup correctly. I have not bothered to do that for this demo so I use this method instead.</p>
 <p>Set a name, for example Keycloak</p>
 <p>Next we set which users are allowed to authenticate thought the integration. As this is a demo, we make it simple and set it to everyone. Select &quot;Permit everyone&quot;</p>
-<p><img src="select-ACP.png" alt="Select users to permit"></p>
+<p><img src="select-ADFS-Access-Control-Policy-permitting-SAML-users.png" alt="Select users to permit"></p>
 <p>Then click next, next and finish</p>
 <p>After you finish, the dialog &quot;Edit Claims Issuance Policy for Keycloak&quot; should open. Here we configure what information will be sent to Keycloak together with the user when it has been authenticated. In Keycloak we configured the user to be identified by email, so now we must configure ADFS to send the email address of the authenticated user.</p>
 <p>First we create a rule to get a the email as a claim.</p>
 <p>Select &quot;Send LDAP Attributes as Claims&quot;. Set a name for the issuance rule, select Active Directory as store. Under LDAP attribute choose &quot;Email addresses&quot; and set &quot;Email address&quot; as Outgoing claim type</p>
-<p><img src="adfs-email-attribute.png" alt="Add LDAP attribute as claim"></p>
+<p><img src="configure-adfs-to-issue-email-attribute-as-claim-for-SAML.png" alt="Add LDAP attribute as claim to include in SAML Assertion"></p>
 <p>Next, we create a rule to transform and set the email claim as NameID in the SAML response.
 Select &quot;Transform an incoming claim&quot;</p>
 <p>As &quot;Incoming Claim type&quot; set email address and as &quot;Outgoing Claim type&quot; set Name ID and Email as &quot;Outgoing name ID format&quot;</p>
-<p><img src="adfs-claim-as-nameid.png" alt="Transform claim to Name ID"></p>
+<p><img src="transform-adfs-claim-to-nameid-for-SAML-assertion.png" alt="Transform claim to Name ID"></p>
 <p>To configure the Keycloak relying party on ADFS using PowerShell, first disable HTTPS verification if you have not yet set up TLS trust between Keycloak and ADFS
 <div class="highlight"><pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="ln">1</span><span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">ServerCertificateValidationCallback</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$true</span><span class="p">}</span></code></pre></div></p>
 <p>Create and configure relying party
@@ -393,7 +393,7 @@ Select &quot;Transform an incoming claim&quot;</p>
 <p>And while we are in the Windows server, lets create a test user in AD to test the final setup when we are done.</p>
 <p>Open the Active Directory Users and Computers tool and create a new user.
 <em>After creating the user, make sure to open the user properties and add an email address.</em></p>
-<p><img src="ad-create-user.png" alt="Add user in AD"></p>
+<p><img src="create-ADFS-user-for-SAML-authentication.png" alt="Add user in AD"></p>
 <p>To add the user using PowerShell, first disable complex passwords to let use a simple password for testing
 <div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln">1</span><span class="n">secedit</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
 <span class="ln">2</span>  <span class="p">(</span><span class="nb">gc </span><span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;PasswordComplexity = 1&#34;</span><span class="p">,</span> <span class="s2">&#34;PasswordComplexity = 0&#34;</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;MinimumPasswordLength = 7&#34;</span><span class="p">,</span> <span class="s2">&#34;MinimumPasswordLength = 0&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
@@ -412,12 +412,12 @@ Select &quot;Transform an incoming claim&quot;</p>
 </ul>
 <h4 id="configure-the-redirector">Configure the redirector</h4>
 <p>Configure the redirector under Authentication in the menu in the Keycloak web ui. Set an alias and under Default Identity Provider, set the name chosen when creating the SAML authentication provider in earlier steps.</p>
-<p><img src="create-redirector-config.png" alt="Create redirector config"></p>
-<p><img src="set-default-auth-provider.png" alt="Set default authentication provider"></p>
+<p><img src="create-redirector-config-for-ADFS-SAML-authentication.png" alt="Create redirector config for ADFS SAML authentication"></p>
+<p><img src="set-default-authentication-provider-to-ADFS-SAML.png" alt="Set default authentication provider for ADFS"></p>
 <h4 id="transparent-brokering">Transparent brokering</h4>
 <p>The default behavior of Keycloak in brokering mode is that the a new user is asked to update their user profile in Keycloak a first authentication. If you want to have the brokering in Keycloak to be totally transparent, this can be disabled in the &quot;First broker login&quot; authentication flow.</p>
 <p>Under Authentication, select &quot;First broker login&quot; flow and click disable for the first step named &quot;Review Profile&quot;</p>
-<p><img src="disable-profile-review.png" alt="Disable profile review"></p>
+<p><img src="disable-profile-review-in-keycloak.png" alt="Disable profile review"></p>
 <p>To configure the IdP redirection and disabling of the profile review in Keycloak CLI
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">idpRedirector</span><span class="o">=</span><span class="k">$(</span>kcadm.sh get /authentication/flows/browser/executions -r oidcrealm <span class="p">|</span> jq -r <span class="s1">&#39;.[] | select(.providerId == &#34;identity-provider-redirector&#34;).id&#39;</span><span class="k">)</span>
 <span class="ln">2</span>kcadm.sh create /authentication/executions/<span class="nv">$idpRedirector</span>/config -r oidcrealm -s config.defaultProvider<span class="o">=</span>saml -s <span class="nv">alias</span><span class="o">=</span>straight_to_saml
@@ -446,11 +446,11 @@ Select &quot;Transform an incoming claim&quot;</p>
 </div></p>
 <h2 id="lets-test-it">Lets test it</h2>
 <p>Browse to the React test applications and click Login</p>
-<p><img src="react-login.png" alt="React app">
+<p><img src="react-oidc-sample-app-login-form.png" alt="React app">
 Login in ADFS as the test user created earlier</p>
-<p><img src="adfs-login.png" alt="React app">
+<p><img src="react-login-OIDC-authentication-using-SAML.png" alt="React app">
 You now get authenticated to the application and the React test application shows the content of the JWT token in the OIDC authentication response</p>
-<p><img src="jwt-token2.png" alt="JWT token"></p>
+<p><img src="jwt-token-with-atributes-from-ADFS-SAML-IDP.png" alt="JWT token"></p>
 <h2 id="fully-automated-demo">Fully automated demo</h2>
 <p>To make it easy to try this out and play around, I have published my fully <a href="https://github.com/rasmusson/SPA-saml-poc/">Automated demo of this here Github</a>. The demo is based on vagrant, spinning up different virtual machines in virtual box for ADFS, Keycloak and the React app.</p>
 <p>To start the demo first install the prerequisites listed in the GitHub page. Then spin everything up

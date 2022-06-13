@@ -29,7 +29,7 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 &lt;h2 id=&#34;brokered-authentication-using-keycloak&#34;&gt;Brokered authentication using Keycloak&lt;/h2&gt;
 &lt;p&gt;One way to solve this dilemma is to use a broker authentication pattern.&lt;/p&gt;
 &lt;p&gt;Instead of just using OIDC or just using SAML, the SPA uses OIDC, the IdP uses SAML and we place Keycloak as a broker between to translate.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;brokered-auth.png&#34; alt=&#34;Brokered authentication pattern&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;oidc-SAML-translation-for-SPA.png&#34; alt=&#34;Brokered authentication pattern&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The SPA in the browser redirects the user with an OIDC request to Keycloak&lt;/li&gt;
 &lt;li&gt;Keycloak receives the user and request, crafts a SAML request and send it and the user to ADFS IdP for authentication&lt;/li&gt;
@@ -68,16 +68,16 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 &lt;p&gt;Provided you have set up your Keycloak, lets dive in and configure OIDC!&lt;/p&gt;
 &lt;p&gt;Browse to &lt;a href=&#34;https://keycloak:8443/auth/admin/&#34;&gt;https://keycloak:8443/auth/admin/&lt;/a&gt; and login as admin.&lt;/p&gt;
 &lt;p&gt;Create a realm for the OIDC integration&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;create-realm.png&#34; alt=&#34;Create OIDC realm&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-OIDC-realm-in-keycloak.png&#34; alt=&#34;Create OIDC realm&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Create a client for the React SPA. On the first screen, just input a name for the client and click create.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;create-oidc-client.png&#34; alt=&#34;Create OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-OIDC-client-in-keycloak.png&#34; alt=&#34;Create OIDC client&#34;&gt;&lt;/p&gt;
 &lt;p&gt;On this next screen add a redirect URL for your SPA. In my case Im setting up a demo React app below with redirect URL &amp;quot;http://react:3000&amp;quot;&lt;/p&gt;
 &lt;p&gt;Under Web Origins, type a plus sign. &lt;strong&gt;Do not click the plus sign, but type a plus sign in the field&lt;/strong&gt;. This will add all your redirect URLs in allowed origins and avoid CORS problems.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;config-oidc-client-1.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;config-oidc-client-in-keycloak-1.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Now lets configure the client to use PKCE. This is best practice when working with SPAs and other applications that can not protect a secret key.&lt;/p&gt;
 &lt;p&gt;Make sure &amp;quot;Access Type&amp;quot; is set to public and that &amp;quot;Standard Flow Enabled&amp;quot; is set to On.&lt;/p&gt;
 &lt;p&gt;Next expand the Advanced settings and set &amp;quot;Proof Key for Code Exchange Code Challenge Method&amp;quot; to S256&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;config-oidc-client-2.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;config-oidc-client-in-keycloak-2.png&#34; alt=&#34;Configure OIDC client&#34;&gt;&lt;/p&gt;
 &lt;p&gt;To do this using the Keycloak CLI
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;kcadm.sh create realms -s &lt;span class=&#34;nv&#34;&gt;realm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;oidcrealm -s &lt;span class=&#34;nv&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;
@@ -110,19 +110,19 @@ How to set up another app will vary depending on what framework you are using, b
 &lt;p&gt;Next start the React app&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;npm start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;To test that the OIDC integration works fine, lets create a test user in Keycloak and authenticate.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;add-user.png&#34; alt=&#34;Add test user&#34;&gt;
+&lt;p&gt;![Add test user](add-user-to test-OIDC-authentication.png)
 Save and then, set a password for the user as below&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;change-password.png&#34; alt=&#34;Changing password of the test user&#34;&gt;
+&lt;p&gt;![Changing password of the test user](change-password-of-user-to test-OIDC-authentication.png)
 I disable temporary password as this is for demo purposes.&lt;/p&gt;
 &lt;p&gt;To create the test user using Keycloak CLI
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;kcadm.sh create users -r oidcrealm -s &lt;span class=&#34;nv&#34;&gt;username&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; -s &lt;span class=&#34;nv&#34;&gt;enabled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt; -o --fields id,username
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;kcadm.sh set-password -r oidcrealm --username &lt;span class=&#34;nb&#34;&gt;test&lt;/span&gt; --new-password test&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;p&gt;Browse to where your React app is running, in my case &lt;a href=&#34;http://react:3000/&#34;&gt;http://react:3000/&lt;/a&gt; and click the Login button&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;react-login.png&#34; alt=&#34;React app&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;react-oidc-sample-app-login-form.png&#34; alt=&#34;React app&#34;&gt;
 Login using the new test user&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;login-test-user.png&#34; alt=&#34;Login as test user&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;login-test-user-in-react-oidc-sample-app.png&#34; alt=&#34;Login as test user&#34;&gt;
 You should get a JWT token with user information as a result.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;jwt-token1.png&#34; alt=&#34;JWT token&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;react-oidc-sample-app-jwt-token.png&#34; alt=&#34;JWT token&#34;&gt;
 
 &lt;div class=&#34;book-ad&#34; id=&#34;SAML20Ad&#34;&gt;
 &lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
@@ -144,8 +144,8 @@ You should get a JWT token with user information as a result.&lt;/p&gt;
 &lt;h3 id=&#34;saml-integration-between-adfs-and-keycloak&#34;&gt;SAML integration between ADFS and Keycloak&lt;/h3&gt;
 &lt;p&gt;Next step is to set up a authentication provider in Keycloak to authenticate users against the ADFS IdP.&lt;/p&gt;
 &lt;p&gt;In Keycloak, create a new SAML authentication provider&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;create-saml-provider.png&#34; alt=&#34;Create SAML authentication provider&#34;&gt;
-&lt;img src=&#34;configure-saml-provider.png&#34; alt=&#34;Configure SAML authentication provider&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-saml-authentication-provider-in-keycloak.png&#34; alt=&#34;Create SAML authentication provider&#34;&gt;
+&lt;img src=&#34;configure-saml-authentication-provider-in-keycloak.png&#34; alt=&#34;Configure SAML authentication provider&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Configuration may differ in different environments. In this demo we will set the following&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Sync Mode: Import - Meaning we import the user data comming from the IdP ones, when the user is first authenticated.&lt;/li&gt;
@@ -165,16 +165,16 @@ Use the option &amp;quot;Import data about the relying party from a file&amp;quo
 &lt;p&gt;Normally the metadata is simplest imported by using the option &amp;quot;Import data about the relying party published online or on a local network&amp;quot; to let ADFS fetch the metadata directly from Keycloak. This requires the TLS trust is setup correctly. I have not bothered to do that for this demo so I use this method instead.&lt;/p&gt;
 &lt;p&gt;Set a name, for example Keycloak&lt;/p&gt;
 &lt;p&gt;Next we set which users are allowed to authenticate thought the integration. As this is a demo, we make it simple and set it to everyone. Select &amp;quot;Permit everyone&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;select-ACP.png&#34; alt=&#34;Select users to permit&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;select-ADFS-Access-Control-Policy-permitting-SAML-users.png&#34; alt=&#34;Select users to permit&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Then click next, next and finish&lt;/p&gt;
 &lt;p&gt;After you finish, the dialog &amp;quot;Edit Claims Issuance Policy for Keycloak&amp;quot; should open. Here we configure what information will be sent to Keycloak together with the user when it has been authenticated. In Keycloak we configured the user to be identified by email, so now we must configure ADFS to send the email address of the authenticated user.&lt;/p&gt;
 &lt;p&gt;First we create a rule to get a the email as a claim.&lt;/p&gt;
 &lt;p&gt;Select &amp;quot;Send LDAP Attributes as Claims&amp;quot;. Set a name for the issuance rule, select Active Directory as store. Under LDAP attribute choose &amp;quot;Email addresses&amp;quot; and set &amp;quot;Email address&amp;quot; as Outgoing claim type&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;adfs-email-attribute.png&#34; alt=&#34;Add LDAP attribute as claim&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;configure-adfs-to-issue-email-attribute-as-claim-for-SAML.png&#34; alt=&#34;Add LDAP attribute as claim to include in SAML Assertion&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Next, we create a rule to transform and set the email claim as NameID in the SAML response.
 Select &amp;quot;Transform an incoming claim&amp;quot;&lt;/p&gt;
 &lt;p&gt;As &amp;quot;Incoming Claim type&amp;quot; set email address and as &amp;quot;Outgoing Claim type&amp;quot; set Name ID and Email as &amp;quot;Outgoing name ID format&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;adfs-claim-as-nameid.png&#34; alt=&#34;Transform claim to Name ID&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;transform-adfs-claim-to-nameid-for-SAML-assertion.png&#34; alt=&#34;Transform claim to Name ID&#34;&gt;&lt;/p&gt;
 &lt;p&gt;To configure the Keycloak relying party on ADFS using PowerShell, first disable HTTPS verification if you have not yet set up TLS trust between Keycloak and ADFS
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-PowerShell&#34; data-lang=&#34;PowerShell&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;no&#34;&gt;[System.Net.ServicePointManager]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ServerCertificateValidationCallback&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;p&gt;Create and configure relying party
@@ -193,7 +193,7 @@ Select &amp;quot;Transform an incoming claim&amp;quot;&lt;/p&gt;
 &lt;p&gt;And while we are in the Windows server, lets create a test user in AD to test the final setup when we are done.&lt;/p&gt;
 &lt;p&gt;Open the Active Directory Users and Computers tool and create a new user.
 &lt;em&gt;After creating the user, make sure to open the user properties and add an email address.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;ad-create-user.png&#34; alt=&#34;Add user in AD&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-ADFS-user-for-SAML-authentication.png&#34; alt=&#34;Add user in AD&#34;&gt;&lt;/p&gt;
 &lt;p&gt;To add the user using PowerShell, first disable complex passwords to let use a simple password for testing
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secedit&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;gc &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;PasswordComplexity = 1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PasswordComplexity = 0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;replace&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;MinimumPasswordLength = 7&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;MinimumPasswordLength = 0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Out-File&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C:&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;secconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cfg&lt;/span&gt;
@@ -212,12 +212,12 @@ Select &amp;quot;Transform an incoming claim&amp;quot;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;configure-the-redirector&#34;&gt;Configure the redirector&lt;/h4&gt;
 &lt;p&gt;Configure the redirector under Authentication in the menu in the Keycloak web ui. Set an alias and under Default Identity Provider, set the name chosen when creating the SAML authentication provider in earlier steps.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;create-redirector-config.png&#34; alt=&#34;Create redirector config&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;set-default-auth-provider.png&#34; alt=&#34;Set default authentication provider&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;create-redirector-config-for-ADFS-SAML-authentication.png&#34; alt=&#34;Create redirector config for ADFS SAML authentication&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;set-default-authentication-provider-to-ADFS-SAML.png&#34; alt=&#34;Set default authentication provider for ADFS&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;transparent-brokering&#34;&gt;Transparent brokering&lt;/h4&gt;
 &lt;p&gt;The default behavior of Keycloak in brokering mode is that the a new user is asked to update their user profile in Keycloak a first authentication. If you want to have the brokering in Keycloak to be totally transparent, this can be disabled in the &amp;quot;First broker login&amp;quot; authentication flow.&lt;/p&gt;
 &lt;p&gt;Under Authentication, select &amp;quot;First broker login&amp;quot; flow and click disable for the first step named &amp;quot;Review Profile&amp;quot;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;disable-profile-review.png&#34; alt=&#34;Disable profile review&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;disable-profile-review-in-keycloak.png&#34; alt=&#34;Disable profile review&#34;&gt;&lt;/p&gt;
 &lt;p&gt;To configure the IdP redirection and disabling of the profile review in Keycloak CLI
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;idpRedirector&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;kcadm.sh get /authentication/flows/browser/executions -r oidcrealm &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; jq -r &lt;span class=&#34;s1&#34;&gt;&amp;#39;.[] | select(.providerId == &amp;#34;identity-provider-redirector&amp;#34;).id&amp;#39;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;kcadm.sh create /authentication/executions/&lt;span class=&#34;nv&#34;&gt;$idpRedirector&lt;/span&gt;/config -r oidcrealm -s config.defaultProvider&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;saml -s &lt;span class=&#34;nv&#34;&gt;alias&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;straight_to_saml
@@ -246,11 +246,11 @@ Select &amp;quot;Transform an incoming claim&amp;quot;&lt;/p&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;h2 id=&#34;lets-test-it&#34;&gt;Lets test it&lt;/h2&gt;
 &lt;p&gt;Browse to the React test applications and click Login&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;react-login.png&#34; alt=&#34;React app&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;react-oidc-sample-app-login-form.png&#34; alt=&#34;React app&#34;&gt;
 Login in ADFS as the test user created earlier&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;adfs-login.png&#34; alt=&#34;React app&#34;&gt;
+&lt;p&gt;&lt;img src=&#34;react-login-OIDC-authentication-using-SAML.png&#34; alt=&#34;React app&#34;&gt;
 You now get authenticated to the application and the React test application shows the content of the JWT token in the OIDC authentication response&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;jwt-token2.png&#34; alt=&#34;JWT token&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;jwt-token-with-atributes-from-ADFS-SAML-IDP.png&#34; alt=&#34;JWT token&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;fully-automated-demo&#34;&gt;Fully automated demo&lt;/h2&gt;
 &lt;p&gt;To make it easy to try this out and play around, I have published my fully &lt;a href=&#34;https://github.com/rasmusson/SPA-saml-poc/&#34;&gt;Automated demo of this here Github&lt;/a&gt;. The demo is based on vagrant, spinning up different virtual machines in virtual box for ADFS, Keycloak and the React app.&lt;/p&gt;
 &lt;p&gt;To start the demo first install the prerequisites listed in the GitHub page. Then spin everything up
