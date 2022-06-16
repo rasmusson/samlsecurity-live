@@ -218,12 +218,12 @@ ExplicitKeySignatureTrustEngine validates a signature if the key used to sign a 
           &lt;p&gt;SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.&lt;/p&gt;
 &lt;p&gt;This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP POST in OpenSAML.&lt;/p&gt;
 &lt;h2 id=&#34;the-http-post-binding&#34;&gt;The HTTP POST binding&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;&#34;&gt;The Redirect binding explained here&lt;/a&gt; is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL paramaters kan not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;&#34;&gt;The Redirect binding explained here&lt;/a&gt; is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL parameters can not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.&lt;/p&gt;
 &lt;p&gt;The HTTP POST binding uses input fields in a HTML form to send SAML messages.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;post-binding.png&#34; alt=&#34;Diagram of POST binding&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.&lt;/li&gt;
-&lt;li&gt;When the browser receives the HTML page a javascript or meta tag makes the browser automatically submit the form to the recipient of the message .&lt;/li&gt;
+&lt;li&gt;When the browser receives the HTML page a JavaScript or meta tag makes the browser automatically submit the form to the recipient of the message .&lt;/li&gt;
 &lt;li&gt;When the user arrives with its submitted form at the receiver of the message, the receiver will pick the message from the request parameters and parse the message.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;the-html-form-explained&#34;&gt;The HTML form explained&lt;/h3&gt;
@@ -255,7 +255,7 @@ ExplicitKeySignatureTrustEngine validates a signature if the key used to sign a 
 &lt;p&gt;There are two fields used in this binding&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;SAMLRequest/SAMResponse - The encoded, unsigned message&lt;/li&gt;
-&lt;li&gt;RelayState - The relaystate, sent in the original request and send back in the response&lt;/li&gt;
+&lt;li&gt;RelayState - The relay state, sent in the original request and send back in the response&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;sending-a-message-using-opensaml-4&#34;&gt;Sending a message using OpenSAML 4&lt;/h2&gt;
 &lt;p&gt;Because this binding is creating a webpage, OpenSAML uses Apache Velocity. The velocity library must be included in the Maven Pom. If not you will get the following errror&lt;/p&gt;
@@ -284,7 +284,7 @@ ExplicitKeySignatureTrustEngine validates a signature if the key used to sign a 
 &lt;/a&gt;
 &lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
 &lt;/div&gt;
-&lt;p&gt;Creating message contexts to set the message, relaystate and receiving endpoint. Creating Velocity engine to handle website creation.
+&lt;p&gt;Creating message contexts to set the message, relay state and receiving end point. Creating Velocity engine to handle web site creation.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
@@ -322,7 +322,7 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
 &lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;messageContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
 &lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AuthnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;messageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;get-it-on-github&#34;&gt;Get it on Github!&lt;/h2&gt;
-&lt;p&gt;The full running sample is availible on Github at &lt;a href=&#34;https://github.com/rasmusson/OpenSAML-sample-code&#34;&gt;https://github.com/rasmusson/OpenSAML-sample-code&lt;/a&gt; under opensaml-http-post&lt;/p&gt;
+&lt;p&gt;The full running sample is available on Github at &lt;a href=&#34;https://github.com/rasmusson/OpenSAML-sample-code&#34;&gt;https://github.com/rasmusson/OpenSAML-sample-code&lt;/a&gt; under opensaml-http-post&lt;/p&gt;
 &lt;p&gt;Just clone it, run it, go nuts!&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;git clone https://github.com/rasmusson/OpenSAML-sample-code/
 &lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;cd opensaml-http-post
@@ -333,7 +333,7 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
 &lt;p&gt;In this post we have looked at.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The basics of the HTTP Post binding&lt;/li&gt;
-&lt;li&gt;Sending a message using OpenSAML 4,&lt;/li&gt;
+&lt;li&gt;Sending a message using OpenSAML 4&lt;/li&gt;
 &lt;li&gt;Receiving a message using OpenSAML 4&lt;/li&gt;
 &lt;/ul&gt;
 

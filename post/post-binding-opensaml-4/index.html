@@ -11,13 +11,13 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="In this tutorial I wii show you hhow the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML">
+<meta name="description" content="In this tutorial I will show you how the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Using HTTP POST binding in OpenSAML 4" />
 <meta property="og:url" content="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" />
 <meta property="og:title" content="Using HTTP POST binding in OpenSAML 4" />
-<meta property="og:description" content="In this tutorial I wii show you hhow the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML" />
+<meta property="og:description" content="In this tutorial I will show you how the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -195,12 +195,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>SAML messages can be sent using different methods, called bindings. There are four main standard bindings being used today, HTTP Redirect, HTTP POST, HTTP Artifact and SOAP.</p>
 <p>This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP POST in OpenSAML.</p>
 <h2 id="the-http-post-binding">The HTTP POST binding</h2>
-<p><a href="">The Redirect binding explained here</a> is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL paramaters kan not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.</p>
+<p><a href="">The Redirect binding explained here</a> is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL parameters can not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.</p>
 <p>The HTTP POST binding uses input fields in a HTML form to send SAML messages.</p>
 <p><img src="post-binding.png" alt="Diagram of POST binding"></p>
 <ol>
 <li>When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.</li>
-<li>When the browser receives the HTML page a javascript or meta tag makes the browser automatically submit the form to the recipient of the message .</li>
+<li>When the browser receives the HTML page a JavaScript or meta tag makes the browser automatically submit the form to the recipient of the message .</li>
 <li>When the user arrives with its submitted form at the receiver of the message, the receiver will pick the message from the request parameters and parse the message.</li>
 </ol>
 <h3 id="the-html-form-explained">The HTML form explained</h3>
@@ -232,7 +232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>There are two fields used in this binding</p>
 <ul>
 <li>SAMLRequest/SAMResponse - The encoded, unsigned message</li>
-<li>RelayState - The relaystate, sent in the original request and send back in the response</li>
+<li>RelayState - The relay state, sent in the original request and send back in the response</li>
 </ul>
 <h2 id="sending-a-message-using-opensaml-4">Sending a message using OpenSAML 4</h2>
 <p>Because this binding is creating a webpage, OpenSAML uses Apache Velocity. The velocity library must be included in the Maven Pom. If not you will get the following errror</p>
@@ -261,7 +261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </a>
 <span class="lower_ad_line"></span>
 </div>
-<p>Creating message contexts to set the message, relaystate and receiving endpoint. Creating Velocity engine to handle website creation.
+<p>Creating message contexts to set the message, relay state and receiving end point. Creating Velocity engine to handle web site creation.
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="n">MessageContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageContext</span><span class="o">();</span>
 <span class="ln"> 2</span>
 <span class="ln"> 3</span><span class="n">context</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
@@ -299,7 +299,7 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
 <span class="ln">7</span><span class="n">MessageContext</span> <span class="n">messageContext</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="na">getMessageContext</span><span class="o">();</span>
 <span class="ln">8</span><span class="n">authnRequest</span> <span class="o">=</span> <span class="o">(</span><span class="n">AuthnRequest</span><span class="o">)</span> <span class="n">messageContext</span><span class="o">.</span><span class="na">getMessage</span><span class="o">();</span></code></pre></div>
 <h2 id="get-it-on-github">Get it on Github!</h2>
-<p>The full running sample is availible on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-http-post</p>
+<p>The full running sample is available on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-http-post</p>
 <p>Just clone it, run it, go nuts!</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"><span class="ln">1</span>git clone https://github.com/rasmusson/OpenSAML-sample-code/
 <span class="ln">2</span>cd opensaml-http-post
@@ -310,7 +310,7 @@ Initializing HTTPPostEncoder, setting context and Velocity engine and sending th
 <p>In this post we have looked at.</p>
 <ul>
 <li>The basics of the HTTP Post binding</li>
-<li>Sending a message using OpenSAML 4,</li>
+<li>Sending a message using OpenSAML 4</li>
 <li>Receiving a message using OpenSAML 4</li>
 </ul>
 
