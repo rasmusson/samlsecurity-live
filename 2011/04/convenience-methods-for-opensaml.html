@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-figures="" class="page">
   <head>
-<title>Convenience methods for OpenSAML | SAMLSecurity</title>
+<title>Helper methods for OpenSAML | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,15 +11,13 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Creating SAML objects This is implementations of some of the methods in the SAMLUtil class referenced in other examples.
-OpenSAML has a bit struggling way to …">
+<meta name="description" content="During my work with OpenSAML I have created a few helper methods to make it easier to do common things in OpenSAML such as object creation and logging of SAML …">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Convenience methods for OpenSAML" />
+<meta name="twitter:title" content="Helper methods for OpenSAML" />
 <meta property="og:url" content="https://blog.samlsecurity.com/2011/04/convenience-methods-for-opensaml.html" />
-<meta property="og:title" content="Convenience methods for OpenSAML" />
-<meta property="og:description" content="Creating SAML objects This is implementations of some of the methods in the SAMLUtil class referenced in other examples.
-OpenSAML has a bit struggling way to …" />
+<meta property="og:title" content="Helper methods for OpenSAML" />
+<meta property="og:description" content="During my work with OpenSAML I have created a few helper methods to make it easier to do common things in OpenSAML such as object creation and logging of SAML …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -162,7 +160,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Convenience methods for OpenSAML</h1>
+    <h1 class="post_title">Helper methods for OpenSAML</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <use xlink:href="#calendar"></use>
@@ -170,18 +168,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <span class="post_date">
       Apr 1, 2011</span>
     <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml' title="SAML" class="post_tag button button_translucent">SAML
-        </a><a href='https://blog.samlsecurity.com/tags/opensamlv2' title="OpenSAMLV2" class="post_tag button button_translucent">OpenSAMLV2
+        </a><a href='https://blog.samlsecurity.com/tags/opensamlv4' title="OpenSAMLV4" class="post_tag button button_translucent">OpenSAMLV4
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Convenience%20methods%20for%20OpenSAML&url=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f04%2fconvenience-methods-for-opensaml.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Helper%20methods%20for%20OpenSAML&url=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f04%2fconvenience-methods-for-opensaml.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#twitter"></use>
 </svg>
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f04%2fconvenience-methods-for-opensaml.html&t=Convenience%20methods%20for%20OpenSAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2011%2f04%2fconvenience-methods-for-opensaml.html&t=Helper%20methods%20for%20OpenSAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <use xlink:href="#facebook"></use>
 </svg>
@@ -201,9 +199,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     
-    <h2 id="creating-saml-objects">Creating SAML objects</h2>
-<p>This is implementations of some of the methods in the <code>SAMLUtil</code> class referenced in other examples.</p>
-<p>OpenSAML has a bit struggling way to create SAML objects using a factory pattern.</p>
+    <p>During my work with OpenSAML I have created a few helper methods to make it easier to do common things in OpenSAML such as object creation and logging of SAML XML.
+I my code samples I keep this in the SAMLUtil class.</p>
+<h2 id="creating-saml-objects">Creating SAML objects</h2>
+<p>OpenSAML has a bit complex way of creating SAML objects using a factory pattern.</p>
 <p>The normal way to create a SAML object is like this.</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln">1</span><span class="n">XMLObjectBuilderFactory</span> <span class="n">builderFactory</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getBuilderFactory</span><span class="o">();</span>
 <span class="ln">2</span> 
@@ -242,8 +241,26 @@ With generics in JavaSE6 we can make this a lot easier.</p>
 </div>
 <h2 id="logging">Logging</h2>
 <p>The ability to in a nice way log the raw SAML messages i also very important, so I created my own logging method in a utility class. But after using it for a while I learned that I don't have to.</p>
-<p>The OpenSAML library uses the log4j logging framework. By setting the threshold level, of the OpenSAML package ,to debug in the log4j properties file, you get all of the SAML messages to and from your application in your log file.
-You also get other useful information, so log4j is definitely the way to go.</p>
+<p>The ability to log the raw SAML messages turns out to be very important for debugging and understanding what messages are flowing. The OpenSAML library uses the log4j logging framework. By setting the threshold level, of the OpenSAML package to debug in the log4j properties file, you get all of the SAML messages to and from your application in your log file. You also get other useful information, so log4j is a good way to go.</p>
+<p>If you would like to log just some SAML messages in you code. I have created a message to pretty print SAML elements as XML.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="ln"> 1</span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">logSAMLObject</span><span class="o">(</span><span class="kd">final</span> <span class="n">XMLObject</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 2</span>
+<span class="ln"> 3</span> <span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="ln"> 4</span> <span class="k">if</span> <span class="o">(</span><span class="n">object</span> <span class="k">instanceof</span> <span class="n">SignableSAMLObject</span> <span class="o">&amp;&amp;</span> <span class="o">((</span><span class="n">SignableSAMLObject</span><span class="o">)</span> <span class="n">object</span><span class="o">).</span><span class="na">isSigned</span><span class="o">()</span>
+<span class="ln"> 5</span>   <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln"> 6</span>  <span class="n">element</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
+<span class="ln"> 7</span> <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+<span class="ln"> 8</span>  <span class="k">try</span> <span class="o">{</span>
+<span class="ln"> 9</span>   <span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">XMLObjectProviderRegistrySupport</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+<span class="ln">10</span>   <span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
+<span class="ln">11</span>   <span class="n">element</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
+<span class="ln">12</span>  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MarshallingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+<span class="ln">13</span>   <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+<span class="ln">14</span>  <span class="o">}</span>
+<span class="ln">15</span> <span class="o">}</span>
+<span class="ln">16</span> <span class="n">String</span> <span class="n">xmlString</span> <span class="o">=</span> <span class="n">SerializeSupport</span><span class="o">.</span><span class="na">prettyPrintXML</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+<span class="ln">17</span> <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">xmlString</span><span class="o">);</span>
+<span class="ln">18</span><span class="o">}</span></code></pre></div>
 
 
   </article>
@@ -302,7 +319,7 @@ You also get other useful information, so log4j is definitely the way to go.</p>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
           OPENSAMLV2
-          <span class="button_tally">12</span>
+          <span class="button_tally">11</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv3/' class="post_tag button button_translucent" title="opensamlv3">
@@ -337,6 +354,11 @@ You also get other useful information, so log4j is definitely the way to go.</p>
         
         <a href='https://blog.samlsecurity.com/tags/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensamlv4/' class="post_tag button button_translucent" title="opensamlv4">
+          OPENSAMLV4
           <span class="button_tally">1</span>
         </a>
         
