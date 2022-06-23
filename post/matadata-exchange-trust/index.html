@@ -195,7 +195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 For a beginner this can be a quite abstract step, but in this article I will make everything clear.</p>
 <p>The Metadata is a XML document contain many things. For example end points to be used to authenticate users, bindings(transportation methods) supported, requirements on signing. Also and very important, public keys and certificates that is used to establish trust. More on trust further down. Full specification of <a href="http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf">SAML metadata is located here</a></p>
 <p>When a SP decides to start using a IdP for authenticating users, the first thing that is done is to exchange metadata. The SP sends it metadata to the IdP and the IdP send its metadata to the SP.</p>
-<p><img src="metadata-exchange.png" alt="Metadata exchange"></p>
+<p><img src="saml-metadata-exchange.png" alt="Metadata exchange"></p>
 <p>The exchange can be done in different ways, but two popular is to either send it using email or to expose it on a web page on the SP or IdP service.</p>
 <p>Ones exchanged, the SP and IdP both use this metadata in their systems for further communication.</p>
 
@@ -225,7 +225,7 @@ For a beginner this can be a quite abstract step, but in this article I will mak
 <p>The other trust is the cryptographic trust between SP and IdP. In the exchanged metadata, there is also contained certificated and public keys for each party. Some for singing and some for encryptions. Theses are then used to secure all message transport between SP and IdP.</p>
 <p>When the SP send the authentication request to the IdP together with the users. It usually signs it. It does so with its private key for the corresponding key in the metadata.
 When the IdP received the used and authentication request, it verifies the signature with the public key in the metadata previously sent from the SP.</p>
-<p><img src="key-usage.png" alt="Usage of private and exchanged keys"></p>
+<p><img src="saml-metadata-key-usage.png" alt="Usage of private and exchanged keys"></p>
 <p>Same thing, when the IdP responds. IdP signs response with its private key. SP verified with IdP public key in metadata.</p>
 <p>This way both parties can cryptographically trust that the message received was from the expected sender.</p>
 

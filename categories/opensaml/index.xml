@@ -220,7 +220,7 @@ ExplicitKeySignatureTrustEngine validates a signature if the key used to sign a 
 &lt;h2 id=&#34;the-http-post-binding&#34;&gt;The HTTP POST binding&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;&#34;&gt;The Redirect binding explained here&lt;/a&gt; is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL parameters can not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.&lt;/p&gt;
 &lt;p&gt;The HTTP POST binding uses input fields in a HTML form to send SAML messages.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;post-binding.png&#34; alt=&#34;Diagram of POST binding&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-post-binding.png&#34; alt=&#34;Diagram of POST binding&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.&lt;/li&gt;
 &lt;li&gt;When the browser receives the HTML page a JavaScript or meta tag makes the browser automatically submit the form to the recipient of the message .&lt;/li&gt;
@@ -487,7 +487,7 @@ Resulting AuthnRequest&lt;/p&gt;
 &lt;p&gt;This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP Redirect in OpenSAML.&lt;/p&gt;
 &lt;h2 id=&#34;the-http-redirect-binding&#34;&gt;The HTTP Redirect binding&lt;/h2&gt;
 &lt;p&gt;The Redirect binding uses the function of HTTP Redirects the transport messages between SP and IdP with the use of the user browser.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;redirect-binding.png&#34; alt=&#34;Diagram of redirect binding&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-redirect-binding.png&#34; alt=&#34;Diagram of redirect binding&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTTP Redirect to the receiver, with the encoded message in an URL parameter.&lt;/li&gt;
 &lt;li&gt;When the browser receives the redirect, it redirects the user to the receiver.&lt;/li&gt;

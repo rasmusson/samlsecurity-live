@@ -16,7 +16,12 @@
       <guid>https://blog.samlsecurity.com/post/saml-for-react-spa/</guid>
       <description>
         
-          &lt;p&gt;In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server to act as a broker and translate between OIDC and SAML. I will show the necessary configuration needed and as a cherry on top show you how to automate the whole setup.&lt;/p&gt;
+          
+&lt;div class=&#34;video&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/7RQfIlPruIA?controls=1&amp;rel=0&#34; loading=&#34;lazy&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server to act as a broker and translate between OIDC and SAML. I will show the necessary configuration needed and as a cherry on top show you how to automate the whole setup.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem-with-saml-in-spa-in-browser-application&#34;&gt;The problem with SAML in SPA in browser application&lt;/h2&gt;
 &lt;p&gt;“No, you can’t use SAML in a Single Page Application.”&lt;/p&gt;
 &lt;p&gt;“SAML is old. Why don’t you just change to OIDC.”&lt;/p&gt;
@@ -490,7 +495,7 @@ ExplicitKeySignatureTrustEngine validates a signature if the key used to sign a 
 For a beginner this can be a quite abstract step, but in this article I will make everything clear.&lt;/p&gt;
 &lt;p&gt;The Metadata is a XML document contain many things. For example end points to be used to authenticate users, bindings(transportation methods) supported, requirements on signing. Also and very important, public keys and certificates that is used to establish trust. More on trust further down. Full specification of &lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf&#34;&gt;SAML metadata is located here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;When a SP decides to start using a IdP for authenticating users, the first thing that is done is to exchange metadata. The SP sends it metadata to the IdP and the IdP send its metadata to the SP.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;metadata-exchange.png&#34; alt=&#34;Metadata exchange&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-metadata-exchange.png&#34; alt=&#34;Metadata exchange&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The exchange can be done in different ways, but two popular is to either send it using email or to expose it on a web page on the SP or IdP service.&lt;/p&gt;
 &lt;p&gt;Ones exchanged, the SP and IdP both use this metadata in their systems for further communication.&lt;/p&gt;
 
@@ -520,7 +525,7 @@ For a beginner this can be a quite abstract step, but in this article I will mak
 &lt;p&gt;The other trust is the cryptographic trust between SP and IdP. In the exchanged metadata, there is also contained certificated and public keys for each party. Some for singing and some for encryptions. Theses are then used to secure all message transport between SP and IdP.&lt;/p&gt;
 &lt;p&gt;When the SP send the authentication request to the IdP together with the users. It usually signs it. It does so with its private key for the corresponding key in the metadata.
 When the IdP received the used and authentication request, it verifies the signature with the public key in the metadata previously sent from the SP.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;key-usage.png&#34; alt=&#34;Usage of private and exchanged keys&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-metadata-key-usage.png&#34; alt=&#34;Usage of private and exchanged keys&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Same thing, when the IdP responds. IdP signs response with its private key. SP verified with IdP public key in metadata.&lt;/p&gt;
 &lt;p&gt;This way both parties can cryptographically trust that the message received was from the expected sender.&lt;/p&gt;
 
@@ -541,7 +546,7 @@ When the IdP received the used and authentication request, it verifies the signa
 &lt;h2 id=&#34;the-http-post-binding&#34;&gt;The HTTP POST binding&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;&#34;&gt;The Redirect binding explained here&lt;/a&gt; is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL parameters can not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.&lt;/p&gt;
 &lt;p&gt;The HTTP POST binding uses input fields in a HTML form to send SAML messages.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;post-binding.png&#34; alt=&#34;Diagram of POST binding&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-post-binding.png&#34; alt=&#34;Diagram of POST binding&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.&lt;/li&gt;
 &lt;li&gt;When the browser receives the HTML page a JavaScript or meta tag makes the browser automatically submit the form to the recipient of the message .&lt;/li&gt;
@@ -808,7 +813,7 @@ Resulting AuthnRequest&lt;/p&gt;
 &lt;p&gt;This tutorial will walk you through how to send a message, specifically a authentication request, using HTTP Redirect in OpenSAML.&lt;/p&gt;
 &lt;h2 id=&#34;the-http-redirect-binding&#34;&gt;The HTTP Redirect binding&lt;/h2&gt;
 &lt;p&gt;The Redirect binding uses the function of HTTP Redirects the transport messages between SP and IdP with the use of the user browser.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;redirect-binding.png&#34; alt=&#34;Diagram of redirect binding&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-redirect-binding.png&#34; alt=&#34;Diagram of redirect binding&#34;&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;When the SP or IdP want to send a message it responds to the current user with a HTTP Redirect to the receiver, with the encoded message in an URL parameter.&lt;/li&gt;
 &lt;li&gt;When the browser receives the redirect, it redirects the user to the receiver.&lt;/li&gt;
@@ -1521,7 +1526,7 @@ I hope this is of help.&lt;/p&gt;
 &lt;p&gt;And now it&#39;s done and here it is!
 &lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;
 ss
-&lt;img src=&#34;devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;saml-chorme-extention-devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;feature-summary&#34;&gt;Feature summary&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The extension adds a panel to the Developer Tools&lt;/li&gt;
@@ -1985,7 +1990,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
 &lt;p&gt;The use-case being described in the Web Browser Profile is how to authenticate a user that is using a web browser.&lt;/p&gt;
 &lt;h2 id=&#34;how-does-it-work&#34;&gt;How does it work?&lt;/h2&gt;
 &lt;p&gt;Below is a description and figure of the flow in the profile. As always when using SAML, things can be done in a number of different ways. In the flow below I describe one common way, using the HTTP-Redirect binding for sending the AuthnRequest and the Artifact binding for sending the SAML Assertion.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;web-browser-flow.jpg&#34; alt=&#34;Request flow of the SAML web browser profile&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-web-browser-flow.jpg&#34; alt=&#34;Request flow of the SAML web browser profile&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The authentication process could be said to involve five steps&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;User tries to get access - The process begins with a not authenticated user trying to get access to a protected part of the application (SP). Some form of filter is put in place to catch the user.&lt;/li&gt;

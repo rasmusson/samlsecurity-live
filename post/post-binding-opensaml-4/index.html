@@ -11,13 +11,13 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="In this tutorial I will show you how the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML">
+<meta name="description" content="In this tutorial I will show you how the SAML HTTP POST binding works and how to use it to send and receive messages in OpenSAML">
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Using HTTP POST binding in OpenSAML 4" />
 <meta property="og:url" content="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" />
 <meta property="og:title" content="Using HTTP POST binding in OpenSAML 4" />
-<meta property="og:description" content="In this tutorial I will show you how the SAML HTTP POST binding works and hos to use it to send and receive messages in OpenSAML" />
+<meta property="og:description" content="In this tutorial I will show you how the SAML HTTP POST binding works and how to use it to send and receive messages in OpenSAML" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -197,7 +197,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <h2 id="the-http-post-binding">The HTTP POST binding</h2>
 <p><a href="">The Redirect binding explained here</a> is a popular method of sending messages which relies on HTTP Redirects. A problem with the redirect binding is that the message is send inside URL parameters and URL parameters can not hold large amounts of data. This makes it suitable for SAML authentication request, which is quite small, but less suitable for large messages like SAML responses. The POST binding gives a solution to this.</p>
 <p>The HTTP POST binding uses input fields in a HTML form to send SAML messages.</p>
-<p><img src="post-binding.png" alt="Diagram of POST binding"></p>
+<p><img src="saml-post-binding.png" alt="Diagram of POST binding"></p>
 <ol>
 <li>When the SP or IdP want to send a message it responds to the current user with a HTML page with the SAML message encoded in a input field in a form.</li>
 <li>When the browser receives the HTML page a JavaScript or meta tag makes the browser automatically submit the form to the recipient of the message .</li>

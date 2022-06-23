@@ -16,7 +16,12 @@
       <guid>https://blog.samlsecurity.com/post/saml-for-react-spa/</guid>
       <description>
         
-          &lt;p&gt;In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server to act as a broker and translate between OIDC and SAML. I will show the necessary configuration needed and as a cherry on top show you how to automate the whole setup.&lt;/p&gt;
+          
+&lt;div class=&#34;video&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/7RQfIlPruIA?controls=1&amp;rel=0&#34; loading=&#34;lazy&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server to act as a broker and translate between OIDC and SAML. I will show the necessary configuration needed and as a cherry on top show you how to automate the whole setup.&lt;/p&gt;
 &lt;h2 id=&#34;the-problem-with-saml-in-spa-in-browser-application&#34;&gt;The problem with SAML in SPA in browser application&lt;/h2&gt;
 &lt;p&gt;“No, you can’t use SAML in a Single Page Application.”&lt;/p&gt;
 &lt;p&gt;“SAML is old. Why don’t you just change to OIDC.”&lt;/p&gt;
@@ -292,7 +297,7 @@ You now get authenticated to the application and the React test application show
 &lt;p&gt;And now it&#39;s done and here it is!
 &lt;a href=&#34;https://chrome.google.com/webstore/detail/saml-devtools-extension/jndllhgbinhiiddokbeoeepbppdnhhio&#34;&gt;SAML DevTools extension&lt;/a&gt;
 ss
-&lt;img src=&#34;devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;saml-chorme-extention-devtools-shot.jpg&#34; alt=&#34;SAML Chrome DevTools extension screenshot&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;feature-summary&#34;&gt;Feature summary&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;The extension adds a panel to the Developer Tools&lt;/li&gt;
@@ -469,7 +474,7 @@ ss
 &lt;p&gt;The use-case being described in the Web Browser Profile is how to authenticate a user that is using a web browser.&lt;/p&gt;
 &lt;h2 id=&#34;how-does-it-work&#34;&gt;How does it work?&lt;/h2&gt;
 &lt;p&gt;Below is a description and figure of the flow in the profile. As always when using SAML, things can be done in a number of different ways. In the flow below I describe one common way, using the HTTP-Redirect binding for sending the AuthnRequest and the Artifact binding for sending the SAML Assertion.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;web-browser-flow.jpg&#34; alt=&#34;Request flow of the SAML web browser profile&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;saml-web-browser-flow.jpg&#34; alt=&#34;Request flow of the SAML web browser profile&#34;&gt;&lt;/p&gt;
 &lt;p&gt;The authentication process could be said to involve five steps&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;User tries to get access - The process begins with a not authenticated user trying to get access to a protected part of the application (SP). Some form of filter is put in place to catch the user.&lt;/li&gt;
