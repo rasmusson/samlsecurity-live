@@ -16,69 +16,13 @@
       <guid>https://blog.samlsecurity.com/p/opensaml.html</guid>
       <description>
         
-          &lt;p&gt;This is the main page on the site where I guide you to all resources on OpenSAML. Here you will find all topics, from beginner to advanced that I have collected over the years.&lt;/p&gt;
-&lt;p&gt;First, for you that are totaly new to OpenSAML is a short introduction.&lt;/p&gt;
-&lt;h2 id=&#34;what-is-opensaml&#34;&gt;What is OpenSAML?&lt;/h2&gt;
-&lt;p&gt;OpenSAML is a library to facilitate working with SAML messages. Below are some of the functions that OpenSAML provides:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Creating SAML messages&lt;/li&gt;
-&lt;li&gt;Parsing and exporting SAML objects as XML&lt;/li&gt;
-&lt;li&gt;Signing and encryption&lt;/li&gt;
-&lt;li&gt;Encoding and message transport&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Internet2 provides and supports the library. Shibboleth products, produced by internet2, are one of the examples of identity solutions that utilize the OpenSAML library.&lt;/p&gt;
-&lt;p&gt;The OpenSAML library is available in Java and C++, however; not all functions are provided in both versions. OpenSAML is licensed under Apache 2.0 and the latest version of OpenSAML supports SAML 2.0, 1.1 and 1.0.&lt;/p&gt;
-&lt;h2 id=&#34;for-the-beginner&#34;&gt;For the beginner&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.samlsecurity.com/post/getting-started-opensaml-v4/&#34;&gt;Getting started with OpenSAML 4&lt;/a&gt; - This is a tutorial for getting started with OpenSAML 4, the most current version of the library. In this tutorial I will walk you through, the basics of OpenSAML, adding it to your project and building your first SAML message. It is a good starting point for anyone new to SAML.&lt;/p&gt;
-&lt;h2 id=&#34;the-saml-web-browser-sso-flow&#34;&gt;The SAML Web browser SSO flow&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;Using HTTP Redirect to send and receive messages&lt;/a&gt; - This tutorial gives a simple example on how to send a authentication request message (AuthnRequest) using the HTTP Redirect binding.
-&lt;a href=&#34;https://blog.samlsecurity.com/post/post-binding-opensaml-4/&#34;&gt;Using HTTP POST to send and receive messages&lt;/a&gt; - This tutorial gives a simple example on how to send a message using HTTP POST binding. A popular binding for sending SAML Responses, because of their large size .&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/resolve-artifact-with-opensaml.html&#34;&gt;Resolve an artifact with OpenSAML&lt;/a&gt; - Here we look on the second step of the HTTP Artifact binding. When a HTTP Artifact is receved, it is exchanged over SOAP to the real message. Often a SAML Response message.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;single-logout&#34;&gt;Single LogOut&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/02/single-log-out-with-opensaml.html&#34;&gt;Single Log Out with OpenSAML&lt;/a&gt; - A post that shows how to build and send a SLO(Single LogOut) request using HTTP Redirect binding.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;things-needed-here-and-there&#34;&gt;Things needed here and there&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/04/convenience-methods-for-opensaml.html&#34;&gt;Convenience methods for OpenSAML&lt;/a&gt; - Collection of popular helper methods to ease the load of working with OpenSAML. For example creating and logging messages.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2011/03/getting-credentials-in-opensaml.html&#34;&gt;Getting credentials in OpenSAML&lt;/a&gt; - It is not straight forward how to use private and public keys to do cryptographic operations in OpenSAML. This tutorial walks you through it.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2012/11/signing-with-opensaml.html&#34;&gt;Signing with OpenSAML&lt;/a&gt; - Signing is the cryptographic way to ensure that a message has not been changed since sent by the sender. This article walk you through how to do this in OpenSAML.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html&#34;&gt;Verifying signatures with OpenSAML&lt;/a&gt; - Ofcourse, it is not much use to have a signed message if you do not know how to check that the signature is valid. This article will show you how to do it in OpenSAML 4.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;books-on-opensaml&#34;&gt;Books on OpenSAML&lt;/h3&gt;
-&lt;p&gt;To dig deeper into OpenSAML and connecting all the dots I have written a book on the subject.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://shop.samlsecurity.com/b/odEY&#34;&gt;&lt;em&gt;A Guide to OpenSAML&lt;/em&gt;&lt;/a&gt; guides you through all steps of using OpenSAML including:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A basic understanding of Single Sign-On with OpenSAML&lt;/li&gt;
-&lt;li&gt;A migration guide for migrating from OpenSAML V2 to V3&lt;/li&gt;
-&lt;li&gt;Running sample code to try things out&lt;/li&gt;
-&lt;li&gt;A walk though of steps needed to implement SSO in OpenSAML&lt;/li&gt;
-&lt;li&gt;Usage of popular bindings and useful security features&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href=&#34;https://shop.samlsecurity.com/b/fGWSH&#34;&gt;&lt;em&gt;SAML 2.0: Designing secure identity federation&lt;/em&gt;&lt;/a&gt; is not really a book on OpenSAML but as you will understand when learning OpenSAML, you need a very good understanding of SAML to build something good and secure using OpenSAML.&lt;/p&gt;
-&lt;p&gt;Walking through all topics from introduction to advanced you will learn&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;To fully understand SAML and identity federation&lt;/li&gt;
-&lt;li&gt;Workings of the main building blocks like NameId, bindings and assertions&lt;/li&gt;
-&lt;li&gt;How Single Single-On and Single Logout works in detail&lt;/li&gt;
-&lt;li&gt;Different architectural choices and implementation alternatives&lt;/li&gt;
-&lt;li&gt;Security best practices and considerations&lt;/li&gt;
-&lt;li&gt;Previous security vulnerabilities and what can be learned from them&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;the-saml-specs&#34;&gt;The SAML specs&lt;/h3&gt;
-&lt;p&gt;As always, when working with SAML it pays of having the official SAML specs close at hand&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Core Specs&lt;/a&gt; - The main spec for the SAML messages&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35387/sstc-saml-bindings-errata-2.0-wd-05-diff.pdf&#34;&gt;SAML Binding Spec&lt;/a&gt; - Specs for bindings used to transport the messages&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35389/sstc-saml-profiles-errata-2.0-wd-06-diff.pdf&#34;&gt;SAML Profiles Spec&lt;/a&gt; - The profiles showing how to use the SAML messages together for a use-case&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.oasis-open.org/committees/download.php/35391/sstc-saml-metadata-errata-2.0-wd-04-diff.pdf&#34;&gt;SAML Metadata Spec&lt;/a&gt; - 	Specification for SAML configuration data&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;other-resource&#34;&gt;Other resource&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://wiki.shibboleth.net/confluence/display/OpenSAML/Home&#34;&gt;The official OpenSAML homepage&lt;/a&gt; - The official page from Internet2.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml/2.5.3/opensaml-2.5.3-javadoc.jar/!/index.html&#34;&gt;Javadoc for OpenSAML&lt;/a&gt; - Very useful&lt;/p&gt;
-
+          
+            This is the main page on the site where I guide you to all resources on OpenSAML. Here you will find all topics, from beginner to advanced that I have collected over the years.
+First, for you that are totaly new to OpenSAML is a short introduction.
+What is OpenSAML? OpenSAML is a library to facilitate working with SAML messages. Below are some of the functions that OpenSAML provides:
+Creating SAML messages Parsing and exporting SAML objects as XML Signing and encryption Encoding and message transport Internet2 provides and supports the library.
+          
+          
         
       </description>
     </item>

@@ -16,121 +16,10 @@
       <guid>https://blog.samlsecurity.com/2017/05/decrypting-saml-assertion-in-opensaml-v3.html</guid>
       <description>
         
-          &lt;p&gt;As you probably should know at this point, the SAML Assertion contains the description of a authenticated user and how it was authenticated. The assertion is generally signed to prevent manipulation but there are also cases where you would want to encrypt the assertion to prevent someone to see the information within. For example the assertion can be used to communicate personal information about the user such as social security number and address.&lt;/p&gt;
-&lt;p&gt;As most people reading my blog seem to be on the SP side of SAML I will explain how to decrypt an assertion.&lt;/p&gt;
-&lt;p&gt;The general method of encryption and subsequent decryption of a assertion uses two keys, one symmetric and on asymmetric.
-The symmetric key is generated during encryption and used to encrypt the actual assertion data. An asymmetric key, generally a SP key contained in the metadata, is then used to encrypt the symmetric key which is then stored in the XML together with the encrypted assertion.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:response&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;destination=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:8080/webprofile-ref-project/sp/consumer&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_bd4528ed60f7b8142c39ee800625972f&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;issueinstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.955Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;version=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:issuer&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;TestIDP&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:issuer&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:status&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2p:statuscode&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;value=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:status:Success&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:status&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:encryptedassertion&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encrypteddata&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xenc=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_2b077c659cdb0187fb617362135c3d63&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#Element&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptionmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#aes128-cbc&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:keyinfo&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ds=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptedkey&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_24266af2ae292a886ee40085790ec5c4&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:encryptionmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#sha1&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptionmethod&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:cipherdata&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:ciphervalue&amp;gt;&lt;/span&gt;THE ENCRYPTED SYMMETRIC KEY&lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:ciphervalue&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:cipherdata&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptedkey&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:keyinfo&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:cipherdata&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;xenc:ciphervalue&amp;gt;&lt;/span&gt;THE ASSERTION ENCRYPTED USING THE SYMMETRIC KEY&lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:ciphervalue&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:cipherdata&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encryptionmethod&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/xenc:encrypteddata&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;hl&#34;&gt;&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:encryptedassertion&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2p:response&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;To decrypt the reverse of this is done. The asymmetric is used to decrypt the symmetric key, which is then used to decrypt the assertion.&lt;/p&gt;
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;
-&lt;p&gt;Now for the OpenSAML part.&lt;/p&gt;
-&lt;p&gt;First we get the assertion from the XML. The assertion is stored in a EncryptedAssertion object and is retrieved with the method &lt;code&gt;getEncryptedAssertions()&lt;/code&gt; on the response instead of &lt;code&gt;getAssertions()&lt;/code&gt; which is used otherwise.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;StaticKeyInfoCredentialResolver&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoCredentialResolver&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;StaticKeyInfoCredentialResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPCredentials&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Decrypter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;null&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoCredentialResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;InlineEncryptedKeyResolver&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setRootInNewDocument&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encryptedAssertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In this example a &lt;code&gt;StaticKeyInfoCredentialResolver&lt;/code&gt; is used to point out the key that is used for decryption, in this case I have stored it in the static class &lt;code&gt;SPCredentials&lt;/code&gt;. The &lt;code&gt;InlineEncryptedKeyResolver&lt;/code&gt; is used to tell the decryptor that the symmetric encryption key can be found in the XML next to the encrypted assertion.&lt;/p&gt;
-&lt;p&gt;The decryptor returns a decrypted Assertion object.
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34;?&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:assertion&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:saml2=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:assertion&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsd=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;id=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;_96a918c84ff41a98781133414a7c930e&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;issueinstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.956Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;version=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:issuer&amp;gt;&lt;/span&gt;TestIDP&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:issuer&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signature&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ds=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signedinfo&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:canonicalizationmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signaturemethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#rsa-sha1&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:reference&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;uri=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;#_96a918c84ff41a98781133414a7c930e&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transforms&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transform&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2000/09/xmldsig#enveloped-signature&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;                &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:transform&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt;                  &lt;span class=&#34;nt&#34;&gt;&amp;lt;ec:inclusivenamespaces&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:ec=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/10/xml-exc-c14n#&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;prefixlist=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&amp;lt;/ec:inclusivenamespaces&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;                &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transform&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transform&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:transforms&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestmethod&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;algorithm=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/04/xmlenc#sha256&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;              &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:digestvalue&amp;gt;&lt;/span&gt;UDJ762cOSK14nBjbFCq9a47x3WgSCJ1qZpeBYKdy5s0=&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:digestvalue&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;            &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:digestmethod&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;          &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:reference&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt;        &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signaturemethod&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:canonicalizationmethod&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signedinfo&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;ds:signaturevalue&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;syb20Rjh1pDJTc6CY1nN3x1v8WNlG9lRf71A5ik3i97/A+q0NZCvoJLEBVM73K/U8hxo/hbHOmBs
-&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt;7KkF4g3yYLVunRlm/tapnTESKqZ8v8SJZQcbY4xMzi0PUxiUJKBugiho114ijDPAYs+U1UZhXGHL
-&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;zyHVd7XJYoOATKVdh3U=
-&lt;span class=&#34;ln&#34;&gt;27&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signaturevalue&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;28&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/ds:signature&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;29&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subject&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:nameid&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;format=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;namequalifier=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Name qualifier&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;spnamequalifier=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;SP name qualifier&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;Some NameID value&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:nameid&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;31&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subjectconfirmation&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;method=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:cm:bearer&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;32&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:subjectconfirmationdata&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;inresponseto=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Made up ID&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notbefore=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-18T21:26:14.957Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notonorafter=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-22T21:26:14.957Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;recipient=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://localhost:8080/webprofile-ref-project/sp/consumer&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&amp;lt;/saml2:subjectconfirmationdata&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;33&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:subjectconfirmation&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;34&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:subject&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;35&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:conditions&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notbefore=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-18T21:26:14.958Z&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;notonorafter=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-22T21:26:14.958Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;36&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:audiencerestriction&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;37&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:audience&amp;gt;&lt;/span&gt;http://localhost:8080/webprofile-ref-project/sp/consumer&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:audience&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;38&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:audiencerestriction&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;39&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:conditions&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;40&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributestatement&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;41&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attribute&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;username&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;42&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributevalue&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xsi:type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd:string&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;bob&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributevalue&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;43&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attribute&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;44&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attribute&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;telephone&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;45&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:attributevalue&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xmlns:xsi=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;http://www.w3.org/2001/XMLSchema-instance&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;xsi:type=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;xsd:string&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;999999999&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributevalue&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;46&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attribute&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;47&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:attributestatement&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;48&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authnstatement&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;authninstant=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;2017-05-20T21:26:14.962Z&amp;#34;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;49&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authncontext&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;50&lt;/span&gt;      &lt;span class=&#34;nt&#34;&gt;&amp;lt;saml2:authncontextclassref&amp;gt;&lt;/span&gt;urn:oasis:names:tc:SAML:2.0:ac:classes:Smartcard&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authncontextclassref&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;51&lt;/span&gt;    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authncontext&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;52&lt;/span&gt;  &lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:authnstatement&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;53&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;/saml2:assertion&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
-
+          
+            Explanation and examples of how to decrypt an encrypted SAML assertion with OpenSAML V3
+          
+          
         
       </description>
     </item>
@@ -143,51 +32,10 @@ The symmetric key is generated during encryption and used to encrypt the actual 
       <guid>https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html</guid>
       <description>
         
-          &lt;p&gt;&lt;strong&gt;This article discusses singing and sending in OpenSAML 3. If you&#39;re looking for an article on OpenSAML 4, &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html&#34;&gt;you will find it here&lt;/a&gt; and if you&#39;re looking for an article on OpenSAML 2, &lt;a href=&#34;https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html&#34;&gt;you will find it here&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.&lt;/p&gt;
-&lt;p&gt;As described in &lt;a href=&#34;https://blog.samlsecurity.com/post/getting-started-opensaml-v4/&#34;&gt;this post on AuthnRequests OpenSAML V2&lt;/a&gt;, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.&lt;/p&gt;
-&lt;p&gt;As in V2 the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is used to send messages using HTTP redirect, the main difference lays in the message context.&lt;/p&gt;
-&lt;p&gt;One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.&lt;/p&gt;
-&lt;p&gt;In &lt;a href=&#34;https://blog.samlsecurity.com/book&#34;&gt;my book A Guide to OpenSAML V3&lt;/a&gt; I cover the use of the new message contexts in detail.&lt;/p&gt;
-&lt;p&gt;To sign and send a AuthnRequest, three contexts are needed.&lt;/p&gt;
-&lt;p&gt;The main context is created and the AuthnRequest is set.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authnRequest&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The &lt;code&gt;SAMLPeerEntityContext&lt;/code&gt; and &lt;code&gt;SAMLEndpointContext&lt;/code&gt; are created and configured to point to the endpoint of the message.&lt;/p&gt;
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLPeerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;peerEntityContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLEndpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;endpointContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idpEndpoint&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;
-Next, the security parameters context is created and populated with signing information&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureSigningParameters&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SignatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSigningCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPCredentials&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getCredential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSignatureAlgorithm&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureConstants&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ALGO_ID_SIGNATURE_RSA_SHA256&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSubcontext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityParametersContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setSignatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signatureSigningParameters&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Next, the &lt;code&gt;HTTPRedirectDeflateEncoder&lt;/code&gt; is created and populated with context and the http request object.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HTTPRedirectDeflateEncoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setMessageContext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;context&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setHttpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;httpServletResponse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Lastly the encoder is initialized and the message is encoded&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encoder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
+          
+            Information and example on how to sign and send authnrequests in OpenSAML
+          
+          
         
       </description>
     </item>
@@ -200,31 +48,12 @@ Next, the security parameters context is created and populated with signing info
       <guid>https://blog.samlsecurity.com/2016/08/verifying-signatures-with-opensaml-v3.html</guid>
       <description>
         
-          &lt;p&gt;Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, is still very much relevant and worth checking out.&lt;/p&gt;
-&lt;p&gt;The only difference between the two version is that the &lt;code&gt;SignatureValidator&lt;/code&gt; is no longer instantiated. Instead the validate method of &lt;code&gt;SignatureValidator&lt;/code&gt; is now static and takes both the credentials and the signature object.&lt;/p&gt;
-&lt;p&gt;Below is the code for verifying signatures in OpenSAML V3&lt;/p&gt;
-&lt;p&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLSignatureProfileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;profileValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;());&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SignatureValidator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;validate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertion&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getSignature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cred&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;&lt;/p&gt;
-
+          
+            Here is the happy news of the day. Verifying a signature in OpenSAML V3 is done almost identical to how it is done in V2, is still very much relevant and worth checking out.
+The only difference between the two version is that the SignatureValidator is no longer instantiated. Instead the validate method of SignatureValidator is now static and takes both the credentials and the signature object.
+Below is the code for verifying signatures in OpenSAML V3
+          
+          
         
       </description>
     </item>
@@ -237,19 +66,12 @@ Next, the security parameters context is created and populated with signing info
       <guid>https://blog.samlsecurity.com/2016/06/new-book-release-opensaml-version-3.html</guid>
       <description>
         
-          &lt;p&gt;As many of you know, version 2 of OpenSAML will officially reach its end of life at July 31 of 2016. This means that the library will not be receiving any new updates, not even critical security updates.&lt;/p&gt;
-&lt;p&gt;Because of this, everyone currently using version 2 of OpenSAML is strongly advised to migrate to OpenSAML version 3.&lt;/p&gt;
-&lt;p&gt;In light of this, I have done a fair amount of research on version 3 and am now releasing a new edition of A Guide to OpenSAML.&lt;/p&gt;
-&lt;p&gt;The new edition includes:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Sample project updated for V3&lt;/li&gt;
-&lt;li&gt;Updated code and explanatory text&lt;/li&gt;
-&lt;li&gt;New chapters on message handlers and message contexts&lt;/li&gt;
-&lt;li&gt;A rudimentary migration guide from V2 to V3 (based on changes needed in the sample project)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;For the convenience of those of you that have read my previous book and are just migrating to V3, I have provided a chapter in the beginning, summarising all the changes since the last edition.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34;&gt;Have a closer look and buy the book on Payhip!&lt;/a&gt;&lt;/p&gt;
-
+          
+            As many of you know, version 2 of OpenSAML will officially reach its end of life at July 31 of 2016. This means that the library will not be receiving any new updates, not even critical security updates.
+Because of this, everyone currently using version 2 of OpenSAML is strongly advised to migrate to OpenSAML version 3.
+In light of this, I have done a fair amount of research on version 3 and am now releasing a new edition of A Guide to OpenSAML.
+          
+          
         
       </description>
     </item>
@@ -262,50 +84,10 @@ Next, the security parameters context is created and populated with signing info
       <guid>https://blog.samlsecurity.com/2016/04/opensaml-v3-javadocs.html</guid>
       <description>
         
-          &lt;p&gt;So, as those of you working with OpenSAML probably have noticed, the version 2 of the OpenSAML library is closing in on its end of life. After July 31st no more security maintenance will be done at this version. Those using is asked to move to version 3 of the library.&lt;/p&gt;
-&lt;p&gt;I have had many questions on how to use the new version and unfortunately the documentation is not yet produced. I have started to dig into it and will post what I find out.&lt;/p&gt;
-&lt;p&gt;The first thing I noticed was a structure change in the maven setup. The library have been divided into many submodules as listed below. This makes the Javadoc a bit more hard to find but below are links the the javadoc for each module.
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;
-I hope this is of help.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-core/3.1.1/opensaml-core-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-core&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-profile-api/3.1.1/opensaml-profile-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-profile-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-profile-impl/3.1.1/opensaml-profile-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-profile-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-soap-api/3.1.1/opensaml-soap-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-soap-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-soap-impl/3.1.1/opensaml-soap-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-soap-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-saml-api/3.1.1/opensaml-saml-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-saml-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-saml-impl/3.1.1/opensaml-saml-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-saml-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xacml-api/3.1.1/opensaml-xacml-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xacml-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xacml-impl/3.1.1/opensaml-xacml-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xacml-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xacml-saml-api/3.1.1/opensaml-xacml-saml-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xacml-saml-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xacml-saml-impl/3.1.1/opensaml-xacml-saml-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xacml-saml-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-messaging-api/3.1.1/opensaml-messaging-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-messaging-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-messaging-impl/3.1.1/opensaml-messaging-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-messaging-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-storage-api/3.1.1/opensaml-storage-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-storage-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-storage-impl/3.1.1/opensaml-storage-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-storage-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-security-api/3.1.1/opensaml-security-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-security-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-security-impl/3.1.1/opensaml-security-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-security-impl&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xmlsec-api/3.1.1/opensaml-xmlsec-api-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xmlsec-api&lt;/a&gt;&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/service/local/repositories/releases/archive/org/opensaml/opensaml-xmlsec-impl/3.1.1/opensaml-xmlsec-impl-3.1.1-javadoc.jar/!/index.html&#34;&gt;opensaml-xmlsec-impl&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The combined version Java doc is available here&lt;br&gt;
-&lt;a href=&#34;https://build.shibboleth.net/nexus/content/sites/site/java-opensaml/3.2.0/apidocs/&#34;&gt;Java docs&lt;/a&gt;&lt;/p&gt;
-
+          
+            One notable thing that changed going from version 2 to 3 of OpenSAML is that the library was split in to. This first post on OpenSAML V3 try to help by linking to the javadoc of all different libraries
+          
+          
         
       </description>
     </item>
@@ -318,98 +100,13 @@ I hope this is of help.&lt;/p&gt;
       <guid>https://blog.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</guid>
       <description>
         
-          &lt;p&gt;OpenSAML can be used to generate metadata. As with reading metadata, the library is pretty straight forward in relation to the metadata XML.&lt;/p&gt;
-&lt;p&gt;This is an example for generating a SP metadata file&lt;/p&gt;
-&lt;p&gt;We start by creating the EntityDescriptor, setting the EntityId and building the SSO descriptor.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EntityDescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spEntityDescriptor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spEntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEntityID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;entityID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPSSODescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SPSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;In the SSO descriptor we request how we want the communication signed and encrypted&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setWantAssertionsSigned&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setAuthnRequestsSigned&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And what certificates we want to use&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X509KeyInfoGeneratorFactory&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoGeneratorFactory&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;X509KeyInfoGeneratorFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyInfoGeneratorFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setEmitEntityCertificate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyInfoGenerator&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoGenerator&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;keyInfoGeneratorFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;   
-&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyDescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;encKeyDescriptor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setUse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UsageType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ENCRYPTION&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;//Set usage
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Generating key info. The element will contain the public key. The key is used to by the IDP to encrypt data
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;encKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setKeyInfo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyInfoGenerator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;generate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X509Credential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityException&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getKeyDescriptors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;   
-&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyDescriptor&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;KeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;20&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setUse&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UsageType&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SIGNING&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;//Set usage
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;23&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Generating key info. The element will contain the public key. The key is used to by the IDP to verify signatures
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;25&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setKeyInfo&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyInfoGenerator&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;generate&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X509Credential&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;));&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;26&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;catch&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SecurityException&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;27&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMessage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;28&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;29&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getKeyDescriptors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;signKeyDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The keyInfoGenerator uses a &lt;code&gt;X509Credential&lt;/code&gt; to generate the key info object with the public key.
-
-&lt;div class=&#34;book-ad&#34; id=&#34;OpenSAMLAd&#34;&gt;
-&lt;h2 class=&#34;upper_ad_line&#34;&gt;&lt;span&gt;Ad&lt;/span&gt;&lt;/h2&gt;
-
-
-&lt;a href=&#34;https://shop.samlsecurity.com/b/41Tw&#34; id=&#34;OpenSAMLAd-link&#34;&gt;&lt;div class=&#34;book-ad-grid&#34;&gt;
-
-  &lt;div class=&#34;text&#34;&gt; &lt;p&gt;Want to quickly learn and understand OpenSAML?&lt;/p&gt;
-&lt;p&gt;Have a look on the book &lt;em&gt;A guide to OpenSAML&lt;/em&gt;!&lt;/p&gt;
-&lt;/div&gt;
-  
-  
-  &lt;div class=&#34;cover&#34;&gt;&lt;img alt=&#34;Book cover for A Guide to OpenSAML&#34; src=&#34;https://blog.samlsecurity.com/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_2.png&#34; &gt;&lt;/div&gt;
-	
-&lt;/div&gt;
-&lt;/a&gt;
-&lt;span class=&#34;lower_ad_line&#34;&gt;&lt;/span&gt;
-&lt;/div&gt;
-Setting what type of pseudonym federation we want with the IDP.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Request transient pseudonym
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NameIDFormat&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nameIDFormat&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;NameIDFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nameIDFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getNameIDFormats&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nameIDFormat&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Setting location of services&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AssertionConsumerService&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;assertionConsumerService&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMLUtil&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;buildSAMLObjectWithDefaultName&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AssertionConsumerService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertionConsumerService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setIndex&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertionConsumerService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setBinding&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLConstants&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SAML2_ARTIFACT_BINDING_URI&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// Setting address for our AssertionConsumerService
-&lt;/span&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertionConsumerService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;setLocation&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertionConsumerServiceURL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getAssertionConsumerServices&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;assertionConsumerService&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;And finally we set SAML as supported protocol and generate the XML
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;addSupportedProtocol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMLConstants&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;SAML20P_NS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spEntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getRoleDescriptors&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spSSODescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DocumentBuilder&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;builder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;;&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DocumentBuilderFactory&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factory&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DocumentBuilderFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;builder&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;factory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newDocumentBuilder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Document&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;document&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;builder&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newDocument&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Marshaller&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;out&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Configuration&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMarshallerFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;getMarshaller&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spEntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;out&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;marshall&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;spEntityDescriptor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;12&lt;/span&gt; 
-&lt;span class=&#34;ln&#34;&gt;13&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Transformer&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;transformer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TransformerFactory&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newInstance&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;().&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;newTransformer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;14&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;StringWriter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stringWriter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;StringWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;15&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;StreamResult&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;streamResult&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;StreamResult&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stringWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DOMSource&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;source&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DOMSource&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;document&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;17&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;transformer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;transform&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;source&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;streamResult&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;);&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;18&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;stringWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;
-&lt;span class=&#34;ln&#34;&gt;19&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;String&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;metadataXML&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;stringWriter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;toString&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;();&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
-
+          
+            OpenSAML can be used to generate metadata. As with reading metadata, the library is pretty straight forward in relation to the metadata XML.
+This is an example for generating a SP metadata file
+We start by creating the EntityDescriptor, setting the EntityId and building the SSO descriptor.
+1EntityDescriptor spEntityDescriptor = SAMLUtil.buildSAMLObjectWithDefaultName(EntityDescriptor.class); 2spEntityDescriptor.setEntityID(entityID); 3SPSSODescriptor spSSODescriptor = SAMLUtil.buildSAMLObjectWithDefaultName(SPSSODescriptor.class); In the SSO descriptor we request how we want the communication signed and encrypted
+          
+          
         
       </description>
     </item>

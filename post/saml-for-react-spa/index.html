@@ -1,20 +1,30 @@
 
 <!DOCTYPE html>
-<html lang="en" data-figures="" class="page">
+<html
+  lang="en"
+  data-figures=""
+  
+    class="page"
+  
+  
+  >
   <head>
 <title>Authenticating a React SPA towards a SAML IdP | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+
+
   
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server …">
+<meta name="description" content="In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Authenticating a React SPA towards a SAML IdP" />
+<meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
 <meta property="og:url" content="https://blog.samlsecurity.com/post/saml-for-react-spa/" />
 <meta property="og:title" content="Authenticating a React SPA towards a SAML IdP" />
 <meta property="og:description" content="In this tutorial we will look at how to authenticate user from a typical SPA in React using a SAML IdP, in this case ADFS. This is done using a Keycloak server …" />
@@ -26,17 +36,19 @@
 
 <link rel="canonical" href="https://blog.samlsecurity.com/post/saml-for-react-spa/">
 
-    
 
-    
-    
-    <link rel="preload" href="https://blog.samlsecurity.com/css/styles.6f47a712b932d4b1c702c25ffd0d405e0888427e4f9fa4b25b80ebdd60836748b1b9ce8e536bf10ee38ac3713c51b92a45e53a74d34628c35b9cf56139184f7c.css" integrity = "sha512-b0enErky1LHHAsJf/Q1AXgiIQn5Pn6SyW4Dr3WCDZ0ixuc6OU2vxDuOKw3E8UbkqReU6dNNGKMNbnPVhORhPfA==" as="style" crossorigin="anonymous">
-    <link rel="preload" href="https://blog.samlsecurity.com/js/bundle.min.414b2c6020da1c0822bac39819f4c0176a81281333463de1ca30d2521e90b1c3798d3912cd42c7fe2fd49737a8f87aa374688159b316c80bf3d1a32e9aaeb9f5.js" as="script" integrity=
-    "sha512-QUssYCDaHAgiusOYGfTAF2qBKBMzRj3hyjDSUh6QscN5jTkSzULH/i/Ulzeo&#43;HqjdGiBWbMWyAvz0aMumq659Q==" crossorigin="anonymous">
 
-    
-    <link rel="stylesheet" type="text/css" href="https://blog.samlsecurity.com/css/styles.6f47a712b932d4b1c702c25ffd0d405e0888427e4f9fa4b25b80ebdd60836748b1b9ce8e536bf10ee38ac3713c51b92a45e53a74d34628c35b9cf56139184f7c.css" integrity="sha512-b0enErky1LHHAsJf/Q1AXgiIQn5Pn6SyW4Dr3WCDZ0ixuc6OU2vxDuOKw3E8UbkqReU6dNNGKMNbnPVhORhPfA==" crossorigin="anonymous">
-    <script type="text/javascript" src="//www.cookieconsent.com/releases/4.0.0/cookie-consent.js" charset="UTF-8"></script>
+<link rel="preload" href="https://blog.samlsecurity.com/css/styles.be18f9a1bc39074238dd0ccfb361a75e46281b4d5213d0a0165181cc14ca0080e9ecf76cf7663c464de2db2a6600e58b7e4b5e1f71caa41346b92c3d02eb7d9b.css" integrity = "sha512-vhj5obw5B0I43QzPs2GnXkYoG01SE9CgFlGBzBTKAIDp7Pds92Y8Rk3i2ypmAOWLfkteH3HKpBNGuSw9Aut9mw==" as="style" crossorigin="anonymous">
+
+
+
+<link rel="preload" href="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" as="script" integrity=
+"sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="https://blog.samlsecurity.com/css/styles.be18f9a1bc39074238dd0ccfb361a75e46281b4d5213d0a0165181cc14ca0080e9ecf76cf7663c464de2db2a6600e58b7e4b5e1f71caa41346b92c3d02eb7d9b.css" integrity="sha512-vhj5obw5B0I43QzPs2GnXkYoG01SE9CgFlGBzBTKAIDp7Pds92Y8Rk3i2ypmAOWLfkteH3HKpBNGuSw9Aut9mw==" crossorigin="anonymous">
+
+<script type="text/javascript" src="//www.cookieconsent.com/releases/4.0.0/cookie-consent.js" charset="UTF-8"></script>
 <script type="text/javascript" charset="UTF-8">
 document.addEventListener('DOMContentLoaded', function () {
 	cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"open_preferences_center_selector":"#open_privacy_preferences","website_privacy_policy_url":"https:\/\/blog.samlsecurity.com\//privacy"});
@@ -52,29 +64,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-K97HPLG');</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </head>
-  
-  
-    
-    
-  
-  <body data-code="50" data-lines="false" id="documentTop">
+  <body
+    data-code="50"
+    data-lines="false"
+    id="documentTop"
+  >
 
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K97HPLG"
@@ -87,10 +82,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <img src="https://blog.samlsecurity.com/logos/logo.png" class="logo" alt="SAMLSecurity">
   <div class="nav_close">
     <div><svg class="icon">
+  <title>open-menu</title>
   <use xlink:href="#open-menu"></use>
-</svg><svg class="icon">
+</svg>
+<svg class="icon">
+  <title>closeme</title>
   <use xlink:href="#closeme"></use>
-</svg></div>
+</svg>
+</div>
   </div>
 </a>
 
@@ -107,38 +106,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="https://blog.samlsecurity.com/book/" class="nav_item" title="Books">Books </a>
   </div>
       
-
-  <div class="search_container">
-        <svg class="icon">
-  <use xlink:href="#search"></use>
-</svg>
-
-      <form action="https://blog.samlsecurity.com/search">
-      <input class="search_input" id="search-query" name="s"/>
-    </form>
-    </div>
-
 <div class='follow'>
   <a href="https://github.com/rasmusson/#">
     <svg class="icon">
+  <title>github</title>
   <use xlink:href="#github"></use>
 </svg>
+
   </a>
   <a href="https://twitter.com/rasmussonstefan/#">
     <svg class="icon">
+  <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
+
   </a>
   <a href="https://www.linkedin.com/in/steras/#">
     <svg class="icon">
+  <title>linkedin</title>
   <use xlink:href="#linkedin"></use>
 </svg>
+
   </a>
     
   <a href="https://blog.samlsecurity.com/index.xml">
     <svg class="icon">
+  <title>rss</title>
   <use xlink:href="#rss"></use>
 </svg>
+
   </a>
 <div class="color_mode">
   <input type="checkbox" class="color_choice" id="mode">
@@ -156,11 +152,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1 class="post_title">Authenticating a React SPA towards a SAML IdP</h1>
   <div class="post_meta">
     <span><svg class="icon">
+  <title>calendar</title>
   <use xlink:href="#calendar"></use>
-</svg></span>
+</svg>
+</span>
     <span class="post_date">
       Mar 8, 2022</span>
-    <span class="post_time"> · 11 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml' title="SAML" class="post_tag button button_translucent">SAML
+    <span class="post_time"> · 11 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
         </a>
     </span>
     <span class="page_only">&nbsp;·
@@ -168,32 +166,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     Share on:
     <a href="https://twitter.com/intent/tweet?text=Authenticating%20a%20React%20SPA%20towards%20a%20SAML%20IdP&url=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fsaml-for-react-spa%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
+  <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
+
     </a>
     <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fsaml-for-react-spa%2f&t=Authenticating%20a%20React%20SPA%20towards%20a%20SAML%20IdP" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
+  <title>facebook</title>
   <use xlink:href="#facebook"></use>
 </svg>
+
     </a>
     <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
       <svg class="icon">
+  <title>linkedin</title>
   <use xlink:href="#linkedin"></use>
 </svg>
+
     </a>
     <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" title="Copy Link" class="link link_yank">
       <svg class="icon">
+  <title>copy</title>
   <use xlink:href="#copy"></use>
 </svg>
+
     </a>
   </div>
   </span>
   </div>
 
-    
-    
-    <h2>Overview</h2>
-    <nav id="TableOfContents">
+      <div class="post_toc">
+        <h2>Overview</h2>
+        <nav id="TableOfContents">
   <ul>
     <li><a href="#the-problem-with-saml-in-spa-in-browser-application">The problem with SAML in SPA in browser application</a></li>
     <li><a href="#brokered-authentication-using-keycloak">Brokered authentication using Keycloak</a></li>
@@ -209,7 +214,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#fully-automated-demo">Fully automated demo</a></li>
   </ul>
 </nav>
+      </div>
     
+    <div class="post_body">
 <div class="video">
   <iframe src="https://www.youtube.com/embed/7RQfIlPruIA?controls=1&rel=0" loading="lazy"></iframe>
 </div>
@@ -227,7 +234,31 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 <h2 id="brokered-authentication-using-keycloak">Brokered authentication using Keycloak</h2>
 <p>One way to solve this dilemma is to use a broker authentication pattern.</p>
 <p>Instead of just using OIDC or just using SAML, the SPA uses OIDC, the IdP uses SAML and we place Keycloak as a broker between to translate.</p>
-<p><img src="oidc-SAML-translation-for-SPA.png" alt="Brokered authentication pattern"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Brokered authentication pattern"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="oidc-SAML-translation-for-SPA.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <ol>
 <li>The SPA in the browser redirects the user with an OIDC request to Keycloak</li>
 <li>Keycloak receives the user and request, crafts a SAML request and send it and the user to ADFS IdP for authentication</li>
@@ -256,7 +287,7 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png" ></div>
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -266,22 +297,118 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 <p>Provided you have set up your Keycloak, lets dive in and configure OIDC!</p>
 <p>Browse to <a href="https://keycloak:8443/auth/admin/">https://keycloak:8443/auth/admin/</a> and login as admin.</p>
 <p>Create a realm for the OIDC integration</p>
-<p><img src="create-OIDC-realm-in-keycloak.png" alt="Create OIDC realm"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Create OIDC realm"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="create-OIDC-realm-in-keycloak.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>Create a client for the React SPA. On the first screen, just input a name for the client and click create.</p>
-<p><img src="create-OIDC-client-in-keycloak.png" alt="Create OIDC client"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Create OIDC client"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="create-OIDC-client-in-keycloak.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>On this next screen add a redirect URL for your SPA. In my case Im setting up a demo React app below with redirect URL &quot;http://react:3000&quot;</p>
 <p>Under Web Origins, type a plus sign. <strong>Do not click the plus sign, but type a plus sign in the field</strong>. This will add all your redirect URLs in allowed origins and avoid CORS problems.</p>
-<p><img src="config-oidc-client-in-keycloak-1.png" alt="Configure OIDC client"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Configure OIDC client"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="config-oidc-client-in-keycloak-1.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>Now lets configure the client to use PKCE. This is best practice when working with SPAs and other applications that can not protect a secret key.</p>
 <p>Make sure &quot;Access Type&quot; is set to public and that &quot;Standard Flow Enabled&quot; is set to On.</p>
 <p>Next expand the Advanced settings and set &quot;Proof Key for Code Exchange Code Challenge Method&quot; to S256</p>
-<p><img src="config-oidc-client-in-keycloak-2.png" alt="Configure OIDC client"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Configure OIDC client"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="config-oidc-client-in-keycloak-2.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>To do this using the Keycloak CLI
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kcadm.sh create realms -s <span class="nv">realm</span><span class="o">=</span>oidcrealm -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span>
-<span class="ln">2</span>
-<span class="ln">3</span>kcadm.sh create clients -r oidcrealm -f - <span class="s">&lt;&lt; EOF
-</span><span class="ln">4</span><span class="s">{&#34;clientId&#34; : &#34;oidc-client&#34;, &#34;redirectUris&#34;: [&#34;http://react:3000&#34;], &#34;webOrigins&#34;: [&#34;+&#34;], &#34;standardFlowEnabled&#34;: true, &#34;publicClient&#34;: true, &#34;attributes&#34;: {&#34;pkce.code.challenge.method&#34;:&#34;S256&#34;}}
-</span><span class="ln">5</span><span class="s">EOF</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">kcadm.sh create realms -s <span class="nv">realm</span><span class="o">=</span>oidcrealm -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">kcadm.sh create clients -r oidcrealm -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="s">{&#34;clientId&#34; : &#34;oidc-client&#34;, &#34;redirectUris&#34;: [&#34;http://react:3000&#34;], &#34;webOrigins&#34;: [&#34;+&#34;], &#34;standardFlowEnabled&#34;: true, &#34;publicClient&#34;: true, &#34;attributes&#34;: {&#34;pkce.code.challenge.method&#34;:&#34;S256&#34;}}
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="s">EOF</span></span></span></code></pre></div></p>
 <h3 id="setting-up-the-react-demo-application">Setting up the React demo application</h3>
 <p>Now its time to configure the React application to authenticate users using OIDC. In this tutorial I'm using my own OIDC demo app.
 The application is available <a href="https://github.com/rasmusson/react-oidc-pkce-demo">here on Github</a>
@@ -292,35 +419,106 @@ How to set up another app will vary depending on what framework you are using, b
 <li>logoutEndpoint: https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/logout</li>
 </ul>
 <p>To configure the React demo app, clone the repo and run npm install.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>git clone https://github.com/rasmusson/react-oidc-pkce-demo
-<span class="ln">2</span><span class="nb">cd</span> react-oidc-pkce-demo
-<span class="ln">3</span>npm install</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">git clone https://github.com/rasmusson/react-oidc-pkce-demo
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">cd</span> react-oidc-pkce-demo
+</span></span><span class="line"><span class="ln">3</span><span class="cl">npm install</span></span></code></pre></div>
 <p>Now open src/SecuredApp.js and edit the configuration in AuthService to match your endpoints, client name and redirect URI. In our case it will look like this.</p>
-<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="ln">1</span><span class="kr">const</span> <span class="nx">authService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AuthService</span><span class="p">({</span>
-<span class="ln">2</span>    <span class="nx">clientId</span><span class="o">:</span> <span class="s1">&#39;oidc-client&#39;</span><span class="p">,</span>
-<span class="ln">3</span>    <span class="nx">authorizeEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/auth&#39;</span><span class="p">,</span>
-<span class="ln">4</span>    <span class="nx">tokenEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/token&#39;</span><span class="p">,</span>
-<span class="ln">5</span>    <span class="nx">logoutEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/logout&#39;</span><span class="p">,</span>
-<span class="ln">6</span>    <span class="nx">redirectUri</span><span class="o">:</span> <span class="s1">&#39;http://react:3000&#39;</span><span class="p">,</span>
-<span class="ln">7</span>    <span class="nx">scopes</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;openid&#39;</span><span class="p">],</span>
-<span class="ln">8</span><span class="p">});</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="ln">1</span><span class="cl"><span class="kr">const</span> <span class="nx">authService</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AuthService</span><span class="p">({</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="nx">clientId</span><span class="o">:</span> <span class="s1">&#39;oidc-client&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="nx">authorizeEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/auth&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nx">tokenEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/token&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="nx">logoutEndpoint</span><span class="o">:</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/protocol/openid-connect/logout&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="nx">redirectUri</span><span class="o">:</span> <span class="s1">&#39;http://react:3000&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="nx">scopes</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;openid&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">});</span></span></span></code></pre></div>
 <p>Next start the React app</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>npm start</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">npm start</span></span></code></pre></div>
 <p>To test that the OIDC integration works fine, lets create a test user in Keycloak and authenticate.</p>
 <p>![Add test user](add-user-to test-OIDC-authentication.png)
 Save and then, set a password for the user as below</p>
 <p>![Changing password of the test user](change-password-of-user-to test-OIDC-authentication.png)
 I disable temporary password as this is for demo purposes.</p>
 <p>To create the test user using Keycloak CLI
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kcadm.sh create users -r oidcrealm -s <span class="nv">username</span><span class="o">=</span><span class="nb">test</span> -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -o --fields id,username
-<span class="ln">2</span>kcadm.sh set-password -r oidcrealm --username <span class="nb">test</span> --new-password test</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">kcadm.sh create users -r oidcrealm -s <span class="nv">username</span><span class="o">=</span><span class="nb">test</span> -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -o --fields id,username
+</span></span><span class="line"><span class="ln">2</span><span class="cl">kcadm.sh set-password -r oidcrealm --username <span class="nb">test</span> --new-password test</span></span></code></pre></div></p>
 <p>Browse to where your React app is running, in my case <a href="http://react:3000/">http://react:3000/</a> and click the Login button</p>
-<p><img src="react-oidc-sample-app-login-form.png" alt="React app">
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="React app"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="react-oidc-sample-app-login-form.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 Login using the new test user</p>
-<p><img src="login-test-user-in-react-oidc-sample-app.png" alt="Login as test user">
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Login as test user"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="login-test-user-in-react-oidc-sample-app.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 You should get a JWT token with user information as a result.</p>
-<p><img src="react-oidc-sample-app-jwt-token.png" alt="JWT token">
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="JWT token"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="react-oidc-sample-app-jwt-token.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 
 <div class="book-ad" id="SAML20Ad">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -333,7 +531,7 @@ You should get a JWT token with user information as a result.</p>
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png" ></div>
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -342,8 +540,56 @@ You should get a JWT token with user information as a result.</p>
 <h3 id="saml-integration-between-adfs-and-keycloak">SAML integration between ADFS and Keycloak</h3>
 <p>Next step is to set up a authentication provider in Keycloak to authenticate users against the ADFS IdP.</p>
 <p>In Keycloak, create a new SAML authentication provider</p>
-<p><img src="create-saml-authentication-provider-in-keycloak.png" alt="Create SAML authentication provider">
-<img src="configure-saml-authentication-provider-in-keycloak.png" alt="Configure SAML authentication provider"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Create SAML authentication provider"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="create-saml-authentication-provider-in-keycloak.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
+<figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Configure SAML authentication provider"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="configure-saml-authentication-provider-in-keycloak.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>Configuration may differ in different environments. In this demo we will set the following</p>
 <ul>
 <li>Sync Mode: Import - Meaning we import the user data comming from the IdP ones, when the user is first authenticated.</li>
@@ -353,7 +599,7 @@ You should get a JWT token with user information as a result.</p>
 <li>NameID Policy Format: Email - This is how we will identify users</li>
 </ul>
 <p>To configure the SAML IdP using Keycloak CLI
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>kcadm.sh create identity-provider/instances -r oidcrealm -s <span class="nv">alias</span><span class="o">=</span>saml -s <span class="nv">providerId</span><span class="o">=</span>saml -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -s config.wantAuthnRequestsSigned<span class="o">=</span><span class="nb">true</span> -s config.allowedClockSkew<span class="o">=</span><span class="m">10</span> -s <span class="s1">&#39;config.useJwksUrl=&#34;true&#34;&#39;</span> -s config.singleSignOnServiceUrl<span class="o">=</span>https://adfs.devel/adfs/ls/ -s config.singleLogoutServiceUrl<span class="o">=</span>https://adfs.devel/adfs/ls/ -s config.nameIDPolicyFormat<span class="o">=</span>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress -s config.signatureAlgorithm<span class="o">=</span>RSA_SHA256</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">kcadm.sh create identity-provider/instances -r oidcrealm -s <span class="nv">alias</span><span class="o">=</span>saml -s <span class="nv">providerId</span><span class="o">=</span>saml -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -s config.wantAuthnRequestsSigned<span class="o">=</span><span class="nb">true</span> -s config.allowedClockSkew<span class="o">=</span><span class="m">10</span> -s <span class="s1">&#39;config.useJwksUrl=&#34;true&#34;&#39;</span> -s config.singleSignOnServiceUrl<span class="o">=</span>https://adfs.devel/adfs/ls/ -s config.singleLogoutServiceUrl<span class="o">=</span>https://adfs.devel/adfs/ls/ -s config.nameIDPolicyFormat<span class="o">=</span>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress -s config.signatureAlgorithm<span class="o">=</span>RSA_SHA256</span></span></code></pre></div></p>
 <h4 id="configure-keycloak-as-relaying-party-in-adfs">Configure Keycloak as relaying party in ADFS</h4>
 <p>When setting up Keycloak as a SP in ADFS, we need to import Metadata. The metadata contains connection and communication information that ADFS needs.</p>
 <p>First lets download the metadata from Keycloak. At the ADFS server, browse to https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor. Click through the HTTPS warnings and download the file.</p>
@@ -363,45 +609,141 @@ Use the option &quot;Import data about the relying party from a file&quot; and b
 <p>Normally the metadata is simplest imported by using the option &quot;Import data about the relying party published online or on a local network&quot; to let ADFS fetch the metadata directly from Keycloak. This requires the TLS trust is setup correctly. I have not bothered to do that for this demo so I use this method instead.</p>
 <p>Set a name, for example Keycloak</p>
 <p>Next we set which users are allowed to authenticate thought the integration. As this is a demo, we make it simple and set it to everyone. Select &quot;Permit everyone&quot;</p>
-<p><img src="select-ADFS-Access-Control-Policy-permitting-SAML-users.png" alt="Select users to permit"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Select users to permit"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="select-ADFS-Access-Control-Policy-permitting-SAML-users.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>Then click next, next and finish</p>
 <p>After you finish, the dialog &quot;Edit Claims Issuance Policy for Keycloak&quot; should open. Here we configure what information will be sent to Keycloak together with the user when it has been authenticated. In Keycloak we configured the user to be identified by email, so now we must configure ADFS to send the email address of the authenticated user.</p>
 <p>First we create a rule to get a the email as a claim.</p>
 <p>Select &quot;Send LDAP Attributes as Claims&quot;. Set a name for the issuance rule, select Active Directory as store. Under LDAP attribute choose &quot;Email addresses&quot; and set &quot;Email address&quot; as Outgoing claim type</p>
-<p><img src="configure-adfs-to-issue-email-attribute-as-claim-for-SAML.png" alt="Add LDAP attribute as claim to include in SAML Assertion"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Add LDAP attribute as claim to include in SAML Assertion"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="configure-adfs-to-issue-email-attribute-as-claim-for-SAML.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>Next, we create a rule to transform and set the email claim as NameID in the SAML response.
 Select &quot;Transform an incoming claim&quot;</p>
 <p>As &quot;Incoming Claim type&quot; set email address and as &quot;Outgoing Claim type&quot; set Name ID and Email as &quot;Outgoing name ID format&quot;</p>
-<p><img src="transform-adfs-claim-to-nameid-for-SAML-assertion.png" alt="Transform claim to Name ID"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Transform claim to Name ID"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="transform-adfs-claim-to-nameid-for-SAML-assertion.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>To configure the Keycloak relying party on ADFS using PowerShell, first disable HTTPS verification if you have not yet set up TLS trust between Keycloak and ADFS
-<div class="highlight"><pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="ln">1</span><span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">ServerCertificateValidationCallback</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$true</span><span class="p">}</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="ln">1</span><span class="cl"><span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">ServerCertificateValidationCallback</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$true</span><span class="p">}</span></span></span></code></pre></div></p>
 <p>Create and configure relying party
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln"> 1</span><span class="nb">Add-ADFSRelyingPartyTrust</span> <span class="n">-Name</span> <span class="s1">&#39;keycloak&#39;</span> <span class="n">-MetadataURL</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor&#39;</span> <span class="n">-IssuanceAuthorizationRules</span> <span class="sh">@&#39;
-</span><span class="ln"> 2</span><span class="sh">@RuleTemplate = &#34;AllowAllAuthzRule&#34;
-</span><span class="ln"> 3</span><span class="sh"> =&gt; issue(Type = &#34;http://schemas.microsoft.com/authorization/claims/permit&#34;, Value = &#34;true&#34;);
-</span><span class="ln"> 4</span><span class="sh">&#39;@</span> <span class="n">-IssuanceTransformRules</span> <span class="sh">@&#39;
-</span><span class="ln"> 5</span><span class="sh">@RuleTemplate = &#34;LdapClaims&#34;
-</span><span class="ln"> 6</span><span class="sh">@RuleName = &#34;Email Attribute&#34;
-</span><span class="ln"> 7</span><span class="sh">c:[Type == &#34;http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname&#34;, Issuer == &#34;AD AUTHORITY&#34;] =&gt; issue(store = &#34;Active Directory&#34;, types = (&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&#34;), query = &#34;;mail;{0}&#34;, param = c.Value);
-</span><span class="ln"> 8</span><span class="sh">
-</span><span class="ln"> 9</span><span class="sh">@RuleTemplate = &#34;MapClaims&#34;
-</span><span class="ln">10</span><span class="sh">@RuleName = &#34;Email ad nameid&#34;
-</span><span class="ln">11</span><span class="sh">c:[Type == &#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&#34;] =&gt; issue(Type =&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier&#34;, Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType, Properties[&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claimproperties/format&#34;] = &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&#34;);
-</span><span class="ln">12</span><span class="sh">&#39;@</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">Add-ADFSRelyingPartyTrust</span> <span class="n">-Name</span> <span class="s1">&#39;keycloak&#39;</span> <span class="n">-MetadataURL</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor&#39;</span> <span class="n">-IssuanceAuthorizationRules</span> <span class="sh">@&#39;
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="sh">@RuleTemplate = &#34;AllowAllAuthzRule&#34;
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="sh"> =&gt; issue(Type = &#34;http://schemas.microsoft.com/authorization/claims/permit&#34;, Value = &#34;true&#34;);
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="sh">&#39;@</span> <span class="n">-IssuanceTransformRules</span> <span class="sh">@&#39;
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="sh">@RuleTemplate = &#34;LdapClaims&#34;
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="sh">@RuleName = &#34;Email Attribute&#34;
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="sh">c:[Type == &#34;http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname&#34;, Issuer == &#34;AD AUTHORITY&#34;] =&gt; issue(store = &#34;Active Directory&#34;, types = (&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&#34;), query = &#34;;mail;{0}&#34;, param = c.Value);
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="sh">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="sh">@RuleTemplate = &#34;MapClaims&#34;
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="sh">@RuleName = &#34;Email ad nameid&#34;
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="sh">c:[Type == &#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress&#34;] =&gt; issue(Type =&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier&#34;, Issuer = c.Issuer, OriginalIssuer = c.OriginalIssuer, Value = c.Value, ValueType = c.ValueType, Properties[&#34;http://schemas.xmlsoap.org/ws/2005/05/identity/claimproperties/format&#34;] = &#34;urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress&#34;);
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="sh">&#39;@</span></span></span></code></pre></div></p>
 <p>And while we are in the Windows server, lets create a test user in AD to test the final setup when we are done.</p>
 <p>Open the Active Directory Users and Computers tool and create a new user.
 <em>After creating the user, make sure to open the user properties and add an email address.</em></p>
-<p><img src="create-ADFS-user-for-SAML-authentication.png" alt="Add user in AD"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Add user in AD"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="create-ADFS-user-for-SAML-authentication.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>To add the user using PowerShell, first disable complex passwords to let use a simple password for testing
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln">1</span><span class="n">secedit</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
-<span class="ln">2</span>  <span class="p">(</span><span class="nb">gc </span><span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;PasswordComplexity = 1&#34;</span><span class="p">,</span> <span class="s2">&#34;PasswordComplexity = 0&#34;</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;MinimumPasswordLength = 7&#34;</span><span class="p">,</span> <span class="s2">&#34;MinimumPasswordLength = 0&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
-<span class="ln">3</span>  <span class="n">secedit</span> <span class="p">/</span><span class="n">configure</span> <span class="p">/</span><span class="n">db</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">local</span><span class="p">.</span><span class="n">sdb</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="p">/</span><span class="n">areas</span> <span class="n">SECURITYPOLICY</span>
-<span class="ln">4</span>  <span class="nb">rm </span><span class="n">-force</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="n">-confirm</span><span class="err">:</span><span class="nv">$false</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">secedit</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="p">(</span><span class="nb">gc </span><span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;PasswordComplexity = 1&#34;</span><span class="p">,</span> <span class="s2">&#34;PasswordComplexity = 0&#34;</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;MinimumPasswordLength = 7&#34;</span><span class="p">,</span> <span class="s2">&#34;MinimumPasswordLength = 0&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="n">secedit</span> <span class="p">/</span><span class="n">configure</span> <span class="p">/</span><span class="n">db</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">local</span><span class="p">.</span><span class="n">sdb</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="p">/</span><span class="n">areas</span> <span class="n">SECURITYPOLICY</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="nb">rm </span><span class="n">-force</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="n">-confirm</span><span class="err">:</span><span class="nv">$false</span></span></span></code></pre></div></p>
 <p>Now lets create the user
-<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="ln">1</span><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
-<span class="ln">2</span><span class="nb">New-ADUser</span> <span class="n">-SamAccountName</span> <span class="n">test2</span> <span class="n">-GivenName</span> <span class="n">Test</span> <span class="n">-Surname</span> <span class="n">User</span> <span class="n">-Name</span> <span class="s2">&#34;Test User&#34;</span> <span class="n">-Email</span> <span class="s2">&#34;test@test.com&#34;</span><span class="p">`</span>
-<span class="ln">3</span>           <span class="n">-Path</span> <span class="s2">&#34;CN=Users,DC=windomain,DC=local&#34;</span> <span class="p">`</span>
-<span class="ln">4</span>           <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s1">&#39;test&#39;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="n">-Enabled</span> <span class="nv">$true</span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">New-ADUser</span> <span class="n">-SamAccountName</span> <span class="n">test2</span> <span class="n">-GivenName</span> <span class="n">Test</span> <span class="n">-Surname</span> <span class="n">User</span> <span class="n">-Name</span> <span class="s2">&#34;Test User&#34;</span> <span class="n">-Email</span> <span class="s2">&#34;test@test.com&#34;</span><span class="p">`</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">           <span class="n">-Path</span> <span class="s2">&#34;CN=Users,DC=windomain,DC=local&#34;</span> <span class="p">`</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">           <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s1">&#39;test&#39;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="n">-Enabled</span> <span class="nv">$true</span></span></span></code></pre></div></p>
 <h3 id="configure-brokering-between-oidc-and-saml">Configure brokering between OIDC and SAML</h3>
 <p>To make use of the configured SAML IdP to authenticate the user from the React SPA, we need to configure two things in Keycloak.</p>
 <ul>
@@ -410,20 +752,92 @@ Select &quot;Transform an incoming claim&quot;</p>
 </ul>
 <h4 id="configure-the-redirector">Configure the redirector</h4>
 <p>Configure the redirector under Authentication in the menu in the Keycloak web ui. Set an alias and under Default Identity Provider, set the name chosen when creating the SAML authentication provider in earlier steps.</p>
-<p><img src="create-redirector-config-for-ADFS-SAML-authentication.png" alt="Create redirector config for ADFS SAML authentication"></p>
-<p><img src="set-default-authentication-provider-to-ADFS-SAML.png" alt="Set default authentication provider for ADFS"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Create redirector config for ADFS SAML authentication"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="create-redirector-config-for-ADFS-SAML-authentication.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Set default authentication provider for ADFS"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="set-default-authentication-provider-to-ADFS-SAML.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <h4 id="transparent-brokering">Transparent brokering</h4>
 <p>The default behavior of Keycloak in brokering mode is that the a new user is asked to update their user profile in Keycloak a first authentication. If you want to have the brokering in Keycloak to be totally transparent, this can be disabled in the &quot;First broker login&quot; authentication flow.</p>
 <p>Under Authentication, select &quot;First broker login&quot; flow and click disable for the first step named &quot;Review Profile&quot;</p>
-<p><img src="disable-profile-review-in-keycloak.png" alt="Disable profile review"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Disable profile review"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="disable-profile-review-in-keycloak.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <p>To configure the IdP redirection and disabling of the profile review in Keycloak CLI
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span><span class="nv">idpRedirector</span><span class="o">=</span><span class="k">$(</span>kcadm.sh get /authentication/flows/browser/executions -r oidcrealm <span class="p">|</span> jq -r <span class="s1">&#39;.[] | select(.providerId == &#34;identity-provider-redirector&#34;).id&#39;</span><span class="k">)</span>
-<span class="ln">2</span>kcadm.sh create /authentication/executions/<span class="nv">$idpRedirector</span>/config -r oidcrealm -s config.defaultProvider<span class="o">=</span>saml -s <span class="nv">alias</span><span class="o">=</span>straight_to_saml
-<span class="ln">3</span>
-<span class="ln">4</span><span class="nv">reviewProfileExecution</span><span class="o">=</span><span class="k">$(</span>kcadm.sh get /authentication/flows/first%20broker%20login/executions -r oidcrealm <span class="p">|</span> jq -r <span class="s1">&#39;.[] | (select(.alias == &#34;review profile config&#34;) | .requirement) |= &#34;DISABLED&#34; | select(.alias == &#34;review profile config&#34;)&#39;</span><span class="k">)</span>
-<span class="ln">5</span>kcadm.sh update authentication/flows/first%20broker%20login/executions -r oidcrealm -f - <span class="s">&lt;&lt; EOF
-</span><span class="ln">6</span><span class="s">$reviewProfileExecution
-</span><span class="ln">7</span><span class="s">EOF</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="nv">idpRedirector</span><span class="o">=</span><span class="k">$(</span>kcadm.sh get /authentication/flows/browser/executions -r oidcrealm <span class="p">|</span> jq -r <span class="s1">&#39;.[] | select(.providerId == &#34;identity-provider-redirector&#34;).id&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">kcadm.sh create /authentication/executions/<span class="nv">$idpRedirector</span>/config -r oidcrealm -s config.defaultProvider<span class="o">=</span>saml -s <span class="nv">alias</span><span class="o">=</span>straight_to_saml
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nv">reviewProfileExecution</span><span class="o">=</span><span class="k">$(</span>kcadm.sh get /authentication/flows/first%20broker%20login/executions -r oidcrealm <span class="p">|</span> jq -r <span class="s1">&#39;.[] | (select(.alias == &#34;review profile config&#34;) | .requirement) |= &#34;DISABLED&#34; | select(.alias == &#34;review profile config&#34;)&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">kcadm.sh update authentication/flows/first%20broker%20login/executions -r oidcrealm -f - <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="s">$reviewProfileExecution
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="s">EOF</span></span></span></code></pre></div>
 
 <div class="book-ad" id="SAML20Ad">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -436,7 +850,7 @@ Select &quot;Transform an incoming claim&quot;</p>
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png" ></div>
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -444,15 +858,87 @@ Select &quot;Transform an incoming claim&quot;</p>
 </div></p>
 <h2 id="lets-test-it">Lets test it</h2>
 <p>Browse to the React test applications and click Login</p>
-<p><img src="react-oidc-sample-app-login-form.png" alt="React app">
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="React app"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="react-oidc-sample-app-login-form.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 Login in ADFS as the test user created earlier</p>
-<p><img src="react-login-OIDC-authentication-using-SAML.png" alt="React app">
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="React app"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="react-login-OIDC-authentication-using-SAML.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 You now get authenticated to the application and the React test application shows the content of the JWT token in the OIDC authentication response</p>
-<p><img src="jwt-token-with-atributes-from-ADFS-SAML-IDP.png" alt="JWT token"></p>
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="JWT token"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="jwt-token-with-atributes-from-ADFS-SAML-IDP.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
 <h2 id="fully-automated-demo">Fully automated demo</h2>
 <p>To make it easy to try this out and play around, I have published my fully <a href="https://github.com/rasmusson/SPA-saml-poc/">Automated demo of this here Github</a>. The demo is based on vagrant, spinning up different virtual machines in virtual box for ADFS, Keycloak and the React app.</p>
 <p>To start the demo first install the prerequisites listed in the GitHub page. Then spin everything up
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="ln">1</span>vagrant up adfs keycloak react</code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">vagrant up adfs keycloak react</span></span></code></pre></div></p>
 <p>Go grab lunch. It takes some time =)
 
 <div class="book-ad" id="SAML20Ad">
@@ -466,17 +952,44 @@ You now get authenticated to the application and the React test application show
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_2.png" ></div>
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
 <span class="lower_ad_line"></span>
 </div></p>
 
+    </div>
+<div class="post_comments">
+  
+  
+  
+</div>
+
+
+
 
   </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
+    <br>
+    
+  
+  <div class="search">
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
+    <label for="find" class="search_label"><svg class="icon">
+  <title>search</title>
+  <use xlink:href="#search"></use>
+</svg>
+
+    </label>
+    
+    <div class="search_results results"></div>
+  </div>
+
+
+    
+    
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
@@ -611,7 +1124,7 @@ You now get authenticated to the application and the React test application show
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="linkedin">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h362c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zM181 406h-60V196h60zm0-240h-60v-60h60zm210 240h-60V286c0-16.54-13.46-30-30-30s-30 13.46-30 30v120h-60V196h60v11.309C286.719 202.422 296.93 196 316 196c40.691.043 75 36.547 75 79.688zm0 0"></path>
   </symbol>
-  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="arrow">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="to-top">
     <path d="M604.501 440.509L325.398 134.956c-5.331-5.357-12.423-7.627-19.386-7.27-6.989-.357-14.056 1.913-19.387 7.27L7.499 440.509c-9.999 10.024-9.999 26.298 0 36.323s26.223 10.024 36.222 0l262.293-287.164L568.28 476.832c9.999 10.024 26.222 10.024 36.221 0 9.999-10.023 9.999-26.298 0-36.323z"></path>
   </symbol>
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="carly">
@@ -635,62 +1148,13 @@ You now get authenticated to the application and the React test application show
   </symbol>
   <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="stackoverflow">
     <path d="M21 27v-8h3v11H0V19h3v8h18z"></path><path d="M17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zm3.7 14.7L10.6 6.4l1.7-2 10.2 8.5-1.7 2zM7.2 12.3l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm-1.8 6.8l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zM19 25H5v-3h14v3z"></path>
-  </symbol>  
- 
-  <symbol viewBox="0 0 487 500" xmlns="http://www.w3.org/2000/svg" id="search">
-    <path d="M 170.00,0.21
-           C 170.00,0.21 205.00,0.21 205.00,0.21
-             247.11,0.50 297.49,24.67 326.91,54.09
-             343.73,70.91 356.29,91.36 365.86,113.00
-             374.37,132.26 380.75,154.80 381.00,176.00
-             381.38,209.20 380.95,234.94 366.77,266.00
-             366.77,266.00 352.55,294.00 352.55,294.00
-             351.03,296.55 346.68,301.32 347.93,304.28
-             348.74,306.19 356.04,313.99 357.84,316.00
-             357.84,316.00 371.09,331.00 371.09,331.00
-             371.09,331.00 381.72,342.00 381.72,342.00
-             381.72,342.00 447.17,414.00 447.17,414.00
-             447.17,414.00 469.28,438.00 469.28,438.00
-             469.28,438.00 493.16,464.00 493.16,464.00
-             498.03,469.45 503.57,474.93 506.04,482.00
-             507.47,486.09 507.06,495.34 507.00,500.00
-             506.81,514.03 498.21,519.98 485.00,520.00
-             485.00,520.00 476.00,520.00 476.00,520.00
-             463.45,519.83 458.61,512.43 450.93,504.00
-             450.93,504.00 437.96,490.00 437.96,490.00
-             437.96,490.00 389.83,437.00 389.83,437.00
-             389.83,437.00 346.42,390.00 346.42,390.00
-             346.42,390.00 315.42,356.00 315.42,356.00
-             312.67,352.83 307.81,345.73 303.00,347.11
-             303.00,347.11 284.00,358.14 284.00,358.14
-             274.80,363.24 259.05,370.25 249.00,373.28
-             221.33,381.62 204.29,381.33 176.00,381.00
-             141.83,380.60 103.62,364.70 76.00,345.28
-             41.68,321.15 13.61,278.01 4.42,237.00
-             -0.65,214.32 -0.26,198.88 0.00,176.00
-             0.11,166.87 2.65,150.97 4.89,142.00
-             12.81,110.31 30.80,78.69 53.17,55.04
-             74.60,32.38 111.74,12.46 142.00,4.89
-             142.00,4.89 170.00,0.21 170.00,0.21 Z
-           M 188.00,51.29
-           C 188.00,51.29 177.00,52.43 177.00,52.43
-             165.45,54.09 151.91,57.31 141.00,61.42
-             111.80,72.45 85.28,97.40 69.45,124.00
-             64.08,133.04 60.45,142.93 57.58,153.00
-             55.06,161.84 50.56,183.29 51.18,192.00
-             54.85,243.65 79.02,284.79 124.00,311.55
-             142.35,322.46 167.81,328.31 189.00,329.82
-             196.69,330.36 218.13,326.26 226.00,324.00
-             233.35,321.89 240.00,319.90 247.00,316.69
-             272.93,304.82 298.98,279.95 312.69,255.00
-             317.95,245.42 320.72,237.41 323.71,227.00
-             326.10,218.66 330.40,197.18 329.82,189.00
-             328.54,170.99 324.23,150.45 316.69,134.00
-             302.54,103.10 271.02,72.79 239.00,61.05
-             226.74,56.56 200.75,50.38 188.00,51.29 Z"></path>
   </symbol>
-   
-  
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="xing">
+    <path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 55" id="discord">
+    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
+  </symbol>
 </svg>
 
 
@@ -699,13 +1163,17 @@ You now get authenticated to the application and the React test application show
     <img src='https://blog.samlsecurity.com/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="SAMLSecurity">
     <p>Copyright&nbsp;<span class="year"></span>&nbsp;SAMLSECURITY. All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy">Privacy policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="open_privacy_preferences">Change your consent preferences</a></p><a class="to_top" href="#documentTop">
   <svg class="icon">
-  <use xlink:href="#arrow"></use>
+  <title>to-top</title>
+  <use xlink:href="#to-top"></use>
 </svg>
+
 </a>
 
   </div>
 </footer>
-    <script type="text/javascript" src="https://blog.samlsecurity.com/js/bundle.min.414b2c6020da1c0822bac39819f4c0176a81281333463de1ca30d2521e90b1c3798d3912cd42c7fe2fd49737a8f87aa374688159b316c80bf3d1a32e9aaeb9f5.js" integrity="sha512-QUssYCDaHAgiusOYGfTAF2qBKBMzRj3hyjDSUh6QscN5jTkSzULH/i/Ulzeo&#43;HqjdGiBWbMWyAvz0aMumq659Q==" crossorigin="anonymous"></script>
-    
+<script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
+
+  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+
   </body>
 </html>
