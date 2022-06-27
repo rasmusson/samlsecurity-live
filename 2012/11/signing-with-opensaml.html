@@ -48,15 +48,7 @@
 
 <link rel="stylesheet" type="text/css" href="https://blog.samlsecurity.com/css/styles.be18f9a1bc39074238dd0ccfb361a75e46281b4d5213d0a0165181cc14ca0080e9ecf76cf7663c464de2db2a6600e58b7e4b5e1f71caa41346b92c3d02eb7d9b.css" integrity="sha512-vhj5obw5B0I43QzPs2GnXkYoG01SE9CgFlGBzBTKAIDp7Pds92Y8Rk3i2ypmAOWLfkteH3HKpBNGuSw9Aut9mw==" crossorigin="anonymous">
 
-<script type="text/javascript" src="//www.cookieconsent.com/releases/4.0.0/cookie-consent.js" charset="UTF-8"></script>
-<script type="text/javascript" charset="UTF-8">
-document.addEventListener('DOMContentLoaded', function () {
-	cookieconsent.run({"notice_banner_type":"simple","consent_type":"express","palette":"dark","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"open_preferences_center_selector":"#open_privacy_preferences","website_privacy_policy_url":"https:\/\/blog.samlsecurity.com\//privacy"});
-});
-</script>
-
-<noscript>ePrivacy and GPDR Cookie Consent by <a href="https://www.CookieConsent.com/" rel="nofollow noopener">Cookie Consent</a></noscript>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.css" media="print" onload="this.media='all'">
 
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -456,7 +448,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
 <footer class="footer">
   <div class="footer_inner wrap pale">
     <img src='https://blog.samlsecurity.com/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="SAMLSecurity">
-    <p>Copyright&nbsp;<span class="year"></span>&nbsp;SAMLSECURITY. All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy">Privacy policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="open_privacy_preferences">Change your consent preferences</a></p><a class="to_top" href="#documentTop">
+    <p>Copyright&nbsp;<span class="year"></span>&nbsp;SAMLSECURITY. All Rights Reserved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy">Privacy policy</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a aria-label="View cookie settings" data-cc="c-settings">Change your consent preferences</a></p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <title>to-top</title>
   <use xlink:href="#to-top"></use>
@@ -469,6 +461,120 @@ The third step is to perform the actual signing to produce a cryptographic signa
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
   <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
+
+<script>
+        window.addEventListener('load', function(){
+
+            
+            var cc = initCookieConsent();
+
+            
+            cc.run({
+            	gui_options: {
+                    consent_modal: {
+                        layout: 'cloud',               
+                        position: 'bottom center',     
+                        transition: 'slide',           
+                        swap_buttons: false            
+                    },
+                    settings_modal: {
+                        layout: 'box',                 
+                        
+                        transition: 'slide'            
+                    }
+                },
+            	
+            	current_lang: 'en',
+                autoclear_cookies: false,                   
+                page_scripts: false,                        
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+
+                onFirstAction: function(user_preferences, cookie){
+                    
+                },
+
+                onAccept: function (cookie) {
+                    
+                },
+
+                onChange: function (cookie, changed_categories) {
+                    
+                },
+
+                languages: {
+                    'en': {
+                        consent_modal: {
+                            title: 'We use cookies!',
+                            description: 'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+                            primary_btn: {
+                                text: 'Accept all',
+                                role: 'accept_all'              
+                            },
+                            secondary_btn: {
+                                text: 'Reject all',
+                                role: 'accept_necessary'        
+                            }
+                        },
+                        settings_modal: {
+                            title: 'Cookie preferences',
+                            save_settings_btn: 'Save settings',
+                            accept_all_btn: 'Accept all',
+                            reject_all_btn: 'Reject all',
+                            close_btn_label: 'Close',
+                            cookie_table_headers: [
+                                {col1: 'Name'},
+                                {col2: 'Domain'},
+                                {col3: 'Expiration'},
+                                {col4: 'Description'}
+                            ],
+                            blocks: [
+                                {
+                                    title: 'Cookie usage 📢',
+                                    description: 'I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want. For more details relative to cookies and other sensitive data, please read the full <a href="/privacy" class="cc-link">privacy policy</a>.'
+                                }, {
+                                    title: 'Strictly necessary cookies',
+                                    description: 'These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly',
+                                    toggle: {
+                                        value: 'necessary',
+                                        enabled: true,
+                                        readonly: true          
+                                    }
+                                }, {
+                                    title: 'Performance and Analytics cookies',
+                                    description: 'These cookies allow the website to remember the choices you have made in the past',
+                                    toggle: {
+                                        value: 'analytics',     
+                                        enabled: false,
+                                        readonly: false
+                                    },
+                                
+                                }, {
+                                    title: 'More information',
+                                    description: 'For any queries in relation to our policy on cookies and your choices, please contact us using the information in the <a href="/privacy" class="cc-link">privacy policy</a>.',
+                                }
+                            ]
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 
   </body>
 </html>
