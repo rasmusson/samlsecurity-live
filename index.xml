@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ADFS SAML Metadata URL</title>
+      <link>https://blog.samlsecurity.com/post/matadata-location/</link>
+      <pubDate>Thu, 07 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/matadata-location/</guid>
+      <description>
+        
+          
+            Where do I find the URL for SAML metadata XML for ADFS 
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Authenticating a React SPA towards a SAML IdP</title>
       <link>https://blog.samlsecurity.com/post/saml-for-react-spa/</link>
