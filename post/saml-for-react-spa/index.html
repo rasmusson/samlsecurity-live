@@ -426,9 +426,57 @@ How to set up another app will vary depending on what framework you are using, b
 <p>Next start the React app</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">npm start</span></span></code></pre></div>
 <p>To test that the OIDC integration works fine, lets create a test user in Keycloak and authenticate.</p>
-<p>![Add test user](add-user-to test-OIDC-authentication.png)
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Add test user"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="add-user-to-test-OIDC-authentication.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 Save and then, set a password for the user as below</p>
-<p>![Changing password of the test user](change-password-of-user-to test-OIDC-authentication.png)
+<p><figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="Changing password of the test user"
+      
+        class="image_figure image_internal image_unprocessed"
+        src="change-password-of-user-to-test-OIDC-authentication.png"
+      
+      
+    />
+
+    </picture>
+</figure>
+
 I disable temporary password as this is for demo purposes.</p>
 <p>To create the test user using Keycloak CLI
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">kcadm.sh create users -r oidcrealm -s <span class="nv">username</span><span class="o">=</span><span class="nb">test</span> -s <span class="nv">enabled</span><span class="o">=</span><span class="nb">true</span> -o --fields id,username
