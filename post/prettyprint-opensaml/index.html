@@ -9,7 +9,7 @@
   
   >
   <head>
-<title>Signing and Sending AuthnRequests in OpenSAML V3 | SAMLSecurity</title>
+<title>Pretty printing OpenSAML Objects | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,21 +20,21 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Information and example on how to sign and send authnrequests in OpenSAML" />
+<meta name="description" content="In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Signing and Sending AuthnRequests in OpenSAML V3" />
+<meta name="twitter:title" content="Pretty printing OpenSAML Objects" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
-<meta property="og:url" content="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html" />
-<meta property="og:title" content="Signing and Sending AuthnRequests in OpenSAML V3" />
-<meta property="og:description" content="Information and example on how to sign and send authnrequests in OpenSAML" />
+<meta property="og:url" content="https://blog.samlsecurity.com/post/prettyprint-opensaml/" />
+<meta property="og:title" content="Pretty printing OpenSAML Objects" />
+<meta property="og:description" content="In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.samlsecurity.com/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html">
+<link rel="canonical" href="https://blog.samlsecurity.com/post/prettyprint-opensaml/">
 
 
 
@@ -141,7 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
 <div class="grid-inverse wrap content">
   <article class="post_content">
-    <h1 class="post_title">Signing and Sending AuthnRequests in OpenSAML V3</h1>
+    <h1 class="post_title">Pretty printing OpenSAML Objects</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -149,23 +149,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 </span>
     <span class="post_date">
-      Aug 10, 2016</span>
+      Nov 9, 2023</span>
     <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
-        </a><a href='https://blog.samlsecurity.com/tags/opensamlv3/' title="OpenSAMLV3" class="post_tag button button_translucent">OpenSAMLV3
-        </a><a href='https://blog.samlsecurity.com/tags/digital-signature/' title="Digital signature" class="post_tag button button_translucent">Digital signature
+        </a><a href='https://blog.samlsecurity.com/tags/opensaml4/' title="OpenSAML4" class="post_tag button button_translucent">OpenSAML4
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Signing%20and%20Sending%20AuthnRequests%20in%20OpenSAML%20V3&url=https%3a%2f%2fblog.samlsecurity.com%2f2016%2f08%2fsigning-and-sending-authnrequests-in.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Pretty%20printing%20OpenSAML%20Objects&url=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fprettyprint-opensaml%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2f2016%2f08%2fsigning-and-sending-authnrequests-in.html&t=Signing%20and%20Sending%20AuthnRequests%20in%20OpenSAML%20V3" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fprettyprint-opensaml%2f&t=Pretty%20printing%20OpenSAML%20Objects" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -179,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 
     </a>
-    <a href="https://blog.samlsecurity.com/2016/08/signing-and-sending-authnrequests-in.html" title="Copy Link" class="link link_yank">
+    <a href="https://blog.samlsecurity.com/post/prettyprint-opensaml/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -190,50 +189,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    <div class="post_body"><p><strong>This article discusses singing and sending in OpenSAML 3. If you're looking for an article on OpenSAML 4, <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html">you will find it here</a> and if you're looking for an article on OpenSAML 2, <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html">you will find it here</a></strong></p>
-<p>Signing and sending a AuthnRequest in OpenSAML V3 is fortunately not that different from how it was done in OpenSAML V2.</p>
-<p>As described in <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/">this post on AuthnRequests OpenSAML V2</a>, the AuthnRequest is the SAML request that starts a typical SSO authentication process. This is the SP requesting the IDP to authenticate a user.</p>
-<p>As in V2 the <code>HTTPRedirectDeflateEncoder</code> is used to send messages using HTTP redirect, the main difference lays in the message context.</p>
-<p>One of the major changes between V2 and V3 is the message contexts. In version 2, the message contexts where basically one object containing general properties about the message and its destination. In V3 the message context concept has been expanded to be more flexible contain more information. In the new context structure there is a context object per purpose.</p>
-<p>In <a href="/book">my book A Guide to OpenSAML V3</a> I cover the use of the new message contexts in detail.</p>
-<p>To sign and send a AuthnRequest, three contexts are needed.</p>
-<p>The main context is created and the AuthnRequest is set.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">MessageContext</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MessageContext</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">context</span><span class="o">.</span><span class="na">setMessage</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span></span></span></code></pre></div>
-<p>The <code>SAMLPeerEntityContext</code> and <code>SAMLEndpointContext</code> are created and configured to point to the endpoint of the message.</p>
-<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">SAMLPeerEntityContext</span> <span class="n">peerEntityContext</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLPeerEntityContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">SAMLEndpointContext</span> <span class="n">endpointContext</span> <span class="o">=</span> <span class="n">peerEntityContext</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SAMLEndpointContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">endpointContext</span><span class="o">.</span><span class="na">setEndpoint</span><span class="o">(</span><span class="n">idpEndpoint</span><span class="o">);</span></span></span></code></pre></div>
-
-<div class="book-ad" id="OpenSAMLAd">
-<h2 class="upper_ad_line"><span>Ad</span></h2>
-
-
-<a href="https://shop.samlsecurity.com/b/41Tw" id="OpenSAMLAd-link"><div class="book-ad-grid">
-
-  <div class="text"> <p>Want to quickly learn and understand OpenSAML?</p>
-<p>Have a look on the book <em>A guide to OpenSAML</em>!</p>
-</div>
-  
-  
-  <div class="cover"><img alt="Book cover for A Guide to OpenSAML" src="/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_3.png" ></div>
-	
-</div>
-</a>
-<span class="lower_ad_line"></span>
-</div>
-Next, the security parameters context is created and populated with signing information</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">SignatureSigningParameters</span> <span class="n">signatureSigningParameters</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SignatureSigningParameters</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">signatureSigningParameters</span><span class="o">.</span><span class="na">setSigningCredential</span><span class="o">(</span><span class="n">SPCredentials</span><span class="o">.</span><span class="na">getCredential</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">signatureSigningParameters</span><span class="o">.</span><span class="na">setSignatureAlgorithm</span><span class="o">(</span><span class="n">SignatureConstants</span><span class="o">.</span><span class="na">ALGO_ID_SIGNATURE_RSA_SHA256</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">context</span><span class="o">.</span><span class="na">getSubcontext</span><span class="o">(</span><span class="n">SecurityParametersContext</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="kc">true</span><span class="o">).</span><span class="na">setSignatureSigningParameters</span><span class="o">(</span><span class="n">signatureSigningParameters</span><span class="o">);</span></span></span></code></pre></div>
-<p>Next, the <code>HTTPRedirectDeflateEncoder</code> is created and populated with context and the http request object.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">HTTPRedirectDeflateEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HTTPRedirectDeflateEncoder</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">encoder</span><span class="o">.</span><span class="na">setMessageContext</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">encoder</span><span class="o">.</span><span class="na">setHttpServletResponse</span><span class="o">(</span><span class="n">httpServletResponse</span><span class="o">);</span></span></span></code></pre></div>
-<p>Lastly the encoder is initialized and the message is encoded</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">encoder</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">encoder</span><span class="o">.</span><span class="na">encode</span><span class="o">();</span></span></span></code></pre></div>
+    <div class="post_body"><p>In the best of worlds it's not often you need to look into the acctual XML of a SAML message.
+In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.</p>
+<p>Lets have a look on how to go about doing that in OpenSAML 4.</p>
+<p>First let's create a OpenSAML object so we have something to print.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">buildAuthnRequest</span><span class="o">();</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">AuthnRequest</span> <span class="nf">buildAuthnRequest</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">		<span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">AuthnRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setProtocolBinding</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="o">(</span><span class="n">ASSERTION_CONSUMER_ENDPOINT</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">generateSecureRandomId</span><span class="o">());</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">buildIssuer</span><span class="o">());</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setNameIDPolicy</span><span class="o">(</span><span class="n">buildNameIdPolicy</span><span class="o">());</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl">		<span class="k">return</span> <span class="n">authnRequest</span><span class="o">;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">NameIDPolicy</span> <span class="nf">buildNameIdPolicy</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">	<span class="n">NameIDPolicy</span> <span class="n">nameIDPolicy</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">NameIDPolicy</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">	<span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setAllowCreate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl">	<span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="n">NameIDType</span><span class="o">.</span><span class="na">TRANSIENT</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl">	<span class="k">return</span> <span class="n">nameIDPolicy</span><span class="o">;</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">
+</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">Issuer</span> <span class="nf">buildIssuer</span><span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">	<span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">Issuer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">	<span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">ISSUER</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">	<span class="k">return</span> <span class="n">issuer</span><span class="o">;</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<p>Next, lets do the magic to convert the object to a string.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">XMLObjectProviderRegistrySupport</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="n">authnRequest</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">String</span> <span class="n">xmlString</span> <span class="o">=</span> <span class="n">SerializeSupport</span><span class="o">.</span><span class="na">prettyPrintXML</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">xmlString</span><span class="o">);</span></span></span></code></pre></div>
+<p>In the snipped above this the OpenSAML XMLObjectProviderRegistrySupport is used to convert the OpenSAML object to a XML element.
+The OpenSAML SerializeSupport helper class is then used to format the element as a pretty printed indented string.</p>
+<h2 id="get-it-on-github">Get it on Github!</h2>
+<p>The full sample code is availible on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-prettyprint</p>
+<p>Just clone it, run it, go nuts!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">git clone https://github.com/rasmusson/OpenSAML-sample-code/
+</span></span><span class="line"><span class="ln">2</span><span class="cl">cd opensaml-prettyprint
+</span></span><span class="line"><span class="ln">3</span><span class="cl">mvn compile exec:java -Dexec.mainClass=&#34;no.steras.opensamlSamples.prettyprint.Prettyprint&#34;</span></span></code></pre></div>
+<p>The pretty printed object is printed to the console.</p>
 
     </div>
 <div class="post_comments">
@@ -269,9 +274,6 @@ Next, the security parameters context is created and populated with signing info
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/prettyprint-opensaml/" class="nav-link" title="Pretty printing OpenSAML Objects">Pretty printing OpenSAML Objects</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/matadata-location/" class="nav-link" title="ADFS SAML Metadata URL">ADFS SAML Metadata URL</a>
       </li>
       <li>
@@ -291,6 +293,9 @@ Next, the security parameters context is created and populated with signing info
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/" class="nav-link" title="Getting started with OpenSAML 4">Getting started with OpenSAML 4</a>
       </li>
     </ul>
     <div>
