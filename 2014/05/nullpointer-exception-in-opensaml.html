@@ -20,14 +20,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialise the library." />
+<meta name="description" content="This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Nullpointer exception in OpenSAML" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
 <meta property="og:url" content="https://blog.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html" />
 <meta property="og:title" content="Nullpointer exception in OpenSAML" />
-<meta property="og:description" content="This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialise the library." />
+<meta property="og:description" content="This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library." />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    <div class="post_body"><p>This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialise the library.
+    <div class="post_body"><p>This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library.
 OpenSAML needs a couple of configuration files in order to work. The library is provided with a default set of these files that is sufficient for most uses. Before starting the use the library the configurations must be loaded. This is done using the bootstrap function.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">   <span class="n">DefaultBootstrap</span><span class="o">.</span><span class="na">bootstrap</span><span class="o">();</span>

@@ -18,7 +18,7 @@
         
           
             This is the main page on the site where I guide you to all resources on OpenSAML. Here you will find all topics, from beginner to advanced that I have collected over the years.
-First, for you that are totaly new to OpenSAML is a short introduction.
+First, for you that are totally new to OpenSAML is a short introduction.
 What is OpenSAML? OpenSAML is a library to facilitate working with SAML messages. Below are some of the functions that OpenSAML provides:
 Creating SAML messages Parsing and exporting SAML objects as XML Signing and encryption Encoding and message transport Internet2 provides and supports the library.
           

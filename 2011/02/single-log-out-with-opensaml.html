@@ -20,14 +20,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data recived at login. I my case …" />
+<meta name="description" content="To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data received at login. I my case …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Single Log Out with OpenSAML" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
 <meta property="og:url" content="https://blog.samlsecurity.com/2011/02/single-log-out-with-opensaml.html" />
 <meta property="og:title" content="Single Log Out with OpenSAML" />
-<meta property="og:description" content="To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data recived at login. I my case …" />
+<meta property="og:description" content="To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data received at login. I my case …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    <div class="post_body"><p>To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data recived at login. I my case in the Assertion in the Artifact Resolve Response.</p>
+    <div class="post_body"><p>To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data received at login. I my case in the Assertion in the Artifact Resolve Response.</p>
 <p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">//IPR Ergogroup AS
 </span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doSynchronousLogout</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpSession</span> <span class="n">sessionToLogout</span><span class="o">,</span> <span class="kd">final</span> <span class="n">SAMLMetaData</span> <span class="n">metaData</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SOAPException</span><span class="o">,</span> <span class="n">SecurityException</span><span class="o">,</span> <span class="n">ValidationException</span><span class="o">,</span> <span class="n">IllegalArgumentException</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span><span class="o">,</span> <span class="n">MarshallingException</span><span class="o">,</span> <span class="n">SignatureException</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln"> 3</span><span class="cl">   <span class="n">NameID</span> <span class="n">nameId</span> <span class="o">=</span> <span class="o">(</span><span class="n">NameID</span><span class="o">)</span><span class="n">sessionToLogout</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;SAMLNameID&#34;</span><span class="o">);</span>

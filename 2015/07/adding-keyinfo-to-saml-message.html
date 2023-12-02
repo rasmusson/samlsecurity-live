@@ -239,8 +239,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>Canonicalization algorithm URI</li>
 <li>and HMAC output length (if applicable and a value is configured)</li>
 </ul>
-<h2 id="customising-the-keyinfo">Customising the KeyInfo</h2>
-<p>The above statement only uses the default configuration of for generating KeyInfo. To customise the KeyInfo you create your own instance of <code>KeyInfoGeneratorFactory</code>, set it up as preferred and use it in the statement.</p>
+<h2 id="customizing-the-keyinfo">Customizing the KeyInfo</h2>
+<p>The above statement only uses the default configuration of for generating KeyInfo. To customize the KeyInfo you create your own instance of <code>KeyInfoGeneratorFactory</code>, set it up as preferred and use it in the statement.</p>
 <p>The example below shows how to use a <code>X509KeyInfoGeneratorFactory</code> to create a KeyInfo with properties from the X509 certificate used as credential.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">X509KeyInfoGeneratorFactory</span> <span class="n">x509Factory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509KeyInfoGeneratorFactory</span><span class="o">();</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">x509Factory</span><span class="o">.</span><span class="na">setEmitEntityCertificate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>

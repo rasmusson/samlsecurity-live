@@ -192,7 +192,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">https://&lt;your-adfs-server&gt;/FederationMetadata/2007-06/FederationMetadata.xml</span></span></code></pre></div></p>
 <p>The ADFS Metadata is where the ADFS exposes all endpoint, certificates and other information needed by someone setting up a SAML integration with ADFS. ADFS exposes its Metadata XML on the URL mentioned above.</p>
 <p>To export the SAML metadata XML to use when setting up your SAML integration with ADFS, simply browse to the URL and download the file.</p>
-<p>You can also use someting like wget or curl to obtain it.</p>
+<p>You can also use something like wget or curl to obtain it.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">wget https://&lt;your-adfs-server&gt;/FederationMetadata/2007-06/FederationMetadata.xml</span></span></code></pre></div>
 <p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">curl -O https://&lt;your-adfs-server&gt;/FederationMetadata/2007-06/FederationMetadata.xml</span></span></code></pre></div>
 

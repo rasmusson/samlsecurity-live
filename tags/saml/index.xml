@@ -349,7 +349,7 @@ Buy the book on Payhip! The book has three parts, the first of which introduces 
       <description>
         
           
-            This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialise the library.
+            This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library.
           
           
         
@@ -522,7 +522,7 @@ The normal way to create a SAML object is like this.
       <description>
         
           
-            To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data recived at login. I my case in the Assertion in the Artifact Resolve Response.
+            To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data received at login. I my case in the Assertion in the Artifact Resolve Response.
 1//IPR Ergogroup AS 2public static void doSynchronousLogout(final HttpSession sessionToLogout, final SAMLMetaData metaData) throws SOAPException, SecurityException, ValidationException, IllegalArgumentException, java.lang.SecurityException, IllegalAccessException, MarshallingException, SignatureException { 3 NameID nameId = (NameID)sessionToLogout.getAttribute(&amp;#34;SAMLNameID&amp;#34;); 4 String sessionIndex = (String)sessionToLogout.
           
           
