@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pySAML on SAMLSecurity</title>
+    <link>https://blog.samlsecurity.com/tags/pysaml/</link>
+    <description>Recent content in pySAML on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/pysaml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick first introduction to PySAML</title>
+      <link>https://blog.samlsecurity.com/post/pysaml-intro/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/pysaml-intro/</guid>
+      <description>
+        
+          
+            PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. As a widely used standard for exchanging authentication and authorization data between parties, SAML ensures secure and seamless user authentication across disparate systems.
+In this quick tutorial we will look at the how to set up a simple SAML Service provider using PySAML to talk to mocksaml.dev as IdP.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,7 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick first introduction to PySAML</title>
+      <link>https://blog.samlsecurity.com/post/pysaml-intro/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/pysaml-intro/</guid>
+      <description>
+        
+          
+            PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. As a widely used standard for exchanging authentication and authorization data between parties, SAML ensures secure and seamless user authentication across disparate systems.
+In this quick tutorial we will look at the how to set up a simple SAML Service provider using PySAML to talk to mocksaml.dev as IdP.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Pretty printing OpenSAML Objects</title>
       <link>https://blog.samlsecurity.com/post/prettyprint-opensaml/</link>
@@ -17,7 +34,7 @@
       <description>
         
           
-            In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.
+            In the best of worlds it&#39;s not often you need to look into the actual XML of a SAML message. In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.
 Lets have a look on how to go about doing that in OpenSAML 4.
 First let&#39;s create a OpenSAML object so we have something to print.
           

@@ -7,7 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick first introduction to PySAML</title>
+      <link>https://blog.samlsecurity.com/post/pysaml-intro/</link>
+      <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/pysaml-intro/</guid>
+      <description>
+        
+          
+            PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. As a widely used standard for exchanging authentication and authorization data between parties, SAML ensures secure and seamless user authentication across disparate systems.
+In this quick tutorial we will look at the how to set up a simple SAML Service provider using PySAML to talk to mocksaml.dev as IdP.
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Authenticating a React SPA towards a SAML IdP</title>
       <link>https://blog.samlsecurity.com/post/saml-for-react-spa/</link>

@@ -4,35 +4,37 @@
   lang="en"
   data-figures=""
   
+    class="page"
+  
   
   >
   <head>
-<title>OpenSAML | SAMLSecurity</title>
+<title>Quick first introduction to PySAML | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
 
+  
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="" />
+<meta name="description" content="PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="OpenSAML" />
+<meta name="twitter:title" content="Quick first introduction to PySAML" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
-<meta property="og:url" content="https://blog.samlsecurity.com/tags/opensaml/" />
-<meta property="og:title" content="OpenSAML" />
-<meta property="og:description" content="" />
+<meta property="og:url" content="https://blog.samlsecurity.com/post/pysaml-intro/" />
+<meta property="og:title" content="Quick first introduction to PySAML" />
+<meta property="og:description" content="PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.samlsecurity.com/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.samlsecurity.com/tags/opensaml/">
-<link rel="alternate" type="application/rss+xml" href="https://blog.samlsecurity.com/tags/opensaml/index.xml" title="SAMLSecurity" />
+<link rel="canonical" href="https://blog.samlsecurity.com/post/pysaml-intro/">
 
 
 
@@ -56,7 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   </head>
   <body
-    data-code="7"
+    data-code="50"
     data-lines="false"
     id="documentTop"
   >
@@ -136,17 +138,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <div>
-    <ul class="posts" id="posts">
-        <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://blog.samlsecurity.com/p/opensaml.html" title="The Big OpenSAML Guide">The Big OpenSAML Guide</a>
-      </h3>
-      
+  <article class="post_content">
+    <h1 class="post_title">Quick first introduction to PySAML</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -154,21 +149,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 </span>
     <span class="post_date">
-      Apr 24, 2018</span>
-    <span class="post_time"> · 4 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/opensaml/' title="OpenSAML" class="post_tag button button_translucent">OpenSAML
+      Dec 2, 2023</span>
+    <span class="post_time"> · 6 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
+        </a><a href='https://blog.samlsecurity.com/tags/pysaml/' title="pySAML" class="post_tag button button_translucent">pySAML
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=The%20Big%20OpenSAML%20Guide&url=https%3a%2f%2fblog.samlsecurity.com%2fp%2fopensaml.html&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Quick%20first%20introduction%20to%20PySAML&url=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpysaml-intro%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fp%2fopensaml.html&t=The%20Big%20OpenSAML%20Guide" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpysaml-intro%2f&t=Quick%20first%20introduction%20to%20PySAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -182,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 
     </a>
-    <a href="https://blog.samlsecurity.com/p/opensaml.html" title="Copy Link" class="link link_yank">
+    <a href="https://blog.samlsecurity.com/post/pysaml-intro/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -193,32 +189,232 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div class="pale">
-          
-            <p>This is the main page on the site where I guide you to all resources on OpenSAML. Here you will find all topics, from beginner to advanced that I have collected over the years.
-First, for you that are totaly new to OpenSAML is a short introduction.
-What is OpenSAML? OpenSAML is a library to facilitate working with SAML …</p>
-          
-          <br>
-          <a href="https://blog.samlsecurity.com/p/opensaml.html" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
+      <div class="post_toc">
+        <h2>Overview</h2>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#quick-recap-on-saml">Quick recap on SAML</a></li>
+        <li><a href="#how-pysaml2-simplifies-authentication">How PySAML2 Simplifies Authentication</a></li>
+        <li><a href="#key-benefits-of-pysaml2">Key Benefits of PySAML2</a></li>
+      </ul>
+    </li>
+    <li><a href="#digging-in">Digging in</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#service-configuration">Service configuration</a></li>
+        <li><a href="#idp-metadata">IdP Metadata</a></li>
+        <li><a href="#application-code">Application code</a></li>
+      </ul>
+    </li>
+    <li><a href="#get-it-on-github-and-try-it-out">Get it on Github and try it out!</a></li>
+  </ul>
+</nav>
       </div>
-    </div>
-  </li>
+    
+    <div class="post_body"><p>PySAML2 is a powerful Python library designed to streamline the integration of the Security Assertion Markup Language (SAML) protocol into Python applications. As a widely used standard for exchanging authentication and authorization data between parties, SAML ensures secure and seamless user authentication across disparate systems.</p>
+<p>In this quick tutorial we will look at the how to set up a simple SAML Service provider using PySAML to talk to mocksaml.dev as IdP.</p>
+<h2 id="introduction">Introduction</h2>
+<p>First lets quickly look into some of the basics of SAML and PySAML.</p>
+<h3 id="quick-recap-on-saml">Quick recap on SAML</h3>
+<p>SAML serves as a foundation for enabling Single Sign-On (SSO) capabilities, allowing users to access multiple applications through a single set of credentials. It facilitates secure exchanges of authentication and authorization data between an identity provider (IdP) and a service provider (SP).</p>
+<p>The primary components of a SAML transaction include:</p>
+<ul>
+<li>Identity Provider (IdP): Manages user identities and authentication processes.</li>
+<li>Service Provider (SP): Hosts the applications/services users want to access.</li>
+</ul>
+<p>The SP requests a user to be authenticated by the IdP and get a Authentication Response back as a proof authentication.</p>
+<h3 id="how-pysaml2-simplifies-authentication">How PySAML2 Simplifies Authentication</h3>
+<p>PySAML2 abstracts the complexities of SAML protocols, providing a Python-based framework to seamlessly integrate SAML-based authentication into applications. It empowers developers to:</p>
+<ul>
+<li>Effortlessly Implement SAML: With PySAML2, developers can focus on application logic while the library handles the intricate SAML protocol details.</li>
+<li>Enable Secure Authentication: Ensure secure and reliable authentication mechanisms, meeting the stringent security requirements of modern applications.</li>
+<li>Facilitate Interoperability: PySAML2 adheres to the SAML standard, ensuring compatibility and interoperability across various identity providers and service providers.</li>
+</ul>
+<h3 id="key-benefits-of-pysaml2">Key Benefits of PySAML2</h3>
+<ul>
+<li>Robust Security Measures: PySAML2 incorporates robust security features, including encryption and digital signatures, to fortify authentication processes.</li>
+<li>Flexible Integration: Seamlessly integrate SAML-based authentication into Flask, Django, and other Python frameworks.</li>
+<li>Comprehensive Protocol Support: Support for SAML 2.0 and its various profiles, enabling comprehensive SSO capabilities.</li>
+</ul>
 
-      <li>
-      </li>
-    </ul>
-  </div>
+<div class="book-ad" id="SAML20Ad">
+<h2 class="upper_ad_line"><span>Ad</span></h2>
+
+
+<a href="https://shop.samlsecurity.com/b/fGWSH" id="SAML20Ad-link"><div class="book-ad-grid">
+
+  <div class="text"> <p>Need a complete understanding of SAML 2.0?</p>
+<p>Have a look on the book <em>SAML 2.0: Designing secure identity federation</em>!</p>
+</div>
+  
+  
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+	
+</div>
+</a>
+<span class="lower_ad_line"></span>
+</div>
+<h2 id="digging-in">Digging in</h2>
+<p>The PySAML sample below is a minimal sample of a PySAML usage, with all the shortcuts, just to get PySAML up andd running as simple as possible so showcase it.
+For example</p>
+<ul>
+<li>No signatures are done or required</li>
+<li>Unsolicited responses are allowed</li>
+<li>No encryption or anything</li>
+</ul>
+<p>All of this can pose security problems and should be addressed in anything used for more than a demo like this.
+Those topics is or will be covered in the rest of <a href="https://blog.samlsecurity.com/tags/pysaml/">my series on PySAML</a>.</p>
+<p>To setup this small sample we will look att three parts of the typical PySAML application</p>
+<ul>
+<li>Service configuration: the configuration defining the service PySAML is running. In this case the SP.</li>
+<li>Metadata: The metadata of the part we are talking to. In this case the mocksaml.dev IdP</li>
+<li>The python application code using PySAML</li>
+</ul>
+<p>Now PySAML it self does not itself handle any redirection of use or receiving of responses. It just does the base work of SAML. To make this a bit more of a complete sample I use flask to be the web server and handle this.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before digging in to PySAML2 into your Flask application, ensure you have the following prerequisites installed:</p>
+<p>Flask Framework: PySAML2 integrates seamlessly with Flask. Install Flask by running pip install flask.
+xmlsec1 Library: For cryptographic operations, install xmlsec1 based on your system requirements. On Ubuntu/Debian, use sudo apt-get install xmlsec1.
+PySAML itself: Install by running pip install pysaml2</p>
+<h3 id="service-configuration">Service configuration</h3>
+<p>The first part we will look at here is the service configuration</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kn">from</span> <span class="nn">saml2.config</span> <span class="kn">import</span> <span class="n">Config</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kn">from</span> <span class="nn">saml2</span> <span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">saml_config</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kn">from</span> <span class="nn">saml2.saml</span> <span class="kn">import</span> <span class="n">NAMEID_FORMAT_UNSPECIFIED</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"># SP Configuration</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="n">SP_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="s2">&#34;entityid&#34;</span><span class="p">:</span> <span class="s2">&#34;urn:example:sp&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="s2">&#34;service&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="s2">&#34;sp&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">            <span class="s2">&#34;want_response_signed&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">            <span class="s2">&#34;want_assertions_signed&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">            <span class="s2">&#34;name_id_format&#34;</span><span class="p">:</span> <span class="n">NAMEID_FORMAT_UNSPECIFIED</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">            <span class="s2">&#34;endpoints&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="s2">&#34;assertion_consumer_service&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">                    <span class="p">(</span><span class="s2">&#34;http://localhost:8000/acs&#34;</span><span class="p">,</span> <span class="n">saml_config</span><span class="o">.</span><span class="n">BINDING_HTTP_POST</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">                <span class="p">]</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">            <span class="s2">&#34;allow_unsolicited&#34;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">            <span class="s2">&#34;require_signed_assertion&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">            <span class="s2">&#34;require_signed_response&#34;</span><span class="p">:</span> <span class="kc">False</span> 
+</span></span><span class="line"><span class="ln">21</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="s2">&#34;metadata&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">        <span class="s2">&#34;local&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;metadata.xml&#34;</span><span class="p">]</span>    
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="p">}</span></span></span></code></pre></div>
+<p>The service configuration above shows a simple example of the configuration of the service run by PySAML.
+For simplicity and demoing we say that we don't want or require signing.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="s2">&#34;service&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="s2">&#34;sp&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">            <span class="s2">&#34;want_response_signed&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">            <span class="s2">&#34;want_assertions_signed&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">            <span class="s2">&#34;require_signed_assertion&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">            <span class="s2">&#34;require_signed_response&#34;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> </span></span></code></pre></div></p>
+<p>We also defines that it is ok with unsolicited responses.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="s2">&#34;allow_unsolicited&#34;</span><span class="p">:</span> <span class="kc">True</span></span></span></code></pre></div></p>
+<p>The endpoint definition tells the IdP where to send the resulting authentication response
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="s2">&#34;endpoints&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="s2">&#34;assertion_consumer_service&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="p">(</span><span class="s2">&#34;http://localhost:8000/acs&#34;</span><span class="p">,</span> <span class="n">saml_config</span><span class="o">.</span><span class="n">BINDING_HTTP_POST</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">}</span></span></span></code></pre></div></p>
+<p>and we refer to our IdP Metadata in the metadata.xml explained in the next section.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="s2">&#34;metadata&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="s2">&#34;local&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;metadata.xml&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span></span></span></code></pre></div></p>
+<h3 id="idp-metadata">IdP Metadata</h3>
+<p>Next lets look at the IdP metadata describing the mocksaml IdP</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nt">&lt;md:EntityDescriptor</span> <span class="na">xmlns:md=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:metadata&#34;</span> <span class="na">cacheDuration=</span><span class="s">&#34;PT1701351683S&#34;</span> <span class="na">entityID=</span><span class="s">&#34;samlmock.dev&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="nt">&lt;md:IDPSSODescriptor</span> <span class="na">WantAuthnRequestsSigned=</span><span class="s">&#34;false&#34;</span> <span class="na">protocolSupportEnumeration=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:protocol&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nt">&lt;md:NameIDFormat&gt;</span>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified<span class="nt">&lt;/md:NameIDFormat&gt;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="nt">&lt;md:SingleSignOnService</span> <span class="na">Binding=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect&#34;</span> <span class="na">Location=</span><span class="s">&#34;https://samlmock.dev/idp&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">  <span class="nt">&lt;/md:IDPSSODescriptor&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="nt">&lt;/md:EntityDescriptor&gt;</span></span></span></code></pre></div>
+<p>The XML above shows a typical example of a simple metadata for a IdP.
+The IdP, in this case accepts authentication requests that are not signed, do for simplicity's sake we use a metadata without keys and with the attribute <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl">WantAuthnRequestsSigned=&#34;false&#34;</span></span></code></pre></div>, that states that the IdP does not want it singed.</p>
+<p>Other than that it mainly says that the binding HTTP Redirect should be used to send the authentication request.</p>
+<h3 id="application-code">Application code</h3>
+<p>Now finally lets look at the application code doing the lifting</p>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="kn">from</span> <span class="nn">sp_config</span> <span class="kn">import</span> <span class="n">SP_CONFIG</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">config</span> <span class="o">=</span> <span class="n">saml_config</span><span class="o">.</span><span class="n">Config</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">config</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">SP_CONFIG</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">sp</span> <span class="o">=</span> <span class="n">Saml2Client</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span></span></span></code></pre></div>
+Some basic initiation. We loud our service configuration in SP_CONFIG and initiate a SAML2 client from it. Also initiate the flask app</p>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">request_id</span><span class="p">,</span> <span class="n">authn_request</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">prepare_for_authenticate</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">authn_request</span><span class="p">[</span><span class="s1">&#39;headers&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">])</span></span></span></code></pre></div>
+A simple endpoint in flask that creates the authentication response and then redirects the user to the IdP along with it.</p>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/acs&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">def</span> <span class="nf">acs</span><span class="p">():</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">authn_response</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">parse_authn_request_response</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;SAMLResponse&#39;</span><span class="p">],</span> <span class="n">saml_config</span><span class="o">.</span><span class="n">BINDING_HTTP_POST</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">authn_response</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/success&#39;</span> <span class="k">if</span> <span class="n">authn_response</span> <span class="k">else</span> <span class="s1">&#39;/error&#39;</span><span class="p">)</span></span></span></code></pre></div>
+A flask endpoint acting as the Assertion Consumer Service, receiving the Authentication Response from IdP, when the user is sent back. The SAML Response is send as a form parameter in a POST request.
+The SAML response is printed to the console
+The user is then redirected to the success page</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/success&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">def</span> <span class="nf">success</span><span class="p">():</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">return</span> <span class="s2">&#34;&lt;h1&gt;Authentication successful!&lt;/h1&gt;&#34;</span></span></span></code></pre></div>
+<p>The final success page indicating that the user was successfully authenticated.</p>
+
+<div class="book-ad" id="SAML20Ad">
+<h2 class="upper_ad_line"><span>Ad</span></h2>
+
+
+<a href="https://shop.samlsecurity.com/b/fGWSH" id="SAML20Ad-link"><div class="book-ad-grid">
+
+  <div class="text"> <p>Need a complete understanding of SAML 2.0?</p>
+<p>Have a look on the book <em>SAML 2.0: Designing secure identity federation</em>!</p>
+</div>
+  
+  
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+	
+</div>
+</a>
+<span class="lower_ad_line"></span>
+</div>
+<h2 id="get-it-on-github-and-try-it-out">Get it on Github and try it out!</h2>
+<p>The full sample code is available on Github at <a href="https://github.com/rasmusson/pysaml-samples">https://github.com/rasmusson/pysaml-samples</a> under intro/</p>
+<p>Just clone it, run it, go nuts!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">apt-get install xmlsec1
+</span></span><span class="line"><span class="ln">2</span><span class="cl">pip install flask
+</span></span><span class="line"><span class="ln">3</span><span class="cl">pip install pysaml2
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">git clone https://github.com/rasmusson/pysaml-samples.git
+</span></span><span class="line"><span class="ln">6</span><span class="cl">cd intro
+</span></span><span class="line"><span class="ln">7</span><span class="cl">
+</span></span><span class="line"><span class="ln">8</span><span class="cl">python sp_server.py</span></span></code></pre></div>
+
+    </div>
+<div class="post_comments">
+  
+  
+  
+</div>
+
+
+
+
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <br>
     
   
   <div class="search">
-    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='tags'>
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
     <label for="find" class="search_label"><svg class="icon">
   <title>search</title>
   <use xlink:href="#search"></use>
@@ -234,9 +430,6 @@ What is OpenSAML? OpenSAML is a library to facilitate working with SAML …</p>
     
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
-      <li>
-        <a href="https://blog.samlsecurity.com/post/pysaml-intro/" class="nav-link" title="Quick first introduction to PySAML">Quick first introduction to PySAML</a>
-      </li>
       <li>
         <a href="https://blog.samlsecurity.com/post/prettyprint-opensaml/" class="nav-link" title="Pretty printing OpenSAML Objects">Pretty printing OpenSAML Objects</a>
       </li>
@@ -257,6 +450,9 @@ What is OpenSAML? OpenSAML is a library to facilitate working with SAML …</p>
       </li>
       <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" class="nav-link" title="Redirect with AuthnRequest">Redirect with AuthnRequest</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
       </li>
     </ul>
     <div>
@@ -334,9 +530,8 @@ What is OpenSAML? OpenSAML is a library to facilitate working with SAML …</p>
   </section>
 </aside>
 
+  
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>

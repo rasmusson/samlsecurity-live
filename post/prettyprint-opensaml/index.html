@@ -20,14 +20,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there …" />
+<meta name="description" content="In the best of worlds it&#39;s not often you need to look into the actual XML of a SAML message. In the real world however, when troubleshooting a problem, there is …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Pretty printing OpenSAML Objects" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
 <meta property="og:url" content="https://blog.samlsecurity.com/post/prettyprint-opensaml/" />
 <meta property="og:title" content="Pretty printing OpenSAML Objects" />
-<meta property="og:description" content="In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there …" />
+<meta property="og:description" content="In the best of worlds it&#39;s not often you need to look into the actual XML of a SAML message. In the real world however, when troubleshooting a problem, there is …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    <div class="post_body"><p>In the best of worlds it's not often you need to look into the acctual XML of a SAML message.
+    <div class="post_body"><p>In the best of worlds it's not often you need to look into the actual XML of a SAML message.
 In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.</p>
 <p>Lets have a look on how to go about doing that in OpenSAML 4.</p>
 <p>First let's create a OpenSAML object so we have something to print.</p>
@@ -223,6 +223,24 @@ In the real world however, when troubleshooting a problem, there is often leads 
 </span></span><span class="line"><span class="ln">28</span><span class="cl">
 </span></span><span class="line"><span class="ln">29</span><span class="cl">	<span class="k">return</span> <span class="n">issuer</span><span class="o">;</span>
 </span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+
+<div class="book-ad" id="OpenSAMLAd">
+<h2 class="upper_ad_line"><span>Ad</span></h2>
+
+
+<a href="https://shop.samlsecurity.com/b/41Tw" id="OpenSAMLAd-link"><div class="book-ad-grid">
+
+  <div class="text"> <p>Want to quickly learn and understand OpenSAML?</p>
+<p>Have a look on the book <em>A guide to OpenSAML</em>!</p>
+</div>
+  
+  
+  <div class="cover"><img alt="Book cover for A Guide to OpenSAML" src="/ads/opensamlv3/opensamlv3_cover_hu464517d871c03bfc252f8270c7ac227d_980644_400x300_fit_box_3.png" ></div>
+	
+</div>
+</a>
+<span class="lower_ad_line"></span>
+</div>
 <p>Next, lets do the magic to convert the object to a string.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">XMLObjectProviderRegistrySupport</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
@@ -233,7 +251,7 @@ In the real world however, when troubleshooting a problem, there is often leads 
 <p>In the snipped above this the OpenSAML XMLObjectProviderRegistrySupport is used to convert the OpenSAML object to a XML element.
 The OpenSAML SerializeSupport helper class is then used to format the element as a pretty printed indented string.</p>
 <h2 id="get-it-on-github">Get it on Github!</h2>
-<p>The full sample code is availible on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-prettyprint</p>
+<p>The full sample code is available on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under opensaml-prettyprint</p>
 <p>Just clone it, run it, go nuts!</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">git clone https://github.com/rasmusson/OpenSAML-sample-code/
 </span></span><span class="line"><span class="ln">2</span><span class="cl">cd opensaml-prettyprint
@@ -274,6 +292,9 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://blog.samlsecurity.com/post/pysaml-intro/" class="nav-link" title="Quick first introduction to PySAML">Quick first introduction to PySAML</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/post/matadata-location/" class="nav-link" title="ADFS SAML Metadata URL">ADFS SAML Metadata URL</a>
       </li>
       <li>
@@ -294,9 +315,6 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
       <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
       </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/getting-started-opensaml-v4/" class="nav-link" title="Getting started with OpenSAML 4">Getting started with OpenSAML 4</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -308,7 +326,7 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">6</span>
+          <span class="button_tally">7</span>
         </a>
         
         
@@ -319,7 +337,7 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">31</span>
+          <span class="button_tally">32</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -359,6 +377,11 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
         
         <a href='https://blog.samlsecurity.com/tags/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
+          PYSAML
           <span class="button_tally">1</span>
         </a>
         

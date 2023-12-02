@@ -17,7 +17,7 @@
       <description>
         
           
-            In the best of worlds it&#39;s not often you need to look into the acctual XML of a SAML message. In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.
+            In the best of worlds it&#39;s not often you need to look into the actual XML of a SAML message. In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.
 Lets have a look on how to go about doing that in OpenSAML 4.
 First let&#39;s create a OpenSAML object so we have something to print.
           

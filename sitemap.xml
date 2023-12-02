@@ -3,11 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.samlsecurity.com/</loc>
-    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url><url>
     <loc>https://blog.samlsecurity.com/categories/</loc>
-    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/post/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/pysaml/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/post/pysaml-intro/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/categories/saml/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/tags/</loc>
+    <lastmod>2023-12-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/categories/opensaml/</loc>
     <lastmod>2023-11-09T00:00:00+00:00</lastmod>
@@ -15,25 +33,13 @@
     <loc>https://blog.samlsecurity.com/tags/opensaml4/</loc>
     <lastmod>2023-11-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://blog.samlsecurity.com/post/</loc>
-    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://blog.samlsecurity.com/post/prettyprint-opensaml/</loc>
-    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/saml/</loc>
-    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/tags/</loc>
     <lastmod>2023-11-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/matadata-location/</loc>
     <lastmod>2022-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/post/saml-for-react-spa/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://blog.samlsecurity.com/categories/saml/</loc>
     <lastmod>2022-03-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html</loc>
