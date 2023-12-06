@@ -34,7 +34,7 @@ In this quick tutorial we will look at the how to set up a simple SAML Service p
       <description>
         
           
-            In most example around the web, PySAML is used with the configuration attribute 1allow_unsolicited=True. This disables a, even though optional, security feature of SAML, allowing unsolicited responses to be received and considered valid. Obviously this should not be done in production implementations.
+            In most example around the web, PySAML is used with the configuration attribute allow_unsolicited=True. This disables a, even though optional, security feature of SAML, allowing unsolicited responses to be received and considered valid. Obviously this should not be done in production implementations.
 In this article I will show you what solicited responses are and how you can validate that a response is solicited in PySAML.
 Solicited and unsolicited responses So what is a solicited or unsolicited response?
           
