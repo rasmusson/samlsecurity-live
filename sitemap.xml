@@ -182,5 +182,7 @@
     <loc>https://blog.samlsecurity.com/search/</loc>
   </url><url>
     <loc>https://blog.samlsecurity.com/series/</loc>
+  </url><url>
+    <loc>https://blog.samlsecurity.com/post/pysaml-unsolicited-response/</loc>
   </url>
 </urlset>

@@ -4,35 +4,37 @@
   lang="en"
   data-figures=""
   
+    class="page"
+  
   
   >
   <head>
-<title>Categories | SAMLSecurity</title>
+<title>Verifying solicited responses in PySAML | SAMLSecurity</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
 
+  
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="" />
+<meta name="description" content="In most example around the web, PySAML is used with the configuration attribute 1allow_unsolicited=True. This disables a, even though optional, security feature …" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
-<meta name="twitter:title" content="Categories" />
+<meta name="twitter:title" content="Verifying solicited responses in PySAML" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
-<meta property="og:url" content="https://blog.samlsecurity.com/categories/" />
-<meta property="og:title" content="Categories" />
-<meta property="og:description" content="" />
+<meta property="og:url" content="https://blog.samlsecurity.com/post/pysaml-unsolicited-response/" />
+<meta property="og:title" content="Verifying solicited responses in PySAML" />
+<meta property="og:description" content="In most example around the web, PySAML is used with the configuration attribute 1allow_unsolicited=True. This disables a, even though optional, security feature …" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.samlsecurity.com/icons/favicon-32x32.png">
 <link rel="manifest" href="https://blog.samlsecurity.com/icons/site.webmanifest">
 
-<link rel="canonical" href="https://blog.samlsecurity.com/categories/">
-<link rel="alternate" type="application/rss+xml" href="https://blog.samlsecurity.com/categories/index.xml" title="SAMLSecurity" />
+<link rel="canonical" href="https://blog.samlsecurity.com/post/pysaml-unsolicited-response/">
 
 
 
@@ -56,7 +58,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   </head>
   <body
-    data-code="7"
+    data-code="50"
     data-lines="false"
     id="documentTop"
   >
@@ -136,17 +138,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </nav>
 </header>
     <main>
-
+  
 <div class="grid-inverse wrap content">
-  <div>
-    <ul class="posts" id="posts">
-        <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://blog.samlsecurity.com/categories/saml/" title="SAML">SAML</a>
-      </h3>
-      
+  <article class="post_content">
+    <h1 class="post_title">Verifying solicited responses in PySAML</h1>
   <div class="post_meta">
     <span><svg class="icon">
   <title>calendar</title>
@@ -154,19 +149,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 </span>
     <span class="post_date">
-      Dec 2, 2023</span>
-    <span class="post_time"> · 0 min read</span>
+      Jan 1, 0001</span>
+    <span class="post_time"> · 3 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
+        </a><a href='https://blog.samlsecurity.com/tags/pysaml/' title="pySAML" class="post_tag button button_translucent">pySAML
+        </a>
+    </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=SAML&url=https%3a%2f%2fblog.samlsecurity.com%2fcategories%2fsaml%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Verifying%20solicited%20responses%20in%20PySAML&url=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpysaml-unsolicited-response%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fcategories%2fsaml%2f&t=SAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fpost%2fpysaml-unsolicited-response%2f&t=Verifying%20solicited%20responses%20in%20PySAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -180,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 
     </a>
-    <a href="https://blog.samlsecurity.com/categories/saml/" title="Copy Link" class="link link_yank">
+    <a href="https://blog.samlsecurity.com/post/pysaml-unsolicited-response/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -191,94 +189,90 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-    </div>
-      <div class="excerpt_footer">
-        <div class="pale">
-          
-            <p></p>
-          
-          <br>
-          <a href="https://blog.samlsecurity.com/categories/saml/" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
+      <div class="post_toc">
+        <h2>Overview</h2>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#solicited-and-unsolicited-responses">Solicited and unsolicited responses</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#get-it-on-github-and-try-it-out">Get it on Github and try it out!</a></li>
+  </ul>
+</nav>
       </div>
+    
+    <div class="post_body"><p>In most example around the web, PySAML is used with the configuration attribute <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">allow_unsolicited</span><span class="o">=</span><span class="kc">True</span></span></span></code></pre></div>. This disables a, even though optional, security feature of SAML, allowing unsolicited responses to be received and considered valid. Obviously this should not be done in production implementations.</p>
+<p>In this article I will show you what solicited responses are and how you can validate that a response is solicited in PySAML.</p>
+<h2 id="solicited-and-unsolicited-responses">Solicited and unsolicited responses</h2>
+<p>So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as opposed to a unsolicited response that arrives without you asking for it.</p>
+<p>In the context of SAML, a un solicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.</p>
+<p>This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authenticate by sending the authentication request.</p>
+<p>In order to keep track of this in SAML, when the SP sends a request to the IdP, SP saves the Id of the request. When the IdP send the authentication response back includes the id for the request it responds to in a an attribute, InResponseTo</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;samlp:Response</span> <span class="na">xmlns:samlp=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:protocol&#34;</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="na">ID=</span><span class="s">&#34;de8b79c37092487aa7f9c5cb6c5a542a&#34;</span> 
+</span></span><span class="line hl"><span class="ln">3</span><span class="cl">    <span class="na">InResponseTo=</span><span class="s">&#34;id-5PGmWNaR9dLIoTGOf&#34;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="na">Version=</span><span class="s">&#34;2.0&#34;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="na">IssueInstant=</span><span class="s">&#34;2023-12-02T13:17:14.765Z&#34;</span> 
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="na">Destination=</span><span class="s">&#34;http://localhost:5000/acs&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">...
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nt">&lt;/samlp:Response&gt;</span></span></span></code></pre></div>
+<p>When the SP receives the response it verifies that the InResponseTo id  in the response is the same as the request it sent, ensuring that the response is actually an response to the request that was sent.</p>
+<p>This is a topic a dive deep into in my book on SAML.
+
+<div class="book-ad" id="SAML20Ad">
+<h2 class="upper_ad_line"><span>Ad</span></h2>
+
+
+<a href="https://shop.samlsecurity.com/b/fGWSH" id="SAML20Ad-link"><div class="book-ad-grid">
+
+  <div class="text"> <p>Need a complete understanding of SAML 2.0?</p>
+<p>Have a look on the book <em>SAML 2.0: Designing secure identity federation</em>!</p>
+</div>
+  
+  
+  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+	
+</div>
+</a>
+<span class="lower_ad_line"></span>
+</div></p>
+<h2 id="code">Code</h2>
+<p>The prepare_for_authenticate function in PySAML client returns in addition to the authentication request also the request id for this purpose. Lets store this as key in a dictionary.
+The value of the entry should be the target for the user was heading to before starting authentication. I the case below we just hard code it to simplify.
+The dictionary is stored on the HTTP session of the user</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">request_id</span><span class="p">,</span> <span class="n">authn_request</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">prepare_for_authenticate</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">session</span><span class="p">[</span><span class="s1">&#39;saml2_outstanding_requests&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">request_id</span><span class="p">:</span> <span class="s2">&#34;/success&#34;</span><span class="p">}</span></span></span></code></pre></div>
+<p>Next when we receive the response we parse it using the parse_authn_request_response function of the PySAML client. This function also verifies the InResponseTo id and takes the dictionary we made earlier as a argument of ids of sent requests.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">authn_response</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">parse_authn_request_response</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;SAMLResponse&#39;</span><span class="p">],</span> <span class="n">saml_config</span><span class="o">.</span><span class="n">BINDING_HTTP_POST</span><span class="p">,</span> <span class="n">session</span><span class="p">[</span><span class="s1">&#39;saml2_outstanding_requests&#39;</span><span class="p">])</span></span></span></code></pre></div>
+<h2 id="get-it-on-github-and-try-it-out">Get it on Github and try it out!</h2>
+<p>The full sample code is available on Github at <a href="https://github.com/rasmusson/pysaml-samples">https://github.com/rasmusson/pysaml-samples</a> under solicited_responses/</p>
+<p>Just clone it, run it, go nuts!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">apt-get install xmlsec1
+</span></span><span class="line"><span class="ln">2</span><span class="cl">pip install flask
+</span></span><span class="line"><span class="ln">3</span><span class="cl">pip install pysaml2
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">git clone https://github.com/rasmusson/pysaml-samples.git
+</span></span><span class="line"><span class="ln">6</span><span class="cl">cd intro
+</span></span><span class="line"><span class="ln">7</span><span class="cl">
+</span></span><span class="line"><span class="ln">8</span><span class="cl">python sample.py</span></span></code></pre></div>
+
     </div>
-  </li>
+<div class="post_comments">
+  
+  
+  
+</div>
 
-        <li class="post_item">
-  <div class="excerpt">
-    <div class="excerpt_header">
-      <h3 class="post_link">
-        <a href="https://blog.samlsecurity.com/categories/opensaml/" title="OpenSAML">OpenSAML</a>
-      </h3>
-      
-  <div class="post_meta">
-    <span><svg class="icon">
-  <title>calendar</title>
-  <use xlink:href="#calendar"></use>
-</svg>
-</span>
-    <span class="post_date">
-      Nov 9, 2023</span>
-    <span class="post_time"> · 0 min read</span>
-    <span class="page_only">&nbsp;·
-  <div class="post_share">
-    Share on:
-    <a href="https://twitter.com/intent/tweet?text=OpenSAML&url=https%3a%2f%2fblog.samlsecurity.com%2fcategories%2fopensaml%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
-      <svg class="icon">
-  <title>twitter</title>
-  <use xlink:href="#twitter"></use>
-</svg>
 
-    </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fblog.samlsecurity.com%2fcategories%2fopensaml%2f&t=OpenSAML" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
-      <svg class="icon">
-  <title>facebook</title>
-  <use xlink:href="#facebook"></use>
-</svg>
 
-    </a>
-    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
-      <svg class="icon">
-  <title>linkedin</title>
-  <use xlink:href="#linkedin"></use>
-</svg>
 
-    </a>
-    <a href="https://blog.samlsecurity.com/categories/opensaml/" title="Copy Link" class="link link_yank">
-      <svg class="icon">
-  <title>copy</title>
-  <use xlink:href="#copy"></use>
-</svg>
-
-    </a>
-  </div>
-  </span>
-  </div>
-
-    </div>
-      <div class="excerpt_footer">
-        <div class="pale">
-          
-            <p></p>
-          
-          <br>
-          <a href="https://blog.samlsecurity.com/categories/opensaml/" title="Read More" class="excerpt_more button">Read More</a>
-        </div>
-      </div>
-    </div>
-  </li>
-
-      <li>
-      </li>
-    </ul>
-  </div>
+  </article>
 <aside class="sidebar">
   <section class="sidebar_inner">
     <br>
     
   
   <div class="search">
-    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='categories'>
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
     <label for="find" class="search_label"><svg class="icon">
   <title>search</title>
   <use xlink:href="#search"></use>
@@ -394,9 +388,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 </aside>
 
+  
 </div>
-
-
     </main><svg width="0" height="0" class="hidden">
   <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
     <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
