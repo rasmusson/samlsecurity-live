@@ -26,6 +26,23 @@ In this quick tutorial we will look at the how to set up a simple SAML Service p
     </item>
     
     <item>
+      <title>Disabling &#34;Update account information&#34; dialog when brokering using Keycloak</title>
+      <link>https://blog.samlsecurity.com/post/keycloak-transparent/</link>
+      <pubDate>Sun, 08 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/keycloak-transparent/</guid>
+      <description>
+        
+          
+            Building on my blog on using SAML in a SPA lets dig into a problem many seem to encounter when using keycloak and which to have i more or less like a transparent broker or proxy for authentication.
+The setup Lets take the setup in the post Authenticating a React SPA towards a SAML IdP as any example. This sets up a simple integration between a React Javascript SPA and a ADFS SAML IdP.
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
       <title>Authenticating a React SPA towards a SAML IdP</title>
       <link>https://blog.samlsecurity.com/post/saml-for-react-spa/</link>
       <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
@@ -119,6 +136,25 @@ The use-case being described in the Web Browser Profile is how to authenticate a
         
           
             Information and example on how to sign and send authnrequests in OpenSAML
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Solicited and unsolicited responses in SAML</title>
+      <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/unsolicited-response/</guid>
+      <description>
+        
+          
+            Intro
+Solicited and unsolicited responses So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as opposed to a unsolicited response that arrives without you asking for it.
+In the context of SAML, a un solicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.
+This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authenticate by sending the authentication request.
           
           
         

@@ -226,32 +226,16 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 <h2 id="brokered-authentication-using-keycloak">Brokered authentication using Keycloak</h2>
 <p>One way to solve this dilemma is to use a broker authentication pattern.</p>
 <p>Instead of just using OIDC or just using SAML, the SPA uses OIDC, the IdP uses SAML and we place Keycloak as a broker between to translate.</p>
-<p><figure>
-  <picture>
-
-    
-      
-        
-        
-        
-        
-        
-        
-    <img
-      loading="lazy"
-      decoding="async"
-      alt="Brokered authentication pattern"
-      
-        class="image_figure image_internal image_unprocessed"
-        src="oidc-SAML-translation-for-SPA.png"
-      
-      
-    />
-
-    </picture>
-</figure>
-</p>
-<ol>
+<pre class="mermaid">sequenceDiagram
+    participant Application
+    participant Keycloak SP
+    participant ADFS IdP
+    Application->>Keycloak SP: 1. OIDC request
+    Keycloak SP->>ADFS IdP: 2. SAML request
+    ADFS IdP->>Keycloak SP: 3. SAML response
+    Keycloak SP->>Application: 4. OIDC response
+  </pre>
+  <ol>
 <li>The SPA in the browser redirects the user with an OIDC request to Keycloak</li>
 <li>Keycloak receives the user and request, crafts a SAML request and send it and the user to ADFS IdP for authentication</li>
 <li>Ones the user is authenticated ADFS send a SAML response and user back to Keycloak.</li>
@@ -279,7 +263,7 @@ OIDC on the other hand is a more modern protocol that fit this use case perfectl
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+  <div class="cover"><img src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -571,7 +555,7 @@ You should get a JWT token with user information as a result.</p>
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+  <div class="cover"><img src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -890,7 +874,7 @@ Select &quot;Transform an incoming claim&quot;</p>
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+  <div class="cover"><img src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
@@ -992,12 +976,18 @@ You now get authenticated to the application and the React test application show
 </div>
   
   
-  <div class="cover"><img alt="Book cover for SAML 2.0: Designing secure identity federation" src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
+  <div class="cover"><img src="/ads/saml20/saml20_cover_hu21b4ac923320e0693211419acfc85557_238774_400x300_fit_box_3.png" ></div>
 	
 </div>
 </a>
 <span class="lower_ad_line"></span>
 </div></p>
+
+      
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true,  theme: 'dark' });
+  </script>
 
     </div>
 <div class="post_comments">
@@ -1039,6 +1029,9 @@ You now get authenticated to the application and the React test application show
         <a href="https://blog.samlsecurity.com/post/prettyprint-opensaml/" class="nav-link" title="Pretty printing OpenSAML Objects">Pretty printing OpenSAML Objects</a>
       </li>
       <li>
+        <a href="https://blog.samlsecurity.com/post/keycloak-transparent/" class="nav-link" title="Disabling &#34;Update account information&#34; dialog when brokering using Keycloak">Disabling &quot;Update account information&quot; dialog when brokering using Keycloak</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/post/matadata-location/" class="nav-link" title="ADFS SAML Metadata URL">ADFS SAML Metadata URL</a>
       </li>
       <li>
@@ -1053,9 +1046,6 @@ You now get authenticated to the application and the React test application show
       <li>
         <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest-opensaml2.html" class="nav-link" title="Redirect with AuthnRequest">Redirect with AuthnRequest</a>
       </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/2011/01/redirect-with-authnrequest.html" class="nav-link" title="Using HTTP Redirect binding in OpenSAML 4">Using HTTP Redirect binding in OpenSAML 4</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -1067,7 +1057,7 @@ You now get authenticated to the application and the React test application show
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">8</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -1078,7 +1068,7 @@ You now get authenticated to the application and the React test application show
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">33</span>
+          <span class="button_tally">35</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -1333,6 +1323,5 @@ You now get authenticated to the application and the React test application show
             });
         });
     </script>
-
   </body>
 </html>
