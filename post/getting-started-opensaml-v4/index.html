@@ -356,12 +356,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ComponentInitializationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln">23</span><span class="cl">	<span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
 </span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<p>Lastly lets initialize the OpenSAML library.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">InitializationService</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span></span></span></code></pre></div>
 <h3 id="first-shot---creating-a-authentication-request">First shot - Creating a authentication request</h3>
 <p>This is just a small example on how to use OpenSAML. I have loads of posts and guides on how to do more.<br>
 The following creates a SAML authentication request</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">AuthnRequest</span> <span class="nf">buildAuthnRequest</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">	<span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">AuthnRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">	<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">	<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="k">new</span> <span class="n">DateTime</span><span class="o">());</span>
 </span></span><span class="line"><span class="ln"> 4</span><span class="cl">	<span class="n">authnRequest</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">IPD_SSO_DESTINATION</span><span class="o">);</span>
 </span></span><span class="line"><span class="ln"> 5</span><span class="cl">	<span class="n">authnRequest</span><span class="o">.</span><span class="na">setProtocolBinding</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="o">);</span>
 </span></span><span class="line"><span class="ln"> 6</span><span class="cl">	<span class="n">authnRequest</span><span class="o">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="o">(</span><span class="n">SP_ASSERTION_CONSUMER_SERVICE_URL</span><span class="o">);</span>
@@ -405,7 +407,7 @@ The following creates a SAML authentication request</p>
 <p>The full running sample is available on Github at <a href="https://github.com/rasmusson/OpenSAML-sample-code">https://github.com/rasmusson/OpenSAML-sample-code</a> under getting-started-authnrequest</p>
 <p>Just check out, run and go nuts</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="ln">1</span><span class="cl">git clone https://github.com/rasmusson/OpenSAML-sample-code/
-</span></span><span class="line"><span class="ln">2</span><span class="cl">cd OpenSAML-sample-code/getting-started-authnrequest
+</span></span><span class="line"><span class="ln">2</span><span class="cl">cd OpenSAML-sample-code/getting-started-opensamlv3
 </span></span><span class="line"><span class="ln">3</span><span class="cl">mvn compile exec:java -Dexec.mainClass=&#34;com.samlsecurity.opensamlSamples.gettingStartedAuthnrequest.GenAuthnRequest&#34;</span></span></code></pre></div>
 <h2 id="summary">Summary</h2>
 <p>In this post we have looked on the very basics.</p>
@@ -453,6 +455,9 @@ The following creates a SAML authentication request</p>
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
+        <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
+      </li>
+      <li>
         <a href="https://blog.samlsecurity.com/post/pysaml-intro/" class="nav-link" title="Quick first introduction to PySAML">Quick first introduction to PySAML</a>
       </li>
       <li>
@@ -473,16 +478,13 @@ The following creates a SAML authentication request</p>
       <li>
         <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
       </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
-      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/categories/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
-          <span class="button_tally">24</span>
+          <span class="button_tally">25</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
@@ -498,7 +500,7 @@ The following creates a SAML authentication request</p>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">35</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -543,6 +545,11 @@ The following creates a SAML authentication request</p>
         
         <a href='https://blog.samlsecurity.com/tags/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensaml3/' class="post_tag button button_translucent" title="opensaml3">
+          OPENSAML3
           <span class="button_tally">1</span>
         </a>
         

@@ -20,16 +20,14 @@
 <meta property="og:locale" content="en" />
 
 <meta property="og:type" content="article">
-<meta name="description" content="Intro
-Solicited and unsolicited responses So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as …" />
+<meta name="description" content="In this post we look on the login flow called IdP initiated Authentication or unsolicited responses" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Solicited and unsolicited responses in SAML" />
 <meta name="twitter:image" content="https://blog.samlsecurity.com/"/>
 <meta property="og:url" content="https://blog.samlsecurity.com/post/unsolicited-response/" />
 <meta property="og:title" content="Solicited and unsolicited responses in SAML" />
-<meta property="og:description" content="Intro
-Solicited and unsolicited responses So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as …" />
+<meta property="og:description" content="In this post we look on the login flow called IdP initiated Authentication or unsolicited responses" />
 <meta property="og:image" content="https://blog.samlsecurity.com/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="https://blog.samlsecurity.com/icons/apple-touch-icon.png">
@@ -151,8 +149,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </svg>
 </span>
     <span class="post_date">
-      Jan 1, 0001</span>
-    <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
+      Jun 20, 2024</span>
+    <span class="post_time"> · 4 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
         </a>
     </span>
     <span class="page_only">&nbsp;·
@@ -190,33 +188,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </span>
   </div>
 
-      <div class="post_toc">
-        <h2>Overview</h2>
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#solicited-and-unsolicited-responses">Solicited and unsolicited responses</a></li>
-    <li><a href="#valid-reason-to-allow-unsolicited-responses">Valid reason to allow unsolicited responses</a></li>
-    <li><a href="#verifying-responses">Verifying responses</a></li>
-  </ul>
-</nav>
-      </div>
-    
-    <div class="post_body"><p>Intro</p>
+    <div class="post_body"><p>In this post we will have a look on the uses and disadvantages of unsolicited responses in the context of SAML.</p>
 <h2 id="solicited-and-unsolicited-responses">Solicited and unsolicited responses</h2>
 <p>So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as opposed to a unsolicited response that arrives without you asking for it.</p>
-<p>In the context of SAML, a un solicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.</p>
-<p>This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authenticate by sending the authentication request.</p>
+<p>In the context of SAML, a unsolicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.</p>
+<p>This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authentication by sending the authentication request.</p>
 <p>In order to keep track of this in SAML, when the SP sends a request to the IdP, SP saves the Id of the request. When the IdP send the authentication response back includes the id for the request it responds to in a an attribute, InResponseTo</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">&lt;samlp:Response</span> <span class="na">xmlns:samlp=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:protocol&#34;</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="na">ID=</span><span class="s">&#34;de8b79c37092487aa7f9c5cb6c5a542a&#34;</span> 
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="na">ID=</span><span class="s">&#34;de8b79c37092487aa7f9c5cb6c5a542a&#34;</span>
 </span></span><span class="line hl"><span class="ln">3</span><span class="cl">    <span class="na">InResponseTo=</span><span class="s">&#34;id-5PGmWNaR9dLIoTGOf&#34;</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="na">Version=</span><span class="s">&#34;2.0&#34;</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="na">IssueInstant=</span><span class="s">&#34;2023-12-02T13:17:14.765Z&#34;</span> 
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="na">IssueInstant=</span><span class="s">&#34;2023-12-02T13:17:14.765Z&#34;</span>
 </span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="na">Destination=</span><span class="s">&#34;http://localhost:5000/acs&#34;</span><span class="nt">&gt;</span>
 </span></span><span class="line"><span class="ln">7</span><span class="cl">...
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="nt">&lt;/samlp:Response&gt;</span></span></span></code></pre></div>
 <p>When the SP receives the response it verifies that the InResponseTo id  in the response is the same as the request it sent, ensuring that the response is actually an response to the request that was sent.</p>
-<p>diagram</p>
+<p>In a IdP initiated authentication, the IdP start the authentication itself and send a ready SAML Response with the authenticated user without the SP asking for it.</p>
 <p>This is a topic a dive deep into in my book on SAML.
 
 <div class="book-ad" id="SAML20Ad">
@@ -236,8 +223,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </a>
 <span class="lower_ad_line"></span>
 </div></p>
-<h2 id="valid-reason-to-allow-unsolicited-responses">Valid reason to allow unsolicited responses</h2>
-<h2 id="verifying-responses">Verifying responses</h2>
+<h2 id="common-reasons-to-use-unsolicited-responses">Common reasons to use unsolicited responses</h2>
+<p>The reason to choose to use unsolicited response flow is often that it makes for a simple login flow for the user in some cases.
+Lets say that you have a IdP that acts as a kind of portal site, where  users enter, login and then choose a app to use. And lets say these apps apps are SAML SPs. If using unsolicited response the IdP only need to create a SAML response and send it with the user when it is redirected to the chosen app.</p>
+<p>If you where to use the normal request response flow here the user would first be redirected to the app, the redirected back to the IdP with a SAML request and lastly redirected back to the app again, now with a solicited SAML response.</p>
+<p>Another reason this might be used is that because it allows the SP to be completely stateless as it does not need to save the request Ids while writing for for the SAML responses to com back.</p>
+<h2 id="challenges-and-disadvantages-of-idp-initiated-authentication">Challenges and Disadvantages of IdP-Initiated Authentication</h2>
+<p>Cross-Site Request Forgery (XSRF) Vulnerability: IdP-initiated SSO is susceptible to XSRF attacks, where an attacker can trick a user into logging into the attacker’s account. For example, the attacker can post a valid SAML response to a public webpage, which is then used to trick users into logging into the attacker’s account. This vulnerability is mitigated in SP-initiated SSO, where the SP ensures that the authentication response corresponds to a specific request.</p>
+<p>Deep Linking Problems: Deep linking refers to linking directly to a specific resource on a website. With IdP-initiated SSO, if a user wants to access a specific page on the SP without being authenticated, the process becomes cumbersome. The user must first authenticate via the IdP and then navigate to the desired resource, often requiring custom modifications that undermine SAML’s standardization.</p>
+<p>Inflexible Authentication Behavior: SP-initiated SSO allows the SP to specify various authentication requirements through the AuthnRequest. These can include user identifier formats, re-authentication requirements, and preferred authentication methods (e.g., MFA). IdP-initiated authentication lacks this flexibility, making it harder to enforce tailored security measures for different resources.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>While IdP-initiated authentication offers a straightforward approach, its disadvantages often outweigh its simplicity. The lack of standardization, susceptibility to XSRF attacks, issues with deep linking, and inflexible authentication behavior make SP-initiated SSO the preferred method. Nonetheless, understanding IdP-initiated authentication is essential for making informed decisions about your authentication strategy and mitigating potential risks when its use is unavoidable. Always strive to use SP-initiated authentication where possible to leverage its security and interoperability benefits.</p>
 
       
     </div>
@@ -303,7 +299,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/categories/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
-          <span class="button_tally">24</span>
+          <span class="button_tally">25</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
@@ -319,7 +315,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">35</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -364,6 +360,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <a href='https://blog.samlsecurity.com/tags/opensaml/' class="post_tag button button_translucent" title="opensaml">
           OPENSAML
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensaml3/' class="post_tag button button_translucent" title="opensaml3">
+          OPENSAML3
           <span class="button_tally">1</span>
         </a>
         

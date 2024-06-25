@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenSAML3 on SAMLSecurity</title>
+    <link>https://blog.samlsecurity.com/tags/opensaml3/</link>
+    <description>Recent content in OpenSAML3 on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Sat, 09 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/opensaml3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting started with OpenSAML 3</title>
+      <link>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</link>
+      <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</guid>
+      <description>
+        
+          
+            Dead simple example on how to get started using OpenSAML 3. This tutorial walks you through setting up OpenSAML in your project, initiating OpenSAML and creating your first SAML message
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

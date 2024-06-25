@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/categories/saml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Solicited and unsolicited responses in SAML</title>
+      <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
+      <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/unsolicited-response/</guid>
+      <description>
+        
+          
+            In this post we look on the login flow called IdP initiated Authentication or unsolicited responses
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Quick first introduction to PySAML</title>
       <link>https://blog.samlsecurity.com/post/pysaml-intro/</link>
@@ -136,25 +152,6 @@ The use-case being described in the Web Browser Profile is how to authenticate a
         
           
             Information and example on how to sign and send authnrequests in OpenSAML
-          
-          
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Solicited and unsolicited responses in SAML</title>
-      <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.samlsecurity.com/post/unsolicited-response/</guid>
-      <description>
-        
-          
-            Intro
-Solicited and unsolicited responses So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as opposed to a unsolicited response that arrives without you asking for it.
-In the context of SAML, a un solicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.
-This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authenticate by sending the authentication request.
           
           
         

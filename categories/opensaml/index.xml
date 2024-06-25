@@ -93,6 +93,22 @@ In this post I will show you how to start the SAML Single sign-on process by sen
     </item>
     
     <item>
+      <title>Getting started with OpenSAML 3</title>
+      <link>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</link>
+      <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</guid>
+      <description>
+        
+          
+            Dead simple example on how to get started using OpenSAML 3. This tutorial walks you through setting up OpenSAML in your project, initiating OpenSAML and creating your first SAML message
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
       <title>Getting started with OpenSAML 4</title>
       <link>https://blog.samlsecurity.com/post/getting-started-opensaml-v4/</link>
       <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>

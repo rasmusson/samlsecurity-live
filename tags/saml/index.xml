@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/saml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Solicited and unsolicited responses in SAML</title>
+      <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
+      <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/unsolicited-response/</guid>
+      <description>
+        
+          
+            In this post we look on the login flow called IdP initiated Authentication or unsolicited responses
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Quick first introduction to PySAML</title>
       <link>https://blog.samlsecurity.com/post/pysaml-intro/</link>
@@ -169,6 +185,22 @@ In this post I will show you how to start the SAML Single sign-on process by sen
         
           
             A tutorial looking on how to use the HTTP redirect binding to send and receive messages in OpenSAML v4. This tutorial walks you through the basics of the HTTP-redirect binding and how to use it in OpenSAML
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Getting started with OpenSAML 3</title>
+      <link>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</link>
+      <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/getting-started-opensaml-v3/</guid>
+      <description>
+        
+          
+            Dead simple example on how to get started using OpenSAML 3. This tutorial walks you through setting up OpenSAML in your project, initiating OpenSAML and creating your first SAML message
           
           
         
@@ -557,25 +589,6 @@ The normal way to create a SAML object is like this.
         
           
             Information and example on how to sign and send authnrequests in OpenSAML
-          
-          
-        
-      </description>
-    </item>
-    
-    <item>
-      <title>Solicited and unsolicited responses in SAML</title>
-      <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.samlsecurity.com/post/unsolicited-response/</guid>
-      <description>
-        
-          
-            Intro
-Solicited and unsolicited responses So what is a solicited or unsolicited response? Simply put, a solicited response is a response you asked for, as opposed to a unsolicited response that arrives without you asking for it.
-In the context of SAML, a un solicited response is a SAML authentication response received from the IdP without the SP first having sent an authentication request.
-This is allowed in SAML and is also known as IdP initiated authentication, as opposed to SP initiated authentication, when the SP initiated authenticate by sending the authentication request.
           
           
         
