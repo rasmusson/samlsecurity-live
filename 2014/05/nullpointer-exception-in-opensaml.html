@@ -150,8 +150,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </span>
     <span class="post_date">
       May 5, 2014</span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
+    <span class="post_time"> · 2 min read</span><span>&nbsp;· <a href='https://blog.samlsecurity.com/tags/saml/' title="SAML" class="post_tag button button_translucent">SAML
         </a><a href='https://blog.samlsecurity.com/tags/opensamlv2/' title="OpenSAMLV2" class="post_tag button button_translucent">OpenSAMLV2
+        </a><a href='https://blog.samlsecurity.com/tags/opensamlv3/' title="OpenSAMLV3" class="post_tag button button_translucent">OpenSAMLV3
+        </a><a href='https://blog.samlsecurity.com/tags/opensamlv4/' title="OpenSAMLV4" class="post_tag button button_translucent">OpenSAMLV4
         </a>
     </span>
     <span class="page_only">&nbsp;·
@@ -190,13 +192,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     <div class="post_body"><p>This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library.
-OpenSAML needs a couple of configuration files in order to work. The library is provided with a default set of these files that is sufficient for most uses. Before starting the use the library the configurations must be loaded. This is done using the bootstrap function.</p>
+OpenSAML needs a couple of configuration files in order to work. The library is provided with a default set of these files that is sufficient for most uses. Before starting the use the library the configurations must be loaded.</p>
+<h2 id="opensaml-v2">OpenSAML v2</h2>
+<p>In OpenSAML v2 initialization of the library is done using the bootstrap function.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">   <span class="n">DefaultBootstrap</span><span class="o">.</span><span class="na">bootstrap</span><span class="o">();</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ConfigurationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl">   <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&#34;Bootstrapping failed&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="o">}</span>     </span></span></code></pre></div>
 <p>If you do not do this before you start using the library, you might run into exceptions like.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Exception in thread &#34;main&#34; java.lang.NullPointerException
+</span></span><span class="line"><span class="ln">2</span><span class="cl"> at no.steras.opensaml.Main.main(Main.java:25)
+</span></span><span class="line"><span class="ln">3</span><span class="cl"> at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+</span></span><span class="line"><span class="ln">4</span><span class="cl"> at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+</span></span><span class="line"><span class="ln">5</span><span class="cl"> at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+</span></span><span class="line"><span class="ln">6</span><span class="cl"> at java.lang.reflect.Method.invoke(Method.java:601)
+</span></span><span class="line"><span class="ln">7</span><span class="cl"> at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)</span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -214,14 +225,25 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
 </div>
 </a>
 <span class="lower_ad_line"></span>
-</div>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Exception in thread &#34;main&#34; java.lang.NullPointerException
-</span></span><span class="line"><span class="ln">2</span><span class="cl"> at no.steras.opensaml.Main.main(Main.java:25)
-</span></span><span class="line"><span class="ln">3</span><span class="cl"> at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-</span></span><span class="line"><span class="ln">4</span><span class="cl"> at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
-</span></span><span class="line"><span class="ln">5</span><span class="cl"> at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-</span></span><span class="line"><span class="ln">6</span><span class="cl"> at java.lang.reflect.Method.invoke(Method.java:601)
-</span></span><span class="line"><span class="ln">7</span><span class="cl"> at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)</span></span></code></pre></div></p>
+</div></p>
+<h2 id="opensaml-v3-and-v4">OpenSAML v3 and v4</h2>
+<p>In OpenSAML v3 and v4 initialization of the library some more functions calls are needed as below.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">XMLObjectProviderRegistry</span> <span class="n">registry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XMLObjectProviderRegistry</span><span class="o">();</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">ConfigurationService</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">XMLObjectProviderRegistry</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">registry</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">InitializationService</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InitializationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&#34;Initialization failed&#34;</span><span class="o">);</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<p>If you do not do this before you start using the library, you might run into exceptions like.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">java.lang.NullPointerException: Cannot invoke &#34;org.opensaml.core.xml.config.XMLObjectProviderRegistry.getBuilderFactory()&#34; because the return value of &#34;org.opensaml.core.config.ConfigurationService.get(java.lang.Class)&#34; is null
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    at org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport.getBuilderFactory (XMLObjectProviderRegistrySupport.java:107)
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    at no.steras.opensamlSamples.nobootstrap.v4.OpenSAMLUtils.buildSAMLObject (OpenSAMLUtils.java:33)
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    at no.steras.opensamlSamples.nobootstrap.v4.NoBootstrap.buildAuthnRequest (NoBootstrap.java:54)
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    at no.steras.opensamlSamples.nobootstrap.v4.NoBootstrap.main (NoBootstrap.java:30)
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    at org.codehaus.mojo.exec.ExecJavaMojo$1.run (ExecJavaMojo.java:254)
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    at java.lang.Thread.run (Thread.java:840)</span></span></code></pre></div></p>
 
       
     </div>
@@ -311,13 +333,13 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
           <span class="button_tally">11</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/opensaml4/' class="post_tag button button_translucent" title="opensaml4">
-          OPENSAML4
-          <span class="button_tally">6</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/opensamlv3/' class="post_tag button button_translucent" title="opensamlv3">
           OPENSAMLV3
+          <span class="button_tally">7</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensaml4/' class="post_tag button button_translucent" title="opensaml4">
+          OPENSAML4
           <span class="button_tally">6</span>
         </a>
         
@@ -353,6 +375,11 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
         
         <a href='https://blog.samlsecurity.com/tags/opensaml3/' class="post_tag button button_translucent" title="opensaml3">
           OPENSAML3
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://blog.samlsecurity.com/tags/opensamlv4/' class="post_tag button button_translucent" title="opensamlv4">
+          OPENSAMLV4
           <span class="button_tally">1</span>
         </a>
         

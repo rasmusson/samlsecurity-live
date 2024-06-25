@@ -93,6 +93,22 @@ In light of this, I have done a fair amount of research on version 3 and am now 
     </item>
     
     <item>
+      <title>Nullpointer exception in OpenSAML</title>
+      <link>https://blog.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html</link>
+      <pubDate>Mon, 05 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html</guid>
+      <description>
+        
+          
+            This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library.
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
       <title>Generating metadata with OpenSAML</title>
       <link>https://blog.samlsecurity.com/2012/02/generating-metadata-with-opensaml.html</link>
       <pubDate>Wed, 22 Feb 2012 00:00:00 +0000</pubDate>

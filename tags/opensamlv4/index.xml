@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenSAMLV4 on SAMLSecurity</title>
+    <link>https://blog.samlsecurity.com/tags/opensamlv4/</link>
+    <description>Recent content in OpenSAMLV4 on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Mon, 05 May 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/opensamlv4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nullpointer exception in OpenSAML</title>
+      <link>https://blog.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html</link>
+      <pubDate>Mon, 05 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/2014/05/nullpointer-exception-in-opensaml.html</guid>
+      <description>
+        
+          
+            This is a common exception to beginners in using OpenSAML. A common mistake when starting to use the OpenSAML library is to not initialize the library.
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
