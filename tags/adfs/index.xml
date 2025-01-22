@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ADFS on SAMLSecurity</title>
+    <link>https://blog.samlsecurity.com/tags/adfs/</link>
+    <description>Recent content in ADFS on SAMLSecurity</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Stefan Rasmusson</copyright>
+    <lastBuildDate>Wed, 22 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/adfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Custom ADFS claims in SAML Assertions</title>
+      <link>https://blog.samlsecurity.com/post/adfs-custom-claims/</link>
+      <pubDate>Wed, 22 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/adfs-custom-claims/</guid>
+      <description>
+        
+          
+            A tutorial on how to configure custom claims in ADFS to add additional attributes to the SAML assertion
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

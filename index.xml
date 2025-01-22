@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Stefan Rasmusson</copyright>
-    <lastBuildDate>Thu, 20 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Custom ADFS claims in SAML Assertions</title>
+      <link>https://blog.samlsecurity.com/post/adfs-custom-claims/</link>
+      <pubDate>Wed, 22 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.samlsecurity.com/post/adfs-custom-claims/</guid>
+      <description>
+        
+          
+            A tutorial on how to configure custom claims in ADFS to add additional attributes to the SAML assertion
+          
+          
+        
+      </description>
+    </item>
+    
     <item>
       <title>Solicited and unsolicited responses in SAML</title>
       <link>https://blog.samlsecurity.com/post/unsolicited-response/</link>
