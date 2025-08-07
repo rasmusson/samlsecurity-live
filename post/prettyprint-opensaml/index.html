@@ -193,36 +193,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 In the real world however, when troubleshooting a problem, there is often leads to be found by looking at the XML of the SAML message.</p>
 <p>Lets have a look on how to go about doing that in OpenSAML 4.</p>
 <p>First let's create a OpenSAML object so we have something to print.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">buildAuthnRequest</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">AuthnRequest</span> <span class="nf">buildAuthnRequest</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">		<span class="n">AuthnRequest</span> <span class="n">authnRequest</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">AuthnRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="n">Instant</span><span class="o">.</span><span class="na">now</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setProtocolBinding</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="o">(</span><span class="n">ASSERTION_CONSUMER_ENDPOINT</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">generateSecureRandomId</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">buildIssuer</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl">		<span class="n">authnRequest</span><span class="o">.</span><span class="na">setNameIDPolicy</span><span class="o">(</span><span class="n">buildNameIdPolicy</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl">
-</span></span><span class="line"><span class="ln">13</span><span class="cl">		<span class="k">return</span> <span class="n">authnRequest</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">15</span><span class="cl">
-</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">NameIDPolicy</span> <span class="nf">buildNameIdPolicy</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">17</span><span class="cl">	<span class="n">NameIDPolicy</span> <span class="n">nameIDPolicy</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">NameIDPolicy</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl">	<span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setAllowCreate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">19</span><span class="cl">
-</span></span><span class="line"><span class="ln">20</span><span class="cl">	<span class="n">nameIDPolicy</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="n">NameIDType</span><span class="o">.</span><span class="na">TRANSIENT</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">21</span><span class="cl">
-</span></span><span class="line"><span class="ln">22</span><span class="cl">	<span class="k">return</span> <span class="n">nameIDPolicy</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">24</span><span class="cl">
-</span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">Issuer</span> <span class="nf">buildIssuer</span><span class="o">()</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">26</span><span class="cl">	<span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">OpenSAMLUtils</span><span class="o">.</span><span class="na">buildSAMLObject</span><span class="o">(</span><span class="n">Issuer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">27</span><span class="cl">	<span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">ISSUER</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">28</span><span class="cl">
-</span></span><span class="line"><span class="ln">29</span><span class="cl">	<span class="k">return</span> <span class="n">issuer</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">AuthnRequest</span><span class="w"> </span><span class="n">authnRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildAuthnRequest</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">AuthnRequest</span><span class="w"> </span><span class="nf">buildAuthnRequest</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">		</span><span class="n">AuthnRequest</span><span class="w"> </span><span class="n">authnRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenSAMLUtils</span><span class="p">.</span><span class="na">buildSAMLObject</span><span class="p">(</span><span class="n">AuthnRequest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setIssueInstant</span><span class="p">(</span><span class="n">Instant</span><span class="p">.</span><span class="na">now</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setDestination</span><span class="p">(</span><span class="n">MESSAGE_RECEIVER_ENDPOINT</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setProtocolBinding</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setAssertionConsumerServiceURL</span><span class="p">(</span><span class="n">ASSERTION_CONSUMER_ENDPOINT</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setID</span><span class="p">(</span><span class="n">OpenSAMLUtils</span><span class="p">.</span><span class="na">generateSecureRandomId</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setIssuer</span><span class="p">(</span><span class="n">buildIssuer</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">		</span><span class="n">authnRequest</span><span class="p">.</span><span class="na">setNameIDPolicy</span><span class="p">(</span><span class="n">buildNameIdPolicy</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">		</span><span class="k">return</span><span class="w"> </span><span class="n">authnRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">NameIDPolicy</span><span class="w"> </span><span class="nf">buildNameIdPolicy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">	</span><span class="n">NameIDPolicy</span><span class="w"> </span><span class="n">nameIDPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenSAMLUtils</span><span class="p">.</span><span class="na">buildSAMLObject</span><span class="p">(</span><span class="n">NameIDPolicy</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">	</span><span class="n">nameIDPolicy</span><span class="p">.</span><span class="na">setAllowCreate</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">	</span><span class="n">nameIDPolicy</span><span class="p">.</span><span class="na">setFormat</span><span class="p">(</span><span class="n">NameIDType</span><span class="p">.</span><span class="na">TRANSIENT</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">nameIDPolicy</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Issuer</span><span class="w"> </span><span class="nf">buildIssuer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">	</span><span class="n">Issuer</span><span class="w"> </span><span class="n">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenSAMLUtils</span><span class="p">.</span><span class="na">buildSAMLObject</span><span class="p">(</span><span class="n">Issuer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">	</span><span class="n">issuer</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">ISSUER</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">issuer</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -242,12 +242,12 @@ In the real world however, when troubleshooting a problem, there is often leads 
 <span class="lower_ad_line"></span>
 </div>
 <p>Next, lets do the magic to convert the object to a string.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">XMLObjectProviderRegistrySupport</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">authnRequest</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="n">authnRequest</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">String</span> <span class="n">xmlString</span> <span class="o">=</span> <span class="n">SerializeSupport</span><span class="o">.</span><span class="na">prettyPrintXML</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">
-</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">xmlString</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Marshaller</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XMLObjectProviderRegistrySupport</span><span class="p">.</span><span class="na">getMarshallerFactory</span><span class="p">().</span><span class="na">getMarshaller</span><span class="p">(</span><span class="n">authnRequest</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">out</span><span class="p">.</span><span class="na">marshall</span><span class="p">(</span><span class="n">authnRequest</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">Element</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">authnRequest</span><span class="p">.</span><span class="na">getDOM</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">xmlString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializeSupport</span><span class="p">.</span><span class="na">prettyPrintXML</span><span class="p">(</span><span class="n">element</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">xmlString</span><span class="p">);</span></span></span></code></pre></div>
 <p>In the snipped above this the OpenSAML XMLObjectProviderRegistrySupport is used to convert the OpenSAML object to a XML element.
 The OpenSAML SerializeSupport helper class is then used to format the element as a pretty printed indented string.</p>
 <h2 id="get-it-on-github">Get it on Github!</h2>
@@ -293,12 +293,6 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -316,6 +310,12 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
       <li>
         <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -327,12 +327,7 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -343,7 +338,7 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -361,11 +356,6 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -376,8 +366,8 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -498,7 +488,7 @@ The OpenSAML SerializeSupport helper class is then used to format the element as
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

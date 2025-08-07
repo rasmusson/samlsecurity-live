@@ -242,14 +242,14 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 </div>
 <p>Now for the OpenSAML part.</p>
 <p>First we get the assertion from the XML. The assertion is stored in a EncryptedAssertion object and is retrieved with the method <code>getEncryptedAssertions()</code> on the response instead of <code>getAssertions()</code> which is used otherwise.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">StaticKeyInfoCredentialResolver</span> <span class="n">keyInfoCredentialResolver</span> 
-</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="o">=</span> <span class="k">new</span> <span class="n">StaticKeyInfoCredentialResolver</span><span class="o">(</span><span class="n">SPCredentials</span><span class="o">.</span><span class="na">getCredential</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">Decrypter</span> <span class="n">decrypter</span> 
-</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="o">=</span> <span class="k">new</span> <span class="n">Decrypter</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">keyInfoCredentialResolver</span><span class="o">,</span> <span class="k">new</span> <span class="n">InlineEncryptedKeyResolver</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="n">decrypter</span><span class="o">.</span><span class="na">setRootInNewDocument</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">7</span><span class="cl">
-</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="n">decrypter</span><span class="o">.</span><span class="na">decrypt</span><span class="o">(</span><span class="n">encryptedAssertion</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">StaticKeyInfoCredentialResolver</span><span class="w"> </span><span class="n">keyInfoCredentialResolver</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StaticKeyInfoCredentialResolver</span><span class="p">(</span><span class="n">SPCredentials</span><span class="p">.</span><span class="na">getCredential</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">Decrypter</span><span class="w"> </span><span class="n">decrypter</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Decrypter</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">keyInfoCredentialResolver</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InlineEncryptedKeyResolver</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">decrypter</span><span class="p">.</span><span class="na">setRootInNewDocument</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">decrypter</span><span class="p">.</span><span class="na">decrypt</span><span class="p">(</span><span class="n">encryptedAssertion</span><span class="p">);</span></span></span></code></pre></div>
 <p>In this example a <code>StaticKeyInfoCredentialResolver</code> is used to point out the key that is used for decryption, in this case I have stored it in the static class <code>SPCredentials</code>. The <code>InlineEncryptedKeyResolver</code> is used to tell the decrypter that the symmetric encryption key can be found in the XML next to the encrypted assertion.</p>
 <p>The decrypter returns a decrypted Assertion object.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
@@ -341,12 +341,6 @@ The symmetric key is generated during encryption and used to encrypt the actual 
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -364,6 +358,12 @@ The symmetric key is generated during encryption and used to encrypt the actual 
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -375,12 +375,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -391,7 +386,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -409,11 +404,6 @@ The symmetric key is generated during encryption and used to encrypt the actual 
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -424,8 +414,8 @@ The symmetric key is generated during encryption and used to encrypt the actual 
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -546,7 +536,7 @@ The symmetric key is generated during encryption and used to encrypt the actual 
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

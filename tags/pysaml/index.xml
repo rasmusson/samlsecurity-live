@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pySAML on SAMLSecurity</title>
+    <title>PySAML on SAMLSecurity</title>
     <link>https://blog.samlsecurity.com/tags/pysaml/</link>
-    <description>Recent content in pySAML on SAMLSecurity</description>
+    <description>Recent content in PySAML on SAMLSecurity</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <copyright>Stefan Rasmusson</copyright>
     <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.samlsecurity.com/tags/pysaml/index.xml" rel="self" type="application/rss+xml" />
     <item>

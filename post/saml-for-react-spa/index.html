@@ -716,7 +716,7 @@ Select &quot;Transform an incoming claim&quot;</p>
 </figure>
 </p>
 <p>To configure the Keycloak relying party on ADFS using PowerShell, first disable HTTPS verification if you have not yet set up TLS trust between Keycloak and ADFS
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="ln">1</span><span class="cl"><span class="no">[System.Net.ServicePointManager]</span><span class="p">::</span><span class="n">ServerCertificateValidationCallback</span> <span class="p">=</span> <span class="p">{</span><span class="nv">$true</span><span class="p">}</span></span></span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="line"><span class="ln">1</span><span class="cl"><span class="p">[</span><span class="no">System.Net.ServicePointManager</span><span class="p">]::</span><span class="n">ServerCertificateValidationCallback</span> <span class="p">=</span> <span class="p">{</span><span class="vm">$true</span><span class="p">}</span></span></span></code></pre></div></p>
 <p>Create and configure relying party
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nb">Add-ADFSRelyingPartyTrust</span> <span class="n">-Name</span> <span class="s1">&#39;keycloak&#39;</span> <span class="n">-MetadataURL</span> <span class="s1">&#39;https://keycloak:8443/auth/realms/oidcrealm/broker/saml/endpoint/descriptor&#39;</span> <span class="n">-IssuanceAuthorizationRules</span> <span class="sh">@&#39;
 </span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="sh">@RuleTemplate = &#34;AllowAllAuthzRule&#34;
@@ -759,15 +759,15 @@ Select &quot;Transform an incoming claim&quot;</p>
 </figure>
 </p>
 <p>To add the user using PowerShell, first disable complex passwords to let use a simple password for testing
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">secedit</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="p">(</span><span class="nb">gc </span><span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;PasswordComplexity = 1&#34;</span><span class="p">,</span> <span class="s2">&#34;PasswordComplexity = 0&#34;</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;MinimumPasswordLength = 7&#34;</span><span class="p">,</span> <span class="s2">&#34;MinimumPasswordLength = 0&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="n">secedit</span> <span class="p">/</span><span class="n">configure</span> <span class="p">/</span><span class="n">db</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">local</span><span class="p">.</span><span class="n">sdb</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="p">/</span><span class="n">areas</span> <span class="n">SECURITYPOLICY</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="nb">rm </span><span class="n">-force</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span> <span class="n">-confirm</span><span class="err">:</span><span class="nv">$false</span></span></span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">secedit</span> <span class="p">/</span><span class="n">export</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="py">cfg</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="p">(</span><span class="nb">gc </span><span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="n">cfg</span><span class="p">).</span><span class="py">replace</span><span class="p">(</span><span class="s2">&#34;PasswordComplexity = 1&#34;</span><span class="p">,</span> <span class="s2">&#34;PasswordComplexity = 0&#34;</span><span class="p">).</span><span class="py">replace</span><span class="p">(</span><span class="s2">&#34;MinimumPasswordLength = 7&#34;</span><span class="p">,</span> <span class="s2">&#34;MinimumPasswordLength = 0&#34;</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="py">cfg</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="n">secedit</span> <span class="p">/</span><span class="n">configure</span> <span class="p">/</span><span class="n">db</span> <span class="n">C:</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">security</span><span class="p">\</span><span class="n">local</span><span class="p">.</span><span class="py">sdb</span> <span class="p">/</span><span class="n">cfg</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="py">cfg</span> <span class="p">/</span><span class="n">areas</span> <span class="n">SECURITYPOLICY</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">  <span class="nb">rm </span><span class="n">-force</span> <span class="n">C:</span><span class="p">\</span><span class="n">secconfig</span><span class="p">.</span><span class="py">cfg</span> <span class="n">-confirm:</span><span class="vm">$false</span></span></span></code></pre></div></p>
 <p>Now lets create the user
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">Import-Module</span> <span class="n">ActiveDirectory</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">New-ADUser</span> <span class="n">-SamAccountName</span> <span class="n">test2</span> <span class="n">-GivenName</span> <span class="n">Test</span> <span class="n">-Surname</span> <span class="n">User</span> <span class="n">-Name</span> <span class="s2">&#34;Test User&#34;</span> <span class="n">-Email</span> <span class="s2">&#34;test@test.com&#34;</span><span class="p">`</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">           <span class="n">-Path</span> <span class="s2">&#34;CN=Users,DC=windomain,DC=local&#34;</span> <span class="p">`</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">           <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s1">&#39;test&#39;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="n">-Enabled</span> <span class="nv">$true</span></span></span></code></pre></div></p>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">           <span class="n">-AccountPassword</span> <span class="p">(</span><span class="nb">ConvertTo-SecureString</span> <span class="s1">&#39;test&#39;</span> <span class="n">-AsPlainText</span> <span class="n">-Force</span><span class="p">)</span> <span class="n">-Enabled</span> <span class="vm">$true</span></span></span></code></pre></div></p>
 <h3 id="configure-brokering-between-oidc-and-saml">Configure brokering between OIDC and SAML</h3>
 <p>To make use of the configured SAML IdP to authenticate the user from the React SPA, we need to configure two things in Keycloak.</p>
 <ul>
@@ -1023,12 +1023,6 @@ You now get authenticated to the application and the React test application show
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -1046,6 +1040,12 @@ You now get authenticated to the application and the React test application show
       <li>
         <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/post-binding-opensaml-4/" class="nav-link" title="Using HTTP POST binding in OpenSAML 4">Using HTTP POST binding in OpenSAML 4</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -1057,12 +1057,7 @@ You now get authenticated to the application and the React test application show
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -1073,7 +1068,7 @@ You now get authenticated to the application and the React test application show
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -1091,11 +1086,6 @@ You now get authenticated to the application and the React test application show
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -1106,8 +1096,8 @@ You now get authenticated to the application and the React test application show
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -1228,7 +1218,7 @@ You now get authenticated to the application and the React test application show
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

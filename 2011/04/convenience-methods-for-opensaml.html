@@ -194,23 +194,23 @@ I my code samples I keep this in the SAMLUtil class.</p>
 <h2 id="creating-saml-objects">Creating SAML objects</h2>
 <p>OpenSAML has a bit complex way of creating SAML objects using a factory pattern.</p>
 <p>The normal way to create a SAML object is like this.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">XMLObjectBuilderFactory</span> <span class="n">builderFactory</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getBuilderFactory</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">Assertion</span> <span class="n">assertion</span> <span class="o">=</span> <span class="o">(</span><span class="n">Assertion</span><span class="o">)</span><span class="n">builderFactory</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">      <span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="n">Assertion</span><span class="o">.</span><span class="na">DEFAULT_ELEMENT_NAME</span><span class="o">)</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">      <span class="o">.</span><span class="na">buildObject</span><span class="o">(</span><span class="n">Assertion</span><span class="o">.</span><span class="na">DEFAULT_ELEMENT_NAME</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">XMLObjectBuilderFactory</span><span class="w"> </span><span class="n">builderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configuration</span><span class="p">.</span><span class="na">getBuilderFactory</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">Assertion</span><span class="w"> </span><span class="n">assertion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Assertion</span><span class="p">)</span><span class="n">builderFactory</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">      </span><span class="p">.</span><span class="na">getBuilder</span><span class="p">(</span><span class="n">Assertion</span><span class="p">.</span><span class="na">DEFAULT_ELEMENT_NAME</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">      </span><span class="p">.</span><span class="na">buildObject</span><span class="p">(</span><span class="n">Assertion</span><span class="p">.</span><span class="na">DEFAULT_ELEMENT_NAME</span><span class="p">);</span></span></span></code></pre></div>
 <p>Normally the default name of the class is used so it seams redundant to write this out all the time.
 With generics in JavaSE6 we can make this a lot easier.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="nf">createSAMLObject</span><span class="o">(</span><span class="kd">final</span> <span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">clazz</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"> <span class="n">XMLObjectBuilderFactory</span> <span class="n">builderFactory</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getBuilderFactory</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">4</span><span class="cl"> <span class="n">QName</span> <span class="n">defaultElementName</span> <span class="o">=</span> <span class="o">(</span><span class="n">QName</span><span class="o">)</span><span class="n">clazz</span><span class="o">.</span><span class="na">getDeclaredField</span><span class="o">(</span><span class="s">&#34;DEFAULT_ELEMENT_NAME&#34;</span><span class="o">).</span><span class="na">get</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl"> <span class="n">T</span> <span class="n">object</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="n">builderFactory</span><span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="n">defaultElementName</span><span class="o">).</span><span class="na">buildObject</span><span class="o">(</span><span class="n">defaultElementName</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">6</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="k">return</span> <span class="n">object</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">createSAMLObject</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"> </span><span class="n">XMLObjectBuilderFactory</span><span class="w"> </span><span class="n">builderFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configuration</span><span class="p">.</span><span class="na">getBuilderFactory</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"> </span><span class="n">QName</span><span class="w"> </span><span class="n">defaultElementName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">QName</span><span class="p">)</span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredField</span><span class="p">(</span><span class="s">&#34;DEFAULT_ELEMENT_NAME&#34;</span><span class="p">).</span><span class="na">get</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="n">builderFactory</span><span class="p">.</span><span class="na">getBuilder</span><span class="p">(</span><span class="n">defaultElementName</span><span class="p">).</span><span class="na">buildObject</span><span class="p">(</span><span class="n">defaultElementName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="k">return</span><span class="w"> </span><span class="n">object</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 <p>By putting something like this in a utility class we can now create our SAML objects like this</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Assertion</span> <span class="n">assertion</span> <span class="o">=</span> <span class="n">UtilityClass</span><span class="o">.</span><span class="na">createSAMLObject</span><span class="o">(</span><span class="n">Assertion</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Assertion</span><span class="w"> </span><span class="n">assertion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UtilityClass</span><span class="p">.</span><span class="na">createSAMLObject</span><span class="p">(</span><span class="n">Assertion</span><span class="p">.</span><span class="na">class</span><span class="p">);</span></span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -233,24 +233,24 @@ With generics in JavaSE6 we can make this a lot easier.</p>
 <p>The ability to in a nice way log the raw SAML messages i also very important, so I created my own logging method in a utility class. But after using it for a while I learned that I don't have to.</p>
 <p>The ability to log the raw SAML messages turns out to be very important for debugging and understanding what messages are flowing. The OpenSAML library uses the log4j logging framework. By setting the threshold level, of the OpenSAML package to debug in the log4j properties file, you get all of the SAML messages to and from your application in your log file. You also get other useful information, so log4j is a good way to go.</p>
 <p>If you would like to log just some SAML messages in you code. I have created a message to pretty print SAML elements as XML.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">logSAMLObject</span><span class="o">(</span><span class="kd">final</span> <span class="n">XMLObject</span> <span class="n">object</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl"> <span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> <span class="k">if</span> <span class="o">(</span><span class="n">object</span> <span class="k">instanceof</span> <span class="n">SignableSAMLObject</span> <span class="o">&amp;&amp;</span> <span class="o">((</span><span class="n">SignableSAMLObject</span><span class="o">)</span> <span class="n">object</span><span class="o">).</span><span class="na">isSigned</span><span class="o">()</span>
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">   <span class="o">&amp;&amp;</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="n">element</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">   <span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">XMLObjectProviderRegistrySupport</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl">   <span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">object</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl">   <span class="n">element</span> <span class="o">=</span> <span class="n">object</span><span class="o">.</span><span class="na">getDOM</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl">  <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">MarshallingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl">   <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="ln">15</span><span class="cl"> <span class="o">}</span>
-</span></span><span class="line"><span class="ln">16</span><span class="cl"> <span class="n">String</span> <span class="n">xmlString</span> <span class="o">=</span> <span class="n">SerializeSupport</span><span class="o">.</span><span class="na">prettyPrintXML</span><span class="o">(</span><span class="n">element</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">17</span><span class="cl"> <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">xmlString</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">logSAMLObject</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">XMLObject</span><span class="w"> </span><span class="n">object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"> </span><span class="n">Element</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">SignableSAMLObject</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">((</span><span class="n">SignableSAMLObject</span><span class="p">)</span><span class="w"> </span><span class="n">object</span><span class="p">).</span><span class="na">isSigned</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">   </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">object</span><span class="p">.</span><span class="na">getDOM</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">  </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="p">.</span><span class="na">getDOM</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">   </span><span class="n">Marshaller</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XMLObjectProviderRegistrySupport</span><span class="p">.</span><span class="na">getMarshallerFactory</span><span class="p">().</span><span class="na">getMarshaller</span><span class="p">(</span><span class="n">object</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">   </span><span class="n">out</span><span class="p">.</span><span class="na">marshall</span><span class="p">(</span><span class="n">object</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">   </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="p">.</span><span class="na">getDOM</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MarshallingException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">   </span><span class="n">logger</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">xmlString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SerializeSupport</span><span class="p">.</span><span class="na">prettyPrintXML</span><span class="p">(</span><span class="n">element</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"> </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">xmlString</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 
       
     </div>
@@ -287,12 +287,6 @@ With generics in JavaSE6 we can make this a lot easier.</p>
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -310,6 +304,12 @@ With generics in JavaSE6 we can make this a lot easier.</p>
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -321,12 +321,7 @@ With generics in JavaSE6 we can make this a lot easier.</p>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -337,7 +332,7 @@ With generics in JavaSE6 we can make this a lot easier.</p>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -355,11 +350,6 @@ With generics in JavaSE6 we can make this a lot easier.</p>
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -370,8 +360,8 @@ With generics in JavaSE6 we can make this a lot easier.</p>
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -492,7 +482,7 @@ With generics in JavaSE6 we can make this a lot easier.</p>
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

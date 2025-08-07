@@ -198,11 +198,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p><code>FilesystemMetadataProvider</code> - Used to load data from a file on the filesystem
 <code>HTTPMetadataProvider</code> - Used to load data from an Internet address</p>
 <p>Here is an example on how to load meta data using the <code>FilesystemMetadataProvider</code>.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">FilesystemMetadataProvider</span> <span class="n">idpMetaDataProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FilesystemMetadataProvider</span><span class="o">(</span><span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="s">&#34;path to file&#34;</span><span class="o">));</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">idpMetaDataProvider</span><span class="o">.</span><span class="na">setRequireValidMetadata</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">idpMetaDataProvider</span><span class="o">.</span><span class="na">setParserPool</span><span class="o">(</span><span class="k">new</span> <span class="n">BasicParserPool</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">idpMetaDataProvider</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">EntityDescriptor</span> <span class="n">idpEntityDescriptor</span> <span class="o">=</span> <span class="n">idpMetaDataProvider</span><span class="o">.</span><span class="na">getEntityDescriptor</span><span class="o">(</span><span class="s">&#34;Some entity id&#34;</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">FilesystemMetadataProvider</span><span class="w"> </span><span class="n">idpMetaDataProvider</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FilesystemMetadataProvider</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">File</span><span class="p">(</span><span class="s">&#34;path to file&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">idpMetaDataProvider</span><span class="p">.</span><span class="na">setRequireValidMetadata</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">idpMetaDataProvider</span><span class="p">.</span><span class="na">setParserPool</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BasicParserPool</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">idpMetaDataProvider</span><span class="p">.</span><span class="na">initialize</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">EntityDescriptor</span><span class="w"> </span><span class="n">idpEntityDescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idpMetaDataProvider</span><span class="p">.</span><span class="na">getEntityDescriptor</span><span class="p">(</span><span class="s">&#34;Some entity id&#34;</span><span class="p">);</span></span></span></code></pre></div>
 <p>The EntityDescriptor can then be used to extract data from the metadata. Here are some examples on how to use it.
 
 <div class="book-ad" id="OpenSAMLAd">
@@ -223,19 +223,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="lower_ad_line"></span>
 </div></p>
 <h2 id="sso-services">SSO services</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">SingleSignOnService</span> <span class="n">redirectEndpoint</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">SingleSignOnService</span> <span class="n">sss</span> <span class="o">:</span> <span class="n">idpEntityDescriptor</span><span class="o">.</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">).</span><span class="na">getSingleSignOnServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">   <span class="k">if</span> <span class="o">(</span><span class="n">sss</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_REDIRECT_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">      <span class="n">redirectEndpoint</span> <span class="o">=</span> <span class="n">sss</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">   <span class="o">}</span>
-</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">SingleSignOnService</span><span class="w"> </span><span class="n">redirectEndpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SingleSignOnService</span><span class="w"> </span><span class="n">sss</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">idpEntityDescriptor</span><span class="p">.</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">).</span><span class="na">getSingleSignOnServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sss</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_REDIRECT_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">      </span><span class="n">redirectEndpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sss</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 <h2 id="artifactresolutionservice">ArtifactResolutionService</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">for</span> <span class="o">(</span><span class="n">ArtifactResolutionService</span> <span class="n">ars</span> <span class="o">:</span> <span class="n">idpEntityDescriptor</span><span class="o">.</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">)</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">      <span class="o">.</span><span class="na">getArtifactResolutionServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">   <span class="k">if</span> <span class="o">(</span><span class="n">ars</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">      <span class="n">artifactResolutionServiceURL</span> <span class="o">=</span> <span class="n">ars</span><span class="o">.</span><span class="na">getLocation</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl">   <span class="o">}</span>
-</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ArtifactResolutionService</span><span class="w"> </span><span class="n">ars</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">idpEntityDescriptor</span><span class="p">.</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">      </span><span class="p">.</span><span class="na">getArtifactResolutionServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ars</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">      </span><span class="n">artifactResolutionServiceURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ars</span><span class="p">.</span><span class="na">getLocation</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 <p>The objects of OpenSAML metadata follows the structure of the metadata XML, so if you look at the XML it pretty easy to figure out how to read it with OpenSAML.</p>
 
       
@@ -273,12 +273,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -296,6 +290,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -307,12 +307,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -323,7 +318,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -341,11 +336,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -356,8 +346,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -478,7 +468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

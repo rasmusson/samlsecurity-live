@@ -195,11 +195,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 OpenSAML needs a couple of configuration files in order to work. The library is provided with a default set of these files that is sufficient for most uses. Before starting the use the library the configurations must be loaded.</p>
 <h2 id="opensaml-v2">OpenSAML v2</h2>
 <p>In OpenSAML v2 initialization of the library is done using the bootstrap function.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">   <span class="n">DefaultBootstrap</span><span class="o">.</span><span class="na">bootstrap</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ConfigurationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">   <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&#34;Bootstrapping failed&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="o">}</span>     </span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">   </span><span class="n">DefaultBootstrap</span><span class="p">.</span><span class="na">bootstrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ConfigurationException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">   </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Bootstrapping failed&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">     </span></span></span></code></pre></div>
 <p>If you do not do this before you start using the library, you might run into exceptions like.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">Exception in thread &#34;main&#34; java.lang.NullPointerException
 </span></span><span class="line"><span class="ln">2</span><span class="cl"> at no.steras.opensaml.Main.main(Main.java:25)
@@ -228,14 +228,14 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
 </div></p>
 <h2 id="opensaml-v3-and-v4">OpenSAML v3 and v4</h2>
 <p>In OpenSAML v3 and v4 initialization of the library some more functions calls are needed as below.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">XMLObjectProviderRegistry</span> <span class="n">registry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XMLObjectProviderRegistry</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">ConfigurationService</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">XMLObjectProviderRegistry</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">registry</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">
-</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">InitializationService</span><span class="o">.</span><span class="na">initialize</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InitializationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="s">&#34;Initialization failed&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="n">XMLObjectProviderRegistry</span><span class="w"> </span><span class="n">registry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">XMLObjectProviderRegistry</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="n">ConfigurationService</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">XMLObjectProviderRegistry</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">registry</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="n">InitializationService</span><span class="p">.</span><span class="na">initialize</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InitializationException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RuntimeException</span><span class="p">(</span><span class="s">&#34;Initialization failed&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 <p>If you do not do this before you start using the library, you might run into exceptions like.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">java.lang.NullPointerException: Cannot invoke &#34;org.opensaml.core.xml.config.XMLObjectProviderRegistry.getBuilderFactory()&#34; because the return value of &#34;org.opensaml.core.config.ConfigurationService.get(java.lang.Class)&#34; is null
 </span></span><span class="line"><span class="ln">2</span><span class="cl">    at org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport.getBuilderFactory (XMLObjectProviderRegistrySupport.java:107)
@@ -284,12 +284,6 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -307,6 +301,12 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -318,12 +318,7 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -334,7 +329,7 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -352,11 +347,6 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -367,8 +357,8 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -489,7 +479,7 @@ OpenSAML needs a couple of configuration files in order to work. The library is 
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

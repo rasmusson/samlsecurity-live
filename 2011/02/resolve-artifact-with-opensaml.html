@@ -191,51 +191,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="post_body"><p>In my case the, after the sign on at the IdP is completed, the user is redirected to my `Assertion Consumer Service URL defined in meta data. The IdP sends an artifact back as a parameter.The artifact is a label pointing to the actual user data/login information(the assertion) at the IdP. The user data is not sent in the HTTP request of security reasons. Instead the consumer servlet send a Artifact Resolve Request over a SOAP back channel to get the data.</p>
 <p>Here is an example of a servlet sending <code>ArtifactResolveRequest</code> and receiving an <code>ArtifactResolveResponse</code>.</p>
-<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span> <span class="n">Envelope</span> <span class="nf">sendArtifactResolve</span><span class="o">(</span><span class="kd">final</span> <span class="n">ArtifactResolve</span> <span class="n">artifactResolve</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SOAPException</span><span class="o">,</span> <span class="n">SecurityException</span><span class="o">,</span> <span class="n">CertificateEncodingException</span><span class="o">,</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  <span class="n">MarshallingException</span><span class="o">,</span> <span class="n">SignatureException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">  <span class="n">Envelope</span> <span class="n">envelope</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">wrapInSOAPEnvelope</span><span class="o">(</span><span class="n">artifactResolve</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">  <span class="n">BasicSOAPMessageContext</span> <span class="n">soapContext</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicSOAPMessageContext</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">  <span class="n">soapContext</span><span class="o">.</span><span class="na">setOutboundMessage</span><span class="o">(</span><span class="n">envelope</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">  <span class="n">HttpClientBuilder</span> <span class="n">clientBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpClientBuilder</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">  <span class="n">HttpSOAPClient</span> <span class="n">soapClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpSOAPClient</span><span class="o">(</span><span class="n">clientBuilder</span><span class="o">.</span><span class="na">buildClient</span><span class="o">(),</span> <span class="k">new</span> <span class="n">BasicParserPool</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">10</span><span class="cl">  <span class="n">String</span> <span class="n">artifactResolutionServiceURL</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl">  <span class="k">for</span> <span class="o">(</span><span class="n">ArtifactResolutionService</span> <span class="n">ars</span> <span class="o">:</span> <span class="n">SAMLMetaData</span><span class="o">.</span><span class="na">getIdpEntityDescriptor</span><span class="o">().</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">)</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl">      <span class="o">.</span><span class="na">getArtifactResolutionServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">ars</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl">       <span class="n">artifactResolutionServiceURL</span> <span class="o">=</span> <span class="n">ars</span><span class="o">.</span><span class="na">getLocation</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="ln">16</span><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="ln">17</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">18</span><span class="cl">  <span class="n">soapClient</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">artifactResolutionServiceURL</span><span class="o">,</span> <span class="n">soapContext</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">19</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">20</span><span class="cl">  <span class="k">return</span> <span class="o">(</span><span class="n">Envelope</span><span class="o">)</span><span class="n">soapContext</span><span class="o">.</span><span class="na">getInboundMessage</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">22</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="kd">private</span> <span class="n">ArtifactResolve</span> <span class="nf">generateArtifactResolve</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">artifactString</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CertificateEncodingException</span><span class="o">,</span> <span class="n">MarshallingException</span><span class="o">,</span> <span class="n">SignatureException</span><span class="o">,</span> <span class="n">IllegalArgumentException</span><span class="o">,</span>  <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">24</span><span class="cl">  <span class="n">ArtifactResolve</span> <span class="n">artifactResolve</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">ArtifactResolve</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">25</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">26</span><span class="cl">  <span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Issuer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">27</span><span class="cl">  <span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">EvoteProperties</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;SPEntityId&#34;</span><span class="o">));</span>
-</span></span><span class="line"><span class="ln">28</span><span class="cl">  <span class="n">artifactResolve</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">issuer</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">29</span><span class="cl">  <span class="n">artifactResolve</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="k">new</span> <span class="n">DateTime</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">30</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">31</span><span class="cl">  <span class="n">artifactResolveId</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">getSecureRandomIdentifier</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">32</span><span class="cl">  <span class="n">artifactResolve</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">artifactResolveId</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">33</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">34</span><span class="cl">  <span class="k">for</span> <span class="o">(</span><span class="n">ArtifactResolutionService</span> <span class="n">sss</span> <span class="o">:</span> <span class="n">metaData</span><span class="o">.</span><span class="na">getIdpEntityDescriptor</span><span class="o">().</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">).</span><span class="na">getArtifactResolutionServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">35</span><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">sss</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">36</span><span class="cl">      <span class="n">artifactResolve</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">sss</span><span class="o">.</span><span class="na">getLocation</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">37</span><span class="cl">    <span class="o">}</span>
-</span></span><span class="line"><span class="ln">38</span><span class="cl">  <span class="o">}</span>
-</span></span><span class="line"><span class="ln">39</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">40</span><span class="cl">  <span class="n">Artifact</span> <span class="n">artifact</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Artifact</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">41</span><span class="cl">  <span class="n">artifact</span><span class="o">.</span><span class="na">setArtifact</span><span class="o">(</span><span class="n">artifactString</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">42</span><span class="cl">  <span class="n">artifactResolve</span><span class="o">.</span><span class="na">setArtifact</span><span class="o">(</span><span class="n">artifact</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">43</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">44</span><span class="cl">  <span class="k">return</span> <span class="n">artifactResolve</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">45</span><span class="cl"> <span class="o">}</span></span></span></code></pre></div>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">private</span><span class="w"> </span><span class="n">Envelope</span><span class="w"> </span><span class="nf">sendArtifactResolve</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">ArtifactResolve</span><span class="w"> </span><span class="n">artifactResolve</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SOAPException</span><span class="p">,</span><span class="w"> </span><span class="n">SecurityException</span><span class="p">,</span><span class="w"> </span><span class="n">CertificateEncodingException</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">  </span><span class="n">MarshallingException</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">  </span><span class="n">Envelope</span><span class="w"> </span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">wrapInSOAPEnvelope</span><span class="p">(</span><span class="n">artifactResolve</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">  </span><span class="n">BasicSOAPMessageContext</span><span class="w"> </span><span class="n">soapContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicSOAPMessageContext</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">  </span><span class="n">soapContext</span><span class="p">.</span><span class="na">setOutboundMessage</span><span class="p">(</span><span class="n">envelope</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">  </span><span class="n">HttpClientBuilder</span><span class="w"> </span><span class="n">clientBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClientBuilder</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">  </span><span class="n">HttpSOAPClient</span><span class="w"> </span><span class="n">soapClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpSOAPClient</span><span class="p">(</span><span class="n">clientBuilder</span><span class="p">.</span><span class="na">buildClient</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicParserPool</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">artifactResolutionServiceURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ArtifactResolutionService</span><span class="w"> </span><span class="n">ars</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">SAMLMetaData</span><span class="p">.</span><span class="na">getIdpEntityDescriptor</span><span class="p">().</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">      </span><span class="p">.</span><span class="na">getArtifactResolutionServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ars</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w">       </span><span class="n">artifactResolutionServiceURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ars</span><span class="p">.</span><span class="na">getLocation</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">  </span><span class="n">soapClient</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">artifactResolutionServiceURL</span><span class="p">,</span><span class="w"> </span><span class="n">soapContext</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">Envelope</span><span class="p">)</span><span class="n">soapContext</span><span class="p">.</span><span class="na">getInboundMessage</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="n">ArtifactResolve</span><span class="w"> </span><span class="nf">generateArtifactResolve</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">artifactString</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">CertificateEncodingException</span><span class="p">,</span><span class="w"> </span><span class="n">MarshallingException</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">,</span><span class="w">  </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">SecurityException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w">  </span><span class="n">ArtifactResolve</span><span class="w"> </span><span class="n">artifactResolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">ArtifactResolve</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">  </span><span class="n">Issuer</span><span class="w"> </span><span class="n">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">Issuer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">  </span><span class="n">issuer</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">EvoteProperties</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;SPEntityId&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">  </span><span class="n">artifactResolve</span><span class="p">.</span><span class="na">setIssuer</span><span class="p">(</span><span class="n">issuer</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">  </span><span class="n">artifactResolve</span><span class="p">.</span><span class="na">setIssueInstant</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">  </span><span class="n">artifactResolveId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">getSecureRandomIdentifier</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w">  </span><span class="n">artifactResolve</span><span class="p">.</span><span class="na">setID</span><span class="p">(</span><span class="n">artifactResolveId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ArtifactResolutionService</span><span class="w"> </span><span class="n">sss</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">metaData</span><span class="p">.</span><span class="na">getIdpEntityDescriptor</span><span class="p">().</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">).</span><span class="na">getArtifactResolutionServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sss</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w">      </span><span class="n">artifactResolve</span><span class="p">.</span><span class="na">setDestination</span><span class="p">(</span><span class="n">sss</span><span class="p">.</span><span class="na">getLocation</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">  </span><span class="n">Artifact</span><span class="w"> </span><span class="n">artifact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">Artifact</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="w">  </span><span class="n">artifact</span><span class="p">.</span><span class="na">setArtifact</span><span class="p">(</span><span class="n">artifactString</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="w">  </span><span class="n">artifactResolve</span><span class="p">.</span><span class="na">setArtifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">artifactResolve</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="w"> </span><span class="p">}</span></span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -402,12 +402,6 @@ This is the resulting ArtifactResponse in my case:
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -425,6 +419,12 @@ This is the resulting ArtifactResponse in my case:
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -436,12 +436,7 @@ This is the resulting ArtifactResponse in my case:
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -452,7 +447,7 @@ This is the resulting ArtifactResponse in my case:
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -470,11 +465,6 @@ This is the resulting ArtifactResponse in my case:
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -485,8 +475,8 @@ This is the resulting ArtifactResponse in my case:
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -607,7 +597,7 @@ This is the resulting ArtifactResponse in my case:
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

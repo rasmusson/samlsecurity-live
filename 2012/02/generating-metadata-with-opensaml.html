@@ -194,42 +194,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="post_body"><p>OpenSAML can be used to generate metadata. As with reading metadata, the library is pretty straight forward in relation to the metadata XML.</p>
 <p>This is an example for generating a SP metadata file</p>
 <p>We start by creating the EntityDescriptor, setting the EntityId and building the SSO descriptor.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">EntityDescriptor</span> <span class="n">spEntityDescriptor</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">EntityDescriptor</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">spEntityDescriptor</span><span class="o">.</span><span class="na">setEntityID</span><span class="o">(</span><span class="n">entityID</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">SPSSODescriptor</span> <span class="n">spSSODescriptor</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">SPSSODescriptor</span><span class="o">.</span><span class="na">class</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">EntityDescriptor</span><span class="w"> </span><span class="n">spEntityDescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">EntityDescriptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">spEntityDescriptor</span><span class="p">.</span><span class="na">setEntityID</span><span class="p">(</span><span class="n">entityID</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">SPSSODescriptor</span><span class="w"> </span><span class="n">spSSODescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">SPSSODescriptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span></span></span></code></pre></div>
 <p>In the SSO descriptor we request how we want the communication signed and encrypted</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">setWantAssertionsSigned</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span> <span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">setAuthnRequestsSigned</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">setWantAssertionsSigned</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">setAuthnRequestsSigned</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span></span></span></code></pre></div>
 <p>And what certificates we want to use</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">X509KeyInfoGeneratorFactory</span> <span class="n">keyInfoGeneratorFactory</span> <span class="o">=</span> <span class="k">new</span> <span class="n">X509KeyInfoGeneratorFactory</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="n">keyInfoGeneratorFactory</span><span class="o">.</span><span class="na">setEmitEntityCertificate</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">KeyInfoGenerator</span> <span class="n">keyInfoGenerator</span> <span class="o">=</span> <span class="n">keyInfoGeneratorFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">   
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="n">KeyDescriptor</span> <span class="n">encKeyDescriptor</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">KeyDescriptor</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="n">encKeyDescriptor</span><span class="o">.</span><span class="na">setUse</span><span class="o">(</span><span class="n">UsageType</span><span class="o">.</span><span class="na">ENCRYPTION</span><span class="o">);</span> <span class="c1">//Set usage
-</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="c1"></span> 
-</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">// Generating key info. The element will contain the public key. The key is used to by the IDP to encrypt data
-</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl"> <span class="n">encKeyDescriptor</span><span class="o">.</span><span class="na">setKeyInfo</span><span class="o">(</span><span class="n">keyInfoGenerator</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">X509Credential</span><span class="o">));</span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SecurityException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl"> <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">16</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">getKeyDescriptors</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">encKeyDescriptor</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl">   
-</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="n">KeyDescriptor</span> <span class="n">signKeyDescriptor</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">KeyDescriptor</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">20</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="n">signKeyDescriptor</span><span class="o">.</span><span class="na">setUse</span><span class="o">(</span><span class="n">UsageType</span><span class="o">.</span><span class="na">SIGNING</span><span class="o">);</span>  <span class="c1">//Set usage
-</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="c1"></span> 
-</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="c1">// Generating key info. The element will contain the public key. The key is used to by the IDP to verify signatures
-</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="c1"></span><span class="k">try</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">25</span><span class="cl"> <span class="n">signKeyDescriptor</span><span class="o">.</span><span class="na">setKeyInfo</span><span class="o">(</span><span class="n">keyInfoGenerator</span><span class="o">.</span><span class="na">generate</span><span class="o">(</span><span class="n">X509Credential</span><span class="o">));</span>
-</span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SecurityException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">27</span><span class="cl"> <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">29</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">getKeyDescriptors</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">signKeyDescriptor</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">X509KeyInfoGeneratorFactory</span><span class="w"> </span><span class="n">keyInfoGeneratorFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">X509KeyInfoGeneratorFactory</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">keyInfoGeneratorFactory</span><span class="p">.</span><span class="na">setEmitEntityCertificate</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">KeyInfoGenerator</span><span class="w"> </span><span class="n">keyInfoGenerator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyInfoGeneratorFactory</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="n">KeyDescriptor</span><span class="w"> </span><span class="n">encKeyDescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">KeyDescriptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">encKeyDescriptor</span><span class="p">.</span><span class="na">setUse</span><span class="p">(</span><span class="n">UsageType</span><span class="p">.</span><span class="na">ENCRYPTION</span><span class="p">);</span><span class="w"> </span><span class="c1">//Set usage</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="c1">// Generating key info. The element will contain the public key. The key is used to by the IDP to encrypt data</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"> </span><span class="n">encKeyDescriptor</span><span class="p">.</span><span class="na">setKeyInfo</span><span class="p">(</span><span class="n">keyInfoGenerator</span><span class="p">.</span><span class="na">generate</span><span class="p">(</span><span class="n">X509Credential</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SecurityException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">getKeyDescriptors</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">encKeyDescriptor</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w"></span><span class="n">KeyDescriptor</span><span class="w"> </span><span class="n">signKeyDescriptor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">KeyDescriptor</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w"></span><span class="n">signKeyDescriptor</span><span class="p">.</span><span class="na">setUse</span><span class="p">(</span><span class="n">UsageType</span><span class="p">.</span><span class="na">SIGNING</span><span class="p">);</span><span class="w">  </span><span class="c1">//Set usage</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w"></span><span class="c1">// Generating key info. The element will contain the public key. The key is used to by the IDP to verify signatures</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w"></span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w"> </span><span class="n">signKeyDescriptor</span><span class="p">.</span><span class="na">setKeyInfo</span><span class="p">(</span><span class="n">keyInfoGenerator</span><span class="p">.</span><span class="na">generate</span><span class="p">(</span><span class="n">X509Credential</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">SecurityException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w"> </span><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">getMessage</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w"></span><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">getKeyDescriptors</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">signKeyDescriptor</span><span class="p">);</span></span></span></code></pre></div>
 <p>The keyInfoGenerator uses a <code>X509Credential</code> to generate the key info object with the public key.
 
 <div class="book-ad" id="OpenSAMLAd">
@@ -250,38 +250,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <span class="lower_ad_line"></span>
 </div>
 Setting what type of pseudonym federation we want with the IDP.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// Request transient pseudonym
-</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="c1"></span><span class="n">NameIDFormat</span> <span class="n">nameIDFormat</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">NameIDFormat</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">nameIDFormat</span><span class="o">.</span><span class="na">setFormat</span><span class="o">(</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">getNameIDFormats</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">nameIDFormat</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// Request transient pseudonym</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">NameIDFormat</span><span class="w"> </span><span class="n">nameIDFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">NameIDFormat</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">nameIDFormat</span><span class="p">.</span><span class="na">setFormat</span><span class="p">(</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">getNameIDFormats</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">nameIDFormat</span><span class="p">);</span></span></span></code></pre></div>
 <p>Setting location of services</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">AssertionConsumerService</span> <span class="n">assertionConsumerService</span> <span class="o">=</span> <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">AssertionConsumerService</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">assertionConsumerService</span><span class="o">.</span><span class="na">setIndex</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">assertionConsumerService</span><span class="o">.</span><span class="na">setBinding</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1">// Setting address for our AssertionConsumerService
-</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1"></span><span class="n">assertionConsumerService</span><span class="o">.</span><span class="na">setLocation</span><span class="o">(</span><span class="n">assertionConsumerServiceURL</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">getAssertionConsumerServices</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">assertionConsumerService</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">AssertionConsumerService</span><span class="w"> </span><span class="n">assertionConsumerService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">AssertionConsumerService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">assertionConsumerService</span><span class="p">.</span><span class="na">setIndex</span><span class="p">(</span><span class="n">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">assertionConsumerService</span><span class="p">.</span><span class="na">setBinding</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_ARTIFACT_BINDING_URI</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="c1">// Setting address for our AssertionConsumerService</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">assertionConsumerService</span><span class="p">.</span><span class="na">setLocation</span><span class="p">(</span><span class="n">assertionConsumerServiceURL</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">getAssertionConsumerServices</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">assertionConsumerService</span><span class="p">);</span></span></span></code></pre></div>
 <p>And finally we set SAML as supported protocol and generate the XML
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">spSSODescriptor</span><span class="o">.</span><span class="na">addSupportedProtocol</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="n">spEntityDescriptor</span><span class="o">.</span><span class="na">getRoleDescriptors</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">spSSODescriptor</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="n">DocumentBuilder</span> <span class="n">builder</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="n">DocumentBuilderFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="n">DocumentBuilderFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="n">builder</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="na">newDocumentBuilder</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="n">Document</span> <span class="n">document</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="na">newDocument</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="n">Marshaller</span> <span class="n">out</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">().</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">spEntityDescriptor</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="n">out</span><span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">spEntityDescriptor</span><span class="o">,</span> <span class="n">document</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="n">Transformer</span> <span class="n">transformer</span> <span class="o">=</span> <span class="n">TransformerFactory</span><span class="o">.</span><span class="na">newInstance</span><span class="o">().</span><span class="na">newTransformer</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="n">StringWriter</span> <span class="n">stringWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringWriter</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="n">StreamResult</span> <span class="n">streamResult</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StreamResult</span><span class="o">(</span><span class="n">stringWriter</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="n">DOMSource</span> <span class="n">source</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DOMSource</span><span class="o">(</span><span class="n">document</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="n">transformer</span><span class="o">.</span><span class="na">transform</span><span class="o">(</span><span class="n">source</span><span class="o">,</span> <span class="n">streamResult</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="n">stringWriter</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="n">String</span> <span class="n">metadataXML</span> <span class="o">=</span> <span class="n">stringWriter</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span></span></span></code></pre></div></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">spSSODescriptor</span><span class="p">.</span><span class="na">addSupportedProtocol</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">spEntityDescriptor</span><span class="p">.</span><span class="na">getRoleDescriptors</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">spSSODescriptor</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="n">DocumentBuilder</span><span class="w"> </span><span class="n">builder</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="n">DocumentBuilderFactory</span><span class="w"> </span><span class="n">factory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DocumentBuilderFactory</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factory</span><span class="p">.</span><span class="na">newDocumentBuilder</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">Document</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">newDocument</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="n">Marshaller</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configuration</span><span class="p">.</span><span class="na">getMarshallerFactory</span><span class="p">().</span><span class="na">getMarshaller</span><span class="p">(</span><span class="n">spEntityDescriptor</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w"></span><span class="n">out</span><span class="p">.</span><span class="na">marshall</span><span class="p">(</span><span class="n">spEntityDescriptor</span><span class="p">,</span><span class="w"> </span><span class="n">document</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w"></span><span class="n">Transformer</span><span class="w"> </span><span class="n">transformer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TransformerFactory</span><span class="p">.</span><span class="na">newInstance</span><span class="p">().</span><span class="na">newTransformer</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"></span><span class="n">StringWriter</span><span class="w"> </span><span class="n">stringWriter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringWriter</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w"></span><span class="n">StreamResult</span><span class="w"> </span><span class="n">streamResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StreamResult</span><span class="p">(</span><span class="n">stringWriter</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"></span><span class="n">DOMSource</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DOMSource</span><span class="p">(</span><span class="n">document</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w"></span><span class="n">transformer</span><span class="p">.</span><span class="na">transform</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">streamResult</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w"></span><span class="n">stringWriter</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">metadataXML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stringWriter</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span></span></span></code></pre></div></p>
 
       
     </div>
@@ -318,12 +318,6 @@ Setting what type of pseudonym federation we want with the IDP.</p>
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -341,6 +335,12 @@ Setting what type of pseudonym federation we want with the IDP.</p>
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -352,12 +352,7 @@ Setting what type of pseudonym federation we want with the IDP.</p>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -368,7 +363,7 @@ Setting what type of pseudonym federation we want with the IDP.</p>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -386,11 +381,6 @@ Setting what type of pseudonym federation we want with the IDP.</p>
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -401,8 +391,8 @@ Setting what type of pseudonym federation we want with the IDP.</p>
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -523,7 +513,7 @@ Setting what type of pseudonym federation we want with the IDP.</p>
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

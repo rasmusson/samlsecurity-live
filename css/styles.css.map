@@ -1,18 +1,18 @@
 {
 	"version": 3,
 	"file": "styles.css",
-	"sourceRoot": "/home/stefan/git/samlsecurity",
+	"sourceRoot": "/home/rasmu/git/samlsecurity",
 	"sources": [
-		"/tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/main.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_variables.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_override.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_fonts.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_base.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_components.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_utils.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_mobile.sass",
-		"../../../../tmp/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_syntax.sass",
-		"assets/sass/_custom.sass"
+		"/home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/main.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_variables.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_override.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_fonts.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_base.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_components.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_utils.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_mobile.sass",
+		"../../../../../../../home/rasmu/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/chipzoller/hugo-clarity@v0.0.0-20220616191854-6347e4534069/assets/sass/_syntax.sass",
+		"../../../../../../../home/rasmu/git/samlsecurity/assets/sass/_custom.sass"
 	],
 	"sourcesContent": [
 		"@import 'variables';\n@import 'override';\n@import 'fonts';\n@import 'base';\n@import 'components';\n@import 'utils';\n@import 'mobile';\n@import 'syntax';\n@import 'custom';\n",

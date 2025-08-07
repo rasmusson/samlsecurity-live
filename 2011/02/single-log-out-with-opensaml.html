@@ -190,74 +190,74 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
     <div class="post_body"><p>To logout an user from the SP an LogoutRequest is sent. The data needed about the user is the SessionIndex and NameID from the data received at login. I my case in the Assertion in the Artifact Resolve Response.</p>
-<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">//IPR Ergogroup AS
-</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">doSynchronousLogout</span><span class="o">(</span><span class="kd">final</span> <span class="n">HttpSession</span> <span class="n">sessionToLogout</span><span class="o">,</span> <span class="kd">final</span> <span class="n">SAMLMetaData</span> <span class="n">metaData</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SOAPException</span><span class="o">,</span> <span class="n">SecurityException</span><span class="o">,</span> <span class="n">ValidationException</span><span class="o">,</span> <span class="n">IllegalArgumentException</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span><span class="o">,</span> <span class="n">MarshallingException</span><span class="o">,</span> <span class="n">SignatureException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">   <span class="n">NameID</span> <span class="n">nameId</span> <span class="o">=</span> <span class="o">(</span><span class="n">NameID</span><span class="o">)</span><span class="n">sessionToLogout</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;SAMLNameID&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">   <span class="n">String</span> <span class="n">sessionIndex</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span><span class="n">sessionToLogout</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="s">&#34;SAMLSessionIndex&#34;</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">   <span class="n">Body</span> <span class="n">body</span> <span class="o">=</span> <span class="n">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Body</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl"> 
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">   <span class="n">LogoutRequest</span> <span class="n">logoutRequest</span> <span class="o">=</span> <span class="n">genererateLogoutRequest</span><span class="o">(</span><span class="n">nameId</span><span class="o">,</span> <span class="n">sessionIndex</span><span class="o">,</span> <span class="n">metaData</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">   <span class="n">signLogoutRequest</span><span class="o">(</span><span class="n">logoutRequest</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">10</span><span class="cl">   <span class="n">body</span><span class="o">.</span><span class="na">getUnknownXMLObjects</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">logoutRequest</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">11</span><span class="cl">   <span class="n">nameId</span><span class="o">.</span><span class="na">detach</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">12</span><span class="cl">   <span class="n">Envelope</span> <span class="n">envelope</span> <span class="o">=</span> <span class="n">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Envelope</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl">   <span class="n">envelope</span><span class="o">.</span><span class="na">setBody</span><span class="o">(</span><span class="n">body</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">14</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">15</span><span class="cl">   <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">logSAMLObject</span><span class="o">(</span><span class="n">envelope</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">16</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">17</span><span class="cl">   <span class="n">BasicSOAPMessageContext</span> <span class="n">soapContext</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BasicSOAPMessageContext</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">18</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">19</span><span class="cl">   <span class="n">soapContext</span><span class="o">.</span><span class="na">setOutboundMessage</span><span class="o">(</span><span class="n">envelope</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">20</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">21</span><span class="cl">   <span class="n">HttpClientBuilder</span> <span class="n">clientBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpClientBuilder</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">22</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">23</span><span class="cl">   <span class="n">HttpSOAPClient</span> <span class="n">soapClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpSOAPClient</span><span class="o">(</span><span class="n">clientBuilder</span><span class="o">.</span><span class="na">buildClient</span><span class="o">(),</span> <span class="k">new</span> <span class="n">BasicParserPool</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">24</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">25</span><span class="cl">   <span class="n">String</span> <span class="n">sloServiceURL</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">26</span><span class="cl">   <span class="k">for</span> <span class="o">(</span><span class="n">SingleLogoutService</span> <span class="n">sls</span> <span class="o">:</span> <span class="n">metaData</span><span class="o">.</span><span class="na">getIdpEntityDescriptor</span><span class="o">().</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">).</span><span class="na">getSingleLogoutServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">27</span><span class="cl">      <span class="k">if</span> <span class="o">(</span><span class="n">sls</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">28</span><span class="cl">         <span class="n">sloServiceURL</span> <span class="o">=</span> <span class="n">sls</span><span class="o">.</span><span class="na">getLocation</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">29</span><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="ln">30</span><span class="cl">   <span class="o">}</span>
-</span></span><span class="line"><span class="ln">31</span><span class="cl">   <span class="n">soapClient</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">sloServiceURL</span><span class="o">,</span> <span class="n">soapContext</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">32</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">33</span><span class="cl">   <span class="n">Envelope</span> <span class="n">soapResponse</span> <span class="o">=</span> <span class="o">(</span><span class="n">Envelope</span><span class="o">)</span><span class="n">soapContext</span><span class="o">.</span><span class="na">getInboundMessage</span><span class="o">();</span>
-</span></span><span class="line"><span class="ln">34</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">35</span><span class="cl">   <span class="n">SAMLUtil</span><span class="o">.</span><span class="na">logSAMLObject</span><span class="o">(</span><span class="n">soapResponse</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">36</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">37</span><span class="cl">   <span class="n">validateSLOResponse</span><span class="o">(</span><span class="n">soapResponse</span><span class="o">,</span> <span class="n">logoutRequest</span><span class="o">.</span><span class="na">getID</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">38</span><span class="cl">   <span class="n">verifySLOResponseSignature</span><span class="o">(</span><span class="n">soapResponse</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">39</span><span class="cl">   <span class="n">processSLOResponse</span><span class="o">(</span><span class="n">soapResponse</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">40</span><span class="cl">   
-</span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="o">}</span>
-</span></span><span class="line"><span class="ln">42</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">43</span><span class="cl">  
-</span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="n">LogoutRequest</span> <span class="nf">genererateLogoutRequest</span><span class="o">(</span><span class="kd">final</span> <span class="n">NameID</span> <span class="n">nameId</span><span class="o">,</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">sessionIndex</span><span class="o">,</span> <span class="kd">final</span> <span class="n">SAMLMetaData</span> <span class="n">metaData</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">SecurityException</span><span class="o">,</span> <span class="n">IllegalAccessException</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">45</span><span class="cl">   <span class="n">LogoutRequest</span> <span class="n">logoutRequest</span> <span class="o">=</span> <span class="n">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">LogoutRequest</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">46</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">47</span><span class="cl">   <span class="n">logoutRequest</span><span class="o">.</span><span class="na">setID</span><span class="o">(</span><span class="n">SAMLUtil</span><span class="o">.</span><span class="na">getSecureRandomIdentifier</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">48</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">49</span><span class="cl">   <span class="k">for</span> <span class="o">(</span><span class="n">SingleLogoutService</span> <span class="n">sls</span> <span class="o">:</span> <span class="n">metaData</span><span class="o">.</span><span class="na">getIdpEntityDescriptor</span><span class="o">().</span><span class="na">getIDPSSODescriptor</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML20P_NS</span><span class="o">).</span><span class="na">getSingleLogoutServices</span><span class="o">())</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">50</span><span class="cl">      <span class="k">if</span> <span class="o">(</span><span class="n">sls</span><span class="o">.</span><span class="na">getBinding</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">SAMLConstants</span><span class="o">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="o">))</span> <span class="o">{</span>
-</span></span><span class="line"><span class="ln">51</span><span class="cl">         <span class="n">logoutRequest</span><span class="o">.</span><span class="na">setDestination</span><span class="o">(</span><span class="n">sls</span><span class="o">.</span><span class="na">getLocation</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">52</span><span class="cl">      <span class="o">}</span>
-</span></span><span class="line"><span class="ln">53</span><span class="cl">   <span class="o">}</span>
-</span></span><span class="line"><span class="ln">54</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">55</span><span class="cl">   <span class="n">logoutRequest</span><span class="o">.</span><span class="na">setIssueInstant</span><span class="o">(</span><span class="k">new</span> <span class="n">DateTime</span><span class="o">());</span>
-</span></span><span class="line"><span class="ln">56</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">57</span><span class="cl">   <span class="n">Issuer</span> <span class="n">issuer</span> <span class="o">=</span> <span class="n">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">Issuer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">58</span><span class="cl">   <span class="n">issuer</span><span class="o">.</span><span class="na">setValue</span><span class="o">(</span><span class="n">EvoteProperties</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;SPEntityId&#34;</span><span class="o">));</span>
-</span></span><span class="line"><span class="ln">59</span><span class="cl">   <span class="n">logoutRequest</span><span class="o">.</span><span class="na">setIssuer</span><span class="o">(</span><span class="n">issuer</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">60</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">61</span><span class="cl">   <span class="n">SessionIndex</span> <span class="n">sessionIndexElement</span> <span class="o">=</span> <span class="n">buildSAMLObjectWithDefaultName</span><span class="o">(</span><span class="n">SessionIndex</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">62</span><span class="cl">  
-</span></span><span class="line"><span class="ln">63</span><span class="cl">   <span class="n">sessionIndexElement</span><span class="o">.</span><span class="na">setSessionIndex</span><span class="o">(</span><span class="n">sessionIndex</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">64</span><span class="cl">   <span class="n">logoutRequest</span><span class="o">.</span><span class="na">getSessionIndexes</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">sessionIndexElement</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">65</span><span class="cl"> 
-</span></span><span class="line"><span class="ln">66</span><span class="cl">   <span class="n">logoutRequest</span><span class="o">.</span><span class="na">setNameID</span><span class="o">(</span><span class="n">nameId</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">67</span><span class="cl">   <span class="k">return</span> <span class="n">logoutRequest</span><span class="o">;</span>
-</span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="o">}</span></span></span></code></pre></div>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">//IPR Ergogroup AS</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doSynchronousLogout</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">sessionToLogout</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SAMLMetaData</span><span class="w"> </span><span class="n">metaData</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SOAPException</span><span class="p">,</span><span class="w"> </span><span class="n">SecurityException</span><span class="p">,</span><span class="w"> </span><span class="n">ValidationException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">SecurityException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="p">,</span><span class="w"> </span><span class="n">MarshallingException</span><span class="p">,</span><span class="w"> </span><span class="n">SignatureException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">   </span><span class="n">NameID</span><span class="w"> </span><span class="n">nameId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">NameID</span><span class="p">)</span><span class="n">sessionToLogout</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&#34;SAMLNameID&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">   </span><span class="n">String</span><span class="w"> </span><span class="n">sessionIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="p">)</span><span class="n">sessionToLogout</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&#34;SAMLSessionIndex&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">   </span><span class="n">Body</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">Body</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">   </span><span class="n">LogoutRequest</span><span class="w"> </span><span class="n">logoutRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genererateLogoutRequest</span><span class="p">(</span><span class="n">nameId</span><span class="p">,</span><span class="w"> </span><span class="n">sessionIndex</span><span class="p">,</span><span class="w"> </span><span class="n">metaData</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">   </span><span class="n">signLogoutRequest</span><span class="p">(</span><span class="n">logoutRequest</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">   </span><span class="n">body</span><span class="p">.</span><span class="na">getUnknownXMLObjects</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">logoutRequest</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">   </span><span class="n">nameId</span><span class="p">.</span><span class="na">detach</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w">   </span><span class="n">Envelope</span><span class="w"> </span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">Envelope</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="w">   </span><span class="n">envelope</span><span class="p">.</span><span class="na">setBody</span><span class="p">(</span><span class="n">body</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="w">   </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">logSAMLObject</span><span class="p">(</span><span class="n">envelope</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="w">   </span><span class="n">BasicSOAPMessageContext</span><span class="w"> </span><span class="n">soapContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicSOAPMessageContext</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="w">   </span><span class="n">soapContext</span><span class="p">.</span><span class="na">setOutboundMessage</span><span class="p">(</span><span class="n">envelope</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="w">   </span><span class="n">HttpClientBuilder</span><span class="w"> </span><span class="n">clientBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClientBuilder</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="w">   </span><span class="n">HttpSOAPClient</span><span class="w"> </span><span class="n">soapClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpSOAPClient</span><span class="p">(</span><span class="n">clientBuilder</span><span class="p">.</span><span class="na">buildClient</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicParserPool</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="w">   </span><span class="n">String</span><span class="w"> </span><span class="n">sloServiceURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">26</span><span class="cl"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SingleLogoutService</span><span class="w"> </span><span class="n">sls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">metaData</span><span class="p">.</span><span class="na">getIdpEntityDescriptor</span><span class="p">().</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">).</span><span class="na">getSingleLogoutServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sls</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="w">         </span><span class="n">sloServiceURL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sls</span><span class="p">.</span><span class="na">getLocation</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">31</span><span class="cl"><span class="w">   </span><span class="n">soapClient</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">sloServiceURL</span><span class="p">,</span><span class="w"> </span><span class="n">soapContext</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="w">   </span><span class="n">Envelope</span><span class="w"> </span><span class="n">soapResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Envelope</span><span class="p">)</span><span class="n">soapContext</span><span class="p">.</span><span class="na">getInboundMessage</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">34</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">35</span><span class="cl"><span class="w">   </span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">logSAMLObject</span><span class="p">(</span><span class="n">soapResponse</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">37</span><span class="cl"><span class="w">   </span><span class="n">validateSLOResponse</span><span class="p">(</span><span class="n">soapResponse</span><span class="p">,</span><span class="w"> </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">getID</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">38</span><span class="cl"><span class="w">   </span><span class="n">verifySLOResponseSignature</span><span class="p">(</span><span class="n">soapResponse</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">39</span><span class="cl"><span class="w">   </span><span class="n">processSLOResponse</span><span class="p">(</span><span class="n">soapResponse</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">40</span><span class="cl"><span class="w">   
+</span></span></span><span class="line"><span class="ln">41</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">42</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">43</span><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="ln">44</span><span class="cl"><span class="w"></span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">LogoutRequest</span><span class="w"> </span><span class="nf">genererateLogoutRequest</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">NameID</span><span class="w"> </span><span class="n">nameId</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">sessionIndex</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SAMLMetaData</span><span class="w"> </span><span class="n">metaData</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">SecurityException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">45</span><span class="cl"><span class="w">   </span><span class="n">LogoutRequest</span><span class="w"> </span><span class="n">logoutRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">LogoutRequest</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">46</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">47</span><span class="cl"><span class="w">   </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">setID</span><span class="p">(</span><span class="n">SAMLUtil</span><span class="p">.</span><span class="na">getSecureRandomIdentifier</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">48</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">49</span><span class="cl"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SingleLogoutService</span><span class="w"> </span><span class="n">sls</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">metaData</span><span class="p">.</span><span class="na">getIdpEntityDescriptor</span><span class="p">().</span><span class="na">getIDPSSODescriptor</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML20P_NS</span><span class="p">).</span><span class="na">getSingleLogoutServices</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">50</span><span class="cl"><span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sls</span><span class="p">.</span><span class="na">getBinding</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="n">SAMLConstants</span><span class="p">.</span><span class="na">SAML2_SOAP11_BINDING_URI</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">51</span><span class="cl"><span class="w">         </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">setDestination</span><span class="p">(</span><span class="n">sls</span><span class="p">.</span><span class="na">getLocation</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">52</span><span class="cl"><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">53</span><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">54</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">55</span><span class="cl"><span class="w">   </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">setIssueInstant</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">DateTime</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">56</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">57</span><span class="cl"><span class="w">   </span><span class="n">Issuer</span><span class="w"> </span><span class="n">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">Issuer</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">58</span><span class="cl"><span class="w">   </span><span class="n">issuer</span><span class="p">.</span><span class="na">setValue</span><span class="p">(</span><span class="n">EvoteProperties</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="s">&#34;SPEntityId&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">59</span><span class="cl"><span class="w">   </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">setIssuer</span><span class="p">(</span><span class="n">issuer</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">60</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">61</span><span class="cl"><span class="w">   </span><span class="n">SessionIndex</span><span class="w"> </span><span class="n">sessionIndexElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buildSAMLObjectWithDefaultName</span><span class="p">(</span><span class="n">SessionIndex</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">62</span><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="ln">63</span><span class="cl"><span class="w">   </span><span class="n">sessionIndexElement</span><span class="p">.</span><span class="na">setSessionIndex</span><span class="p">(</span><span class="n">sessionIndex</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">64</span><span class="cl"><span class="w">   </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">getSessionIndexes</span><span class="p">().</span><span class="na">add</span><span class="p">(</span><span class="n">sessionIndexElement</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">65</span><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="ln">66</span><span class="cl"><span class="w">   </span><span class="n">logoutRequest</span><span class="p">.</span><span class="na">setNameID</span><span class="p">(</span><span class="n">nameId</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">67</span><span class="cl"><span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">logoutRequest</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -383,12 +383,6 @@ LogoutRequest sent:</p>
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -406,6 +400,12 @@ LogoutRequest sent:</p>
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -417,12 +417,7 @@ LogoutRequest sent:</p>
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -433,7 +428,7 @@ LogoutRequest sent:</p>
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -451,11 +446,6 @@ LogoutRequest sent:</p>
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -466,8 +456,8 @@ LogoutRequest sent:</p>
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -588,7 +578,7 @@ LogoutRequest sent:</p>
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>

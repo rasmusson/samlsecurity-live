@@ -192,16 +192,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="post_body"><p>When exchanging information with SAML it is highly recommended to sign and verify signatures on all messages. This to ensure the the sender really is how he says he is and that the information sent has not been manipulated during transport.</p>
 <p>Every SAML object that implements the SignableXMLObject interface can be signed.</p>
 <p>The signing of a SAML message is done in three steps. First, all the properties for the signature is put in a Signature object. Properties that can be set include singing credentials, algorithm and optionally a KeyInfo object. The KeyInfo object identifies what key should be used to verify the signature.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">signature</span><span class="o">.</span><span class="na">setSigningCredential</span><span class="o">(</span><span class="n">credential</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">signature</span><span class="o">.</span><span class="na">setSignatureAlgorithm</span><span class="o">(</span><span class="n">SignatureConstants</span><span class="o">.</span><span class="na">ALGO_ID_SIGNATURE_RSA_SHA1</span><span class="o">);</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">signature</span><span class="o">.</span><span class="na">setCanonicalizationAlgorithm</span><span class="o">(</span><span class="n">SignatureConstants</span><span class="o">.</span><span class="na">ALGO_ID_C14N_EXCL_OMIT_COMMENTS</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">signature</span><span class="p">.</span><span class="na">setSigningCredential</span><span class="p">(</span><span class="n">credential</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">signature</span><span class="p">.</span><span class="na">setSignatureAlgorithm</span><span class="p">(</span><span class="n">SignatureConstants</span><span class="p">.</span><span class="na">ALGO_ID_SIGNATURE_RSA_SHA1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">signature</span><span class="p">.</span><span class="na">setCanonicalizationAlgorithm</span><span class="p">(</span><span class="n">SignatureConstants</span><span class="p">.</span><span class="na">ALGO_ID_C14N_EXCL_OMIT_COMMENTS</span><span class="p">);</span></span></span></code></pre></div>
 <p>The Signature object is then added to the SAML object using the setSignature method.
 entityDescriptor.setSignature(signature); The second step is to marshal the object. This must be done before signing or else you will get a message like this.
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="ln">1</span><span class="cl">SEVERE: Unable to compute signature, Signature XMLObject does not have the XMLSignature created during marshalling.</span></span></code></pre></div></p>
-<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="n">Configuration</span>
-</span></span><span class="line"><span class="ln">2</span><span class="cl">        <span class="o">.</span><span class="na">getMarshallerFactory</span><span class="o">()</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="o">.</span><span class="na">getMarshaller</span><span class="o">(</span><span class="n">entityDescriptor</span><span class="o">)</span>
-</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="o">.</span><span class="na">marshall</span><span class="o">(</span><span class="n">entityDescriptor</span><span class="o">);</span></span></span></code></pre></div>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Element</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Configuration</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">getMarshallerFactory</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">getMarshaller</span><span class="p">(</span><span class="n">entityDescriptor</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="p">.</span><span class="na">marshall</span><span class="p">(</span><span class="n">entityDescriptor</span><span class="p">);</span></span></span></code></pre></div>
 
 <div class="book-ad" id="OpenSAMLAd">
 <h2 class="upper_ad_line"><span>Ad</span></h2>
@@ -221,7 +221,7 @@ entityDescriptor.setSignature(signature); The second step is to marshal the obje
 <span class="lower_ad_line"></span>
 </div>
 The third step is to perform the actual signing to produce a cryptographic signature, this is done with the Signer class.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Signer</span><span class="o">.</span><span class="na">signObject</span><span class="o">(</span><span class="n">signature</span><span class="o">);</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Signer</span><span class="p">.</span><span class="na">signObject</span><span class="p">(</span><span class="n">signature</span><span class="p">);</span></span></span></code></pre></div>
 <p>Here is how the signed object might look after signing and marshalling.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="nt">&lt;md:entitiesdescriptor</span> <span class="na">xmlns:md=</span><span class="s">&#34;urn:oasis:names:tc:SAML:2.0:metadata&#34;</span><span class="nt">&gt;</span>
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">   <span class="nt">&lt;ds:signature</span> <span class="na">xmlns:ds=</span><span class="s">&#34;http://www.w3.org/2000/09/xmldsig#&#34;</span><span class="nt">&gt;</span>
@@ -281,12 +281,6 @@ The third step is to perform the actual signing to produce a cryptographic signa
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-metadata-ssl-channel-creation-failiure/" class="nav-link" title="ADFS Error: The request was aborted. Could not create SSL/TLS secure channel">ADFS Error: The request was aborted. Could not create SSL/TLS secure channel</a>
-      </li>
-      <li>
-        <a href="https://blog.samlsecurity.com/post/adfs-custom-claims/" class="nav-link" title="Custom ADFS claims in SAML Assertions">Custom ADFS claims in SAML Assertions</a>
-      </li>
-      <li>
         <a href="https://blog.samlsecurity.com/post/unsolicited-response/" class="nav-link" title="Solicited and unsolicited responses in SAML">Solicited and unsolicited responses in SAML</a>
       </li>
       <li>
@@ -304,6 +298,12 @@ The third step is to perform the actual signing to produce a cryptographic signa
       <li>
         <a href="https://blog.samlsecurity.com/post/saml-for-react-spa/" class="nav-link" title="Authenticating a React SPA towards a SAML IdP">Authenticating a React SPA towards a SAML IdP</a>
       </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/2012/11/verifying-signatures-with-opensaml.html" class="nav-link" title="Signing and verifying signatures with OpenSAML 4">Signing and verifying signatures with OpenSAML 4</a>
+      </li>
+      <li>
+        <a href="https://blog.samlsecurity.com/post/matadata-exchange-trust/" class="nav-link" title="Metadata exchange and trust">Metadata exchange and trust</a>
+      </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
@@ -315,12 +315,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
         
         <a href='https://blog.samlsecurity.com/categories/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">12</span>
-        </a>
-        
-        <a href='https://blog.samlsecurity.com/categories/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
+          <span class="button_tally">10</span>
         </a>
         
         
@@ -331,7 +326,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
       <nav class="tags_nav">
         <a href='https://blog.samlsecurity.com/tags/saml/' class="post_tag button button_translucent" title="saml">
           SAML
-          <span class="button_tally">38</span>
+          <span class="button_tally">36</span>
         </a>
         
         <a href='https://blog.samlsecurity.com/tags/opensamlv2/' class="post_tag button button_translucent" title="opensamlv2">
@@ -349,11 +344,6 @@ The third step is to perform the actual signing to produce a cryptographic signa
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/adfs/' class="post_tag button button_translucent" title="adfs">
-          ADFS
-          <span class="button_tally">2</span>
-        </a>
-        
         <a href='https://blog.samlsecurity.com/tags/pysaml/' class="post_tag button button_translucent" title="pysaml">
           PYSAML
           <span class="button_tally">2</span>
@@ -364,8 +354,8 @@ The third step is to perform the actual signing to produce a cryptographic signa
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital-signature">
-          DIGITAL-SIGNATURE
+        <a href='https://blog.samlsecurity.com/tags/digital-signature/' class="post_tag button button_translucent" title="digital signature">
+          DIGITAL SIGNATURE
           <span class="button_tally">1</span>
         </a>
         
@@ -486,7 +476,7 @@ The third step is to perform the actual signing to produce a cryptographic signa
 </footer>
 <script type="text/javascript" src="https://blog.samlsecurity.com/en/js/bundle.4e04b93422786398f3502d560bd5acb3d3f99b2e942c8c11e0fd926ab6ec3ccbd020d4294d58c0825ecb606ef221b34edc81586f1832489816a57ae8f0276615.js" integrity="sha512-TgS5NCJ4Y5jzUC1WC9Wss9P5my6ULIwR4P2SarbsPMvQINQpTVjAgl7LYG7yIbNO3IFYbxgySJgWpXro8CdmFQ==" crossorigin="anonymous"></script>
 
-  <script src="https://blog.samlsecurity.com/js/search.min.3cdef09662883a233c2e74dcd7547ea5c99238d1a7009861c00f0bd5c5e108355257f7904f424bea5101df91f1175186b96a8a0473a452772ed26ddc0bf14588.js"></script>
+  <script src="https://blog.samlsecurity.com/js/search.min.e45e2daebe6588d837777e00672959cc7504ba04c3a52d05a5f2583db1358a13471eedb2b0fd96ae8847d5e0fb1513323e22cf29d41505cdb3ee073efbb5d4ef.js"></script>
 <script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@v2.8.1/dist/cookieconsent.js"></script>
 
 <script>
